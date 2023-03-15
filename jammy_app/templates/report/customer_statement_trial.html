@@ -1,0 +1,160 @@
+<style type="text/css">
+	.no-border-right {
+  		border-right: solid 1px #FFF;
+  		border-left: solid 1px #FFF;
+  		border-bottom: solid 1px #FFF;
+	}
+	.no-border{
+		border-right: solid 1px #FFF;
+  		border-left: solid 1px #FFF;
+  		border-bottom: solid 1px #FFF;
+	}
+  footer {
+        position: fixed;
+        bottom: 0;
+        font-weight: lighter;
+        }
+</style>
+<div class="print-format">
+	<div class="container-fluid">
+		 {% set count = 0 %}
+
+	<div class="row">
+		<div class="col-sm-12">
+			    {% set count = count + 1 %}
+
+			    <h3 align="center"><b>Customer Statement</b></h3>
+			      <p align="right">Page No {{count }} </p>
+
+			    <p>{{ curr_date }}</p>
+			    <br><br>
+	            <b>{{ data[0]['Customer'] }}</b><br>
+	            <h6>
+	            {% if (data[0].address) %}
+				   {% if (data[0].address.address_line1) %}
+					   {{ data[0].address.address_line1 }},<br>
+				   {% endif %}
+				    {% if (data[0].address.address_line2) %}
+						{{ data[0].address.address_line2 }},<br>
+				    {% endif %}
+                    {% if (data[0].address.city) %}
+						{{ data[0].address.city }},
+					{% endif %}
+					{% if (data[0].address.state) %}
+						{{ data[0].address.state }},
+					{% endif %}
+					{% if (data[0].address.pincode) %}
+						{{ data[0].address.pincode }}
+					{% endif %}
+				{% endif %}</h6>
+
+			<br><br>
+
+			<table border="3" class="table" width="100%">
+				<thead>
+					<tr>
+						<th class="text-center">Transaction Date</th>
+						<th class="text-center">Transaction No.</th>
+						<th class="text-center">Your Reference</th>
+						<th class="text-center">Voucher Type</th>
+						<th class="text-center">Due Date</th>
+						<th class="text-center">Amount</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					{% for values in data %}
+
+
+						<tr>
+							<td align="center">{{ values['Posting Date'] or " " }}</td>
+							<td align="center">{{ values['Voucher No'] or " " }}</td>
+							<td align="center">{{ values['your_reference'] or " " }}</td>
+							<td align="center">{{ values['Voucher Type'] or " " }}</td>
+							<td align="center">{{ values['Due Date'] or " " }}</td>
+							{% if (values['Outstanding Amount']) %}
+								<td align="right"> {{ data[0]["currency"] }} {{ "{:,.2f}".format(values['Outstanding Amount']) }}</td>
+								{% else %}
+								<td></td>
+							{% endif %}
+						</tr>
+					{% if (loop.index != 0 and loop.index%10 == 0)  %}
+
+							</table>
+					</div>
+
+					<div class="">
+						<p style="page-break-after: always"> &nbsp;</p>
+
+					</div>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xs-4"></div>
+							<div class="col-xs-4"></div>
+							<div class="col-xs-4">
+								<h3><img src= "https://jammyinc.com/wp-content/themes/jammysite/images/img_01.png" width="100" height="100"  align="right"></h3><br><br><br><br><br><br>
+
+                            <p align="right">Page No {{ (loop.index/10 )|int +1 }} </p>
+							</div>
+						</div>
+
+					</div>
+					<br><br><br><br>
+			</div>
+			        {% if (loop.index > 9 ) %}
+					<table border="3" class="table" width="100%">
+						<thead>
+							<tr>
+								<th class="text-center">Transaction Date</th>
+								<th class="text-center">Transaction No.</th>
+								<th class="text-center">Your Reference</th>
+								<th class="text-center">Voucher Type</th>
+								<th class="text-center">Due Date</th>
+								<th class="text-center">Amount</th>
+							</tr>
+						</thead>
+					{% endif %}
+				{% endif %}
+
+					{% endfor %}
+					<tr>
+						<td colspan="6" class="no-border"></td>
+					</tr>
+					<tr>
+						<td colspan="5" align="right" class="no-border-right">
+							Total Balance:
+						</td>
+						<td align="right" class="no-border-right">
+							{{ data[0]["currency"] }} {{ "{:,.2f}".format(total) }}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+
+
+            <br>
+
+			<table border="3" class="table table-borderless" width="100%">
+				<tr>
+					<td align="center">Current</td>
+					<td align="center">Past Due 0-{{ filters["range1"] }}</td>
+					<td align="center">Past Due {{ filters["range1"] + 1 }}-{{ filters["range2"] }}</td>
+					<td align="center">Past Due {{ filters["range2"] + 1 }}-{{ filters["range3"] }}</td>
+					<td align="center">Past Due {{ filters["range3"] + 1 }}-Above</td>
+				</tr>
+				<tr>
+					<td align="center">{{ data[0]["currency"] }} {{ "{:,.2f}".format(total) }}</td>
+					<td align="center">{{ data[0]["currency"] }} {{ "{:,.2f}".format(total_range["total_range1"]) }}</td>
+					<td align="center">{{ data[0]["currency"] }} {{ "{:,.2f}".format(total_range["total_range2"]) }}</td>
+					<td align="center">{{ data[0]["currency"] }} {{ "{:,.2f}".format(total_range["total_range3"]) }}</td>
+					<td align="center">{{ data[0]["currency"] }} {{ "{:,.2f}".format(total_range["total_range4"]) }}</td>
+				</tr>
+
+			</table>
+
+
+		</div>
+	</div>
+</div>
+</div>

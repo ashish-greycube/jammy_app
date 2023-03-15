@@ -1,0 +1,364 @@
+{% for row in doc.items %}
+    {% if row.cartons %}
+        {% for i in range(row.cartons) %}
+          <div style="page-break-before: always;"></div>
+        <html>
+          <head>
+
+            <style>
+                .size{
+              width: 384px;
+                height: 576px;height
+            }
+              .fsize{font-size: 20px;}
+              .f_font{font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif;}
+              .tar{text-align: right;}
+                .brs{border-right: hidden;}
+                .tac{text-align: center;}
+                .font_size{font-size: 14px;}
+                .sign{padding-left: 50px;}
+                .bth{
+                    border-top: hidden;
+                  }
+                  .brh{
+                    border-right: hidden;
+                  }
+                  .blh{
+                    border-left: hidden;
+                  }
+                  .border-bottom td {
+                border-bottom: 1pt solid #000000;
+              }
+              .table1 {
+            width: 100%;
+            margin: 0 auto !important;
+        }
+            </style>
+          </head>
+          <body>
+            <div class="size">  
+                <div class="row">
+                    <table width="100%">
+                                      <tr>
+                                        <td rowspan="4" colspan="12" style ="border-width: 0px 0px 0px 0px; font-family: Arial; font-size: 20px;" >
+                                                <center><b>{{ doc.customer or ""}}</b><br></center>
+                                        </td>
+                                      </tr>
+                                    </table>  
+                                    <br>
+                                     <hr style="border-top: 1px solid #000000; margin-top: 0px !important; margin-bottom: 0px !important;">
+                  
+                </div>
+            
+                <br>
+                
+                  <div class="row">
+                          <div class="col-xs-6" style="padding-left: 20px; font-size: 14px; font-family: Arial;">
+                           PO # &nbsp; {{ doc.po_no or ""}} 
+                          </div>
+                         <!--  <div class="col-xs-1" style="padding-left: 0px;">
+                          </div> -->
+                            {% if doc.po_no %}
+                              <div class="col-xs-6" style="padding-left: 10px; font-family: Arial;">
+                                <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text={{doc.po_no}}" width="150" height="30">
+                              </div>
+                            {% else %}
+                              <div class="col-xs-6" style="padding-left: 10px; font-family: Arial;">
+                                  </div>
+                            {% endif %}
+                      </div>
+                      <br>
+                      <hr style="border-top: 1px solid #000000; margin-top: 0px !important; margin-bottom: 0px !important;">
+            
+                      <br>
+                      <div class="row">
+                          <div class="col-xs-6" style="padding-left: 20px; font-size: 14px; font-family: Arial;" >
+                           LINE #&nbsp; {{ row.idx or ""}} 
+                          </div>
+                          <div class="col-xs-6" style="padding-left: 10px;">
+                            <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text={{row.idx}}" width="150" height="30">
+                          </div>
+                      </div>
+                      <br>
+                      <hr style="border-top: 1px solid #000000; margin-top: 0px !important; margin-bottom: 0px !important;">
+            
+            
+                       <br>
+                      <div class="row">
+                          <div class="col-xs-6" style="padding-left: 20px; font-size: 14px; font-family: Arial;" >
+                           JAMMY PART #&nbsp;<br>{{ row.item_code or "" }} 
+                          </div>
+                          {% if row.item_code %}
+                            <div class="col-xs-6" style="padding-left: 10px; font-family: Arial;">
+                                  <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text={{row.item_code}}" width="150" height="30">
+                                </div>
+                          {% else %}
+                              <div class="col-xs-6" style="padding-left: 10px; font-family: Arial;">
+                                  </div>
+                          {% endif %}
+
+                      </div>
+                      <br>
+                      <hr style="border-top: 1px solid #000000; margin-top: 0px !important; margin-bottom: 0px !important;">
+            
+                       <br>
+            
+                      <div class="row">
+                          <div class="col-xs-6" style=" padding-left: 20px; font-size: 14px; font-family: Arial;" >
+                           YOUR PART #&nbsp; <br> <b>{{ row.customer_item_code or ""}}</b>
+                          </div>
+                          {% if row.customer_item_code %}
+                            <div class="col-xs-6" style="padding-left: 10px; padding-top: 10px;">
+                            <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text={{row.customer_item_code}}" width="150" height="30">
+                          </div>
+                          {% else %}
+                              <div class="col-xs-6" style="padding-left: 10px; font-family: Arial;">
+                                  </div>
+                          {% endif %}
+                      </div>
+            
+                      <br>
+                      <hr style="border-top: 1px solid #000000; margin-top: 0px !important; margin-bottom: 0px !important;">
+            
+                      <br>
+            
+                      <div class="row">
+                          <div class="col-xs-6" style=" padding-left: 20px; font-size: 14px; font-family: Arial;" >
+                           PCS/CTN &nbsp;{{ row.pcs_ctn or "" }} <br><br>
+                           <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text={{row.pcs_ctn}}" width="150" height="30">
+                          </div>
+                          <div class="col-xs-5" style="padding-left: 10px; font-size: 14px; font-family: Arial;" >
+                           QUANTITY &nbsp;{{ row.qty or ""}} <br><br>
+                           <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text={{row.qty}}" width="150" height="30">
+                          </div>
+                      </div>
+            
+                      <br>
+            
+                       <hr style="border-top: 1px solid #000000; margin-top: 0px !important; margin-bottom: 0px !important;">
+                       <br>
+            
+                       <div class="row">
+                          <div class="col-xs-6" style=" padding-left: 20px; font-size: 14px; font-family: Arial;" >
+                           VENDOR ID 004254 <br><br>
+                           <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text=004254" width="150" height="30">
+                          </div>
+                          <div class="col-xs-5" style="padding-left: 10px; font-size: 14px; font-family: Arial;" >
+                           BATCH #&nbsp;{{ row.batch_no }} <br><br>
+                           <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text={{row.batch_no}}" width="150" height="30">
+                          </div>
+                      </div>
+            
+                      <br>
+            
+                      <hr style="border-top: 1px solid #000000; margin-top: 0px !important; margin-bottom: 0px !important;">
+            
+                      <br>
+            
+            
+                      <div class="row">
+                          <div class="col-xs-3" style="padding-left: 20px; " >
+                           <img src="/files/jammy_new_logo.png" height="60">
+                          </div>
+                           <div class="col-xs-4" style="padding-left: 0px; padding-top: 10px; font-size: 17px; font-family: Arial; ">
+                            <b> JAMMY, INC </b>
+                          </div>
+                          <div class="col-xs-4" style="padding-left: 0px; font-size: 16px; padding-top: 10px; font-family: Arial;" >
+                            <b>{{ doc.name or ""}}</b>
+                           <!-- <img src="/files/j_log.png" width="200" height="100"> -->
+                            <!-- } -->
+                          </div>
+                      </div>
+            
+                      <!-- <div class="">
+                        <p style="page-break-after: always"> &nbsp;</p>
+                    </div> -->
+                </div>    
+                 <div class="">
+                        <p style="page-break-after: always"> &nbsp;</p>
+                    </div>
+              </body>
+        </html>
+  {% endfor %}
+  {% else %}
+    <div style="page-break-before: always;"></div>
+        <html>
+          <head>
+
+            <style>
+                .size{
+              width: 384px;
+                height: 576px;height
+            }
+              .fsize{font-size: 20px;}
+              .f_font{font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif;}
+              .tar{text-align: right;}
+                .brs{border-right: hidden;}
+                .tac{text-align: center;}
+                .font_size{font-size: 14px;}
+                .sign{padding-left: 50px;}
+                .bth{
+                    border-top: hidden;
+                  }
+                  .brh{
+                    border-right: hidden;
+                  }
+                  .blh{
+                    border-left: hidden;
+                  }
+                  .border-bottom td {
+                border-bottom: 1pt solid #000000;
+              }
+              .table1 {
+            width: 100%;
+            margin: 0 auto !important;
+        }
+            </style>
+          </head>
+          <body>
+            <div class="size">  
+                <div class="row">
+                    <table width="100%">
+                                      <tr>
+                                        <td rowspan="4" colspan="12" style ="border-width: 0px 0px 0px 0px; font-family: Arial; font-size: 20px;" >
+                                                <center><b>{{ doc.customer or ""}}</b><br></center>
+                                        </td>
+                                      </tr>
+                                    </table>  
+                                    <br>
+                                     <hr style="border-top: 1px solid #000000; margin-top: 0px !important; margin-bottom: 0px !important;">
+                  
+                </div>
+            
+                <br>
+                
+                  <div class="row">
+                          <div class="col-xs-6" style="padding-left: 20px; font-size: 14px; font-family: Arial;">
+                           PO # &nbsp; {{ doc.po_no or ""}} 
+                          </div>
+                         <!--  <div class="col-xs-1" style="padding-left: 0px;">
+                          </div> -->
+                            {% if doc.po_no %}
+                              <div class="col-xs-6" style="padding-left: 10px; font-family: Arial;">
+                                <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text={{doc.po_no}}" width="150" height="30">
+                              </div>
+                            {% else %}
+                              <div class="col-xs-6" style="padding-left: 10px; font-family: Arial;">
+                                  </div>
+                            {% endif %}
+                      </div>
+                      <br>
+                      <hr style="border-top: 1px solid #000000; margin-top: 0px !important; margin-bottom: 0px !important;">
+            
+                      <br>
+                      <div class="row">
+                          <div class="col-xs-6" style="padding-left: 20px; font-size: 14px; font-family: Arial;" >
+                           LINE #&nbsp; {{ row.idx or ""}} 
+                          </div>
+                          <div class="col-xs-6" style="padding-left: 10px;">
+                            <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text={{row.idx}}" width="150" height="30">
+                          </div>
+                      </div>
+                      <br>
+                      <hr style="border-top: 1px solid #000000; margin-top: 0px !important; margin-bottom: 0px !important;">
+            
+            
+                       <br>
+                      <div class="row">
+                          <div class="col-xs-6" style="padding-left: 20px; font-size: 14px; font-family: Arial;" >
+                           JAMMY PART #&nbsp;<br>{{ row.item_code or "" }} 
+                          </div>
+                          {% if row.item_code %}
+                            <div class="col-xs-6" style="padding-left: 10px; font-family: Arial;">
+                                  <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text={{row.item_code}}" width="150" height="30">
+                                </div>
+                          {% else %}
+                              <div class="col-xs-6" style="padding-left: 10px; font-family: Arial;">
+                                  </div>
+                          {% endif %}
+                      </div>
+                      <br>
+                      <hr style="border-top: 1px solid #000000; margin-top: 0px !important; margin-bottom: 0px !important;">
+            
+                       <br>
+            
+                     <div class="row">
+                          <div class="col-xs-6" style=" padding-left: 20px; font-size: 14px; font-family: Arial;" >
+                           YOUR PART #&nbsp; <br> <b>{{ row.customer_item_code or ""}}</b>
+                          </div>
+                          {% if row.customer_item_code %}
+                            <div class="col-xs-6" style="padding-left: 10px; padding-top: 10px;">
+                            <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text={{row.customer_item_code}}" width="150" height="30">
+                          </div>
+                          {% else %}
+                              <div class="col-xs-6" style="padding-left: 10px; font-family: Arial;">
+                                  </div>
+                          {% endif %}
+                      </div>
+            
+                      <br>
+                      <hr style="border-top: 1px solid #000000; margin-top: 0px !important; margin-bottom: 0px !important;">
+            
+                      <br>
+            
+                      <div class="row">
+                          <div class="col-xs-6" style=" padding-left: 20px; font-size: 14px; font-family: Arial;" >
+                           PCS/CTN &nbsp;{{ row.pcs_ctn or "" }} <br><br>
+                           <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text={{row.pcs_ctn}}" width="150" height="30">
+                          </div>
+                          <div class="col-xs-5" style="padding-left: 10px; font-size: 14px; font-family: Arial;" >
+                           QUANTITY &nbsp;{{ row.qty or ""}} <br><br>
+                           <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text={{row.qty}}" width="150" height="30">
+                          </div>
+                      </div>
+            
+                      <br>
+            
+                       <hr style="border-top: 1px solid #000000; margin-top: 0px !important; margin-bottom: 0px !important;">
+                       <br>
+            
+                       <div class="row">
+                          <div class="col-xs-6" style=" padding-left: 20px; font-size: 14px; font-family: Arial;" >
+                           VENDOR ID 004254 <br><br>
+                           <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text=004254" width="150" height="30">
+                          </div>
+                          <div class="col-xs-5" style="padding-left: 10px; font-size: 14px; font-family: Arial;" >
+                           BATCH #&nbsp;{{ row.batch_no }} <br><br>
+                           <img src="http://bwipjs-api.metafloor.com/?bcid=code128&text={{row.batch_no}}" width="150" height="30">
+                          </div>
+                      </div>
+            
+                      <br>
+            
+                      <hr style="border-top: 1px solid #000000; margin-top: 0px !important; margin-bottom: 0px !important;">
+            
+                      <br>
+            
+            
+                      <div class="row">
+                          <div class="col-xs-3" style="padding-left: 20px; " >
+                           <img src="/files/jammy_new_logo.png" height="60">
+                          </div>
+                           <div class="col-xs-4" style="padding-left: 0px; padding-top: 10px; font-size: 17px; font-family: Arial; ">
+                            <b> JAMMY, INC </b>
+                          </div>
+                          <div class="col-xs-4" style="padding-left: 0px; font-size: 16px; padding-top: 10px; font-family: Arial;" >
+                            <b>{{ doc.name or ""}}</b>
+                           <!-- <img src="/files/j_log.png" width="200" height="100"> -->
+                            <!-- } -->
+                          </div>
+                      </div>
+            
+                      <!-- <div class="">
+                        <p style="page-break-after: always"> &nbsp;</p>
+                    </div> -->
+                </div>    
+                 <div class="">
+                        <p style="page-break-after: always"> &nbsp;</p>
+                    </div>
+              </body>
+        </html>
+  {% endif %}
+{% endfor %}
+
+

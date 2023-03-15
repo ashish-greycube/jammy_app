@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include jammy_app *.css
+recursive-include jammy_app *.csv
+recursive-include jammy_app *.html
+recursive-include jammy_app *.ico
+recursive-include jammy_app *.js
+recursive-include jammy_app *.json
+recursive-include jammy_app *.md
+recursive-include jammy_app *.png
+recursive-include jammy_app *.py
+recursive-include jammy_app *.svg
+recursive-include jammy_app *.txt
+recursive-exclude jammy_app *.pyc
