@@ -1,7 +1,7 @@
 [
  {
   "docstatus": 0,
-  "doctype": "Custom Script",
+  "doctype": "Client Script",
   "dt": "Purchase Order",
   "modified": "2021-05-19 15:19:06.148393",
   "name": "Purchase Order-Client",
@@ -12,7 +12,7 @@
  },
  {
   "docstatus": 0,
-  "doctype": "Custom Script",
+  "doctype": "Client Script",
   "dt": "Batch",
   "modified": "2021-06-22 10:23:07.928885",
   "name": "Batch-Client",
@@ -23,7 +23,7 @@
  },
  {
   "docstatus": 0,
-  "doctype": "Custom Script",
+  "doctype": "Client Script",
   "dt": "Stock Entry",
   "modified": "2021-03-09 12:48:53.163808",
   "name": "Stock Entry-Client",
@@ -34,7 +34,7 @@
  },
  {
   "docstatus": 0,
-  "doctype": "Custom Script",
+  "doctype": "Client Script",
   "dt": "Packing Slip",
   "modified": "2019-03-25 05:23:40.147410",
   "name": "Packing Slip-Client",
@@ -45,7 +45,7 @@
  },
  {
   "docstatus": 0,
-  "doctype": "Custom Script",
+  "doctype": "Client Script",
   "dt": "Sales Invoice",
   "modified": "2021-06-21 14:06:21.009736",
   "name": "Sales Invoice-Client",
@@ -56,7 +56,7 @@
  },
  {
   "docstatus": 0,
-  "doctype": "Custom Script",
+  "doctype": "Client Script",
   "dt": "Delivery Note",
   "modified": "2021-06-22 10:09:34.654657",
   "name": "Delivery Note-Client",
@@ -67,7 +67,7 @@
  },
  {
   "docstatus": 0,
-  "doctype": "Custom Script",
+  "doctype": "Client Script",
   "dt": "Sales Order",
   "modified": "2021-06-22 10:11:55.402435",
   "name": "Sales Order-Client",
@@ -78,7 +78,7 @@
  },
  {
   "docstatus": 0,
-  "doctype": "Custom Script",
+  "doctype": "Client Script",
   "dt": "Quotation",
   "modified": "2020-05-27 10:00:43.229305",
   "name": "Quotation-Client",
@@ -89,7 +89,7 @@
  },
  {
   "docstatus": 0,
-  "doctype": "Custom Script",
+  "doctype": "Client Script",
   "dt": "Address Template",
   "modified": "2020-12-03 00:26:53.239121",
   "name": "Address Template-Client",
@@ -100,7 +100,7 @@
  },
  {
   "docstatus": 0,
-  "doctype": "Custom Script",
+  "doctype": "Client Script",
   "dt": "Journal Entry",
   "modified": "2020-06-12 11:03:54.489846",
   "name": "Journal Entry-Client",
@@ -111,7 +111,7 @@
  },
  {
   "docstatus": 0,
-  "doctype": "Custom Script",
+  "doctype": "Client Script",
   "dt": "Purchase Order Item",
   "modified": "2020-12-10 03:12:56.454143",
   "name": "Purchase Order Item-Client",
@@ -122,7 +122,7 @@
  },
  {
   "docstatus": 0,
-  "doctype": "Custom Script",
+  "doctype": "Client Script",
   "dt": "Purchase Receipt",
   "modified": "2021-08-11 14:07:58.203181",
   "name": "Purchase Receipt-Client",
@@ -133,7 +133,7 @@
  },
  {
   "docstatus": 0,
-  "doctype": "Custom Script",
+  "doctype": "Client Script",
   "dt": "Purchase Invoice",
   "modified": "2020-07-24 10:23:31.568074",
   "name": "Purchase Invoice-Client",
@@ -144,7 +144,7 @@
  },
  {
   "docstatus": 0,
-  "doctype": "Custom Script",
+  "doctype": "Client Script",
   "dt": "Payment Entry",
   "modified": "2021-06-23 11:47:36.992649",
   "name": "Payment Entry-Client",
