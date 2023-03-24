@@ -1,5 +1,519 @@
 [
  {
+  "absolute_value": 0,
+  "align_labels_right": 1,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": "en-US",
+  "disabled": 1,
+  "doc_type": "Sales Invoice",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": null,
+  "html": "",
+  "line_breaks": 1,
+  "modified": "2020-10-23 19:54:40.634936",
+  "module": "Accounts",
+  "name": "GST E-Invoice",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 0,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 1,
+  "standard": "Yes"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 1,
+  "default_print_language": "en-US",
+  "disabled": 0,
+  "doc_type": "Delivery Note",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": null,
+  "html": "{{ frappe.render_template(\"jammy_app/print_format/delivery_note/bar-code_print_format.html\",{\"doc\": doc}) }}",
+  "line_breaks": 0,
+  "modified": "2021-08-10 03:16:36.280001",
+  "module": "Stock",
+  "name": "Bar code Print Format",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 0,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "Yes"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": "en-US",
+  "disabled": 0,
+  "doc_type": "Sales Order",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Proforma Invoice<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"customer_name\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Bill To\"}, {\"fieldname\": \"address_display\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Address\"}, {\"fieldname\": \"contact_display\", \"print_hide\": 0, \"label\": \"Contact\"}, {\"fieldname\": \"transaction_date\", \"print_hide\": 0, \"label\": \"Date\"}, {\"fieldname\": \"po_no\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Customer's PO\"}, {\"fieldname\": \"po_date\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"PO Date\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"shipping_address_name\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Ship To\"}, {\"fieldname\": \"shipping_address\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Ship To Address\"}, {\"fieldname\": \"ship_via\", \"print_hide\": 0, \"label\": \"Ship Via\"}, {\"fieldname\": \"fob_point\", \"print_hide\": 0, \"label\": \"FOB Point\"}, {\"fieldname\": \"payment_terms\", \"print_hide\": 0, \"label\": \"Payment Terms\"}, {\"fieldname\": \"sales_partner\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Sales Person\"}, {\"fieldname\": \"instructions\", \"print_hide\": 0, \"label\": \"Instructions\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"item_code\", \"print_width\": \"150px\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"image\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"qty\", \"print_width\": \"100px\", \"print_hide\": 0}, {\"fieldname\": \"stock_uom\", \"print_width\": \"70px\", \"print_hide\": 0}, {\"fieldname\": \"uom\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"100px\", \"print_hide\": 0}, {\"fieldname\": \"amount\", \"print_width\": \"100px\", \"print_hide\": 0}, {\"fieldname\": \"batch_no\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total\", \"print_hide\": 0, \"label\": \"Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"taxes\", \"print_hide\": 0, \"label\": \"Sales Taxes and Charges\", \"visible_columns\": [{\"fieldname\": \"charge_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"row_id\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"account_head\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"cost_center\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"total\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount_after_discount_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_total\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_tax_amount_after_discount_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"item_wise_tax_detail\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"grand_total\", \"print_hide\": 0, \"label\": \"Grand Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"More\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<div>\\n    <p><b>Total Weight: {{doc.total_weight_pkg}} Lbs</p>\\n    <p>Total Cartons: {{doc.total_cartons}}</p>\\n    <p>Made In China</b></p>\\n</div>\"}, {\"fieldname\": \"project\", \"print_hide\": 0, \"label\": \"Project\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Terms\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"terms\", \"print_hide\": 0, \"label\": \"Terms and Conditions Details\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Subscription\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"from_date\", \"print_hide\": 0, \"label\": \"From Date\"}, {\"fieldname\": \"to_date\", \"print_hide\": 0, \"label\": \"To Date\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"subscription\", \"print_hide\": 0, \"label\": \"Subscription\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2021-09-14 16:46:57.399666",
+  "module": "Selling",
+  "name": "Proforma Invoice Intl",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": "en-US",
+  "disabled": 0,
+  "doc_type": "Delivery Note",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\"><h2>PACKING LIST<br><small>{{ doc.name }}</small><br><small>PO# &emsp;{{doc.po_no or ''}}</small>\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Address\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"posting_date\", \"print_hide\": 0, \"label\": \"Date\"}, {\"fieldname\": \"ship_via\", \"print_hide\": 0, \"label\": \"Ship Via\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<span style=\\\"padding-right: 44px;\\\"><b>{{ _(\\\"Shipping Acct #\\\") }}&emsp; &emsp; &emsp;&emsp;  </b> {{ doc.shipping_account or \\\"\\\"}}</span>\"}, {\"fieldname\": \"nmfc\", \"print_hide\": 0, \"label\": \"NMFC\"}, {\"fieldname\": \"customer_name\", \"print_hide\": 0, \"label\": \"Customer Name\"}, {\"fieldname\": \"shipping_address\", \"print_hide\": 0, \"label\": \"Shipping Address\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"to_warehouse\", \"print_hide\": 0, \"label\": \"To Warehouse\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<div style=\\\"display:flex;\\\"><label>Warehouse Name</label> \\n<span style=\\\"padding-left: 42px;\\\">\\n\\t<h>{% if doc.items[0].warehouse %}\\n\\t\\t{{doc.items[0].warehouse}} \\n\\t{% endif%}\\n</span></div>\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<div style=\\\"display:flex;\\\"><label>Address</label>&emsp; &emsp; &emsp; &emsp; &emsp;<span style=\\\"padding-left: 25px;\\\" letter-spacing: 3px;>\\n    {% if frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"address_line_1\\\") %}\\n\\t\\t{{frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"address_line_1\\\")}}<br>\\n\\t{%- endif-%}\\n\\t{% if frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"address_line_2\\\") %}\\n\\t\\t{{frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"address_line_2\\\")}}<br>\\n\\t{%- endif-%}\\n\\t{% if frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"city\\\") %}\\n\\t\\t{{frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"city\\\")}},\\n\\t{%- endif-%}\\n\\t{% if frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"state\\\") %}\\n\\t\\t{{frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"state\\\")}}\\n\\t{%- endif-%}\\n\\t{% if frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"pin\\\") %}\\n\\t\\t{{frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"pin\\\")}}\\n\\t{%- endif-%}\\n\\t</span>\\n</div>\"}, {\"fieldname\": \"fob_point\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"FOB Point\"}, {\"fieldname\": \"tracking_number\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Tracking Number\"}, {\"fieldname\": \"sales_order_number\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Sales Order#\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"item_code\", \"print_width\": \"150px\", \"print_hide\": 0}, {\"fieldname\": \"qty\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"cartons\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"pcs_ctn\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"customer_item_code\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"weight_per_unit\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"total_weight\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"carton_volume_cbm\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"carton_dimensions\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total_cartons\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Total Cartons\"}, {\"fieldname\": \"total_carton_volume_cbm\", \"print_hide\": 0, \"label\": \"Total Carton Volume CBM\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total_weight_pkg\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Total Weight (Lbs)\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Terms\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"terms\", \"print_hide\": 0, \"label\": \"Terms and Conditions Details\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Status\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"instructions\", \"print_hide\": 0, \"label\": \"Instructions\"}, {\"fieldname\": \"sales_partner\", \"print_hide\": 0, \"label\": \"Sales Partner\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<br><small>{{ doc.name }}</small>\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"project\", \"print_hide\": 0, \"label\": \"Project\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2022-06-08 09:29:33.313941",
+  "module": "Stock",
+  "name": "Packing List",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": null,
+  "disabled": 0,
+  "doc_type": "Purchase Order",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Purchase Order<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"naming_series\", \"print_hide\": 0, \"label\": \"Series\"}, {\"fieldname\": \"get_items_from_open_material_requests\", \"print_hide\": 0, \"label\": \"Get Items from Open Material Requests\"}, {\"fieldname\": \"supplier_name\", \"print_hide\": 0, \"label\": \"Supplier Name\"}, {\"fieldname\": \"supplier_delivery_note\", \"print_hide\": 0, \"label\": \"Supplier Delivery Note\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"warehouse\", \"print_hide\": 0, \"label\": \"Accepted Warehouse\"}, {\"fieldname\": \"transaction_date\", \"print_hide\": 0, \"label\": \"Date\"}, {\"fieldname\": \"schedule_date\", \"print_hide\": 0, \"label\": \"Reqd By Date\"}, {\"fieldname\": \"order_confirmation_no\", \"print_hide\": 0, \"label\": \"Order Confirmation No\"}, {\"fieldname\": \"order_confirmation_date\", \"print_hide\": 0, \"label\": \"Order Confirmation Date\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Drop Ship\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"customer\", \"print_hide\": 0, \"label\": \"Customer\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"customer_contact_person\", \"print_hide\": 0, \"label\": \"Customer Contact\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Address and Contact\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"address_display\", \"print_hide\": 0, \"label\": \"Address\"}, {\"fieldname\": \"contact_display\", \"print_hide\": 0, \"label\": \"Contact\"}, {\"fieldname\": \"contact_mobile\", \"print_hide\": 0, \"label\": \"Mobile No\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"expected_delivery_date\", \"print_hide\": 0, \"label\": \"Expected Delivery Date\"}, {\"fieldname\": \"supplier_warehouse\", \"print_hide\": 0, \"label\": \"Supplier Warehouse\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"scan_barcode\", \"print_hide\": 0, \"label\": \"Scan Barcode\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"item_code\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"batch_no\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"transaction_date\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"notes\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"qty\", \"print_width\": \"60px\", \"print_hide\": 0}, {\"fieldname\": \"pcs_ctn\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"cartons\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"stock_uom\", \"print_width\": \"100px\", \"print_hide\": 0}, {\"fieldname\": \"uom\", \"print_width\": \"100px\", \"print_hide\": 0}, {\"fieldname\": \"last_purchase_rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"60\", \"print_hide\": 0}, {\"fieldname\": \"amount\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"Pricing Rules\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"pricing_rules\", \"print_hide\": 0, \"label\": \"Purchase Order Pricing Rule\", \"visible_columns\": [{\"fieldname\": \"pricing_rule\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"item_code\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"margin_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rate_or_discount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rule_applied\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"Raw Materials Supplied\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"set_reserve_warehouse\", \"print_hide\": 0, \"label\": \"Set Reserve Warehouse\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total_qty\", \"print_hide\": 0, \"label\": \"Total Quantity\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total\", \"print_hide\": 0, \"label\": \"Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"tax_category\", \"print_hide\": 0, \"label\": \"Tax Category\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"taxes\", \"print_hide\": 0, \"label\": \"Purchase Taxes and Charges\", \"visible_columns\": [{\"fieldname\": \"category\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"add_deduct_tax\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"charge_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"row_id\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"included_in_print_rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"account_head\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"cost_center\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"total\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"customs_tariff_number\", \"print_hide\": 0, \"label\": \"Tariff %\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"grand_total\", \"print_hide\": 0, \"label\": \"Grand Total\"}, {\"fieldname\": \"disable_rounded_total\", \"print_hide\": 0, \"label\": \"Disable Rounded Total\"}, {\"fieldname\": \"in_words\", \"print_hide\": 0, \"label\": \"In Words\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Payment Terms\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"payment_terms_template\", \"print_hide\": 0, \"label\": \"Payment Terms Template\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Terms and Conditions\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"terms\", \"print_hide\": 0, \"label\": \"Terms and Conditions\"}, {\"fieldtype\": \"Section Break\", \"label\": \"More Information\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"status\", \"print_hide\": 0, \"label\": \"Status\"}, {\"fieldname\": \"inter_company_order_reference\", \"print_hide\": 0, \"label\": \"Inter Company Order Reference\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Subscription Section\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"update_auto_repeat_reference\", \"print_hide\": 0, \"label\": \"Update Auto Repeat Reference\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2021-10-21 15:56:00.098520",
+  "module": "Buying",
+  "name": "Purchase to import",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": null,
+  "disabled": 0,
+  "doc_type": "Purchase Receipt",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Packing List<br></small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"posting_date\", \"print_hide\": 0, \"label\": \"Date\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<h><b>Received Date</h></b><br>\\n<br>\"}, {\"fieldname\": \"eta__updates\", \"print_hide\": 0, \"label\": \"ETA  UPDATES\"}, {\"fieldname\": \"supplier_delivery_note\", \"print_hide\": 0, \"label\": \"Supplier Delivery Note\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"set_warehouse\", \"print_hide\": 0, \"label\": \"Accepted Warehouse\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<div style=\\\"display:flex;\\\"><label>Address</label>&emsp; &emsp; &emsp; &emsp; &emsp;<span style=\\\"padding-left: 25px;\\\" letter-spacing: 3px;>\\n    {% if frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"address_line_1\\\") %}\\n\\t\\t{{frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"address_line_1\\\")}}<br>\\n\\t{%- endif-%}\\n\\t{% if frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"address_line_2\\\") %}\\n\\t\\t{{frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"address_line_2\\\")}}<br>\\n\\t{%- endif-%}\\n\\t{% if frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"city\\\") %}\\n\\t\\t{{frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"city\\\")}},\\n\\t{%- endif-%}\\n\\t{% if frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"state\\\") %}\\n\\t\\t{{frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"state\\\")}}\\n\\t{%- endif-%}\\n\\t{% if frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"pin\\\") %}\\n\\t\\t{{frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"pin\\\")}}\\n\\t{%- endif-%}\\n\\t</span>\\n</div>\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"scan_barcode\", \"print_hide\": 0, \"label\": \"Scan Barcode\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"item_code\", \"print_width\": \"100\", \"print_hide\": 0}, {\"fieldname\": \"batch_no\", \"print_width\": \"80\", \"print_hide\": 0}, {\"fieldname\": \"qty\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"pcs_ctn\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"cartons\", \"print_width\": \"80\", \"print_hide\": 0}, {\"fieldname\": \"warehouse_count\", \"print_width\": \"100\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"Printing Settings\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total_cartons\", \"print_hide\": 0, \"label\": \"Total Cartons\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<h><b>Wharehouse Count</b></h>\\n\"}, {\"fieldname\": \"instructions\", \"print_hide\": 0, \"label\": \"Instructions\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2023-01-09 10:54:15.104423",
+  "module": "Stock",
+  "name": "RECEIVING REPORT",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": null,
+  "disabled": 0,
+  "doc_type": "Stock Entry",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Stock Entry<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"stock_entry_type\", \"print_hide\": 0, \"label\": \"Stock Entry Type\"}, {\"fieldname\": \"purchase_order\", \"print_hide\": 0, \"label\": \"Purchase Order\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"posting_date\", \"print_hide\": 0, \"label\": \"Posting Date\"}, {\"fieldname\": \"inspection_required\", \"print_hide\": 0, \"label\": \"Inspection Required\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<b>FROM<b><br>\\n{{doc.source_warehouse_address}}<b><br>\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"{{doc.source_address_display}}\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<b>TO<b><br>\\n{{doc.target_warehouse_address}}<b>\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"{{doc.target_address_display}}\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"scan_barcode\", \"print_hide\": 0, \"label\": \"Scan Barcode\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"batch_no\", \"print_width\": \"96\", \"print_hide\": 0}, {\"fieldname\": \"item_code\", \"print_width\": \"133\", \"print_hide\": 0}, {\"fieldname\": \"qty\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"pcs_ctn\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"cartons\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total_cartons\", \"print_hide\": 0, \"label\": \"Total Cartons\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"value_difference\", \"print_hide\": 0, \"label\": \"Total Value Difference (Out - In)\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Additional Costs\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"additional_costs\", \"print_hide\": 0, \"label\": \"Additional Costs\", \"visible_columns\": [{\"fieldname\": \"expense_account\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"amount\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldname\": \"total_additional_costs\", \"print_hide\": 0, \"label\": \"Total Additional Costs\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Customer or Supplier Details\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"supplier_name\", \"print_hide\": 0, \"label\": \"Supplier Name\"}, {\"fieldname\": \"supplier_address\", \"print_hide\": 0, \"label\": \"Supplier Address\"}, {\"fieldname\": \"address_display\", \"print_hide\": 0, \"label\": \"Address\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"customer_name\", \"print_hide\": 0, \"label\": \"Customer Name\"}, {\"fieldname\": \"customer_address\", \"print_hide\": 0, \"label\": \"Customer Address\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2022-10-05 15:11:54.922220",
+  "module": "Stock",
+  "name": "WAREHOUSE TRANSFER",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": "en-US",
+  "disabled": 0,
+  "doc_type": "Purchase Receipt",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>In Tranist Report<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"posting_date\", \"print_hide\": 0, \"label\": \"Date\"}, {\"fieldname\": \"eta__updates\", \"print_hide\": 0, \"label\": \"ETA  UPDATES\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"supplier_delivery_note\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Supplier Ref\"}, {\"fieldname\": \"supplier_name\", \"print_hide\": 0, \"label\": \"Supplier Name\"}, {\"fieldname\": \"set_warehouse\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Destination\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"scan_barcode\", \"print_hide\": 0, \"label\": \"Scan Barcode\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"item_code\", \"print_width\": \"158\", \"print_hide\": 0}, {\"fieldname\": \"batch_no\", \"print_width\": \"79\", \"print_hide\": 0}, {\"fieldname\": \"qty\", \"print_width\": \"100px\", \"print_hide\": 0}, {\"fieldname\": \"pcs_ctn\", \"print_width\": \"63\", \"print_hide\": 0}, {\"fieldname\": \"cartons\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"Printing Settings\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"instructions\", \"print_hide\": 0, \"label\": \"Instructions\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2021-11-15 10:54:03.012876",
+  "module": "Stock",
+  "name": "In Transit Report",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": "",
+  "custom_format": 0,
+  "default_print_language": "en-US",
+  "disabled": 0,
+  "doc_type": "Sales Invoice",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2><b>Sales Invoice<br><small></b><b>{{ doc.name }}</small></b>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Address\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"posting_date\", \"print_hide\": 0, \"label\": \"Date\"}, {\"fieldname\": \"customer_name\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Bill To\"}, {\"fieldname\": \"contact_display\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Contact\"}, {\"fieldname\": \"address_display\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Address\"}, {\"fieldname\": \"contact_mobile\", \"print_hide\": 0, \"label\": \"Mobile No\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<br> <b>{{ _(\\\"Purchase Order #\\\") }}&emsp; &emsp; </b> {{ doc.po_no }}</br> </br>\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"payment_terms\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Payment Terms\"}, {\"fieldname\": \"ship_via\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Ship Via\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<div class=\\\"row  data-field\\\" data-fieldname=\\\"ship_via\\\" data-fieldtype=\\\"Data\\\">\\r\\n\\t<div class=\\\"col-xs-5\\\"><label>Ship To</label></div>\\r\\n\\t<div class=\\\"col-xs-7 value\\\">{{ frappe.db.get_value(\\\"Address\\\", doc.shipping_address_name, \\\"address_title\\\") }}</div>\\r\\n</div>\"}, {\"fieldname\": \"shipping_address\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Ship To Address\"}, {\"fieldname\": \"tracking_number\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Tracking Number\"}, {\"fieldname\": \"due_date\", \"print_hide\": 0, \"label\": \"Payment Due Date\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"item_code\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"customer_item_code\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"400px\", \"print_hide\": 0}, {\"fieldname\": \"qty\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"stock_uom\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"cartons\", \"print_width\": \"80px\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"amount\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total\", \"print_hide\": 0, \"label\": \"Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"taxes\", \"print_hide\": 0, \"label\": \"Sales Taxes and Charges\", \"visible_columns\": [{\"fieldname\": \"charge_type\", \"print_width\": \"80\", \"print_hide\": 0}, {\"fieldname\": \"row_id\", \"print_width\": \"80\", \"print_hide\": 0}, {\"fieldname\": \"account_head\", \"print_width\": \"80\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"80px\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"total\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount_after_discount_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_total\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_tax_amount_after_discount_amount\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"grand_total\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Grand Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Terms\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"instructions\", \"print_hide\": 0, \"label\": \"Instructions\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<head>\\n <style type =\\\"text/css\\\">\\n   .footer{ \\n       position: fixed;     \\n       text-align: center;    \\n       bottom: 0px; \\n       width: 650px;\\n       height: 40;\\n     }  \\n</style>\\n</head>\\n\\n    <div class=\\\"footer\\\">\\n<b><font size=\\\"h1\\\"> Sales Invoice<small>&emsp;{{ doc.name }}&emsp;&emsp;&emsp;&emsp;\\nDelivery Note# &emsp;{{doc.delivery_note_number}}&emsp;&emsp;&emsp;&emsp;\\nSales Partner &emsp;{{doc.sales_partner}}\\n</small> \\n</font></div></b>\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2022-02-08 17:22:25.968161",
+  "module": "Accounts",
+  "name": "Drop Ship Invoice",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": "en-US",
+  "disabled": 0,
+  "doc_type": "Purchase Order",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Purchase Order<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"get_items_from_open_material_requests\", \"print_hide\": 0, \"label\": \"Get Items from Open Material Requests\"}, {\"fieldname\": \"supplier_name\", \"print_hide\": 0, \"label\": \"Supplier Name\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"transaction_date\", \"print_hide\": 0, \"label\": \"Date\"}, {\"fieldname\": \"schedule_date\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Reqd By Date\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Address\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"contact_display\", \"print_hide\": 0, \"label\": \"Contact\"}, {\"fieldname\": \"address_display\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Supplier Address\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"incoterms\", \"print_hide\": 0, \"label\": \"Incoterms\"}, {\"fieldname\": \"shipping_address_display\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Destination\"}, {\"fieldname\": \"ship_via\", \"print_hide\": 0, \"label\": \"Ship Via\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"item_code\", \"print_width\": \"120\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"260\", \"print_hide\": 0}, {\"fieldname\": \"batch_no\", \"print_width\": \"120\", \"print_hide\": 0}, {\"fieldname\": \"qty\", \"print_width\": \"80px\", \"print_hide\": 0}, {\"fieldname\": \"uom\", \"print_width\": \"80px\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"received_qty\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"balance_qty\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"amount\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldname\": \"link_to_mrs\", \"print_hide\": 0, \"label\": \"Link to material requests\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total\", \"print_hide\": 0, \"label\": \"Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"taxes\", \"print_hide\": 0, \"label\": \"Purchase Taxes and Charges\", \"visible_columns\": [{\"fieldname\": \"category\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"add_deduct_tax\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"charge_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"row_id\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"included_in_print_rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"account_head\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"cost_center\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"total\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"grand_total\", \"print_hide\": 0, \"label\": \"Grand Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Terms\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"terms\", \"print_hide\": 0, \"label\": \"Terms and Conditions\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2023-02-27 11:10:39.229984",
+  "module": "Buying",
+  "name": "Purchase Order Description",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": "en-US",
+  "disabled": 0,
+  "doc_type": "Quotation",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Quotation<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"customer_address\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Bill To\"}, {\"fieldname\": \"address_display\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Bill To Address\"}, {\"fieldname\": \"requested_by\", \"print_hide\": 0, \"label\": \"Requested By\"}, {\"fieldname\": \"transaction_date\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Quotation Date\"}, {\"fieldname\": \"effective_date\", \"print_hide\": 0, \"label\": \"Effective Date\"}, {\"fieldname\": \"valid_till\", \"print_hide\": 0, \"label\": \"Valid Till\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<div class=\\\"row  data-field\\\" data-fieldname=\\\"ship_via\\\" data-fieldtype=\\\"Data\\\">\\r\\n\\t<div class=\\\"col-xs-5\\\"><label>Ship To</label></div>\\r\\n\\t<div class=\\\"col-xs-7 value\\\">{{ frappe.db.get_value(\\\"Address\\\", doc.shipping_address_name, \\\"address_title\\\") }}</div>\\r\\n</div>\"}, {\"fieldname\": \"shipping_address\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Ship To Address\"}, {\"fieldname\": \"ship_via\", \"print_hide\": 0, \"label\": \"Ship Via\"}, {\"fieldname\": \"fob_point\", \"print_hide\": 0, \"label\": \"FOB Point\"}, {\"fieldname\": \"payment_terms\", \"print_hide\": 0, \"label\": \"Payment Terms\"}, {\"fieldname\": \"sales_partner\", \"print_hide\": 0, \"label\": \"Sales Partner\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"item_code\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"customer_item_code\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"qty\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"100px\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"taxes\", \"print_hide\": 0, \"label\": \"Sales Taxes and Charges\", \"visible_columns\": [{\"fieldname\": \"charge_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"row_id\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"account_head\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"cost_center\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"total\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount_after_discount_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_total\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_tax_amount_after_discount_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"item_wise_tax_detail\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"Terms\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"terms\", \"print_hide\": 0, \"label\": \"Term Details\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2022-02-28 15:19:08.227450",
+  "module": "Selling",
+  "name": "Quote Description",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": null,
+  "disabled": 0,
+  "doc_type": "Purchase Invoice",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Purchase Invoice<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"supplier_name\", \"print_hide\": 0, \"label\": \"Supplier Name\"}, {\"fieldname\": \"due_date\", \"print_hide\": 0, \"label\": \"Due Date\"}, {\"fieldname\": \"supplier_delivery_note\", \"print_hide\": 0, \"label\": \"Supplier Delivery Note\"}, {\"fieldname\": \"purchase_receipt\", \"print_hide\": 0, \"label\": \"purchase_receipt\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"posting_date\", \"print_hide\": 0, \"label\": \"Date\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Accounting Dimensions \"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"cost_center\", \"print_hide\": 0, \"label\": \"Cost Center\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Hold Invoice\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"on_hold\", \"print_hide\": 0, \"label\": \"Hold Invoice\"}, {\"fieldname\": \"release_date\", \"print_hide\": 0, \"label\": \"Release Date\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"hold_comment\", \"print_hide\": 0, \"label\": \"Reason For Putting On Hold\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Address and Contact\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"address_display\", \"print_hide\": 0, \"label\": \"Address\"}, {\"fieldname\": \"contact_display\", \"print_hide\": 0, \"label\": \"Contact\"}, {\"fieldname\": \"contact_mobile\", \"print_hide\": 0, \"label\": \"Mobile No\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"item_name\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"qty\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"amount\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"Pricing Rules\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"pricing_rules\", \"print_hide\": 0, \"label\": \"Pricing Rule Detail\", \"visible_columns\": [{\"fieldname\": \"pricing_rule\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"item_code\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"margin_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rate_or_discount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rule_applied\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"Raw Materials Supplied\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"supplied_items\", \"print_hide\": 0, \"label\": \"Supplied Items\", \"visible_columns\": [{\"fieldname\": \"main_item_code\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rm_item_code\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"batch_no\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"serial_no\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"required_qty\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"consumed_qty\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"stock_uom\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"conversion_factor\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"current_stock\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"reference_name\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"bom_detail_no\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total_qty\", \"print_hide\": 0, \"label\": \"Total Quantity\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total\", \"print_hide\": 0, \"label\": \"Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"taxes\", \"print_hide\": 0, \"label\": \"Purchase Taxes and Charges\", \"visible_columns\": [{\"fieldname\": \"category\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"add_deduct_tax\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"charge_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"row_id\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"included_in_print_rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"account_head\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"cost_center\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"total\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Payments\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"cash_bank_account\", \"print_hide\": 0, \"label\": \"Cash/Bank Account\"}, {\"fieldname\": \"clearance_date\", \"print_hide\": 0, \"label\": \"Clearance Date\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Advance Payments\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"allocate_advances_automatically\", \"print_hide\": 0, \"label\": \"Set Advances and Allocate (FIFO)\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Payment Terms\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"payment_terms_template\", \"print_hide\": 0, \"label\": \"Payment Terms Template\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Terms and Conditions\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"terms\", \"print_hide\": 0, \"label\": \"Terms and Conditions1\"}, {\"fieldtype\": \"Section Break\", \"label\": \"More Information\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"status\", \"print_hide\": 0, \"label\": \"Status\"}, {\"fieldname\": \"inter_company_invoice_reference\", \"print_hide\": 0, \"label\": \"Inter Company Invoice Reference\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Subscription Section\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"update_auto_repeat_reference\", \"print_hide\": 0, \"label\": \"Update Auto Repeat Reference\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2022-04-01 09:34:53.349137",
+  "module": "Accounts",
+  "name": "P. Invoice",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": "en-US",
+  "disabled": 0,
+  "doc_type": "Quotation",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Quotation<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"customer_address\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Bill To\"}, {\"fieldname\": \"address_display\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Bill To Address\"}, {\"fieldname\": \"requested_by\", \"print_hide\": 0, \"label\": \"Requested By\"}, {\"fieldname\": \"transaction_date\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Quotation Date\"}, {\"fieldname\": \"effective_date\", \"print_hide\": 0, \"label\": \"Effective Date\"}, {\"fieldname\": \"valid_till\", \"print_hide\": 0, \"label\": \"Valid Till\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<div class=\\\"row  data-field\\\" data-fieldname=\\\"ship_via\\\" data-fieldtype=\\\"Data\\\">\\r\\n\\t<div class=\\\"col-xs-5\\\"><label>Ship To</label></div>\\r\\n\\t<div class=\\\"col-xs-7 value\\\">{{ frappe.db.get_value(\\\"Address\\\", doc.shipping_address_name, \\\"address_title\\\") }}</div>\\r\\n</div>\"}, {\"fieldname\": \"shipping_address\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Ship To Address\"}, {\"fieldname\": \"ship_via\", \"print_hide\": 0, \"label\": \"Ship Via\"}, {\"fieldname\": \"fob_point\", \"print_hide\": 0, \"label\": \"FOB Point\"}, {\"fieldname\": \"payment_terms\", \"print_hide\": 0, \"label\": \"Payment Terms\"}, {\"fieldname\": \"sales_partner\", \"print_hide\": 0, \"label\": \"Sales Partner\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"item_code\", \"print_width\": \"80\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"250\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"80px\", \"print_hide\": 0}, {\"fieldname\": \"pcs_ctn\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"taxes\", \"print_hide\": 0, \"label\": \"Sales Taxes and Charges\", \"visible_columns\": [{\"fieldname\": \"charge_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"row_id\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"account_head\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"cost_center\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"total\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount_after_discount_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_total\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_tax_amount_after_discount_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"item_wise_tax_detail\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"Terms\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"terms\", \"print_hide\": 0, \"label\": \"Term Details\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2022-05-31 16:50:02.279338",
+  "module": "Selling",
+  "name": "Quote DescNoCcode",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": "en-US",
+  "disabled": 0,
+  "doc_type": "Delivery Note",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Commercial Invoice<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"transaction_date\", \"print_hide\": 0, \"label\": \"Date\"}, {\"fieldname\": \"customer_name\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Bill To\"}, {\"fieldname\": \"contact_display\", \"print_hide\": 0, \"label\": \"Contact\"}, {\"fieldname\": \"address_display\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Bill To Address\"}, {\"fieldname\": \"instructions\", \"print_hide\": 0, \"label\": \"Instructions\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"customer\", \"print_hide\": 0, \"label\": \"Customer\"}, {\"fieldname\": \"shipping_address\", \"print_hide\": 0, \"label\": \"Shipping Address\"}, {\"fieldname\": \"ship_via\", \"print_hide\": 0, \"label\": \"Ship Via\"}, {\"fieldname\": \"payment_terms\", \"print_hide\": 0, \"label\": \"Payment Terms\"}, {\"fieldname\": \"sales_partner\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Sales Person\"}, {\"fieldname\": \"po_no\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Customer's PO\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"item_code\", \"print_width\": \"150px\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"image\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"qty\", \"print_width\": \"100px\", \"print_hide\": 0}, {\"fieldname\": \"stock_uom\", \"print_width\": \"70px\", \"print_hide\": 0}, {\"fieldname\": \"uom\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"100px\", \"print_hide\": 0}, {\"fieldname\": \"amount\", \"print_width\": \"100px\", \"print_hide\": 0}, {\"fieldname\": \"batch_no\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total\", \"print_hide\": 0, \"label\": \"Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"taxes\", \"print_hide\": 0, \"label\": \"Sales Taxes and Charges\", \"visible_columns\": [{\"fieldname\": \"charge_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"row_id\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"account_head\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"cost_center\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"total\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount_after_discount_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_total\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_tax_amount_after_discount_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"item_wise_tax_detail\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"grand_total\", \"print_hide\": 0, \"label\": \"Grand Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Terms\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"terms\", \"print_hide\": 0, \"label\": \"Terms and Conditions Details\"}, {\"fieldtype\": \"Section Break\", \"label\": \"More\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"project\", \"print_hide\": 0, \"label\": \"Project\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Subscription\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"from_date\", \"print_hide\": 0, \"label\": \"From Date\"}, {\"fieldname\": \"to_date\", \"print_hide\": 0, \"label\": \"To Date\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"subscription\", \"print_hide\": 0, \"label\": \"Subscription\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2022-07-06 16:58:47.965650",
+  "module": "Stock",
+  "name": "Commercial Inv.",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": null,
+  "disabled": 0,
+  "doc_type": "Purchase Receipt",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Purchase Packing List<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"title\", \"print_hide\": 0, \"label\": \"Title\"}, {\"fieldname\": \"naming_series\", \"print_hide\": 0, \"label\": \"Series\"}, {\"fieldname\": \"supplier_name\", \"print_hide\": 0, \"label\": \"Supplier Name\"}, {\"fieldname\": \"supplier_delivery_note\", \"print_hide\": 0, \"label\": \"Supplier Delivery Note\"}, {\"fieldname\": \"eta__updates\", \"print_hide\": 0, \"label\": \"ETA  UPDATES\"}, {\"fieldname\": \"purchase_receipt\", \"print_hide\": 0, \"label\": \"Purchase Receipt\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"posting_date\", \"print_hide\": 0, \"label\": \"Date\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Address and Contact\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"address_display\", \"print_hide\": 0, \"label\": \"Address\"}, {\"fieldname\": \"contact_display\", \"print_hide\": 0, \"label\": \"Contact\"}, {\"fieldname\": \"contact_mobile\", \"print_hide\": 0, \"label\": \"Mobile No\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"scan_barcode\", \"print_hide\": 0, \"label\": \"Scan Barcode\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"item_code\", \"print_width\": \"158\", \"print_hide\": 0}, {\"fieldname\": \"batch_no\", \"print_width\": \"79\", \"print_hide\": 0}, {\"fieldname\": \"posting_date\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"qty\", \"print_width\": \"100px\", \"print_hide\": 0}, {\"fieldname\": \"pcs_ctn\", \"print_width\": \"63\", \"print_hide\": 0}, {\"fieldname\": \"cartons\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"uom\", \"print_width\": \"100px\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"60\", \"print_hide\": 0}, {\"fieldname\": \"amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"weight_per_unit\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"total_weight\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"weight_uom\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"Pricing Rules\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"pricing_rules\", \"print_hide\": 0, \"label\": \"Pricing Rule Detail\", \"visible_columns\": [{\"fieldname\": \"pricing_rule\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"item_code\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"margin_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rate_or_discount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rule_applied\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total_qty\", \"print_hide\": 0, \"label\": \"Total Quantity\"}, {\"fieldname\": \"total_cartons\", \"print_hide\": 0, \"label\": \"Total Cartons\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total\", \"print_hide\": 0, \"label\": \"Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"shipping_rule\", \"print_hide\": 0, \"label\": \"Shipping Rule\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"taxes\", \"print_hide\": 0, \"label\": \"Purchase Taxes and Charges\", \"visible_columns\": [{\"fieldname\": \"category\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"add_deduct_tax\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"charge_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"row_id\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"included_in_print_rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"account_head\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"cost_center\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"total\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"grand_total\", \"print_hide\": 0, \"label\": \"Grand Total\"}, {\"fieldname\": \"disable_rounded_total\", \"print_hide\": 0, \"label\": \"Disable Rounded Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Terms and Conditions\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"terms\", \"print_hide\": 0, \"label\": \"Terms and Conditions\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Printing Settings\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"language\", \"print_hide\": 0, \"label\": \"Print Language\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"instructions\", \"print_hide\": 0, \"label\": \"Instructions\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Transporter Details\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"transporter_name\", \"print_hide\": 0, \"label\": \"Transporter Name\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"lr_no\", \"print_hide\": 0, \"label\": \"Vehicle Number\"}, {\"fieldname\": \"lr_date\", \"print_hide\": 0, \"label\": \"Vehicle Date\"}, {\"fieldname\": \"warehouse\", \"print_hide\": 0, \"label\": \"Accepted Warehouse\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2022-10-03 12:47:26.231826",
+  "module": "Stock",
+  "name": "Purchase Packing List",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": null,
+  "disabled": 0,
+  "doc_type": "Stock Entry",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Packing List<br><small>{{ doc.name }}</small></h2><br>\\t{{doc.posting_date}}\\t\\t</div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Warehouse Contact Info\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<b>FROM<b><br>\\n{{doc.source_warehouse_address}}<b><br>\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"{{doc.source_address_display}}\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<b>TO<b><br>\\n{{doc.target_warehouse_address}}<b>\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"{{doc.target_address_display}}\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<br>\\n<br>\\n<br>\\n{{doc.scan_barcode}}\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"description\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"cartons\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"qty\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"net_weight\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"volume\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"Customer or Supplier Details\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"supplier_name\", \"print_hide\": 0, \"label\": \"Supplier Name\"}, {\"fieldname\": \"supplier_address\", \"print_hide\": 0, \"label\": \"Supplier Address\"}, {\"fieldname\": \"address_display\", \"print_hide\": 0, \"label\": \"Address\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"customer_name\", \"print_hide\": 0, \"label\": \"Customer Name\"}, {\"fieldname\": \"customer_address\", \"print_hide\": 0, \"label\": \"Customer Address\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Accounting Dimensions\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"project\", \"print_hide\": 0, \"label\": \"Project\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"More Information\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"remarks\", \"print_hide\": 0, \"label\": \"Remarks\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total_amount\", \"print_hide\": 0, \"label\": \"Total Amount\"}, {\"fieldname\": \"credit_note\", \"print_hide\": 0, \"label\": \"Credit Note\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"Total Cartons  &nbsp {{doc.total_cartons}}<br>\\nTotal Pieces &nbsp{{doc.total_qty}}<br>\\nNet Weight &nbsp{{doc.total_net_weight}}&nbsp KG<br>\\nGross Weight &nbsp{{doc.total_kilos}}&nbsp KG <br>\\nVolume &nbsp{{doc.total_volume}} CBM\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2022-12-07 15:46:47.782087",
+  "module": "Stock",
+  "name": "Stock Entry Packing List",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": "en-US",
+  "disabled": 0,
+  "doc_type": "Stock Entry",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Commercial Invoice<br><small>{{ doc.name }}</small>\\t</h2><br>\\t{{doc.posting_date}}</div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"inspection_required\", \"print_hide\": 0, \"label\": \"Inspection Required\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Warehouse Contact Info\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<b>FROM<b><br>\\n{{doc.source_warehouse_address}}<b><br>\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"{{doc.source_address_display}}\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<b>TO<b><br>\\n{{doc.target_warehouse_address}}<b>\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"{{doc.target_address_display}}\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<br>\\n<br>\\n<br>\\n{{doc.scan_barcode}}\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"description\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"qty\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"unit_rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"line_amount\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"Customer or Supplier Details\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"supplier_name\", \"print_hide\": 0, \"label\": \"Supplier Name\"}, {\"fieldname\": \"supplier_address\", \"print_hide\": 0, \"label\": \"Supplier Address\"}, {\"fieldname\": \"address_display\", \"print_hide\": 0, \"label\": \"Address\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"customer_name\", \"print_hide\": 0, \"label\": \"Customer Name\"}, {\"fieldname\": \"customer_address\", \"print_hide\": 0, \"label\": \"Customer Address\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Accounting Dimensions\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"project\", \"print_hide\": 0, \"label\": \"Project\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"More Information\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"remarks\", \"print_hide\": 0, \"label\": \"Remarks\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"credit_note\", \"print_hide\": 0, \"label\": \"Credit Note\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"Total Cartons  &nbsp {{doc.total_cartons}}<br>\\nTotal Pieces &nbsp{{doc.total_qty}}<br>\\nNet Weight &nbsp{{doc.total_net_weight}}&nbsp KG<br>\\nGross Weight &nbsp{{doc.total_kilos}}&nbsp KG <br>\\nVolume &nbsp{{doc.total_volume}} CBM\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"Total Amount USD  $54,301.44\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2022-12-07 15:48:15.378900",
+  "module": "Stock",
+  "name": "Stock Entry Commercial Invoice",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": "en-US",
+  "disabled": 0,
+  "doc_type": "Sales Order",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">              <h2>Sales Order<br><small>{{ doc.name }}</small><br><small>PO# &emsp;{{doc.po_no or ''}}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"transaction_date\", \"print_hide\": 0, \"label\": \"Date\"}, {\"fieldname\": \"customer_name\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Bill To\"}, {\"fieldname\": \"contact_person\", \"print_hide\": 0, \"label\": \"Contact Person\"}, {\"fieldname\": \"address_display\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Billing Address\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<div class=\\\"row  data-field\\\" data-fieldname=\\\"ship_via\\\" data-fieldtype=\\\"Data\\\">\\r\\n\\t<div class=\\\"col-xs-5\\\"><label>Ship To</label></div>\\r\\n\\t<div class=\\\"col-xs-7 value\\\">{{ frappe.db.get_value(\\\"Address\\\", doc.shipping_address_name, \\\"address_title\\\") }}</div>\\r\\n</div>\"}, {\"fieldname\": \"shipping_address\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Shipping Address\"}, {\"fieldname\": \"fob_point\", \"print_hide\": 0, \"label\": \"FOB Point\"}, {\"fieldname\": \"ship_via\", \"print_hide\": 0, \"label\": \"Ship Via\"}, {\"fieldname\": \"whs_invoice\", \"print_hide\": 0, \"label\": \"WHS INVOICE\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"item_code\", \"print_width\": \"150px\", \"print_hide\": 0}, {\"fieldname\": \"customer_item_code\", \"print_width\": \"100\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"qty\", \"print_width\": \"75px\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"100px\", \"print_hide\": 0}, {\"fieldname\": \"amount\", \"print_width\": \"100px\", \"print_hide\": 0}, {\"fieldname\": \"batch_no\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total\", \"print_hide\": 0, \"label\": \"Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"taxes\", \"print_hide\": 0, \"label\": \"Sales Taxes and Charges\", \"visible_columns\": [{\"fieldname\": \"charge_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"row_id\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"account_head\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"cost_center\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"total\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount_after_discount_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_total\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_tax_amount_after_discount_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"item_wise_tax_detail\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"discount_amount\", \"print_hide\": 0, \"align\": \"right\", \"label\": \"Discount\"}, {\"fieldname\": \"grand_total\", \"print_hide\": 0, \"label\": \"Grand Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Terms\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"terms\", \"print_hide\": 0, \"label\": \"Terms and Conditions Details\"}, {\"fieldtype\": \"Section Break\", \"label\": \"More\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"project\", \"print_hide\": 0, \"label\": \"Project\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Subscription\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"from_date\", \"print_hide\": 0, \"label\": \"From Date\"}, {\"fieldname\": \"to_date\", \"print_hide\": 0, \"label\": \"To Date\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"subscription\", \"print_hide\": 0, \"label\": \"Subscription\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<head>\\n <style type =\\\"text/css\\\">\\n   .footer{ \\n       position: fixed;     \\n       text-align: center;    \\n       bottom: 0px; \\n       width: 650px;\\n       height: 40;\\n     }  \\n</style>\\n</head>\\n\\n    <div class=\\\"footer\\\">\\n<b><font size=\\\"h1\\\"> Sales Order #<small>&emsp;{{ doc.name }}&emsp;&emsp;&emsp;&emsp;\\nSales Partner &emsp;{{doc.sales_partner}}\\n</small> \\n</font></div></b>\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2023-01-26 14:53:37.988371",
+  "module": "Selling",
+  "name": "Sales Order Customer Item",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": null,
+  "disabled": 0,
+  "doc_type": "Delivery Note",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<class=\\\"print-heading\\\">\\t\\t<b><h2 style=\\\"font-size:250%;text-align:right;\\\">Bill of Lading</h2></b>\\n<b><h style=\\\"font-size:100%;text-align:left\\\">Date:{{doc.posting_date}}&emsp;{{ doc.name }}&emsp;PO#{{ doc.po_no }}&emsp;{{ doc.whs_invoice }}</h></b>\\n\\n\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Delivery To\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<div style=\\\"width:320px;height:100px;border:2px solid #000;\\\">\\r\\n&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b><u><h style=\\\"font-size:120%;text-align:center;font-family:aril\\\">SHIP TO</h></b></u><br>\\r\\n<h <font-size=\\\"100%\\\">&emsp;{{doc.customer}}</h><br>\\r\\n<h <font-size=\\\"100%\\\">&emsp;{{doc.shipping_address}}</font></h>\\r\\n\\t</div></style>\\r\\n\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<div style=\\\"width:320px;height:100px;border:2px solid #000;\\\">\\r\\n&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<B><u><h style=\\\"font-size:120%;text-align:center;font-family:aril\\\">SHIP FROM</h></B></u><br>\\r\\n\\r\\n<span style=\\\"padding-left;font-size=110%\\\">\\r\\n&emsp;<h>{% if doc.items[0].warehouse %}\\r\\n\\t\\t{{doc.items[0].warehouse}} \\r\\n\\t{% endif%}</h>\\r\\n</span><br>\\r\\n<font-size=\\\"110%\\\">\\r\\n   &emsp;{% if frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"address_line_1\\\") %}\\r\\n\\t\\t{{frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"address_line_1\\\")}}\\r\\n\\t{%- endif-%}\\r\\n\\t&emsp;{% if frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"address_line_2\\\") %}\\r\\n\\t\\t{{frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"address_line_2\\\")}}\\r\\n\\t{%- endif-%}\\r\\n\\t{% if frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"city\\\") %}\\r\\n\\t\\t{{frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"city\\\")}},\\r\\n\\t{%- endif-%}\\r\\n\\t{% if frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"state\\\") %}\\r\\n\\t\\t{{frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"state\\\")}}\\r\\n\\t{%- endif-%}\\r\\n\\t&emsp;{% if frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"pin\\\") %}\\r\\n\\t\\t{{frappe.db.get_value(\\\"Warehouse\\\", {\\\"name\\\":doc.items[0].warehouse},\\\"pin\\\")}}\\r\\n\\t{%- endif-%}<br>\\r\\n\\t\\t</font></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"BILLING INFORATION\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"&emsp;<b><u><h style=\\\"font-size:130%;text-align:center;font-family:ariel black\\\">CARRIER</h></b></u>\\r\\n&emsp;&emsp;<h style=\\\"font-size:140%;text-align:center;font-family:ariel black\\\">{{doc.ship_via}}</h></b></u><br>\\r\\n<font-size=\\\"130%\\\"> <text-align:left\\\">&emsp;<b>{{doc.freight_charge_terms}}</b>\\r\\n&emsp;&emsp;&emsp;{{doc.shipping_account}}<br>\\r\\n</style><br></font>\\r\\n\\r\\n\\r\\n\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"&emsp;<b>NMFC</b>&emsp;{{doc.nmfc}}<br>\\r\\n&emsp;<b>NMFC</b>&emsp;{{doc.nmfc2}}<br>\\r\\n</style><br></font>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Address and Contact\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"ppd_instructions\", \"print_hide\": 0, \"label\": \"PPD Instructions\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"scan_barcode\", \"print_hide\": 0, \"label\": \"Scan Barcode\"}, {\"fieldname\": \"items\", \"print_hide\": 0, \"label\": \"Items\", \"visible_columns\": [{\"fieldname\": \"cartons\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"batch_no\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"item_code\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"customer_item_code\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"total_weight\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"Package Weight Details\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total_cartons\", \"print_hide\": 0, \"align\": \"left\", \"label\": \"Total Cartons\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"total_net_weight\", \"print_hide\": 0, \"label\": \"Total Net Weight\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Pricing Rules\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"pricing_rules\", \"print_hide\": 0, \"label\": \"Pricing Rule Detail\", \"visible_columns\": [{\"fieldname\": \"pricing_rule\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"item_code\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"margin_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rate_or_discount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rule_applied\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"taxes\", \"print_hide\": 0, \"label\": \"Sales Taxes and Charges\", \"visible_columns\": [{\"fieldname\": \"charge_type\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"row_id\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"account_head\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"description\", \"print_width\": \"300px\", \"print_hide\": 0}, {\"fieldname\": \"cost_center\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"rate\", \"print_width\": \"111\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"total\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"tax_amount_after_discount_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_tax_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"base_total\", \"print_width\": \"83\", \"print_hide\": 0}, {\"fieldname\": \"base_tax_amount_after_discount_amount\", \"print_width\": \"\", \"print_hide\": 0}, {\"fieldname\": \"item_wise_tax_detail\", \"print_width\": \"\", \"print_hide\": 0}]}, {\"fieldtype\": \"Section Break\", \"label\": \"Terms and Conditions\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"terms\", \"print_hide\": 0, \"label\": \"Terms and Conditions Details\"}, {\"fieldtype\": \"Section Break\", \"label\": \"More Information\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"project\", \"print_hide\": 0, \"label\": \"Project\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"FOOTER\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<head>\\r\\n <style type =\\\"text\\\" >\\r\\n   .footer{ \\r\\n       position: fixed;     \\r\\n       text-align: left;    \\r\\n       bottom: 0px; \\r\\n       p.small line-height: 1;\\r\\n     }  \\r\\n</style>\\r\\n</head>\\r\\n\\r\\n    <div class=\\\"footer\\\">\\r\\n<div style=\\\"width:340px;height:120px;border:2px solid #000;\\\">\\r\\n<p class=\\\"small\\\">\\r\\n<b><h style=\\\"font-size:80%;text-align:left;font-family:aril\\\">This is to certify that the above named materials are properly classified, packaged, marked and labeled, and are in proper condition for transportation according to the applicable regulations of the DOT.<br>\\r\\n______________________&emsp;&emsp;&emsp; _________________<br>\\r\\n&nbspShipper Signature &ensp;&emsp;&emsp;&ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Pickup Date\\r\\n</font> </b></style></p></div></div>\\r\\n\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldname\": \"_custom_html\", \"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldtype\": \"HTML\", \"options\": \"<head>\\r\\n <style type =\\\"text\\\" >\\r\\n   .footer{ \\r\\n       position: fixed;     \\r\\n       text-align: left;    \\r\\n       bottom: 0px; \\r\\n       p.small line-height: 0.2;\\r\\n     }  \\r\\n</style>\\r\\n</head>\\r\\n\\r\\n    <div class=\\\"footer\\\">\\r\\n<div style=\\\"width:340px;height:120px;border:2px solid #000;\\\">\\r\\n<p class=\\\"small\\\">\\r\\n<b><h style=\\\"font-size:80%;text-align:left;font-family:aril\\\">Carrier acknowledges receipt of packages and required placards.\\r\\nThis is to certify that the above-named materials are properly classified, packaged, marked and labeled, and are in proper condition for transportation according to the applicable regulations of the DOT.<br>\\r\\n______________________&emsp;&emsp;&emsp; _________________<br>\\r\\n&nbspCarrier Signature &ensp;&emsp;&emsp;&ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Pickup Date\\r\\n</b></style>\\r\\n</p>\\r\\n\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2023-03-01 16:48:06.082648",
+  "module": "Stock",
+  "name": "Bill of Lading",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ },
+ {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -26,6 +540,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -52,6 +567,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -78,6 +594,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -104,6 +621,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -130,6 +648,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -156,6 +675,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -182,6 +702,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 1,
   "css": null,
   "custom_format": 0,
@@ -208,6 +729,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -234,6 +756,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 1,
@@ -260,6 +783,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 1,
@@ -286,6 +810,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -312,6 +837,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 1,
@@ -338,6 +864,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 1,
@@ -364,6 +891,61 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": null,
+  "disabled": 1,
+  "doc_type": "Sales Invoice",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\n\\t<h2>\\n\\t\\tTAX INVOICE<br>\\n\\t\\t<small>{{ doc.name }}</small>\\n\\t</h2>\\n</div>\\n<h2 class=\\\"text-center\\\">\\n\\t{% if doc.invoice_copy -%}\\n\\t\\t<small>{{ doc.invoice_copy }}</small>\\n\\t{% endif -%}\\n</h2>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"company\", \"label\": \"Company\"}, {\"print_hide\": 0, \"fieldname\": \"company_address_display\", \"label\": \"Company Address\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"posting_date\", \"label\": \"Date\"}, {\"print_hide\": 0, \"fieldname\": \"due_date\", \"label\": \"Payment Due Date\"}, {\"print_hide\": 0, \"fieldname\": \"reverse_charge\", \"label\": \"Reverse Charge\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldname\": \"_custom_html\", \"options\": \"<hr>\", \"fieldtype\": \"HTML\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Address\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"customer_name\", \"label\": \"Customer Name\"}, {\"print_hide\": 0, \"fieldname\": \"address_display\", \"label\": \"Address\"}, {\"print_hide\": 0, \"fieldname\": \"contact_display\", \"label\": \"Contact\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"shipping_address\", \"label\": \"Shipping Address\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"visible_columns\": [{\"print_hide\": 0, \"fieldname\": \"item_code\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"description\", \"print_width\": \"200px\"}, {\"print_hide\": 0, \"fieldname\": \"gst_hsn_code\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"serial_no\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"qty\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"uom\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"rate\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"amount\", \"print_width\": \"\"}], \"print_hide\": 0, \"fieldname\": \"items\", \"label\": \"Items\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"total\", \"label\": \"Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"visible_columns\": [{\"print_hide\": 0, \"fieldname\": \"description\", \"print_width\": \"300px\"}], \"print_hide\": 0, \"fieldname\": \"taxes\", \"label\": \"Sales Taxes and Charges\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"grand_total\", \"label\": \"Grand Total\"}, {\"print_hide\": 0, \"fieldname\": \"rounded_total\", \"label\": \"Rounded Total\"}, {\"print_hide\": 0, \"fieldname\": \"in_words\", \"label\": \"In Words\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"other_charges_calculation\", \"align\": \"left\", \"label\": \"Tax Breakup\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Terms\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"terms\", \"label\": \"Terms and Conditions Details\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2017-12-15 11:57:25.477278",
+  "module": "Regional",
+  "name": "GST Tax Invoice",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Server",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "Yes"
+ },
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 1,
+  "default_print_language": null,
+  "disabled": 1,
+  "doc_type": "Sales Invoice",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": null,
+  "html": "<style>\n\t.print-format table, .print-format tr, \n\t.print-format td, .print-format div, .print-format p {\n\t\tfont-family: Monospace;\n\t\tline-height: 200%;\n\t\tvertical-align: middle;\n\t}\n\t@media screen {\n\t\t.print-format {\n\t\t\twidth: 4in;\n\t\t\tpadding: 0.25in;\n\t\t\tmin-height: 8in;\n\t\t}\n\t}\n</style>\n\n<p class=\"text-center\">\n\t{{ doc.company }}<br>\n\t{% if doc.company_address_display %}\n\t\t{% set company_address = doc.company_address_display.replace(\"\\n\", \" \").replace(\"<br>\", \" \") %}\n\t\t{% if \"GSTIN\" not in company_address %}\n\t\t\t{{ company_address }}\n\t\t\t<b>{{ _(\"GSTIN\") }}:</b>{{ doc.company_gstin }}\n\t\t{% else %}\n\t\t\t{{ company_address.replace(\"GSTIN\", \"<br>GSTIN\") }}\n\t\t{% endif %}\n\t{% endif %}\n\t<br>\n\t{% if doc.docstatus == 0 %}\n\t\t<b>{{ doc.status + \" \"+ (doc.select_print_heading or _(\"Invoice\")) }}</b><br>\n\t{% else %}\n\t\t<b>{{ doc.select_print_heading or _(\"Invoice\") }}</b><br>\n\t{% endif %}\n</p>\n<p>\n\t<b>{{ _(\"Receipt No\") }}:</b> {{ doc.name }}<br>\n\t<b>{{ _(\"Date\") }}:</b> {{ doc.get_formatted(\"posting_date\") }}<br>\n\t{% if doc.grand_total > 50000 %}\n\t\t{% set customer_address = doc.address_display.replace(\"\\n\", \" \").replace(\"<br>\", \" \") %}\n\t\t<b>{{ _(\"Customer\") }}:</b><br>\n\t\t{{ doc.customer_name }}<br>\n\t\t{{ customer_address }}\n\t{% endif %}\n</p>\n\n<hr>\n<table class=\"table table-condensed cart no-border\">\n\t<thead>\n\t\t<tr>\n\t\t\t<th width=\"40%\">{{ _(\"Item\") }}</b></th>\n\t\t\t<th width=\"30%\" class=\"text-right\">{{ _(\"Qty\") }}</th>\n\t\t\t<th width=\"30%\" class=\"text-right\">{{ _(\"Amount\") }}</th>\n\t\t</tr>\n\t</thead>\n\t<tbody>\n\t\t{%- for item in doc.items -%}\n\t\t<tr>\n\t\t\t<td>\n\t\t\t\t{{ item.item_code }}\n\t\t\t\t{%- if item.item_name != item.item_code -%}\n\t\t\t\t\t<br>{{ item.item_name }}\n\t\t\t\t{%- endif -%}\n\t\t\t\t{%- if item.gst_hsn_code -%}\n\t\t\t\t\t<br><b>{{ _(\"HSN/SAC\") }}:</b> {{ item.gst_hsn_code }}\n\t\t\t\t{%- endif -%}\n\t\t\t\t{%- if item.serial_no -%}\n\t\t\t\t\t<br><b>{{ _(\"Serial No\") }}:</b> {{ item.serial_no }}\n\t\t\t\t{%- endif -%}\n\t\t\t</td>\n\t\t\t<td class=\"text-right\">{{ item.qty }}<br>@ {{ item.rate }}</td>\n\t\t\t<td class=\"text-right\">{{ item.get_formatted(\"amount\") }}</td>\n\t\t</tr>\n\t\t{%- endfor -%}\n\t</tbody>\n</table>\n<table class=\"table table-condensed no-border\">\n\t<tbody>\n\t\t<tr>\n\t\t\t{% if doc.flags.show_inclusive_tax_in_print %}\n\t\t\t\t<td class=\"text-right\" style=\"width: 70%\">\n\t\t\t\t\t{{ _(\"Total Excl. Tax\") }}\n\t\t\t\t</td>\n\t\t\t\t<td class=\"text-right\">\n\t\t\t\t\t{{ doc.get_formatted(\"net_total\", doc) }}\n\t\t\t\t</td>\n\t\t\t{% else %}\n\t\t\t\t<td class=\"text-right\" style=\"width: 70%\">\n\t\t\t\t\t{{ _(\"Total\") }}\n\t\t\t\t</td>\n\t\t\t\t<td class=\"text-right\">\n\t\t\t\t\t{{ doc.get_formatted(\"total\", doc) }}\n\t\t\t\t</td>\n\t\t\t{% endif %}\n\t\t</tr>\n\t\t{%- for row in doc.taxes -%}\n\t\t  {%- if (not row.included_in_print_rate or doc.flags.show_inclusive_tax_in_print) and row.tax_amount != 0 -%}\n\t\t\t<tr>\n\t\t\t\t<td class=\"text-right\" style=\"width: 70%\">\n\t\t\t\t\t{{ row.description }}\n\t\t\t\t</td>\n\t\t\t\t<td class=\"text-right\">\n\t\t\t\t\t{{ row.get_formatted(\"tax_amount\", doc) }}\n\t\t\t\t</td>\n\t\t\t<tr>\n\t\t  {%- endif -%}\n\t\t{%- endfor -%}\n\t\t{%- if doc.discount_amount -%}\n\t\t<tr>\n\t\t\t<td class=\"text-right\" style=\"width: 75%\">\n\t\t\t\t{{ _(\"Discount\") }}\n\t\t\t</td>\n\t\t\t<td class=\"text-right\">\n\t\t\t\t{{ doc.get_formatted(\"discount_amount\") }}\n\t\t\t</td>\n\t\t</tr>\n\t\t{%- endif -%}\n\t\t<tr>\n\t\t\t<td class=\"text-right\" style=\"width: 75%\">\n\t\t\t\t<b>{{ _(\"Grand Total\") }}</b>\n\t\t\t</td>\n\t\t\t<td class=\"text-right\">\n\t\t\t\t{{ doc.get_formatted(\"grand_total\") }}\n\t\t\t</td>\n\t\t</tr>\n\t\t{%- if doc.rounded_total -%}\n\t\t<tr>\n\t\t\t<td class=\"text-right\" style=\"width: 75%\">\n\t\t\t\t<b>{{ _(\"Rounded Total\") }}</b>\n\t\t\t</td>\n\t\t\t<td class=\"text-right\">\n\t\t\t\t{{ doc.get_formatted(\"rounded_total\") }}\n\t\t\t</td>\n\t\t</tr>\n\t\t{%- endif -%}\n\t\t<tr>\n\t\t\t<td class=\"text-right\" style=\"width: 75%\">\n\t\t\t\t<b>{{ _(\"Paid Amount\") }}</b>\n\t\t\t</td>\n\t\t\t<td class=\"text-right\">\n\t\t\t\t{{ doc.get_formatted(\"paid_amount\") }}\n\t\t\t</td>\n\t\t</tr>\n\t{%- if doc.change_amount -%}\n\t\t<tr>\n\t\t\t<td class=\"text-right\" style=\"width: 75%\">\n\t\t\t\t<b>{{ _(\"Change Amount\") }}</b>\n\t\t\t</td>\n\t\t\t<td class=\"text-right\">\n\t\t\t\t{{ doc.get_formatted(\"change_amount\") }}\n\t\t\t</td>\n\t\t</tr>\n\t{%- endif -%}\n\t</tbody>\n</table>\n<p>{{ doc.terms or \"\" }}</p>\n<p class=\"text-center\">{{ _(\"Thank you, please visit again.\") }}</p>",
+  "line_breaks": 0,
+  "modified": "2019-01-24 17:09:27.190929",
+  "module": "Accounts",
+  "name": "GST POS Invoice",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 0,
+  "print_format_type": "Server",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "Yes"
+ },
+ {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -390,6 +972,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -416,6 +999,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -442,6 +1026,34 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 0,
+  "default_print_language": null,
+  "disabled": 0,
+  "doc_type": "Purchase Invoice",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Purchase Invoice<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"supplier_name\", \"label\": \"Supplier Name\"}, {\"print_hide\": 0, \"fieldname\": \"due_date\", \"label\": \"Due Date\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Address\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"address_display\", \"label\": \"Address\"}, {\"print_hide\": 0, \"fieldname\": \"contact_display\", \"label\": \"Contact\"}, {\"print_hide\": 0, \"fieldname\": \"contact_mobile\", \"label\": \"Mobile No\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"visible_columns\": [{\"print_hide\": 0, \"fieldname\": \"item_name\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"description\", \"print_width\": \"300px\"}, {\"print_hide\": 0, \"fieldname\": \"image\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"received_qty\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"qty\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"rejected_qty\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"discount_percentage\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"rate\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"amount\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"pricing_rule\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"weight_per_unit\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"total_weight\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"weight_uom\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"warehouse\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"rejected_warehouse\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"batch_no\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"serial_no\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"bom\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"asset\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"gst_hsn_code\", \"print_width\": \"\"}], \"print_hide\": 0, \"fieldname\": \"items\", \"label\": \"Items\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"total\", \"label\": \"Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"visible_columns\": [{\"print_hide\": 0, \"fieldname\": \"category\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"add_deduct_tax\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"charge_type\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"row_id\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"included_in_print_rate\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"account_head\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"cost_center\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"description\", \"print_width\": \"300px\"}, {\"print_hide\": 0, \"fieldname\": \"rate\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"tax_amount\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"total\", \"print_width\": \"\"}], \"print_hide\": 0, \"fieldname\": \"taxes\", \"label\": \"Purchase Taxes and Charges\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"grand_total\", \"label\": \"Grand Total\"}, {\"print_hide\": 0, \"fieldname\": \"in_words\", \"label\": \"In Words\"}, {\"print_hide\": 0, \"fieldname\": \"disable_rounded_total\", \"label\": \"Disable Rounded Total\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Payments\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"cash_bank_account\", \"label\": \"Cash/Bank Account\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"other_charges_calculation\", \"align\": \"left\", \"label\": \"Tax Breakup\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Raw\"}, {\"fieldtype\": \"Column Break\"}, {\"visible_columns\": [{\"print_hide\": 0, \"fieldname\": \"main_item_code\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"rm_item_code\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"description\", \"print_width\": \"300px\"}, {\"print_hide\": 0, \"fieldname\": \"batch_no\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"serial_no\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"required_qty\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"consumed_qty\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"stock_uom\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"rate\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"amount\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"conversion_factor\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"current_stock\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"reference_name\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"bom_detail_no\", \"print_width\": \"\"}], \"print_hide\": 0, \"fieldname\": \"supplied_items\", \"label\": \"Supplied Items\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Terms\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"terms\", \"label\": \"Terms and Conditions1\"}]",
+  "html": null,
+  "line_breaks": 0,
+  "modified": "2019-03-04 13:38:47.362002",
+  "module": "Accounts",
+  "name": "GST Purchase Invoice",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Server",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "Yes"
+ },
+ {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -468,6 +1080,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -494,6 +1107,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -520,6 +1134,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -546,6 +1161,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 1,
   "css": null,
   "custom_format": 0,
@@ -572,6 +1188,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 1,
   "css": null,
   "custom_format": 0,
@@ -598,6 +1215,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -624,6 +1242,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -650,6 +1269,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -676,6 +1296,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -702,6 +1323,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -728,6 +1350,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 1,
   "css": null,
   "custom_format": 0,
@@ -754,6 +1377,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 1,
   "css": null,
   "custom_format": 0,
@@ -780,6 +1404,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -806,6 +1431,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -832,6 +1458,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -858,6 +1485,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -884,6 +1512,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -910,6 +1539,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -936,6 +1566,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -962,6 +1593,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -988,6 +1620,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -1014,6 +1647,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -1040,6 +1674,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -1066,6 +1701,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -1092,6 +1728,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 1,
@@ -1118,6 +1755,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -1144,6 +1782,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 1,
@@ -1170,6 +1809,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -1196,6 +1836,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 1,
@@ -1222,6 +1863,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 1,
@@ -1248,6 +1890,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -1274,6 +1917,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -1300,6 +1944,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -1326,6 +1971,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -1352,6 +1998,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,
@@ -1378,6 +2025,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": "",
   "custom_format": 1,
@@ -1404,6 +2052,7 @@
   "standard": "No"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 1,
@@ -1430,6 +2079,7 @@
   "standard": "Yes"
  },
  {
+  "absolute_value": 0,
   "align_labels_right": 0,
   "css": null,
   "custom_format": 0,

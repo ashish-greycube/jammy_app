@@ -5,6 +5,1470 @@
   "disabled": 0,
   "docstatus": 0,
   "doctype": "Report",
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": null,
+  "modified": "2023-03-16 00:15:52.546882",
+  "module": "Regional",
+  "name": "DATEV",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "GL Entry",
+  "reference_report": null,
+  "report_name": "DATEV",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "DATEV",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "DATEV",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "DATEV",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Auditor"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": "Standard",
+  "modified": "2021-06-24 02:50:19.902113",
+  "module": "Accounts",
+  "name": "New Gross Profit",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "New Gross Profit",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "New Gross Profit",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "New Gross Profit",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": "{}",
+  "letter_head": "Standard",
+  "modified": "2020-03-14 05:51:41.705957",
+  "module": "Accounts",
+  "name": "Gross Profit Test",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "Gross Profit Test",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "Gross Profit Test",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "Gross Profit Test",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": "{\"filters\":[[\"Sales Invoice\",\"status\",\"!=\",\"Cancelled\",false],[\"Sales Invoice\",\"company\",\"=\",\"Jammy, Inc.\"]],\"fields\":\n[[\"name\",\"Sales Invoice\"],[\"customer\",\"Sales Invoice\"],[\"posting_date\",\"Sales Invoice\"],[\"currency\",\"Sales Invoice\"],\n[\"item_code\",\"Sales Invoice Item\"],[\"qty\",\"Sales Invoice Item\"],[\"rate\",\"Sales Invoice Item\"],\n[\"base_rate\",\"Sales Invoice Item\"],[\"net_amount\",\"Sales Invoice Item\"],[\"batch_no\",\"Sales Invoice Item\"],\n[\"batch_no\",\"Packed Item\"],[\"Rate\",\"batch_no\"] ],\"order_by\":\"`tabSales Invoice`.`modified` desc\",\"add_totals_row\":0,\"page_length\":20,\"column_widths\":\n{\"name\":120,\"customer\":112,\"posting_date\":89,\"currency\":120,\"Sales Invoice Item:item_code\":87,\n\"Sales Invoice Item:qty\":71,\"Sales Invoice Item:rate\":66,\"Sales Invoice Item:net_amount\":114,\n\"Sales Invoice Item:batch_no\":91,\"Packed Item:batch_no\":120,\"batch_no:rate\":114},\"group_by\":null}",
+  "json": "{\n \"add_totals_row\": 0,\n \"column_widths\": {\n  \"Packed Item:batch_no\": 120,\n  \"Sales Invoice Item:batch_no\": 91,\n  \"Sales Invoice Item:item_code\": 87,\n  \"Sales Invoice Item:net_amount\": 114,\n  \"Sales Invoice Item:qty\": 71,\n  \"Sales Invoice Item:rate\": 66,\n  \"currency\": 120,\n  \"customer\": 112,\n  \"name\": 120,\n  \"posting_date\": 89\n },\n \"fields\": [\n  [\n   \"name\",\n   \"Sales Invoice\"\n  ],\n  [\n   \"customer\",\n   \"Sales Invoice\"\n  ],\n  [\n   \"posting_date\",\n   \"Sales Invoice\"\n  ],\n  [\n   \"currency\",\n   \"Sales Invoice\"\n  ],\n  [\n   \"item_code\",\n   \"Sales Invoice Item\"\n  ],\n  [\n   \"qty\",\n   \"Sales Invoice Item\"\n  ],\n  [\n   \"rate\",\n   \"Sales Invoice Item\"\n  ],\n  [\n   \"base_rate\",\n   \"Sales Invoice Item\"\n  ],\n  [\n   \"net_amount\",\n   \"Sales Invoice Item\"\n  ],\n  [\n   \"batch_no\",\n   \"Sales Invoice Item\"\n  ],\n  [\n   \"batch_no\",\n   \"Packed Item\"\n  ]\n ],\n \"filters\": [\n  [\n   \"Sales Invoice\",\n   \"status\",\n   \"!=\",\n   \"Cancelled\",\n   false\n  ],\n  [\n   \"Sales Invoice\",\n   \"company\",\n   \"=\",\n   \"Jammy, Inc.\"\n  ]\n ],\n \"group_by\": null,\n \"order_by\": \"`tabSales Invoice`.`modified` desc\",\n \"page_length\": 20\n}",
+  "letter_head": "Standard",
+  "modified": "2023-03-15 23:33:48.299398",
+  "module": "Accounts",
+  "name": "profit report?",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "profit report?",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "profit report?",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "profit report?",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "profit report?",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[[\"Purchase Receipt\",\"status\",\"=\",\"Draft\",false],[\"Purchase Receipt\",\"company\",\"=\",\"Jammy, Inc.\"]],\"fields\":[[\"name\",\"Purchase Receipt\"],[\"docstatus\",\"Purchase Receipt\"],[\"item_code\",\"Purchase Receipt Item\"],[\"batch_no\",\"Purchase Receipt Item\"],[\"received_qty\",\"Purchase Receipt Item\"],[\"supplier_delivery_note\",\"Purchase Receipt\"],[\"posting_date\",\"Purchase Receipt\"],[\"status\",\"Purchase Receipt\"],[\"warehouse\",\"Purchase Receipt\"],[\"currency\",\"Purchase Receipt\"],[\"supplier\",\"Purchase Receipt\"],[\"supplier_name\",\"Purchase Receipt\"],[\"base_grand_total\",\"Purchase Receipt\"],[\"is_subcontracted\",\"Purchase Receipt\"],[\"transporter_name\",\"Purchase Receipt\"],[\"is_return\",\"Purchase Receipt\"],[\"per_billed\",\"Purchase Receipt\"]],\"order_by\":\"`tabPurchase Receipt`.`modified` desc\",\"add_totals_row\":0,\"page_length\":500,\"column_widths\":{\"name\":120,\"Purchase Receipt Item:item_code\":158,\"Purchase Receipt Item:batch_no\":79,\"Purchase Receipt Item:received_qty\":100,\"supplier_delivery_note\":103,\"posting_date\":85,\"status\":180,\"warehouse\":120,\"currency\":120,\"supplier\":150,\"supplier_name\":104,\"base_grand_total\":120,\"is_subcontracted\":120,\"transporter_name\":120,\"is_return\":120,\"per_billed\":120},\"group_by\":null}",
+  "letter_head": "Standard",
+  "modified": "2022-03-31 09:20:32.364324",
+  "module": "Stock",
+  "name": "MELY'S INCOMING CONTAINER INFO",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Purchase Receipt",
+  "reference_report": null,
+  "report_name": "MELY'S INCOMING CONTAINER INFO ",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "MELY'S INCOMING CONTAINER INFO",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Purchase User"
+   },
+   {
+    "parent": "MELY'S INCOMING CONTAINER INFO",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "MELY'S INCOMING CONTAINER INFO",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock Manager"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[[\"Payment Entry\",\"posting_date\",\"Between\",[\"2020-05-01\",\"2021-11-30\"],false],[\"Payment Entry\",\"payment_type\",\"!=\",\"Pay\",false],[\"Payment Entry\",\"docstatus\",\"!=\",\"2\",false],[\"Payment Entry\",\"party_name\",\"like\",\"%GRIMES%\"]],\"fields\":[[\"name\",\"Payment Entry\"],[\"posting_date\",\"Payment Entry\"],[\"paid_from_account_currency\",\"Payment Entry\"],[\"party_name\",\"Payment Entry\"],[\"paid_amount\",\"Payment Entry\"],[\"reference_no\",\"Payment Entry\"],[\"reference_date\",\"Payment Entry\"]],\"order_by\":\"`tabPayment Entry`.`modified` desc\",\"add_totals_row\":true,\"page_length\":500,\"column_widths\":{\"name\":120,\"posting_date\":93,\"paid_from_account_currency\":120,\"party_name\":117,\"paid_amount\":99,\"reference_no\":61,\"reference_date\":120},\"group_by\":null}",
+  "letter_head": "Standard",
+  "modified": "2021-11-04 14:57:38.606903",
+  "module": "Accounts",
+  "name": "PAYMENT RECORD",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Payment Entry",
+  "reference_report": null,
+  "report_name": "PAYMENT RECORD",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "PAYMENT RECORD",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "PAYMENT RECORD",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "[\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"item\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"Item\",\n  \"label\": \"Item\",\n  \"name\": \"Item\",\n  \"options\": \"Item\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"item_name\",\n  \"fieldtype\": \"\",\n  \"id\": \"Item Name\",\n  \"label\": \"Item Name\",\n  \"name\": \"Item Name\",\n  \"width\": 150\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"description\",\n  \"fieldtype\": \"\",\n  \"id\": \"Description\",\n  \"label\": \"Description\",\n  \"name\": \"Description\",\n  \"width\": 150\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"warehouse\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"Warehouse\",\n  \"label\": \"Warehouse\",\n  \"name\": \"Warehouse\",\n  \"options\": \"Warehouse\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"batch\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"Batch\",\n  \"label\": \"Batch\",\n  \"name\": \"Batch\",\n  \"options\": \"Batch\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"doctype\": \"Batch\",\n  \"editable\": false,\n  \"fieldname\": \"rate\",\n  \"fieldtype\": \"Currency\",\n  \"id\": \"rate\",\n  \"insert_after_index\": 4,\n  \"label\": \"Rate\",\n  \"link_field\": \"Batch\",\n  \"name\": \"Rate\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"opening_qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"Opening Qty\",\n  \"label\": \"Opening Qty\",\n  \"name\": \"Opening Qty\",\n  \"width\": 90\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"in_qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"In Qty\",\n  \"label\": \"In Qty\",\n  \"name\": \"In Qty\",\n  \"width\": 80\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"out_qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"Out Qty\",\n  \"label\": \"Out Qty\",\n  \"name\": \"Out Qty\",\n  \"width\": 80\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"balance_qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"Balance Qty\",\n  \"label\": \"Balance Qty\",\n  \"name\": \"Balance Qty\",\n  \"width\": 90\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"uom\",\n  \"fieldtype\": \"\",\n  \"id\": \"UOM\",\n  \"label\": \"UOM\",\n  \"name\": \"UOM\",\n  \"width\": 90\n }\n]",
+  "letter_head": "Standard",
+  "modified": "2023-03-15 23:33:48.304458",
+  "module": "Stock",
+  "name": "Xiaoming Monthly Sales Report",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Stock Ledger Entry",
+  "reference_report": "Batch-Wise Balance History",
+  "report_name": "Xiaoming Monthly Sales Report",
+  "report_script": null,
+  "report_type": "Custom Report",
+  "roles": [
+   {
+    "parent": "Xiaoming Monthly Sales Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "Xiaoming Monthly Sales Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "[\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"entity\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"entity\",\n  \"label\": \"Item ID\",\n  \"name\": \"Item ID\",\n  \"options\": \"Item\",\n  \"width\": 140\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"entity_name\",\n  \"fieldtype\": \"Data\",\n  \"id\": \"entity_name\",\n  \"label\": \"Item Name\",\n  \"name\": \"Item Name\",\n  \"width\": 140\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"stock_uom\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"stock_uom\",\n  \"label\": \"UOM\",\n  \"name\": \"UOM\",\n  \"options\": \"UOM\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"2021\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"2021\",\n  \"label\": \"2021\",\n  \"name\": \"2021\",\n  \"width\": 120\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"total\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"total\",\n  \"label\": \"Total\",\n  \"name\": \"Total\",\n  \"width\": 120\n }\n]",
+  "letter_head": "Standard",
+  "modified": "2023-03-15 23:33:48.303110",
+  "module": "Selling",
+  "name": "Sales Report Analytics",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Order",
+  "reference_report": "Sales Analytics",
+  "report_name": "Sales Report Analytics",
+  "report_script": null,
+  "report_type": "Custom Report",
+  "roles": [
+   {
+    "parent": "Sales Report Analytics",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "Sales Report Analytics",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   },
+   {
+    "parent": "Sales Report Analytics",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Maintenance User"
+   },
+   {
+    "parent": "Sales Report Analytics",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales Manager"
+   },
+   {
+    "parent": "Sales Report Analytics",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "Sales Report Analytics",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "Sales Report Analytics",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   },
+   {
+    "parent": "Sales Report Analytics",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Maintenance User"
+   },
+   {
+    "parent": "Sales Report Analytics",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales Manager"
+   },
+   {
+    "parent": "Sales Report Analytics",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[[\"Payment Entry\",\"payment_type\",\"!=\",\"Pay\",false],[\"Payment Entry\",\"status\",\"!=\",\"Cancelled\",false],[\"Payment Entry\",\"posting_date\",\"Between\",[\"2021-12-01\",\"2021-12-31\"],false],[\"Payment Entry\",\"party_type\",\"=\",\"Customer\"]],\"fields\":[[\"name\",\"Payment Entry\"],[\"posting_date\",\"Payment Entry\"],[\"reference_name\",\"Payment Entry Reference\"],[\"party_name\",\"Payment Entry\"],[\"sales_partner\",\"Payment Entry\"],[\"paid_from_account_currency\",\"Payment Entry\"],[\"allocated_amount\",\"Payment Entry Reference\"],[\"unallocated_amount\",\"Payment Entry\"],[\"freight_charges\",\"Payment Entry Reference\"],[\"discount\",\"Payment Entry Reference\"]],\"order_by\":\"`tabPayment Entry`.`modified` desc\",\"add_totals_row\":true,\"page_length\":500,\"column_widths\":{\"name\":120,\"posting_date\":93,\"Payment Entry Reference:reference_name\":80,\"party_name\":117,\"sales_partner\":136,\"paid_from_account_currency\":120,\"Payment Entry Reference:allocated_amount\":74,\"unallocated_amount\":70,\"Payment Entry Reference:freight_charges\":128,\"Payment Entry Reference:discount\":87},\"group_by\":null}",
+  "letter_head": "Standard",
+  "modified": "2022-01-19 15:15:32.986321",
+  "module": "Accounts",
+  "name": "COMMISSIONS REPORT",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Payment Entry",
+  "reference_report": null,
+  "report_name": "COMMISSIONS REPORT",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "COMMISSIONS REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "COMMISSIONS REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[[\"Sales Order\",\"docstatus\",\"!=\",\"2\",false],[\"Sales Order\",\"naming_series\",\"=\",\"BACK ORDER-\"],[\"Sales Order\",\"company\",\"=\",\"Jammy, Inc.\"],[\"Sales Order\",\"po_no\",\"like\",\"%26884%\"]],\"fields\":[[\"status\",\"Sales Order\"],[\"name\",\"Sales Order\"],[\"transaction_date\",\"Sales Order\"],[\"customer\",\"Sales Order\"],[\"po_no\",\"Sales Order\"],[\"po_date\",\"Sales Order\"],[\"item_code\",\"Sales Order Item\"],[\"rate\",\"Sales Order Item\"],[\"qty\",\"Sales Order Item\"],[\"delivered_qty\",\"Sales Order Item\"],[\"delivery_date\",\"Sales Order Item\"]],\"order_by\":\"`tabSales Order`.`modified` desc\",\"add_totals_row\":true,\"page_length\":500,\"column_widths\":{\"status\":97,\"name\":120,\"transaction_date\":109,\"customer\":120,\"po_no\":141,\"po_date\":100,\"Sales Order Item:item_code\":152,\"Sales Order Item:rate\":100,\"Sales Order Item:qty\":125,\"Sales Order Item:delivered_qty\":161,\"Sales Order Item:delivery_date\":62},\"group_by\":null}",
+  "letter_head": "Standard",
+  "modified": "2022-07-06 13:38:25.961963",
+  "module": "Selling",
+  "name": "ANGELA'S BLANKET AND BACK ORDER REPORT",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Order",
+  "reference_report": null,
+  "report_name": "ANGELA'S BLANKET AND BACK ORDER REPORT",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "ANGELA'S BLANKET AND BACK ORDER REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "ANGELA'S BLANKET AND BACK ORDER REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   },
+   {
+    "parent": "ANGELA'S BLANKET AND BACK ORDER REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Maintenance User"
+   },
+   {
+    "parent": "ANGELA'S BLANKET AND BACK ORDER REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales Manager"
+   },
+   {
+    "parent": "ANGELA'S BLANKET AND BACK ORDER REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "ANGELA'S BLANKET AND BACK ORDER REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "ANGELA'S BLANKET AND BACK ORDER REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   },
+   {
+    "parent": "ANGELA'S BLANKET AND BACK ORDER REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Maintenance User"
+   },
+   {
+    "parent": "ANGELA'S BLANKET AND BACK ORDER REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales Manager"
+   },
+   {
+    "parent": "ANGELA'S BLANKET AND BACK ORDER REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "[\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"item_code\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"item_code\",\n  \"label\": \"Item\",\n  \"name\": \"Item\",\n  \"options\": \"Item\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"item_name\",\n  \"id\": \"item_name\",\n  \"label\": \"Item Name\",\n  \"name\": \"Item Name\",\n  \"width\": 150\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"item_group\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"item_group\",\n  \"label\": \"Item Group\",\n  \"name\": \"Item Group\",\n  \"options\": \"Item Group\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"warehouse\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"warehouse\",\n  \"label\": \"Warehouse\",\n  \"name\": \"Warehouse\",\n  \"options\": \"Warehouse\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"stock_uom\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"stock_uom\",\n  \"label\": \"Stock UOM\",\n  \"name\": \"Stock UOM\",\n  \"options\": \"UOM\",\n  \"width\": 90\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"qty\",\n  \"editable\": false,\n  \"fieldname\": \"bal_qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"bal_qty\",\n  \"label\": \"Balance Qty\",\n  \"name\": \"Balance Qty\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"bal_val\",\n  \"fieldtype\": \"Currency\",\n  \"id\": \"bal_val\",\n  \"label\": \"Balance Value\",\n  \"name\": \"Balance Value\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"qty\",\n  \"editable\": false,\n  \"fieldname\": \"opening_qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"opening_qty\",\n  \"label\": \"Opening Qty\",\n  \"name\": \"Opening Qty\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"opening_val\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"opening_val\",\n  \"label\": \"Opening Value\",\n  \"name\": \"Opening Value\",\n  \"width\": 110\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"qty\",\n  \"editable\": false,\n  \"fieldname\": \"in_qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"in_qty\",\n  \"label\": \"In Qty\",\n  \"name\": \"In Qty\",\n  \"width\": 80\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"in_val\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"in_val\",\n  \"label\": \"In Value\",\n  \"name\": \"In Value\",\n  \"width\": 80\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"qty\",\n  \"editable\": false,\n  \"fieldname\": \"out_qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"out_qty\",\n  \"label\": \"Out Qty\",\n  \"name\": \"Out Qty\",\n  \"width\": 80\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"out_val\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"out_val\",\n  \"label\": \"Out Value\",\n  \"name\": \"Out Value\",\n  \"width\": 80\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"rate\",\n  \"editable\": false,\n  \"fieldname\": \"val_rate\",\n  \"fieldtype\": \"Currency\",\n  \"id\": \"val_rate\",\n  \"label\": \"Valuation Rate\",\n  \"name\": \"Valuation Rate\",\n  \"width\": 90\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"qty\",\n  \"editable\": false,\n  \"fieldname\": \"reorder_level\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"reorder_level\",\n  \"label\": \"Reorder Level\",\n  \"name\": \"Reorder Level\",\n  \"width\": 80\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"qty\",\n  \"editable\": false,\n  \"fieldname\": \"reorder_qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"reorder_qty\",\n  \"label\": \"Reorder Qty\",\n  \"name\": \"Reorder Qty\",\n  \"width\": 80\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"company\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"company\",\n  \"label\": \"Company\",\n  \"name\": \"Company\",\n  \"options\": \"Company\",\n  \"width\": 100\n }\n]",
+  "letter_head": "Standard",
+  "modified": "2023-03-15 23:33:48.298049",
+  "module": "Stock",
+  "name": "Inventory Balances and Reorder numbers",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Stock Ledger Entry",
+  "reference_report": "Stock Balance",
+  "report_name": "Inventory Balances and Reorder numbers",
+  "report_script": null,
+  "report_type": "Custom Report",
+  "roles": [
+   {
+    "parent": "Inventory Balances and Reorder numbers",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "Inventory Balances and Reorder numbers",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 1,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "[\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"warehouse\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"warehouse\",\n  \"label\": \"Warehouse\",\n  \"name\": \"Warehouse\",\n  \"options\": \"Warehouse\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"date\",\n  \"fieldtype\": \"Datetime\",\n  \"id\": \"date\",\n  \"label\": \"Date\",\n  \"name\": \"Date\",\n  \"width\": 95\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"item_code\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"item_code\",\n  \"label\": \"Item\",\n  \"name\": \"Item\",\n  \"options\": \"Item\",\n  \"width\": 130\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"item_name\",\n  \"id\": \"item_name\",\n  \"label\": \"Item Name\",\n  \"name\": \"Item Name\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"doctype\": \"Delivery Note\",\n  \"editable\": false,\n  \"fieldname\": \"customer_name\",\n  \"fieldtype\": \"Data\",\n  \"id\": \"customer_name\",\n  \"insert_after_index\": 3,\n  \"label\": \"Customer Name\",\n  \"link_field\": \"voucher_no\",\n  \"name\": \"Customer Name\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"rate\",\n  \"editable\": false,\n  \"fieldname\": \"valuation_rate\",\n  \"fieldtype\": \"Currency\",\n  \"id\": \"valuation_rate\",\n  \"label\": \"Valuation Rate\",\n  \"name\": \"Valuation Rate\",\n  \"options\": \"Company:company:default_currency\",\n  \"width\": 110\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"qty\",\n  \"editable\": false,\n  \"fieldname\": \"actual_qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"actual_qty\",\n  \"label\": \"Qty\",\n  \"name\": \"Qty\",\n  \"width\": 50\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"qty\",\n  \"editable\": false,\n  \"fieldname\": \"qty_after_transaction\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"qty_after_transaction\",\n  \"label\": \"Balance Qty\",\n  \"name\": \"Balance Qty\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"rate\",\n  \"editable\": false,\n  \"fieldname\": \"incoming_rate\",\n  \"fieldtype\": \"Currency\",\n  \"id\": \"incoming_rate\",\n  \"label\": \"Incoming Rate\",\n  \"name\": \"Incoming Rate\",\n  \"options\": \"Company:company:default_currency\",\n  \"width\": 110\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"stock_value\",\n  \"fieldtype\": \"Currency\",\n  \"id\": \"stock_value\",\n  \"label\": \"Balance Value\",\n  \"name\": \"Balance Value\",\n  \"options\": \"Company:company:default_currency\",\n  \"width\": 110\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"stock_uom\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"stock_uom\",\n  \"label\": \"Stock UOM\",\n  \"name\": \"Stock UOM\",\n  \"options\": \"UOM\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"voucher_type\",\n  \"id\": \"voucher_type\",\n  \"label\": \"Voucher Type\",\n  \"name\": \"Voucher Type\",\n  \"width\": 110\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"voucher_no\",\n  \"fieldtype\": \"Dynamic Link\",\n  \"id\": \"voucher_no\",\n  \"label\": \"Voucher #\",\n  \"name\": \"Voucher #\",\n  \"options\": \"voucher_type\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"batch_no\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"batch_no\",\n  \"label\": \"Batch\",\n  \"name\": \"Batch\",\n  \"options\": \"Batch\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"serial_no\",\n  \"id\": \"serial_no\",\n  \"label\": \"Serial #\",\n  \"name\": \"Serial #\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"project\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"project\",\n  \"label\": \"Project\",\n  \"name\": \"Project\",\n  \"options\": \"Project\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"company\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"company\",\n  \"label\": \"Company\",\n  \"name\": \"Company\",\n  \"options\": \"Company\",\n  \"width\": 110\n }\n]",
+  "letter_head": "Standard",
+  "modified": "2023-03-15 23:33:48.301667",
+  "module": "Stock",
+  "name": "ITEM USAGE",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Stock Ledger Entry",
+  "reference_report": "Stock Ledger",
+  "report_name": "ITEM USAGE",
+  "report_script": null,
+  "report_type": "Custom Report",
+  "roles": [
+   {
+    "parent": "ITEM USAGE",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "ITEM USAGE",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "[\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"date\",\n  \"fieldtype\": \"Datetime\",\n  \"id\": \"date\",\n  \"label\": \"Date\",\n  \"name\": \"Date\",\n  \"width\": 95\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"voucher_no\",\n  \"fieldtype\": \"Dynamic Link\",\n  \"id\": \"voucher_no\",\n  \"label\": \"Voucher #\",\n  \"name\": \"Voucher #\",\n  \"options\": \"voucher_type\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"doctype\": \"Delivery Note\",\n  \"editable\": false,\n  \"fieldname\": \"customer_name\",\n  \"fieldtype\": \"Data\",\n  \"id\": \"customer_name\",\n  \"insert_after_index\": 13,\n  \"label\": \"Customer Name\",\n  \"link_field\": \"voucher_no\",\n  \"name\": \"Customer Name\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"doctype\": \"Delivery Note\",\n  \"editable\": false,\n  \"fieldname\": \"whs_invoice\",\n  \"fieldtype\": \"Data\",\n  \"id\": \"whs_invoice\",\n  \"insert_after_index\": 15,\n  \"label\": \"WHS INVOICE\",\n  \"link_field\": \"voucher_no\",\n  \"name\": \"WHS INVOICE\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"qty\",\n  \"editable\": false,\n  \"fieldname\": \"actual_qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"actual_qty\",\n  \"label\": \"Qty\",\n  \"name\": \"Qty\",\n  \"width\": 50\n },\n {\n  \"compareValue\": null,\n  \"doctype\": \"Batch\",\n  \"editable\": false,\n  \"fieldname\": \"item\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"item\",\n  \"insert_after_index\": 4,\n  \"label\": \"Item\",\n  \"link_field\": \"batch_no\",\n  \"name\": \"Item\",\n  \"options\": \"Item\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"batch_no\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"batch_no\",\n  \"label\": \"Batch\",\n  \"name\": \"Batch\",\n  \"options\": \"Batch\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"qty\",\n  \"editable\": false,\n  \"fieldname\": \"qty_after_transaction\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"qty_after_transaction\",\n  \"label\": \"Balance Qty\",\n  \"name\": \"Balance Qty\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"doctype\": \"Delivery Note\",\n  \"editable\": false,\n  \"fieldname\": \"sales_partner\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"sales_partner\",\n  \"insert_after_index\": 2,\n  \"label\": \"Sales Partner\",\n  \"link_field\": \"voucher_no\",\n  \"name\": \"Sales Partner\",\n  \"options\": \"Sales Partner\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"stock_uom\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"stock_uom\",\n  \"label\": \"Stock UOM\",\n  \"name\": \"Stock UOM\",\n  \"options\": \"UOM\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"doctype\": \"Delivery Note\",\n  \"editable\": false,\n  \"fieldname\": \"po_no\",\n  \"fieldtype\": \"Data\",\n  \"id\": \"po_no\",\n  \"insert_after_index\": 14,\n  \"label\": \"Customer's Purchase Order No\",\n  \"link_field\": \"voucher_no\",\n  \"name\": \"Customer's Purchase Order No\",\n  \"width\": 100\n }\n]",
+  "letter_head": "Standard",
+  "modified": "2023-03-15 23:33:48.287370",
+  "module": "Stock",
+  "name": "STOCK DISCREPANCY",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Stock Ledger Entry",
+  "reference_report": "Stock Ledger",
+  "report_name": "STOCK DISCREPANCY",
+  "report_script": null,
+  "report_type": "Custom Report",
+  "roles": [
+   {
+    "parent": "STOCK DISCREPANCY",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "STOCK DISCREPANCY",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[[\"Sales Invoice\",\"status\",\"!=\",\"Cancelled\",false],[\"Sales Invoice\",\"posting_date\",\"Between\",[\"2023-02-01\",\"2023-02-28\"],false],[\"Sales Invoice\",\"company\",\"=\",\"Jammy, Inc.\"],[\"Sales Invoice\",\"sales_partner\",\"=\",\"Advanced Marketing Southeast\"]],\"fields\":[[\"status\",\"Sales Invoice\"],[\"posting_date\",\"Sales Invoice\"],[\"customer\",\"Sales Invoice\"],[\"name\",\"Sales Invoice\"],[\"whs_invoice\",\"Sales Invoice\"],[\"item_code\",\"Sales Invoice Item\"],[\"qty\",\"Sales Invoice Item\"],[\"rate\",\"Sales Invoice Item\"],[\"net_amount\",\"Sales Invoice Item\"],[\"base_rate\",\"Sales Invoice Item\"]],\"order_by\":\"`tabSales Invoice`.`modified` desc\",\"add_totals_row\":true,\"page_length\":500,\"column_widths\":{\"status\":97,\"posting_date\":89,\"customer\":112,\"name\":120,\"whs_invoice\":120,\"Sales Invoice Item:item_code\":87,\"Sales Invoice Item:qty\":71,\"Sales Invoice Item:rate\":66,\"Sales Invoice Item:net_amount\":114},\"group_by\":null}",
+  "letter_head": "Standard",
+  "modified": "2023-03-14 09:56:41.699987",
+  "module": "Accounts",
+  "name": "Jammy Inc Batch Mond End Inv.",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "Jammy Inc Batch Mond End Inv.",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "Jammy Inc Batch Mond End Inv.",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "Jammy Inc Batch Mond End Inv.",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "Jammy Inc Batch Mond End Inv.",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[[\"Sales Invoice\",\"posting_date\",\"Between\",[\"2021-11-01\",\"2021-11-30\"],false],[\"Sales Invoice\",\"company\",\"=\",\"Jammy, Inc.\"]],\"fields\":[[\"posting_date\",\"Sales Invoice\"],[\"name\",\"Sales Invoice\"],[\"customer\",\"Sales Invoice\"],[\"item_code\",\"Sales Invoice Item\"],[\"qty\",\"Sales Invoice Item\"],[\"valuation_rate\",\"Sales Invoice Item\"],[\"net_amount\",\"Sales Invoice Item\"],[\"rate\",\"Sales Invoice Item\"]],\"order_by\":\"`tabSales Invoice`.`modified` desc\",\"add_totals_row\":true,\"page_length\":500,\"column_widths\":{\"posting_date\":89,\"name\":120,\"customer\":112,\"Sales Invoice Item:item_code\":87,\"Sales Invoice Item:qty\":71,\"Sales Invoice Item:valuation_rate\":120,\"Sales Invoice Item:net_amount\":114,\"Sales Invoice Item:rate\":66},\"group_by\":null}",
+  "letter_head": "Standard",
+  "modified": "2022-03-25 10:53:15.375337",
+  "module": "Accounts",
+  "name": "Gross Profit Report",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "Gross Profit Report",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "Gross Profit Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "Gross Profit Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "Gross Profit Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "[\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"date\",\n  \"fieldtype\": \"Datetime\",\n  \"id\": \"date\",\n  \"label\": \"Date\",\n  \"name\": \"Date\",\n  \"width\": 95\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"item_code\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"item_code\",\n  \"label\": \"Item\",\n  \"name\": \"Item\",\n  \"options\": \"Item\",\n  \"width\": 130\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"warehouse\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"warehouse\",\n  \"label\": \"Warehouse\",\n  \"name\": \"Warehouse\",\n  \"options\": \"Warehouse\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"batch_no\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"batch_no\",\n  \"label\": \"Batch\",\n  \"name\": \"Batch\",\n  \"options\": \"Batch\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"qty\",\n  \"editable\": false,\n  \"fieldname\": \"actual_qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"actual_qty\",\n  \"label\": \"Qty\",\n  \"name\": \"Qty\",\n  \"width\": 50\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"voucher_no\",\n  \"fieldtype\": \"Dynamic Link\",\n  \"id\": \"voucher_no\",\n  \"label\": \"Voucher #\",\n  \"name\": \"Voucher #\",\n  \"options\": \"voucher_type\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"qty\",\n  \"editable\": false,\n  \"fieldname\": \"qty_after_transaction\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"qty_after_transaction\",\n  \"label\": \"Balance Qty\",\n  \"name\": \"Balance Qty\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"convertible\": \"rate\",\n  \"editable\": false,\n  \"fieldname\": \"incoming_rate\",\n  \"fieldtype\": \"Currency\",\n  \"id\": \"incoming_rate\",\n  \"label\": \"Incoming Rate\",\n  \"name\": \"Incoming Rate\",\n  \"options\": \"Company:company:default_currency\",\n  \"width\": 110\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"stock_uom\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"stock_uom\",\n  \"label\": \"Stock UOM\",\n  \"name\": \"Stock UOM\",\n  \"options\": \"UOM\",\n  \"width\": 100\n }\n]",
+  "letter_head": "Standard",
+  "modified": "2023-03-15 23:33:48.295258",
+  "module": "Stock",
+  "name": "PURCHASE ORDER REVIEW REPORT",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Stock Ledger Entry",
+  "reference_report": "Stock Ledger",
+  "report_name": "PURCHASE ORDER REVIEW REPORT",
+  "report_script": null,
+  "report_type": "Custom Report",
+  "roles": [
+   {
+    "parent": "PURCHASE ORDER REVIEW REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "PURCHASE ORDER REVIEW REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[],\"fields\":[[\"name\",\"Item\"],[\"item_code\",\"Item\"],[\"description\",\"Item\"],[\"customer_name\",\"Item Customer Detail\"],[\"ref_code\",\"Item Customer Detail\"],[\"rate\",\"Item Customer Detail\"],[\"item_group\",\"Item\"]],\"order_by\":\"`tabItem`.`item_name` asc\",\"add_totals_row\":0,\"page_length\":500,\"column_widths\":{\"name\":120,\"item_code\":90,\"description\":136,\"Item Customer Detail:customer_name\":140,\"Item Customer Detail:ref_code\":80,\"Item Customer Detail:rate\":78,\"item_group\":120},\"group_by\":null}",
+  "letter_head": "Standard",
+  "modified": "2022-05-25 16:48:51.683633",
+  "module": "Stock",
+  "name": "Customer Code and Rate Listing",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Item",
+  "reference_report": null,
+  "report_name": "Customer Code and Rate Listing",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "Customer Code and Rate Listing",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   },
+   {
+    "parent": "Customer Code and Rate Listing",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Purchase User"
+   },
+   {
+    "parent": "Customer Code and Rate Listing",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock Manager"
+   },
+   {
+    "parent": "Customer Code and Rate Listing",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "Customer Code and Rate Listing",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Item Manager"
+   },
+   {
+    "parent": "Customer Code and Rate Listing",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Maintenance User"
+   },
+   {
+    "parent": "Customer Code and Rate Listing",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[[\"Purchase Receipt\",\"name\",\"like\",\"%PREC-%\",false],[\"Purchase Receipt\",\"status\",\"=\",\"Draft\",false],[\"Purchase Receipt\",\"company\",\"=\",\"Jammy, Inc.\"]],\"fields\":[[\"name\",\"Purchase Receipt\"],[\"title\",\"Purchase Receipt\"],[\"supplier_delivery_note\",\"Purchase Receipt\"],[\"posting_date\",\"Purchase Receipt\"],[\"currency\",\"Purchase Receipt\"],[\"grand_total\",\"Purchase Receipt\"],[\"status\",\"Purchase Receipt\"],[\"item_code\",\"Purchase Receipt Item\"],[\"rate\",\"Purchase Receipt Item\"],[\"received_qty\",\"Purchase Receipt Item\"],[\"qty\",\"Purchase Receipt Item\"],[\"batch_no\",\"Purchase Receipt Item\"],[\"set_warehouse\",\"Purchase Receipt\"]],\"order_by\":\"`tabPurchase Receipt`.`modified` desc\",\"add_totals_row\":0,\"page_length\":500,\"column_widths\":{\"name\":120,\"title\":120,\"supplier_delivery_note\":120,\"posting_date\":100,\"currency\":120,\"grand_total\":120,\"status\":150,\"Purchase Receipt Item:item_code\":158,\"Purchase Receipt Item:rate\":60,\"Purchase Receipt Item:received_qty\":100,\"Purchase Receipt Item:qty\":100,\"Purchase Receipt Item:batch_no\":79,\"set_warehouse\":120},\"group_by\":null}",
+  "letter_head": "Standard",
+  "modified": "2022-06-20 15:02:30.127678",
+  "module": "Stock",
+  "name": "INVENTORY IN TRANSIT",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Purchase Receipt",
+  "reference_report": null,
+  "report_name": "INVENTORY IN TRANSIT",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "INVENTORY IN TRANSIT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Purchase User"
+   },
+   {
+    "parent": "INVENTORY IN TRANSIT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "INVENTORY IN TRANSIT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock Manager"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[[\"Sales Invoice\",\"status\",\"!=\",\"Cancelled\",false],[\"Sales Invoice\",\"customer\",\"=\",\"Cargo Craft, Inc. - GA\"],[\"Sales Invoice\",\"company\",\"=\",\"Jammy, Inc.\"]],\"fields\":[[\"name\",\"Sales Invoice\"],[\"customer\",\"Sales Invoice\"],[\"posting_date\",\"Sales Invoice\"],[\"delivery_note_number\",\"Sales Invoice\"],[\"po_no\",\"Sales Invoice\"],[\"po_date\",\"Sales Invoice\"],[\"item_code\",\"Sales Invoice Item\"],[\"customer_item_code\",\"Sales Invoice Item\"],[\"qty\",\"Sales Invoice Item\"],[\"rate\",\"Sales Invoice Item\"]],\"order_by\":\"`tabSales Invoice`.`modified` desc\",\"add_totals_row\":true,\"page_length\":500,\"column_widths\":{\"name\":120,\"customer\":112,\"posting_date\":89,\"delivery_note_number\":120,\"po_no\":110,\"po_date\":120,\"Sales Invoice Item:item_code\":87,\"Sales Invoice Item:customer_item_code\":50,\"Sales Invoice Item:qty\":71,\"Sales Invoice Item:rate\":66},\"group_by\":null}",
+  "letter_head": "Standard",
+  "modified": "2022-09-12 12:52:42.835836",
+  "module": "Accounts",
+  "name": "Customer's Sales",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "Customer's Sales",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "Customer's Sales",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "Customer's Sales",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "Customer's Sales",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[[\"Sales Invoice\",\"docstatus\",\"!=\",\"2\",false],[\"Sales Invoice\",\"posting_date\",\"Between\",[\"2023-01-01\",\"2023-01-31\"],false],[\"Sales Invoice\",\"company\",\"=\",\"Jammy, Inc.\"]],\"fields\":[[\"name\",\"Sales Invoice\"],[\"customer\",\"Sales Invoice\"],[\"posting_date\",\"Sales Invoice\"],[\"status\",\"Sales Invoice\"],[\"sales_partner\",\"Sales Invoice\"],[\"item_code\",\"Sales Invoice Item\"],[\"rate\",\"Sales Invoice Item\"],[\"qty\",\"Sales Invoice Item\"],[\"currency\",\"Sales Invoice\"]],\"order_by\":\"`tabSales Invoice`.`modified` desc\",\"add_totals_row\":true,\"page_length\":500,\"column_widths\":{\"name\":120,\"customer\":112,\"posting_date\":89,\"status\":97,\"sales_partner\":103,\"Sales Invoice Item:item_code\":87,\"Sales Invoice Item:rate\":66,\"Sales Invoice Item:qty\":71,\"currency\":120},\"group_by\":null}",
+  "letter_head": "Standard",
+  "modified": "2023-02-16 13:36:50.168261",
+  "module": "Accounts",
+  "name": "SALES LISTING REPORT-ACCOUNTING REPORT",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "SALES LISTING REPORT-ACCOUNTING REPORT",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "SALES LISTING REPORT-ACCOUNTING REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "SALES LISTING REPORT-ACCOUNTING REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "SALES LISTING REPORT-ACCOUNTING REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "[\n {\n  \"compareValue\": null,\n  \"doctype\": \"Customer\",\n  \"editable\": false,\n  \"fieldname\": \"default_sales_partner\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"default_sales_partner\",\n  \"insert_after_index\": 0,\n  \"label\": \"Sales Partner\",\n  \"link_field\": \"customer\",\n  \"name\": \"Sales Partner\",\n  \"options\": \"Sales Partner\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"item_code\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"item_code\",\n  \"label\": \"Item Code\",\n  \"name\": \"Item Code\",\n  \"options\": \"Item\",\n  \"width\": 120\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"item_name\",\n  \"fieldtype\": \"Data\",\n  \"id\": \"item_name\",\n  \"label\": \"Item Name\",\n  \"name\": \"Item Name\",\n  \"width\": 140\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"description\",\n  \"fieldtype\": \"Data\",\n  \"id\": \"description\",\n  \"label\": \"Description\",\n  \"name\": \"Description\",\n  \"width\": 150\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"quantity\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"quantity\",\n  \"label\": \"Quantity\",\n  \"name\": \"Quantity\",\n  \"width\": 150\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"uom\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"uom\",\n  \"label\": \"UOM\",\n  \"name\": \"UOM\",\n  \"options\": \"UOM\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"rate\",\n  \"id\": \"rate\",\n  \"label\": \"Rate\",\n  \"name\": \"Rate\",\n  \"options\": \"Currency\",\n  \"width\": 120\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"amount\",\n  \"id\": \"amount\",\n  \"label\": \"Amount\",\n  \"name\": \"Amount\",\n  \"options\": \"Currency\",\n  \"width\": 120\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"sales_order\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"sales_order\",\n  \"label\": \"Sales Order\",\n  \"name\": \"Sales Order\",\n  \"options\": \"Sales Order\",\n  \"width\": 100\n },\n {\n  \"editable\": false,\n  \"fieldname\": \"transaction_date\",\n  \"fieldtype\": \"Date\",\n  \"id\": \"transaction_date\",\n  \"label\": \"Transaction Date\",\n  \"name\": \"Transaction Date\",\n  \"width\": 90\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"customer\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"customer\",\n  \"label\": \"Customer\",\n  \"name\": \"Customer\",\n  \"options\": \"Customer\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"delivered_quantity\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"delivered_quantity\",\n  \"label\": \"Delivered Quantity\",\n  \"name\": \"Delivered Quantity\",\n  \"width\": 150\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"billed_amount\",\n  \"fieldtype\": \"currency\",\n  \"id\": \"billed_amount\",\n  \"label\": \"Billed Amount\",\n  \"name\": \"Billed Amount\",\n  \"width\": 120\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"company\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"company\",\n  \"label\": \"Company\",\n  \"name\": \"Company\",\n  \"options\": \"Company\",\n  \"width\": 100\n }\n]",
+  "letter_head": "Standard",
+  "modified": "2023-03-15 23:33:48.292596",
+  "module": "Selling",
+  "name": "Item-wise Sales History CVS",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Order",
+  "reference_report": "Item-wise Sales History",
+  "report_name": "Item-wise Sales History CVS",
+  "report_script": null,
+  "report_type": "Custom Report",
+  "roles": [
+   {
+    "parent": "Item-wise Sales History CVS",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "Item-wise Sales History CVS",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   },
+   {
+    "parent": "Item-wise Sales History CVS",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Maintenance User"
+   },
+   {
+    "parent": "Item-wise Sales History CVS",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales Manager"
+   },
+   {
+    "parent": "Item-wise Sales History CVS",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "Item-wise Sales History CVS",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "Item-wise Sales History CVS",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   },
+   {
+    "parent": "Item-wise Sales History CVS",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Maintenance User"
+   },
+   {
+    "parent": "Item-wise Sales History CVS",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales Manager"
+   },
+   {
+    "parent": "Item-wise Sales History CVS",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[[\"Sales Invoice\",\"posting_date\",\"Between\",[\"2021-01-01\",\"2021-12-31\"],false],[\"Sales Taxes and Charges\",\"account_head\",\"=\",\"GST Tax - Sales - JI\",false],[\"Sales Invoice\",\"name\",\"like\",\"%R200%\"],[\"Sales Invoice\",\"company\",\"=\",\"Jammy, Inc.\"]],\"fields\":[[\"name\",\"Sales Invoice\"],[\"posting_date\",\"Sales Invoice\"],[\"currency\",\"Sales Invoice\"],[\"grand_total\",\"Sales Invoice\"],[\"account_head\",\"Sales Taxes and Charges\"],[\"tax_amount\",\"Sales Taxes and Charges\"]],\"order_by\":\"`tabSales Invoice`.`modified` desc\",\"add_totals_row\":true,\"page_length\":500,\"column_widths\":{\"name\":120,\"posting_date\":89,\"currency\":120,\"grand_total\":122,\"Sales Taxes and Charges:account_head\":120,\"Sales Taxes and Charges:tax_amount\":120},\"group_by\":null}",
+  "letter_head": "Standard",
+  "modified": "2022-10-17 16:47:03.289050",
+  "module": "Accounts",
+  "name": "GST YEARLY REPORT",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "GST YEARLY REPORT",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "GST YEARLY REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "GST YEARLY REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "GST YEARLY REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "[\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"sales_invoice\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"Sales Invoice\",\n  \"label\": \"Sales Invoice\",\n  \"name\": \"Sales Invoice\",\n  \"options\": \"Sales Invoice\",\n  \"width\": 120\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"customer\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"Customer\",\n  \"label\": \"Customer\",\n  \"name\": \"Customer\",\n  \"options\": \"Customer\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"customer_group\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"Customer Group\",\n  \"label\": \"Customer Group\",\n  \"name\": \"Customer Group\",\n  \"options\": \"Customer Group\",\n  \"width\": 100\n },\n {\n  \"editable\": false,\n  \"fieldname\": \"posting_date\",\n  \"fieldtype\": \"Date\",\n  \"id\": \"Posting Date\",\n  \"label\": \"Posting Date\",\n  \"name\": \"Posting Date\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"item_code\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"Item Code\",\n  \"label\": \"Item Code\",\n  \"name\": \"Item Code\",\n  \"options\": \"Item\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"item_name\",\n  \"fieldtype\": \"Data\",\n  \"id\": \"Item Name\",\n  \"label\": \"Item Name\",\n  \"name\": \"Item Name\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"item_group\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"Item Group\",\n  \"label\": \"Item Group\",\n  \"name\": \"Item Group\",\n  \"options\": \"Item Group\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"brand\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"Brand\",\n  \"label\": \"Brand\",\n  \"name\": \"Brand\",\n  \"options\": \"Brand\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"description\",\n  \"fieldtype\": \"Data\",\n  \"id\": \"Description\",\n  \"label\": \"Description\",\n  \"name\": \"Description\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"warehouse\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"Warehouse\",\n  \"label\": \"Warehouse\",\n  \"name\": \"Warehouse\",\n  \"options\": \"Warehouse\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"doctype\": \"Sales Invoice\",\n  \"editable\": false,\n  \"fieldname\": \"total_taxes_and_charges\",\n  \"fieldtype\": \"Currency\",\n  \"id\": \"total_taxes_and_charges\",\n  \"insert_after_index\": 10,\n  \"label\": \"Total Taxes and Charges\",\n  \"link_field\": \"Sales Invoice\",\n  \"name\": \"Total Taxes and Charges\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"Qty\",\n  \"label\": \"Qty\",\n  \"name\": \"Qty\",\n  \"width\": 80\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"avg._selling_rate\",\n  \"fieldtype\": \"Currency\",\n  \"id\": \"Avg. Selling Rate\",\n  \"label\": \"Avg. Selling Rate\",\n  \"name\": \"Avg. Selling Rate\",\n  \"options\": \"currency\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"valuation_rate\",\n  \"fieldtype\": \"Currency\",\n  \"id\": \"Valuation Rate\",\n  \"label\": \"Valuation Rate\",\n  \"name\": \"Valuation Rate\",\n  \"options\": \"currency\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"selling_amount\",\n  \"fieldtype\": \"Currency\",\n  \"id\": \"Selling Amount\",\n  \"label\": \"Selling Amount\",\n  \"name\": \"Selling Amount\",\n  \"options\": \"currency\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"buying_amount\",\n  \"fieldtype\": \"Currency\",\n  \"id\": \"Buying Amount\",\n  \"label\": \"Buying Amount\",\n  \"name\": \"Buying Amount\",\n  \"options\": \"currency\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"gross_profit\",\n  \"fieldtype\": \"Currency\",\n  \"id\": \"Gross Profit\",\n  \"label\": \"Gross Profit\",\n  \"name\": \"Gross Profit\",\n  \"options\": \"currency\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"gross_profit_%\",\n  \"fieldtype\": \"Percent\",\n  \"id\": \"Gross Profit %\",\n  \"label\": \"Gross Profit %\",\n  \"name\": \"Gross Profit %\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"project\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"Project\",\n  \"label\": \"Project\",\n  \"name\": \"Project\",\n  \"options\": \"Project\",\n  \"width\": 100\n }\n]",
+  "letter_head": "Standard",
+  "modified": "2023-03-15 23:33:48.289991",
+  "module": "Accounts",
+  "name": "GST GROSS PROFIT",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Invoice",
+  "reference_report": "Gross Profit",
+  "report_name": "GST GROSS PROFIT",
+  "report_script": null,
+  "report_type": "Custom Report",
+  "roles": [
+   {
+    "parent": "GST GROSS PROFIT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "GST GROSS PROFIT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "GST GROSS PROFIT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "[\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"entity\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"entity\",\n  \"label\": \"Customer ID\",\n  \"name\": \"Customer ID\",\n  \"options\": \"Customer\",\n  \"width\": 140\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"entity_name\",\n  \"fieldtype\": \"Data\",\n  \"id\": \"entity_name\",\n  \"label\": \"Customer Name\",\n  \"name\": \"Customer Name\",\n  \"width\": 140\n },\n {\n  \"compareValue\": null,\n  \"doctype\": \"Customer\",\n  \"editable\": false,\n  \"fieldname\": \"customer_primary_contact\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"customer_primary_contact\",\n  \"insert_after_index\": 1,\n  \"label\": \"Customer Primary Contact\",\n  \"link_field\": \"entity\",\n  \"name\": \"Customer Primary Contact\",\n  \"options\": \"Contact\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"doctype\": \"Customer\",\n  \"editable\": false,\n  \"fieldname\": \"customer_primary_address\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"customer_primary_address\",\n  \"insert_after_index\": 2,\n  \"label\": \"Customer Primary Address\",\n  \"link_field\": \"entity\",\n  \"name\": \"Customer Primary Address\",\n  \"options\": \"Address\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"doctype\": \"Customer\",\n  \"editable\": false,\n  \"fieldname\": \"mailing_address\",\n  \"fieldtype\": \"Data\",\n  \"id\": \"mailing_address\",\n  \"insert_after_index\": 3,\n  \"label\": \"Mailing Address\",\n  \"link_field\": \"entity\",\n  \"name\": \"Mailing Address\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"doctype\": \"Customer\",\n  \"editable\": false,\n  \"fieldname\": \"primary_address\",\n  \"fieldtype\": \"Text\",\n  \"id\": \"primary_address\",\n  \"insert_after_index\": 4,\n  \"label\": \"Primary Address\",\n  \"link_field\": \"entity\",\n  \"name\": \"Primary Address\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"2022\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"2022\",\n  \"label\": \"2022\",\n  \"name\": \"2022\",\n  \"width\": 120\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"total\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"total\",\n  \"label\": \"Total\",\n  \"name\": \"Total\",\n  \"width\": 120\n }\n]",
+  "letter_head": "Standard",
+  "modified": "2023-03-15 23:33:48.288830",
+  "module": "Selling",
+  "name": "Customer Yearly Sales and addresses",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Order",
+  "reference_report": "Sales Analytics",
+  "report_name": "Customer Yearly Sales and addresses",
+  "report_script": null,
+  "report_type": "Custom Report",
+  "roles": [
+   {
+    "parent": "Customer Yearly Sales and addresses",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "Customer Yearly Sales and addresses",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   },
+   {
+    "parent": "Customer Yearly Sales and addresses",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Maintenance User"
+   },
+   {
+    "parent": "Customer Yearly Sales and addresses",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales Manager"
+   },
+   {
+    "parent": "Customer Yearly Sales and addresses",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "Customer Yearly Sales and addresses",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "Customer Yearly Sales and addresses",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   },
+   {
+    "parent": "Customer Yearly Sales and addresses",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Maintenance User"
+   },
+   {
+    "parent": "Customer Yearly Sales and addresses",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales Manager"
+   },
+   {
+    "parent": "Customer Yearly Sales and addresses",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[[\"Sales Invoice\",\"status\",\"!=\",\"Cancelled\",false],[\"Sales Invoice\",\"posting_date\",\"Between\",[\"2023-02-01\",\"2023-02-28\"],false],[\"Sales Invoice\",\"company\",\"=\",\"Jammy, Inc.\"]],\"fields\":[[\"name\",\"Sales Invoice\"],[\"customer\",\"Sales Invoice\"],[\"posting_date\",\"Sales Invoice\"],[\"whs_invoice\",\"Sales Invoice\"],[\"grand_total\",\"Sales Invoice\"],[\"tax_amount\",\"Sales Taxes and Charges\"],[\"currency\",\"Sales Invoice\"],[\"sales_partner\",\"Sales Invoice\"]],\"order_by\":\"`tabSales Invoice`.`modified` desc\",\"add_totals_row\":true,\"page_length\":500,\"column_widths\":{\"name\":120,\"customer\":112,\"posting_date\":89,\"whs_invoice\":120,\"grand_total\":122,\"Sales Taxes and Charges:tax_amount\":120,\"currency\":120,\"sales_partner\":103},\"group_by\":null}",
+  "letter_head": "Standard",
+  "modified": "2023-03-14 10:34:36.334988",
+  "module": "Accounts",
+  "name": "CVS & AMS SHIPPING REPORT",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "CVS & AMS SHIPPING REPORT",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "CVS & AMS SHIPPING REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "CVS & AMS SHIPPING REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "CVS & AMS SHIPPING REPORT",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[[\"Payment Entry\",\"posting_date\",\"Between\",[\"2023-01-01\",\"2023-01-31\"],false],[\"Payment Entry\",\"party_type\",\"=\",\"Customer\"]],\"fields\":[[\"name\",\"Payment Entry\"],[\"posting_date\",\"Payment Entry\"],[\"party_name\",\"Payment Entry\"],[\"paid_amount\",\"Payment Entry\"],[\"reference_name\",\"Payment Entry Reference\"],[\"allocated_amount\",\"Payment Entry Reference\"],[\"unallocated_amount\",\"Payment Entry\"],[\"discount\",\"Payment Entry Reference\"],[\"freight_charges\",\"Payment Entry Reference\"],[\"reference_date\",\"Payment Entry\"],[\"reference_no\",\"Payment Entry\"],[\"paid_from_account_currency\",\"Payment Entry\"]],\"order_by\":\"`tabPayment Entry`.`modified` desc\",\"add_totals_row\":true,\"page_length\":500,\"column_widths\":{\"name\":120,\"posting_date\":93,\"party_name\":117,\"paid_amount\":99,\"Payment Entry Reference:reference_name\":80,\"Payment Entry Reference:allocated_amount\":74,\"unallocated_amount\":70,\"Payment Entry Reference:discount\":87,\"Payment Entry Reference:freight_charges\":128,\"reference_date\":120,\"reference_no\":61,\"paid_from_account_currency\":120},\"group_by\":null}",
+  "letter_head": "Standard",
+  "modified": "2023-02-16 14:30:48.755457",
+  "module": "Accounts",
+  "name": "CASH RECEIPTS REPORT-ACCOUNTING",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Payment Entry",
+  "reference_report": null,
+  "report_name": "CASH RECEIPTS REPORT-ACCOUNTING",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "CASH RECEIPTS REPORT-ACCOUNTING",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[[\"Purchase Order\",\"supplier\",\"=\",\"Shaoxing Weiguang Electron & Electric Equipment Co.\"],[\"Purchase Order\",\"warehouse\",\"=\",\"Jammy Distribution - JI\"],[\"Purchase Order\",\"status\",\"=\",\"To Receive and Bill\"]],\"fields\":[[\"name\",\"Purchase Order\"],[\"warehouse\",\"Purchase Order\"],[\"transaction_date\",\"Purchase Order\"],[\"batch_no\",\"Purchase Order Item\"],[\"item_name\",\"Purchase Order Item\"],[\"qty\",\"Purchase Order Item\"],[\"received_qty\",\"Purchase Order Item\"],[\"rate\",\"Purchase Order Item\"],[\"expected_delivery_date\",\"Purchase Order Item\"]],\"order_by\":\"`tabPurchase Order`.`modified` desc\",\"add_totals_row\":0,\"page_length\":500,\"column_widths\":{\"name\":120,\"warehouse\":76,\"transaction_date\":120,\"Purchase Order Item:batch_no\":120,\"Purchase Order Item:item_name\":120,\"Purchase Order Item:qty\":60,\"Purchase Order Item:received_qty\":120,\"Purchase Order Item:rate\":60,\"Purchase Order Item:expected_delivery_date\":60},\"group_by\":null}",
+  "letter_head": "Standard",
+  "modified": "2023-01-31 16:37:25.630447",
+  "module": "Buying",
+  "name": "Ralphy's Factory Order Report",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Purchase Order",
+  "reference_report": null,
+  "report_name": "Ralphy's Factory Order Report",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "Ralphy's Factory Order Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "Ralphy's Factory Order Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Purchase Manager"
+   },
+   {
+    "parent": "Ralphy's Factory Order Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Purchase User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "[\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"item_code\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"Item Code\",\n  \"label\": \"Item Code\",\n  \"name\": \"Item Code\",\n  \"options\": \"Item\",\n  \"width\": 120\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"item_name\",\n  \"fieldtype\": \"\",\n  \"id\": \"Item Name\",\n  \"label\": \"Item Name\",\n  \"name\": \"Item Name\",\n  \"width\": 120\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"Qty\",\n  \"label\": \"Qty\",\n  \"name\": \"Qty\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"doctype\": \"Purchase Order\",\n  \"editable\": false,\n  \"fieldname\": \"total_qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"total_qty\",\n  \"insert_after_index\": 2,\n  \"label\": \"Total Quantity\",\n  \"link_field\": \"Purchase Order\",\n  \"name\": \"Total Quantity\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"received_qty\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"Received Qty\",\n  \"label\": \"Received Qty\",\n  \"name\": \"Received Qty\",\n  \"width\": 120\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"uom\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"UOM\",\n  \"label\": \"UOM\",\n  \"name\": \"UOM\",\n  \"options\": \"UOM\",\n  \"width\": 80\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"purchase_order\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"Purchase Order\",\n  \"label\": \"Purchase Order\",\n  \"name\": \"Purchase Order\",\n  \"options\": \"Purchase Order\",\n  \"width\": 120\n },\n {\n  \"editable\": false,\n  \"fieldname\": \"transaction_date\",\n  \"fieldtype\": \"Date\",\n  \"id\": \"Transaction Date\",\n  \"label\": \"Transaction Date\",\n  \"name\": \"Transaction Date\",\n  \"width\": 140\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"company\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"Company\",\n  \"label\": \"Company\",\n  \"name\": \"Company\",\n  \"options\": \"Company\",\n  \"width\": null\n }\n]",
+  "letter_head": "Standard",
+  "modified": "2023-03-15 23:33:48.284898",
+  "module": "Buying",
+  "name": "Item Purchases",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Purchase Order",
+  "reference_report": "Item-wise Purchase History",
+  "report_name": "Item Purchases",
+  "report_script": null,
+  "report_type": "Custom Report",
+  "roles": [
+   {
+    "parent": "Item Purchases",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "Item Purchases",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Purchase Manager"
+   },
+   {
+    "parent": "Item Purchases",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Purchase User"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[[\"Payment Entry\",\"payment_type\",\"!=\",\"Pay\",false],[\"Payment Entry\",\"posting_date\",\"Between\",[\"2023-02-01\",\"2023-02-28\"],false],[\"Payment Entry\",\"party_type\",\"=\",\"Customer\"]],\"fields\":[[\"name\",\"Payment Entry\"],[\"status\",\"Payment Entry\"],[\"posting_date\",\"Payment Entry\"],[\"reference_name\",\"Payment Entry Reference\"],[\"party_name\",\"Payment Entry\"],[\"allocated_amount\",\"Payment Entry Reference\"],[\"unallocated_amount\",\"Payment Entry\"],[\"freight_charges\",\"Payment Entry Reference\"],[\"discount\",\"Payment Entry Reference\"],[\"sales_partner\",\"Payment Entry\"],[\"paid_from_account_currency\",\"Payment Entry\"]],\"order_by\":\"`tabPayment Entry`.`modified` desc\",\"add_totals_row\":true,\"page_length\":500,\"column_widths\":{\"name\":120,\"status\":120,\"posting_date\":93,\"Payment Entry Reference:reference_name\":111,\"party_name\":117,\"Payment Entry Reference:allocated_amount\":74,\"unallocated_amount\":70,\"Payment Entry Reference:freight_charges\":128,\"Payment Entry Reference:discount\":87,\"sales_partner\":120,\"paid_from_account_currency\":120},\"group_by\":null}",
+  "letter_head": "Standard",
+  "modified": "2023-03-14 10:33:18.300955",
+  "module": "Accounts",
+  "name": "Commission's Report",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Payment Entry",
+  "reference_report": null,
+  "report_name": "Commission's Report",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "Commission's Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "No",
+  "javascript": null,
+  "json": "[\n {\n  \"editable\": false,\n  \"fieldname\": \"posting_date\",\n  \"fieldtype\": \"Date\",\n  \"id\": \"posting_date\",\n  \"label\": \"Posting Date\",\n  \"name\": \"Posting Date\",\n  \"width\": 90\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"account\",\n  \"fieldtype\": \"Link\",\n  \"id\": \"account\",\n  \"label\": \"Account\",\n  \"name\": \"Account\",\n  \"options\": \"Account\",\n  \"width\": 180\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"debit\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"debit\",\n  \"label\": \"Debit (USD)\",\n  \"name\": \"Debit (USD)\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"credit\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"credit\",\n  \"label\": \"Credit (USD)\",\n  \"name\": \"Credit (USD)\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"balance\",\n  \"fieldtype\": \"Float\",\n  \"id\": \"balance\",\n  \"label\": \"Balance (USD)\",\n  \"name\": \"Balance (USD)\",\n  \"width\": 130\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"voucher_type\",\n  \"id\": \"voucher_type\",\n  \"label\": \"Voucher Type\",\n  \"name\": \"Voucher Type\",\n  \"width\": 120\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"voucher_no\",\n  \"fieldtype\": \"Dynamic Link\",\n  \"id\": \"voucher_no\",\n  \"label\": \"Voucher No\",\n  \"name\": \"Voucher No\",\n  \"options\": \"voucher_type\",\n  \"width\": 180\n },\n {\n  \"compareValue\": null,\n  \"doctype\": \"Sales Invoice\",\n  \"editable\": false,\n  \"fieldname\": \"po_no\",\n  \"fieldtype\": \"Data\",\n  \"id\": \"po_no\",\n  \"insert_after_index\": 7,\n  \"label\": \"Customer's Purchase Order\",\n  \"link_field\": \"against_voucher\",\n  \"name\": \"Customer's Purchase Order\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"doctype\": \"Payment Entry\",\n  \"editable\": false,\n  \"fieldname\": \"reference_no\",\n  \"fieldtype\": \"Data\",\n  \"id\": \"reference_no\",\n  \"insert_after_index\": 8,\n  \"label\": \"Cheque/Reference No\",\n  \"link_field\": \"voucher_no\",\n  \"name\": \"Check/Reference No\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"against\",\n  \"id\": \"against\",\n  \"label\": \"Against Account\",\n  \"name\": \"Against Account\",\n  \"width\": 120\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"party_type\",\n  \"id\": \"party_type\",\n  \"label\": \"Party Type\",\n  \"name\": \"Party Type\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"party\",\n  \"id\": \"party\",\n  \"label\": \"Party\",\n  \"name\": \"Party\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"project\",\n  \"id\": \"project\",\n  \"label\": \"Project\",\n  \"name\": \"Project\",\n  \"options\": \"Project\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"cost_center\",\n  \"id\": \"cost_center\",\n  \"label\": \"Cost Center\",\n  \"name\": \"Cost Center\",\n  \"options\": \"Cost Center\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"against_voucher_type\",\n  \"id\": \"against_voucher_type\",\n  \"label\": \"Against Voucher Type\",\n  \"name\": \"Against Voucher Type\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"against_voucher\",\n  \"fieldtype\": \"Dynamic Link\",\n  \"id\": \"against_voucher\",\n  \"label\": \"Against Voucher\",\n  \"name\": \"Against Voucher\",\n  \"options\": \"against_voucher_type\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"bill_no\",\n  \"fieldtype\": \"Data\",\n  \"id\": \"bill_no\",\n  \"label\": \"Supplier Invoice No\",\n  \"name\": \"Supplier Invoice No\",\n  \"width\": 100\n },\n {\n  \"compareValue\": null,\n  \"editable\": false,\n  \"fieldname\": \"remarks\",\n  \"id\": \"remarks\",\n  \"label\": \"Remarks\",\n  \"name\": \"Remarks\",\n  \"width\": 400\n }\n]",
+  "letter_head": "Standard",
+  "modified": "2023-03-15 23:33:48.280761",
+  "module": "Accounts",
+  "name": "GENERAL LEDGER CUSTOMER",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "GL Entry",
+  "reference_report": "General Ledger",
+  "report_name": "GENERAL LEDGER CUSTOMER",
+  "report_script": null,
+  "report_type": "Custom Report",
+  "roles": [
+   {
+    "parent": "GENERAL LEDGER CUSTOMER",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "GENERAL LEDGER CUSTOMER",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "GENERAL LEDGER CUSTOMER",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Auditor"
+   }
+  ],
+  "sales_partner": null
+ },
+ {
+  "add_total_row": 0,
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
   "is_standard": "No",
   "javascript": "",
   "json": "{\"filters\":[[\"Address\",\"country\",\"=\",\"United States\"]],\"fields\":[[\"name\",\"Address\"],[\"docstatus\",\"Address\"],[\"address_title\",\"Address\"],[\"address_type\",\"Address\"],[\"address_line1\",\"Address\"],[\"address_line2\",\"Address\"],[\"city\",\"Address\"],[\"state\",\"Address\"],[\"country\",\"Address\"],[\"pincode\",\"Address\"],[\"is_primary_address\",\"Address\"],[\"link_name\",\"Dynamic Link\"],[\"link_doctype\",\"Dynamic Link\"],[\"link_title\",\"Dynamic Link\"]],\"order_by\":\"`tabAddress`.`modified` desc\",\"add_totals_row\":0,\"page_length\":500,\"column_widths\":{\"name\":120,\"docstatus\":120,\"address_title\":120,\"address_type\":120,\"address_line1\":120,\"address_line2\":120,\"city\":120,\"state\":120,\"country\":90,\"pincode\":120,\"is_primary_address\":120,\"Dynamic Link:link_name\":120,\"Dynamic Link:link_doctype\":120,\"Dynamic Link:link_title\":120},\"group_by\":null}",
