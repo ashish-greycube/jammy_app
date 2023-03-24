@@ -1,0 +1,178 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Invoice Item",
+  "enabled": 1,
+  "modified": "2022-04-14 14:19:43.014703",
+  "module": null,
+  "name": "Sales Invoice Item-Client",
+  "script": "frappe.ui.form.on('Sales Invoice Item', {\n\trefresh(frm) {\n\t\t// your code here\n\t}\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Pricing Rule",
+  "enabled": 1,
+  "modified": "2022-07-01 09:08:24.695946",
+  "module": null,
+  "name": "Pricing Rule-Client",
+  "script": "\t\tcur_frm.add_fetch('customer','default_sales_partner','sales_partner');\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Purchase Order",
+  "enabled": 1,
+  "modified": "2021-05-19 15:19:06.148393",
+  "module": null,
+  "name": "Purchase Order-Client",
+  "script": "frappe.ui.form.on('Purchase Order', {\n\trefresh(frm) {\n\t\t// cur_frm.add_fetch('item_code', 'net_weight', 'net_weight');\ncur_frm.add_fetch('item_code', 'pcs_ctn', 'pcs_ctn');\n\nfrappe.ui.form.on(\"Purchase Order Item\", \"qty\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_cartons(frm);\n\tset_total_weight(frm);\n});\nfrappe.ui.form.on(\"Purchase Order Item\", \"net_weight\", function(frm, cdt, cdn) {\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_weight(frm);\n});\nfrappe.ui.form.on(\"Purchase Order Item\", \"pcs_ctn\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_total_cartons(frm);\n});\n\nfrappe.ui.form.on(\"Purchase Order Item\", \"cartons\", function(frm) {\n\tset_total_cartons(frm);\n});\nfrappe.ui.form.on(\"Purchase Order Item\", \"groos_weight\", function(frm) {\n\tset_total_weight(frm);\n});\n\n\nvar set_cartons = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.pcs_ctn) {\n\t\tvar qty = row.qty || 1;\n\t\tvar cartons = Math.ceil(flt(qty) / flt(row.pcs_ctn));\n\t\tfrappe.model.set_value(cdt, cdn, \"cartons\", cartons);\n\t}\n}\nvar set_gross_weight = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.net_weight) {\n\t\tvar qty = row.qty || 1;\n\t\tvar gross_weight = flt(qty) * flt(row.net_weight);\n\t\tfrappe.model.set_value(cdt, cdn, \"gross_weight\", gross_weight);\n\t}\n}\n\nvar set_total_cartons = function(frm) {\n\tsum_cartons = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\tsum_cartons += d.cartons;\n\t});\n\tfrm.set_value(\"total_cartons\", sum_cartons);\n}\nvar set_total_weight = function(frm) {\n\ttotal_weight = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\ttotal_weight += d.gross_weight;\n\t});\n\tfrm.set_value(\"total_weight_pkg\", total_weight);\n}\n\t}\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Batch",
+  "enabled": 1,
+  "modified": "2021-06-22 10:23:07.928885",
+  "module": null,
+  "name": "Batch-Client",
+  "script": "frappe.ui.form.on('Batch', {\n\trefresh(frm) {\n\t\t// cur_frm.add_fetch('item_code', 'net_weight', 'net_weight', 'batch', 'rate', 'pcs_ctn');\ncur_frm.add_fetch('item_code', 'pcs_ctn', 'pcs_ctn');\ncur_frm.add_fetch('item_code', 'rate', 'purchase_rate');\n\nfrappe.ui.form.on(\"Purchase Receipt Item\", \"qty\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_cartons(frm);\n\tset_total_weight(frm);\n\tset_rate(frm);\n});\nfrappe.ui.form.on(\"Purchase Receipt Item\", \"net_weight\", function(frm, cdt, cdn) {\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_weight(frm);\n});\nfrappe.ui.form.on(\"Purchase Receipt Item\", \"pcs_ctn\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_total_cartons(frm);\n});\n\nfrappe.ui.form.on(\"Purchase Receipt Item\", \"cartons\", function(frm) {\n\tset_total_cartons(frm);\n});\n\nfrappe.ui.form.on(\"Purchase Receipt Item\", \"gross_weight\", function(frm) {\n\tset_total_weight(frm);\n});\n\n\nvar set_cartons = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.pcs_ctn) {\n\t\tvar qty = row.qty || 1;\n\t\tvar cartons = Math.ceil(flt(qty) / flt(row.pcs_ctn));\n\t\tfrappe.model.set_value(cdt, cdn, \"cartons\", cartons);\n\t}\n}\nvar set_gross_weight = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.net_weight) {\n\t\tvar qty = row.qty || 1;\n\t\tvar gross_weight = flt(qty) * flt(row.net_weight);\n\t\tfrappe.model.set_value(cdt, cdn, \"gross_weight\", gross_weight);\n\t}\n}\n\nvar set_total_cartons = function(frm) {\n\tsum_cartons = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\tsum_cartons += d.cartons;\n\t});\n\tfrm.set_value(\"total_cartons\", sum_cartons);\n}\nvar set_total_weight = function(frm) {\n\ttotal_weight = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\ttotal_weight += d.gross_weight;\n\t});\n\tfrm.set_value(\"total_weight_pkg\", total_weight);\n}\n    } \n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Stock Entry",
+  "enabled": 1,
+  "modified": "2021-03-09 12:48:53.163808",
+  "module": null,
+  "name": "Stock Entry-Client",
+  "script": "frappe.ui.form.on('Stock Entry', {\n\trefresh(frm) {\n\t\tcur_frm.add_fetch('item_code', 'pcs_ctn', 'pcs_ctn');\nfrappe.ui.form.on(\"Stock Entry Item\", \"qty\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_total_cartons(frm);\n\t});\nfrappe.ui.form.on(\"Stock Entry Item\", \"pcs_ctn\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_total_cartons(frm, cdt, cdn);\n});\n\nfrappe.ui.form.on(\"Stock Entry Item\", \"total_cartons\", function(frm, cdt, cdn) {\n\tset_total_cartons(frm, cdt, cdn);\n});\n\nvar set_cartons = function(frm, cdt, cdn) {\n\tvar row = locals[frm][cdt][cdn];\n\tif (row.pcs_ctn) {\n\t\tvar qty = row.qty || 1;\n\t\tvar cartons = Math.ceil(flt(qty) / flt(row.pcs_ctn));\n\t\tfrappe.model.set_value(cdt, cdn, \"cartons\", cartons);\n\t}\nvar set_total_cartons = function(frm, cdt, cdn) {\n\tvar row = locals[frm][cdt][cdn];\n\tvar qty = row.qty || 1;\n\t\tvar total_cartons = Math.ceil(flt(qty) / flt(row.pcs_ctn));\n\t\tfrappe.model.set_value(cdt, cdn, \" total_cartons \", total_cartons);\t\n    \n}\n\tfrm.set_value(\"total_cartons\", total_cartons);\n}\n// your code here\n\t}\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Packing Slip",
+  "enabled": 1,
+  "modified": "2019-03-25 05:23:40.147410",
+  "module": null,
+  "name": "Packing Slip-Client",
+  "script": "cur_frm.add_fetch('item_code', 'net_weight', 'net_weight');\ncur_frm.add_fetch('item_code', 'pcs_ctn', 'pcs_ctn');\n\nfrappe.ui.form.on(\"Packing Slip Item\", \"qty\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_cartons(frm);\n\tset_total_weight(frm);\n});\nfrappe.ui.form.on(\"Packing Slip Item\", \"net_weight\", function(frm, cdt, cdn) {\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_weight(frm);\n});\nfrappe.ui.form.on(\"Packing Slip Item\", \"pcs_ctn\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_total_cartons(frm);\n});\n\nfrappe.ui.form.on(\"Packing Slip Item\", \"cartons\", function(frm) {\n\tset_total_cartons(frm);\n});\nfrappe.ui.form.on(\"Packing Slip Item\", \"groos_weight\", function(frm) {\n\tset_total_weight(frm);\n});\n\n\nvar set_cartons = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.pcs_ctn) {\n\t\tvar qty = row.qty || 1;\n\t\tvar cartons = Math.ceil(flt(qty) / flt(row.pcs_ctn));\n\t\tfrappe.model.set_value(cdt, cdn, \"cartons\", cartons);\n\t}\n}\nvar set_gross_weight = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.net_weight) {\n\t\tvar qty = row.qty || 1;\n\t\tvar gross_weight = flt(qty) * flt(row.net_weight);\n\t\tfrappe.model.set_value(cdt, cdn, \"gross_weight\", gross_weight);\n\t}\n}\n\nvar set_total_cartons = function(frm) {\n\tsum_cartons = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\tsum_cartons += d.cartons;\n\t});\n\tfrm.set_value(\"total_cartons\", sum_cartons);\n}\nvar set_total_weight = function(frm) {\n\ttotal_weight = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\ttotal_weight += d.gross_weight;\n\t});\n\tfrm.set_value(\"total_weight_pkg\", total_weight);\n}",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Invoice",
+  "enabled": 1,
+  "modified": "2021-06-21 14:06:21.009736",
+  "module": null,
+  "name": "Sales Invoice-Client",
+  "script": "cur_frm.add_fetch('customer','credit_days_based_on','credit_days_based_on');\ncur_frm.add_fetch('customer','credit_days','credit_days');\ncur_frm.add_fetch('customer','credit_limit','credit_limit');\ncur_frm.add_fetch('customer','payment_terms','payment_terms');\ncur_frm.add_fetch('customer','freight_ppd','freight_ppd');\ncur_frm.add_fetch('customer','email_option','email_option');\ncur_frm.add_fetch('customer','shipping_account','shipping_account');\n\n\"ignore_pricing_rule : 1\",\n\ncur_frm.add_fetch('item_code', 'net_weight', 'net_weight');\ncur_frm.add_fetch('item_code', 'pcs_ctn', 'pcs_ctn');\ncur_frm.add_fetch('batch_no', 'purchase_rate', 'purchase_rate');\n\nfrappe.ui.form.on(\"Sales Invoice Item\", \"batch_no\", function(frm, cdt, cdn) {\n\tset_batch_no(frm, cdt, cdn);\n\tset_purchase_rate(frm, cdt, cdn);\n});   \n\nfrappe.ui.form.on(\"Sales Invoice Item\", \"qty\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_cartons(frm);\n\tset_total_weight(frm);\n});\nfrappe.ui.form.on(\"Sales Invoice Item\", \"net_weight\", function(frm, cdt, cdn) {\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_weight(frm);\n});\nfrappe.ui.form.on(\"Sales Invoice Item\", \"pcs_ctn\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_total_cartons(frm);\n});\n\nfrappe.ui.form.on(\"Sales Invoice Item\", \"cartons\", function(frm) {\n\tset_total_cartons(frm);\n});\nfrappe.ui.form.on(\"Sales Invoice Item\", \"groos_weight\", function(frm) {\n\tset_total_weight(frm);\n});\n\n\nvar set_cartons = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.pcs_ctn) {\n\t\tvar qty = row.qty || 1;\n\t\tvar cartons = Math.ceil(flt(qty) / flt(row.pcs_ctn));\n\t\tfrappe.model.set_value(cdt, cdn, \"cartons\", cartons);\n\t}\n}\nvar set_gross_weight = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.net_weight) {\n\t\tvar qty = row.qty || 1;\n\t\tvar gross_weight = flt(qty) * flt(row.net_weight);\n\t\tfrappe.model.set_value(cdt, cdn, \"gross_weight\", gross_weight);\n\t}\n}\n\nvar set_total_cartons = function(frm) {\n\tsum_cartons = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\tsum_cartons += d.cartons;\n\t});\n\tfrm.set_value(\"total_cartons\", sum_cartons);\n}\nvar set_total_weight = function(frm) {\n\ttotal_weight = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\ttotal_weight += d.gross_weight;\n\t});\n\tfrm.set_value(\"total_weight_pkg\", total_weight);\n}\n\nfrappe.ui.form.on(\"Sales Invoice Item\", {\n  batch_no: function(frm,cdt,cdn) {\n    var expire = frappe.db.get_value(\"Batch\",d.batch_no,purchase_rate);\n    frm.set_value(\"purchase_rate\", purchase_rate);\n  }\n});",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Delivery Note",
+  "enabled": 1,
+  "modified": "2023-03-24 04:59:51.817025",
+  "module": "Jammy_app",
+  "name": "Delivery Note-Client",
+  "script": "cur_frm.add_fetch('warehouse','address_title','address_title');\ncur_frm.add_fetch('warehouse','address_line1','address_line1');\ncur_frm.add_fetch('warehouse','address_line2','address_line2');\ncur_frm.add_fetch('warehouse','city','city');\ncur_frm.add_fetch('warehouse','state','state');\ncur_frm.add_fetch('warehouse','pincode','pincode');\n\n\n// cur_frm.add_fetch('customer','credit_days_based_on','credit_days_based_on');\n// cur_frm.add_fetch('customer','credit_days','credit_days');\n// cur_frm.add_fetch('customer','credit_limit','credit_limit');\ncur_frm.add_fetch('customer','payment_terms','payment_terms');\ncur_frm.add_fetch('customer','freight_ppd','freight_ppd');\ncur_frm.add_fetch('customer','shipping_account','shipping_account');\ncur_frm.add_fetch('customer','email_option','email_option');\n\n\"ignore_pricing_rule : 1\",\n\ncur_frm.add_fetch('item_code', 'net_weight', 'net_weight');\ncur_frm.add_fetch('item_code', 'pcs_ctn', 'pcs_ctn');\n\n\n\nfrappe.ui.form.on(\"Delivery Note Item\", \"qty\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_cartons(frm);\n\tset_total_weight(frm);\n});\nfrappe.ui.form.on(\"Delivery Note Item\", \"net_weight\", function(frm, cdt, cdn) {\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_weight(frm);\n});\nfrappe.ui.form.on(\"Delivery Note Item\", \"pcs_ctn\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_total_cartons(frm);\n});\n\nfrappe.ui.form.on(\"Delivery Note Item\", \"cartons\", function(frm) {\n\tset_total_cartons(frm);\n});\nfrappe.ui.form.on(\"Delivery Note Item\", \"groos_weight\", function(frm) {\n\tset_total_weight(frm);\n});\n\n\nvar set_cartons = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.pcs_ctn) {\n\t\tvar qty = row.qty || 1;\n\t\tvar cartons = Math.ceil(flt(qty) / flt(row.pcs_ctn));\n\t\tfrappe.model.set_value(cdt, cdn, \"cartons\", cartons);\n\t}\n}\nvar set_gross_weight = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.net_weight) {\n\t\tvar qty = row.qty || 1;\n\t\tvar gross_weight = flt(qty) * flt(row.net_weight);\n\t\tfrappe.model.set_value(cdt, cdn, \"gross_weight\", gross_weight);\n\t}\n}\n\nvar set_total_cartons = function(frm) {\n\tsum_cartons = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\tsum_cartons += d.cartons;\n\t});\n\tfrm.set_value(\"total_cartons\", sum_cartons);\n}\nvar set_total_weight = function(frm) {\n\ttotal_weight = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\ttotal_weight += d.gross_weight;\n\t});\n\tfrm.set_value(\"total_weight_pkg\", total_weight);\n}\n\n// frappe.ui.form.on(\"Delivery Note Item\", \"batch_no\", function(frm, cdt, cdn) {\n//     var d = locals[cdt][cdn];\n//         frappe.db.get_value(\"Batch\", {\"name\": d.batch_no}, \"purchase_rate\", function(value) {\n//             d.purchase_rate = value.purchase_rate;\n//         });\n// });\n\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Order",
+  "enabled": 1,
+  "modified": "2023-03-24 03:21:37.424806",
+  "module": "Jammy_app",
+  "name": "Sales Order-Client",
+  "script": "\n\nfrappe.ui.form.on(\"Sales Order Item\", \"qty\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_cartons(frm);\n\tset_total_weight(frm);\n\t\n});\nfrappe.ui.form.on(\"Sales Order Item\", \"net_weight\", function(frm, cdt, cdn) {\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_weight(frm);\n});\nfrappe.ui.form.on(\"Sales Order Item\", \"pcs_ctn\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_total_cartons(frm);\n});\n\nfrappe.ui.form.on(\"Sales Order Item\", \"cartons\", function(frm) {\n\tset_total_cartons(frm);\n});\nfrappe.ui.form.on(\"Sales Order Item\", \"groos_weight\", function(frm) {\n\tset_total_weight(frm);\n});\nfrappe.ui.form.on(\"Sales Order Item\", \"warehouse\", function(frm, cdt, cdn) {\n\tset_warehouse(frm, cdt, cdn);\n\tset_warehouse(frm);\n});\n\nvar warehouse = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.warehouse) {\n\t\tvar warehouse = row.warehouse || 1;\n\t\tfrappe.model.set_warehouse(cdt, cdn, \"warehouse\", warehouse);\n\t}\n}\nvar set_cartons = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.pcs_ctn) {\n\t\tvar qty = row.qty || 1;\n\t\tvar cartons = Math.ceil(flt(qty) / flt(row.pcs_ctn));\n\t\tfrappe.model.set_value(cdt, cdn, \"cartons\", cartons);\n\t}\n}\nvar set_gross_weight = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.net_weight) {\n\t\tvar qty = row.qty || 1;\n\t\tvar gross_weight = flt(qty) * flt(row.net_weight);\n\t\tfrappe.model.set_value(cdt, cdn, \"gross_weight\", gross_weight);\n\t}\n}\n\nvar set_total_cartons = function(frm) {\n\tsum_cartons = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\tsum_cartons += d.cartons;\n\t});\n\tfrm.set_value(\"total_cartons\", sum_cartons);\n}\nvar set_total_weight = function(frm) {\n\ttotal_weight = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\ttotal_weight += d.gross_weight;\n\t});\n\tfrm.set_value(\"total_weight_pkg\", total_weight);\n}\n frappe.ui.form.on(\"Sales Order\", { \n     setup: function(frm) {\n//  cur_frm.add_fetch('customer','credit_days_based_on','credit_days_based_on');\n// cur_frm.add_fetch('customer','credit_days','credit_days');\n// cur_frm.add_fetch('customer','credit_limit','credit_limit');\ncur_frm.add_fetch('customer','payment_terms','payment_terms');\ncur_frm.add_fetch('customer','freight_ppd','freight_ppd');\ncur_frm.add_fetch('customer','shipping_account','shipping_account');\ncur_frm.add_fetch('customer','email_option','email_option');\n\n\"ignore_pricing_rule : 1\",\n\ncur_frm.add_fetch('item_code', 'net_weight', 'net_weight');\ncur_frm.add_fetch('item_code', 'pcs_ctn', 'pcs_ctn');        \n     },\n\t refresh: function(frm) { \n\t if(frm.doc.table_items){\n\t\t var last_id = frm.doc.table_items.length - 1;\n\t\t  frappe.model.set_value(frm.doc.table_items[last_id].doctype, frm.doc.table_items[last_id].warehouse, \"warehouse\", frm.doc.warehouse); } \n\t\t}\n\t  });\n\t  \n\tfrappe.ui.form.on(\"Sales Order Item\", \"batch_no\", function(frm, cdt, cdn) {\n    var d = locals[cdt][cdn];\n        frappe.db.get_value(\"Batch\", {\"name\": d.batch_no}, \"purchase_rate\", function(value) {\n            d.purchase_rate = value.purchase_rate;\n        });\n});\n  ",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Quotation",
+  "enabled": 1,
+  "modified": "2020-05-27 10:00:43.229305",
+  "module": null,
+  "name": "Quotation-Client",
+  "script": "cur_frm.add_fetch('customer','credit_days_based_on','credit_days_based_on');\ncur_frm.add_fetch('customer','credit_days','credit_days');\ncur_frm.add_fetch('customer','credit_limit','credit_limit');\ncur_frm.add_fetch('customer','payment_terms','payment_terms');\ncur_frm.add_fetch('customer','freight_ppd','freight_ppd');\ncur_frm.add_fetch('customer','shipping_account','shipping_account');\n\ncur_frm.add_fetch('item_code', 'net_weight', 'net_weight');\ncur_frm.add_fetch('item_code', 'pcs_ctn', 'pcs_ctn');\n\nfrappe.ui.form.on(\"Quotation Item\", \"qty\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_cartons(frm);\n\tset_total_weight(frm);\n});\nfrappe.ui.form.on(\"Quotation Item\", \"net_weight\", function(frm, cdt, cdn) {\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_weight(frm);\n});\nfrappe.ui.form.on(\"Quotation Item\", \"pcs_ctn\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_total_cartons(frm);\n});\n\nfrappe.ui.form.on(\"Quotation Item\", \"cartons\", function(frm) {\n\tset_total_cartons(frm);\n});\nfrappe.ui.form.on(\"Quotation Item\", \"groos_weight\", function(frm) {\n\tset_total_weight(frm);\n});\n\n\nvar set_cartons = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.pcs_ctn) {\n\t\tvar qty = row.qty || 1;\n\t\tvar cartons = Math.ceil(flt(qty) / flt(row.pcs_ctn));\n\t\tfrappe.model.set_value(cdt, cdn, \"cartons\", cartons);\n\t}\n}\nvar set_gross_weight = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.net_weight) {\n\t\tvar qty = row.qty || 1;\n\t\tvar gross_weight = flt(qty) * flt(row.net_weight);\n\t\tfrappe.model.set_value(cdt, cdn, \"gross_weight\", gross_weight);\n\t}\n}\n\nvar set_total_cartons = function(frm) {\n\tsum_cartons = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\tsum_cartons += d.cartons;\n\t});\n\tfrm.set_value(\"total_cartons\", sum_cartons);\n}\nvar set_total_weight = function(frm) {\n\ttotal_weight = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\ttotal_weight += d.gross_weight;\n\t});\n\tfrm.set_value(\"total_weight_pkg\", total_weight);\n}",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Address Template",
+  "enabled": 1,
+  "modified": "2020-12-03 00:26:53.239121",
+  "module": null,
+  "name": "Address Template-Client",
+  "script": "",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Journal Entry",
+  "enabled": 1,
+  "modified": "2020-06-12 11:03:54.489846",
+  "module": null,
+  "name": "Journal Entry-Client",
+  "script": "function create_je(frm) {\n    frappe.call({\n        method: 'frappe.client.get_value',\n        args: {\n            'doctype': 'Custom Employee Salary Component',\n            'filters': {\n                'name': frm.doc.salary_component\n            },\n            'fieldname': ['component_name', 'expense_account', 'payable_account']\n        },\n        callback: function (data) {\n            ccco_params.je = populate_je_obj(frm, data);\n        }\n    });\n}\n\nfunction populate_je_obj(frm, data) {\n    let je = {};\n    let accounts = [\n        {\n            \"doctype\": \"Journal Entry Account\",\n            \"account\": data.message.payable_account,\n            \"party\": frm.doc.customer,\n            \"party_type\": \"customer\",\n            \"debit\": 0,\n            \"credit\": frm.doc.gross_pay,\n            \"credit_in_account_currency\": frm.doc.gross_pay,\n            \"user_remark\": cur_frm.docname\n        },\n\n        {\n            \"doctype\": \"Journal Entry Account\",\n            \"account\": data.message.expense_account,\n            \"debit\": frm.doc.gross_pay,\n            \"credit\": 0,\n            \"debit_in_account_currency\": frm.doc.gross_pay,\n            \"user_remark\": cur_frm.docname\n        }\n    ];\n    je[\"doctype\"] = \"Journal Entry\";\n    je[\"posting_date\"] = frappe.datetime.add_days(frm.doc.process_date, 0),\n    je[\"accounts\"] = accounts;\n    return je;\n}\n\nfunction submit_je(frm) {\n    ccco_params.je[\"remark\"] = cur_frm.docname;\n    frappe.db.insert(ccco_params.je)\n        .then(function (doc) {\n            frappe.call({\n                \"method\": \"frappe.client.submit\",\n                \"args\": {\n                    \"doc\": doc\n                },\n                \"callback\": (r) => {\n                    console.log(r);\n                }\n            });\n        });\n}",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Purchase Order Item",
+  "enabled": 1,
+  "modified": "2020-12-10 03:12:56.454143",
+  "module": null,
+  "name": "Purchase Order Item-Client",
+  "script": "frappe.ui.form.on(\"Purchase Order\",\"validate\", function(){ for (var i =0; i < cur_frm.doc.items.length; i++){ cur_frm.doc.items[i].transaction_date = cur_frm.doc.transaction_date } cur_frm.refresh_field('items') });\n\nfrappe.ui.form.on(\"Purchase Order\",\"validate\", function(){ for (var i =0; i < cur_frm.doc.items.length; i++){ cur_frm.doc.items[i].purchase_order_no = cur_frm.doc.purchase_order_no } cur_frm.refresh_field('items') });",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Purchase Receipt",
+  "enabled": 1,
+  "modified": "2021-08-11 14:07:58.203181",
+  "module": null,
+  "name": "Purchase Receipt-Client",
+  "script": "frappe.ui.form.on(\"Purchase Receipt\",\"validate\", function(){ for (var i =0; i < cur_frm.doc.items.length; i++){ cur_frm.doc.items[i].posting_date = cur_frm.doc.posting_date } cur_frm.refresh_field('items') });\n\nfrappe.ui.form.on(\"Purchase Receipt\",\"validate\", function(){ for (var i =0; i < cur_frm.doc.items.length; i++){ cur_frm.doc.items[i].purchase_order_no = cur_frm.doc.purchase_order_no } cur_frm.refresh_field('items') });\n\nfrappe.ui.form.on(\"Purchase Receipt\",\"validate\", function(){ for (var i =0; i < cur_frm.doc.items.length; i++){ cur_frm.doc.items[i].naming_series = cur_frm.doc.naming_series } cur_frm.refresh_field('items') });\n\nfrappe.ui.form.on(\"Purchase Receipt\",\"validate\", function(){ for (var i =0; i < cur_frm.doc.items.length; i++){ cur_frm.doc.items[i].purchase_receipt = cur_frm.doc.purchase_receipt } cur_frm.refresh_field('items') });\n\ncur_frm.add_fetch('item_code', 'net_weight', 'net_weight');\ncur_frm.add_fetch('item_code', 'pcs_ctn', 'pcs_ctn');\n\n\n\nfrappe.ui.form.on(\"Purchase Receipt Item\", \"qty\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_cartons(frm);\n\tset_total_weight(frm);\n});\nfrappe.ui.form.on(\"Purchase Receipt Item\", \"net_weight\", function(frm, cdt, cdn) {\n\tset_gross_weight(frm, cdt, cdn);\n\tset_total_weight(frm);\n});\nfrappe.ui.form.on(\"Purchase Receipt\", \"pcs_ctn\", function(frm, cdt, cdn) {\n\tset_cartons(frm, cdt, cdn);\n\tset_total_cartons(frm);\n});\n\nfrappe.ui.form.on(\"Purchase Receipt Item\", \"cartons\", function(frm) {\n\tset_total_cartons(frm);\n});\nfrappe.ui.form.on(\"Purchase Receipt\", \"groos_weight\", function(frm) {\n\tset_total_weight(frm);\n});\n\n\nvar set_cartons = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.pcs_ctn) {\n\t\tvar qty = row.qty || 1;\n\t\tvar cartons = Math.ceil(flt(qty) / flt(row.pcs_ctn));\n\t\tfrappe.model.set_value(cdt, cdn, \"cartons\", cartons);\n\t}\n}\nvar set_gross_weight = function(frm, cdt, cdn) {\n\tvar row = locals[cdt][cdn];\n\tif (row.net_weight) {\n\t\tvar qty = row.qty || 1;\n\t\tvar gross_weight = flt(qty) * flt(row.net_weight);\n\t\tfrappe.model.set_value(cdt, cdn, \"gross_weight\", gross_weight);\n\t}\n}\n\nvar set_total_cartons = function(frm) {\n\tsum_cartons = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\tsum_cartons += d.cartons;\n\t});\n\tfrm.set_value(\"total_cartons\", sum_cartons);\n}\nvar set_total_weight = function(frm) {\n\ttotal_weight = 0;\n\t$.each(frm.doc.items, function(i, d) {\n\t\ttotal_weight += d.gross_weight;\n\t});\n\tfrm.set_value(\"total_weight_pkg\", total_weight);\n}\n\nfrappe.ui.form.on(\"Purchase Receipte Item\", \"batch_no\", function(frm, cdt, cdn) {\n    var d = locals[cdt][cdn];\n        frappe.db.get_value(\"Batch\", {\"name\": d.batch_no}, \"purchase_rate\", function(value) {\n            d.purchase_rate = value.purchase_rate;\n        });\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Purchase Invoice",
+  "enabled": 1,
+  "modified": "2020-07-24 10:23:31.568074",
+  "module": null,
+  "name": "Purchase Invoice-Client",
+  "script": "frappe.ui.form.on(\"Purchase Invoice\",\"validate\", function(){ for (var i =0; i < cur_frm.doc.items.length; i++){ cur_frm.doc.items[i].transaction_date = cur_frm.doc.transaction_date } cur_frm.refresh_field('items') });\n\nfrappe.ui.form.on(\"Purchase Invoice\",\"validate\", function(){ for (var i =0; i < cur_frm.doc.items.length; i++){ cur_frm.doc.items[i].purchase_order_no = cur_frm.doc.purchase_order_no } cur_frm.refresh_field('items') });",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Payment Entry",
+  "enabled": 1,
+  "modified": "2021-06-23 11:47:36.992649",
+  "module": null,
+  "name": "Payment Entry-Client",
+  "script": "cur_frm.add_fetch('customer','payment_terms','payment_terms');\ncur_frm.add_fetch('customer','freight_ppd','freight_ppd');\ncur_frm.add_fetch('customer','shipping_account','shipping_account');\ncur_frm.add_fetch('customer','sales_partner','sales_partner');\n\nfrappe.ui.form.on(\"Payment Entry Reference\", \"reference_name\", function(frm, cdt, cdn) {\n    var d = locals[cdt][cdn];\n        frappe.db.get_value(\"Reference Name\", {\"name\": d. reference_name}, \"whs_invoice\", function(value) {\n            d. whs_invoice= value. whs_invoice;\n        });\n});\n\nfrappe.ui.form.on(\"Payment Entry\", {\n\tonload: function(frm){\n\t    if (frm.is_new()){\n\t         frm.set_df_property(\"default_sales_partner\", \"hidden\", 1);\n\t    }\n}\n\t\n});\n\n",
+  "view": "Form"
+ }
+]
