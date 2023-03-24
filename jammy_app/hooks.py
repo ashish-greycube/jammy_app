@@ -13,7 +13,9 @@ app_license = "MIT"
 
 # Includes in <head>
 # ------------------
-fixtures = ['Custom Field','Property Setter','Workflow','Workflow State','Workflow Action','Role','Report','Page', 'Print Format', 'Custom Script']
+# fixtures = ['Custom Field','Property Setter','Workflow','Workflow State','Workflow Action','Role','Report','Page', 'Print Format', 'Custom Script']
+# fixtures = ['Custom Field','Property Setter','Workflow','Workflow State','Workflow Action','Role','Report','Page', 'Print Format', 'Client Script']
+fixtures = ['Client Script']
 # include js, css files in header of desk.html
 # app_include_css = "/assets/jammy_app/css/jammy_app.css"
 # app_include_js = "/assets/jammy_app/js/jammy_app.js"
