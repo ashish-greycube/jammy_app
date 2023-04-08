@@ -21,8 +21,8 @@ fixtures = ['Client Script']
 # app_include_js = "/assets/jammy_app/js/jammy_app.js"
 
 # include js, css files in header of web template
-web_include_css = "/assets/jammy_app/css/jammy_app.css"
-web_include_js = "/assets/jammy_app/js/jammy_app.js"
+# web_include_css = "/assets/jammy_app/css/jammy_app.css"
+# web_include_js = "/assets/jammy_app/js/jammy_app.js"
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
@@ -115,7 +115,8 @@ doctype_js = {
 	"Sales Order": "jammy_app/custom_jammy/sales_order/sales_order.js",
 	"Sales Invoice": "jammy_app/custom_jammy/sales_invoice/sales_invoice.js",
 	"Terms and Conditions": "jammy_app/custom_jammy/terms_and_conditions/terms_and_conditions.js",
-	"Delivery Note" : "jammy_app/custom_jammy/delivery_note/delivery_note.js"
+	"Delivery Note" : "jammy_app/custom_jammy/delivery_note/delivery_note.js",
+    # "Journal Entry": "jammy_app/custom_jammy/journal_entry.js"
 	
 
 }
