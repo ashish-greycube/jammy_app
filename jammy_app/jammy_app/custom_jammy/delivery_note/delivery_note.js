@@ -44,7 +44,6 @@ frappe.ui.form.on("Delivery Note Item", "groos_weight", function(frm) {
 // });
 
 frappe.ui.form.on("Delivery Note Item", "qty", function(frm, cdt, cdn) {
-	console.log('jammy_app/jammy_app/jammy_app/custom_jammy/delivery_note/delivery_note.js')
 	set_cartons(frm, cdt, cdn);
 	set_gross_weight(frm, cdt, cdn);
 	set_total_cartons(frm);

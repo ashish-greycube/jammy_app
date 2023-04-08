@@ -8,14 +8,14 @@ app_publisher = "frappe"
 app_description = "Jammy"
 app_icon = "octicon octicon-file-directory"
 app_color = "grey"
-app_email = "prashant.p@indictrans.in"
+app_email = "admin@greycube.in"
 app_license = "MIT"
 
 # Includes in <head>
 # ------------------
 # fixtures = ['Custom Field','Property Setter','Workflow','Workflow State','Workflow Action','Role','Report','Page', 'Print Format', 'Custom Script']
 # fixtures = ['Custom Field','Property Setter','Workflow','Workflow State','Workflow Action','Role','Report','Page', 'Print Format', 'Client Script']
-fixtures = ['Client Script']
+# fixtures = ['Client Script']
 # include js, css files in header of desk.html
 # app_include_css = "/assets/jammy_app/css/jammy_app.css"
 # app_include_js = "/assets/jammy_app/js/jammy_app.js"
@@ -116,9 +116,11 @@ doctype_js = {
 	"Sales Invoice": "jammy_app/custom_jammy/sales_invoice/sales_invoice.js",
 	"Terms and Conditions": "jammy_app/custom_jammy/terms_and_conditions/terms_and_conditions.js",
 	"Delivery Note" : "jammy_app/custom_jammy/delivery_note/delivery_note.js",
-    # "Journal Entry": "jammy_app/custom_jammy/journal_entry.js"
-	
-
+    # "Journal Entry": "jammy_app/custom_jammy/journal_entry.js",
+	"Pricing Rule": "jammy_app/custom_jammy/pricing_rule.js",
+    "Payment Entry": "jammy_app/custom_jammy/payment_entry.js",
+    "Stock Entry": "jammy_app/custom_jammy/stock_entry.js",
+    "Purchase Order": "jammy_app/custom_jammy/purchase_order.js"
 }
 # Scheduled Tasks
 # ---------------

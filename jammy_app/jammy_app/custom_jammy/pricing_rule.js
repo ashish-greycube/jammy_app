@@ -1,0 +1,1 @@
+cur_frm.add_fetch('customer','default_sales_partner','sales_partner');
