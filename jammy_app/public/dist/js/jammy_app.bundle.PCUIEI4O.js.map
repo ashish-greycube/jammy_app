@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../apps/jammy_app/jammy_app/public/js/jammy_app.bundle.js"],
+  "sourcesContent": ["console.log('ashish')\nfrappe.query_reports[\"Accounts Receivable\"] = {\n\tonload: function(report) {\n\t\treport.page.add_inner_button(__(\"Accounts Receivable Summary\"), function() {\n\t\t\tvar filters = report.get_values();\n\t\t\tfrappe.set_route('query-report', 'Accounts Receivable Summary', {company: filters.company});\n\t\t});\n\t\treport.page.add_inner_button(__(\"Customer Statement\"), function() {\n\t\t\tfrappe.query_reports[\"Accounts Receivable\"].customer_statement_data(report, \"customer_statement\")\n\t\t});\n\n\t\treport.page.add_inner_button(__(\"Customer Letter\"), function() {\n\t\t\tfrappe.query_reports[\"Accounts Receivable\"].customer_statement_data(report, \"customer_letter_print\")\n\t\t});\n\t}\n}    "],
+  "mappings": "MAAA,QAAQ,IAAI,QAAQ,EACpB,OAAO,cAAc,uBAAyB,CAC7C,OAAQ,SAAS,EAAQ,CACxB,EAAO,KAAK,iBAAiB,GAAG,6BAA6B,EAAG,UAAW,CAC1E,GAAI,GAAU,EAAO,WAAW,EAChC,OAAO,UAAU,eAAgB,8BAA+B,CAAC,QAAS,EAAQ,OAAO,CAAC,CAC3F,CAAC,EACD,EAAO,KAAK,iBAAiB,GAAG,oBAAoB,EAAG,UAAW,CACjE,OAAO,cAAc,uBAAuB,wBAAwB,EAAQ,oBAAoB,CACjG,CAAC,EAED,EAAO,KAAK,iBAAiB,GAAG,iBAAiB,EAAG,UAAW,CAC9D,OAAO,cAAc,uBAAuB,wBAAwB,EAAQ,uBAAuB,CACpG,CAAC,CACF,CACD",
+  "names": []
+}

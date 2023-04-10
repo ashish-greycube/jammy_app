@@ -6,7 +6,7 @@ import json
 import unicodedata
 import re
 from datetime import datetime, date
-
+# final good
 @frappe.whitelist()
 def customer_statement(data, filters):
 	data = json.loads(data)

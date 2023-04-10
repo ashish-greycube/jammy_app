@@ -1,5 +1,5 @@
 import pdfkit
-import MySQLdb
+# import MySQLdb
 import os
 from jammy_app.jammy_app.report.customer_statement.customer_statement import *
 
