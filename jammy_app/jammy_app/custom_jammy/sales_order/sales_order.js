@@ -127,11 +127,11 @@ frappe.ui.form.on("Sales Order", {
 
 
 
-frappe.ui.form.on("Sales Order Item", "batch_no", function (frm, cdt, cdn) {
-	var d = locals[cdt][cdn];
-	frappe.db.get_value("Batch", {
-		"name": d.batch_no
-	}, "purchase_rate", function (value) {
-		d.purchase_rate = value.purchase_rate;
-	});
-});
+// frappe.ui.form.on("Sales Order Item", "batch_no", function (frm, cdt, cdn) {
+// 	var d = locals[cdt][cdn];
+// 	frappe.db.get_value("Batch", {
+// 		"name": d.batch_no
+// 	}, "purchase_rate", function (value) {
+// 		d.purchase_rate = value.purchase_rate;
+// 	});
+// });

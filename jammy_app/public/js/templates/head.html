@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{{ title }}</title>
+    <link href="{{ base_url }}/assets/frappe/css/bootstrap.css" rel="stylesheet">
+	<link type="text/css" rel="stylesheet"
+        href="{{ base_url }}/assets/frappe/css/font-awesome.css">
+	<style>
+		{%= frappe.boot.print_css %}
+	</style>
+  </head>
+  <body>
+	  <div class="print-format-gutter">
+		  <div id="header-html" class="visible-pdf">
+		  	<div class="letter-head-header">
+				<div class="row">
+					<div class="col-xs-12">
+						<img src= "/files/jammy_letter_head_logo.gif" style="width: 45%" >
+
+					</div>
+					
+					<!-- <div class="col-xs-4">	
+					</div>
+					<div class="col-xs-4">
+						style="width: 45%"
+					</div>
+					<div class="col-xs-4">
+						<h3 class="text-right"><img src= "https://jammyinc.com/wp-content/themes/jammysite/images/img_01.png" width="100" height="100"></h3><br>
+
+						<h3 class="text-right"><img src= "/files/jammy_logo.png"></h3><br>
+					</div> -->
+				</div>
+			</div>
+		  </div>
+			<div id="footer-html" class="visible-pdf">
+		  		<div class="letter-head-footer">
+					<div class="row">
+						<div class="col-xs-12">
+								<b>JAMMY, INCORPORATED</b><br>
+								PO Box 471697,Fort Worth, TX 76147 817.737.6566 / Fax 737.5960 / 800.537.3136/info@<b>jammyinc.com</b><br>
+								
+							
+						</div>
+					</div>
+				</div>
+		  	</div>
+	   <div class="print-format">
+       		{%= content %}
+		</div>
+  </body>
+</html>

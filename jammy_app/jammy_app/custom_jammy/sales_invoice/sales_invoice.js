@@ -38,11 +38,11 @@ cur_frm.add_fetch('customer','shipping_account','shipping_account');
 
 cur_frm.add_fetch('item_code', 'net_weight', 'net_weight');
 cur_frm.add_fetch('item_code', 'pcs_ctn', 'pcs_ctn');
-cur_frm.add_fetch('batch_no', 'purchase_rate', 'purchase_rate');
+// cur_frm.add_fetch('batch_no', 'purchase_rate', 'purchase_rate');
 
 frappe.ui.form.on("Sales Invoice Item", "batch_no", function(frm, cdt, cdn) {
 	set_batch_no(frm, cdt, cdn);
-	set_purchase_rate(frm, cdt, cdn);
+	// set_purchase_rate(frm, cdt, cdn);
 });   
 
 frappe.ui.form.on("Sales Invoice Item", "qty", function(frm, cdt, cdn) {
@@ -102,9 +102,9 @@ var set_total_weight = function(frm) {
 	frm.set_df_property("total_weight_pkg", "read_only", 1);
 }
 
-frappe.ui.form.on("Sales Invoice Item", {
-  batch_no: function(frm,cdt,cdn) {
-    var expire = frappe.db.get_value("Batch",d.batch_no,purchase_rate);
-    frm.set_value("purchase_rate", purchase_rate);
-  }
-});
+// frappe.ui.form.on("Sales Invoice Item", {
+//   batch_no: function(frm,cdt,cdn) {
+//     var expire = frappe.db.get_value("Batch",d.batch_no,purchase_rate);
+//     frm.set_value("purchase_rate", purchase_rate);
+//   }
+// });

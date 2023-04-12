@@ -1,0 +1,190 @@
+{% $.each(data, function(i, record) { %}
+{% if (i) { %}
+{% count = 0 %}
+<style type="text/css">table { page-break-inside:auto }</style>
+
+<div class="">
+		<!-- <div class="">
+			<div class="">
+				<p class="text-right" align="Center">
+					{% count += 1 %}
+					Page No {%= count %}
+				</p>
+			</div>
+			<div class="" align="Right">
+				<b>CUSTOMER STATEMENT</b>
+			</div>
+			<div class="" align="Right">
+			</div>
+	</div> -->
+	<div class="row">
+		<div class="col-xs-6">
+				<div>
+					{%= filters.report_date %}<br><br>
+				</div>
+				<div>
+					<p>
+						<b>{{ i }} </b><br>
+						{% if (data[i][0].address) { %}
+						   {% if (data[i][0].address.address_line1) { %}
+							   {{ data[i][0].address.address_line1 }}<br>
+						   {% } %}
+						    {% if (data[i][0].address.address_line2)  { %}
+								{{ data[i][0].address.address_line2 }}<br>
+						    {% } %}
+		                    {% if (data[i][0].address.city) { %}
+								{{ data[i][0].address.city }},
+							{% } %}
+							{% if (data[i][0].address.state) { %}
+								{{ data[i][0].address.state }}&nbsp;
+							{% } %}
+							{% if (data[i][0].address.pincode) { %}
+								{{ data[i][0].address.pincode }}
+							{% } %}
+							{% if (data[i][0].address.country !=  "United States") { %}
+							<br>
+								{{ data[i][0].address.country }}
+							{% } %}
+						{% } %}
+					</p>
+				</div>
+		</div>
+		<div class="col-xs-6" >
+			<div class="">
+				<p class="text-right" align="Center">
+					{% count += 1 %}
+					Page No {%= count %}
+				</p>
+			</div>
+			<div class="" align="Right">
+				<b>CUSTOMER STATEMENT</b>
+			</div>
+			<div class="" align="Right">
+			</div>
+		</div>
+	</div>
+	<!-- <div class="">
+		<div>
+			{%= filters.report_date %}
+		</div>
+		<div style="margin-top: 20px">
+			<p>
+				<b>{{ i }} </b><br>
+				{% if (data[i][0].address) { %}
+				   {% if (data[i][0].address.address_line1) { %}
+					   {{ data[i][0].address.address_line1 }}<br>
+				   {% } %}
+				    {% if (data[i][0].address.address_line2)  { %}
+						{{ data[i][0].address.address_line2 }}<br>
+				    {% } %}
+                    {% if (data[i][0].address.city) { %}
+						{{ data[i][0].address.city }},
+					{% } %}
+					{% if (data[i][0].address.state) { %}
+						{{ data[i][0].address.state }}&nbsp;
+					{% } %}
+					{% if (data[i][0].address.pincode) { %}
+						{{ data[i][0].address.pincode }}
+					{% } %}
+					{% if (data[i][0].address.country !=  "United States") { %}
+					<br>
+						{{ data[i][0].address.country }}
+					{% } %}
+				{% } %}
+			</p>
+		</div>
+	</div> -->
+	<br><br><br>
+	<div class="">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Transaction Date</th>
+					<th>Transaction No.</th>
+					<th>Reference</th>
+					<th>Voucher Type</th>
+					<th>Due Date</th>
+					<th style="text-align:right;">Amount(USD)</th>
+				</tr>
+			</thead>
+			{% total_amount = 0.0; %}
+			{% $.each(record, function(i, vouchers) { %}
+				{% total_amount +=  flt(vouchers[__("outstanding")]) %}
+				<tr>
+					<td>{{ vouchers[__("posting_date")] }}</td>
+					<td>{{ vouchers[__("voucher_no")] }}</td>
+					<td>{{ vouchers[__("your_reference")] }}</td>
+					<td>{{ vouchers[__("voucher_type")] }}</td>
+					<td>{{ vouchers[__("due_date")] }}</td>
+					<td style="text-align:right;">{{ vouchers[__("outstanding")] }}</td>
+				</tr>
+				{% if (i != 0 && i%15 ==0) { %}
+					</table>
+					</div>
+					<div class="">
+						<p style="page-break-after: always"> &nbsp;</p>
+					</div>
+					<div class="">
+						<p class="text-right">
+							{% count += 1 %}
+							Page No {%= count %}
+						</p>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Transaction Date</th>
+								<th>Transaction No.</th>
+								<th>Reference</th>
+								<th>Voucher Type</th>
+								<th>Due Date</th>
+								<th style="text-align:right;">Amount(USD)</th>
+							</tr>
+						</thead>
+				{% } %}
+			{% }); %}
+		</table>
+	</div>
+	<div class="">
+		<div class="text-right">Total Balance: {%= format_currency(flt(total_amount)) %}</div>
+	</div>
+	<div class="">
+		{%
+			range_1 = 0.0;
+			range_2 = 0.0;
+			range_3 = 0.0;
+			range_4 = 0.0;
+			range_5 = 0.0;
+		%}
+		{% $.each(record, function(i,vouchers) { %}
+			{% range_1 += flt(vouchers[__("range1")]) %}
+			{% range_2 += flt(vouchers[__("range2")]) %}
+			{% range_3 += flt(vouchers[__("range3")]) %}
+			{% range_4 += flt(vouchers[__("range4")]) %}
+			{% range_5 += flt(vouchers[__("range5")]) %}
+		{% }); %}
+
+		<table class="table table-borderless">
+			<tr>
+				<td style="text-align:center;">Total</td>
+				<td style="text-align:center;">Current</td>
+				<td style="text-align:center;">Past Due 1-{{ filters.range1 }}</td>
+				<td style="text-align:center;">Past Due {%= filters.range1 + 1 %}-{{ filters.range2 }}</td>
+				<td style="text-align:center;">Past Due {%= filters.range2 + 1 %}-{{ filters.range3 }}</td>
+				<td style="text-align:center;">Past Due {%= filters.range3 + 1 %}-above</td>
+			</tr>
+			<tr>
+				<td style="text-align:center;">{%= format_currency(flt(total_amount)) %}</td>
+				<td style="text-align:center;">{%= format_currency(flt(range_1)) %}</td>
+				<td style="text-align:center;">{%= format_currency(flt(range_2)) %}</td>
+				<td style="text-align:center;">{%= format_currency(flt(range_3)) %}</td>
+				<td style="text-align:center;">{%= format_currency(flt(range_4)) %}</td>
+				<td style="text-align:center;">{%= format_currency(flt(range_5)) %}</td>
+
+			</tr>
+		</table>
+	</div>
+</div>
+<div>.</div>
+<div class="page-break"></div>
+{% } %}
+{% }); %}

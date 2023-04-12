@@ -1,0 +1,166 @@
+<html>
+{% $.each(data, function(i, record) { %}
+
+{% if (i) { %}
+<div class="col-xs-12">
+	<div class="row">
+		<div class="col-xs-6">
+				<div>
+					{%= filters.report_date %}<br><br>
+				</div>
+				<div>
+					<p>
+						<b>{{ i }}</b> <br>
+						{% if (data[i][0].address) { %}
+						   {% if (data[i][0].address.address_line1) { %}
+							   {{ data[i][0].address.address_line1 }}<br>
+						   {% } %}
+						    {% if (data[i][0].address.address_line2)  { %}
+								{{ data[i][0].address.address_line2 }}<br>
+						    {% } %}
+		                    {% if (data[i][0].address.city) { %}
+								{{ data[i][0].address.city }},
+							{% } %}
+							{% if (data[i][0].address.state) { %}
+								{{ data[i][0].address.state }}&nbsp;
+							{% } %}
+							{% if (data[i][0].address.pincode) { %}
+								{{ data[i][0].address.pincode }}
+							{% } %}
+							{% if (data[i][0].address.country != "United States") { %}
+							<br>
+								{{ data[i][0].address.country }}
+							{% } %}
+						{% } %}
+					</p>
+				</div>
+		</div>
+		<div class="col-xs-6" >
+			<!-- <div class=""> -->
+				<!-- <p class="text-right" align="Center">
+					{% count += 1 %}
+					Page No {%= count %}
+				</p> -->
+			<!-- </div> -->
+			<div class="" align="Right">
+				<b>BALANCE NOTICE</b>
+			</div>
+			<div class="" align="Right">
+			</div>
+		</div>
+	</div>
+	<!-- <div class="row">
+		<div class="col-xs-4">
+		</div>
+		<div class="col-xs-4" align="right">
+			<b>CUSTOMER LETTER</b>
+		</div>
+		<div class="col-xs-4">
+		</div>
+	</div>
+	<div class="row">
+		<div>
+			{%= filters.report_date %}
+		</div>
+
+		<div style="margin-top: 20px">
+			<p>
+				<b>{{ i }}</b> <br>
+				{% if (data[i][0].address) { %}
+				   {% if (data[i][0].address.address_line1) { %}
+					   {{ data[i][0].address.address_line1 }}<br>
+				   {% } %}
+				    {% if (data[i][0].address.address_line2)  { %}
+						{{ data[i][0].address.address_line2 }}<br>
+				    {% } %}
+                    {% if (data[i][0].address.city) { %}
+						{{ data[i][0].address.city }},
+					{% } %}
+					{% if (data[i][0].address.state) { %}
+						{{ data[i][0].address.state }}&nbsp;
+					{% } %}
+					{% if (data[i][0].address.pincode) { %}
+						{{ data[i][0].address.pincode }}
+					{% } %}
+					{% if (data[i][0].address.country != "United States") { %}
+					<br>
+						{{ data[i][0].address.country }}
+					{% } %}
+				{% } %}
+			</p>
+		</div>
+	</div> -->
+	<br><br><br>
+	<div class="row">
+		Dear {{i}},<br><br>
+		{%
+			range_1 = 0.0;
+			range_2 = 0.0;
+			range_3 = 0.0;
+			range_4 = 0.0;
+			range_5 = 0.0;
+		%}
+		{% total_pass_due = 0.0  %}
+		{% total_amount = 0.0; %}
+		{% $.each(record, function(i, vouchers) { %}
+		    {% total_amount +=  flt(vouchers[__("outstanding")]) %}
+		    {% range_1 += flt(vouchers[__("range1")]) %}
+			{% range_2 += flt(vouchers[__("range2")]) %}
+			{% range_3 += flt(vouchers[__("range3")]) %}
+			{% range_4 += flt(vouchers[__("range4")]) %}
+			{% range_5 += flt(vouchers[__("range5")]) %}
+			{% payment_entry_date = vouchers[__("payment_entry_date")]  %}
+		{% }); %}
+		{% total_pass_due = range_1 + range_2 + range_3 + range_4 + range_5 %}
+
+
+		<p align="justify" style="text-indent: 50px;">
+			Our records indicate that your account is past due. We assume that this is an oversight on your part.
+			The amount you have past due is {%= format_currency(flt(total_pass_due)) %} and your last payment was dated  {{ payment_entry_date }}.Please send
+			payment as soon as possible to clear the past due balance.<br>
+		</p>
+
+	</div>
+	<div class="row">
+		<table class="table table-borderless">
+			<thead>
+				<td style="text-align:center;">Total</td>
+				<td style="text-align:center;">Current</td>
+				<td style="text-align:center;">Past Due 1-{{ filters.range1 }}</td>
+				<td style="text-align:center;">Past Due {%= filters.range1 + 1 %}-{{ filters.range2 }}</td>
+				<td style="text-align:center;">Past Due {%= filters.range2 + 1 %}-{{ filters.range3 }}</td>
+				<td style="text-align:center;">Past Due {%= filters.range3 + 1 %}-above</td>
+			</thead>
+			<tr>
+				<td style="text-align:center;">{%= format_currency(flt(total_amount)) %}</td>
+				<td style="text-align:center;">{%= format_currency(flt(range_1)) %}</td>
+				<td style="text-align:center;">{%= format_currency(flt(range_2)) %}</td>
+				<td style="text-align:center;">{%= format_currency(flt(range_3)) %}</td>
+				<td style="text-align:center;">{%= format_currency(flt(range_4)) %}</td>
+				<td style="text-align:center;">{%= format_currency(flt(range_5)) %}</td>
+			</tr>
+		</table>
+	</div>
+	<div class="row">
+		<p style="text-indent: 50px;">
+			If you have any questions, please contact me at (800) 537-3136.<br>
+			If you have mailed a payment in the last two weeks, please disregard this notice.
+		</p>
+	</div>
+	<br><br>
+	<div class="row">
+	    Sincerely,
+		<h3><b>Ana Espinosa</b></h3><br>
+	</div>
+	<div class="row">
+	Ana Espinosa<br>
+	Accounts Receivable<br>
+	<b>JAMMY, INCORPORATED<br>
+	(800) 537-3136</b>
+	</div>
+</div>
+<div>.</div>
+<div class="page-break"></div>
+{% } %}
+{% }); %}
+</html>
