@@ -109,6 +109,7 @@ doc_events = {
 }
 
 doctype_js = {
+    "Customer":"jammy_app/custom_jammy/customer/customer.js",
     "Packing Slip" : "jammy_app/custom_jammy/packing_slip/packing_slip.js",
 	"Quotation": "jammy_app/custom_jammy/quotation/quotation.js",
 	"Purchase Invoice":"jammy_app/custom_jammy/purchase_invoice/purchase_invoice.js",

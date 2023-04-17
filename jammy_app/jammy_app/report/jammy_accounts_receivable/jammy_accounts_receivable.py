@@ -1008,7 +1008,6 @@ class JammyReceivablePayableReport(object):
 		# for charts
 		self.ageing_column_labels = []
 		self.add_column(label=_("Age (Days)"), fieldname="age", fieldtype="Int", width=80)
-		print(' self.filters.get("range1")', self.filters.get("range1"),self.filters)
 		for i, label in enumerate(
 			[
 				"0-{range1}".format(range1=self.filters["range1"]),
