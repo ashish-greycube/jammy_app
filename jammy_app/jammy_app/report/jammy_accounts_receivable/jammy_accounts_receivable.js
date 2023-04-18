@@ -1,12 +1,10 @@
-// Copyright (c) 2023, frappe and contributors
-// For license information, please see license.txt
-/* eslint-disable */
-
+// Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
+// License: GNU General Public License v3. See license.txt
 
 frappe.query_reports["Jammy Accounts Receivable"] = {
 	"filters": [
 		{
-			"fieldname":"company",
+			"fieldname": "company",
 			"label": __("Company"),
 			"fieldtype": "Link",
 			"options": "Company",
@@ -14,54 +12,19 @@ frappe.query_reports["Jammy Accounts Receivable"] = {
 			"default": frappe.defaults.get_user_default("Company")
 		},
 		{
-			"fieldname":"ageing_based_on",
-			"label": __("Ageing Based On"),
-			"fieldtype": "Select",
-			"options": 'Posting Date\nDue Date',
-			"default": "Posting Date"
-		},
-		{
-			"fieldname":"report_date",
-			"label": __("As on Date"),
+			"fieldname": "report_date",
+			"label": __("Posting Date"),
 			"fieldtype": "Date",
 			"default": frappe.datetime.get_today()
 		},
 		{
-			"fieldname":"range1",
-			"label": __("Ageing Range 1"),
-			"fieldtype": "Int",
-			"default": "30",
-			"reqd": 1
-		},
-		{
-			"fieldname":"range2",
-			"label": __("Ageing Range 2"),
-			"fieldtype": "Int",
-			"default": "60",
-			"reqd": 1
-		},
-		{
-			"fieldname":"range3",
-			"label": __("Ageing Range 3"),
-			"fieldtype": "Int",
-			"default": "90",
-			"reqd": 1
-		},
-		{
-			"fieldname":"range4",
-			"label": __("Ageing Range 4"),
-			"fieldtype": "Int",
-			"default": "120",
-			"reqd": 1
-		},
-		{
-			"fieldname":"finance_book",
+			"fieldname": "finance_book",
 			"label": __("Finance Book"),
 			"fieldtype": "Link",
 			"options": "Finance Book"
 		},
 		{
-			"fieldname":"cost_center",
+			"fieldname": "cost_center",
 			"label": __("Cost Center"),
 			"fieldtype": "Link",
 			"options": "Cost Center",
@@ -71,11 +34,11 @@ frappe.query_reports["Jammy Accounts Receivable"] = {
 					filters: {
 						'company': company
 					}
-				}
+				};
 			}
 		},
 		{
-			"fieldname":"customer",
+			"fieldname": "customer",
 			"label": __("Customer"),
 			"fieldtype": "Link",
 			"options": "Customer",
@@ -104,34 +67,85 @@ frappe.query_reports["Jammy Accounts Receivable"] = {
 			}
 		},
 		{
-			"fieldname":"customer_group",
+			"fieldname": "party_account",
+			"label": __("Receivable Account"),
+			"fieldtype": "Link",
+			"options": "Account",
+			get_query: () => {
+				var company = frappe.query_report.get_filter_value('company');
+				return {
+					filters: {
+						'company': company,
+						'account_type': 'Receivable',
+						'is_group': 0
+					}
+				};
+			}
+		},
+		{
+			"fieldname": "ageing_based_on",
+			"label": __("Ageing Based On"),
+			"fieldtype": "Select",
+			"options": 'Posting Date\nDue Date',
+			"default": "Due Date"
+		},
+		{
+			"fieldname": "range1",
+			"label": __("Ageing Range 1"),
+			"fieldtype": "Int",
+			"default": "30",
+			"reqd": 1
+		},
+		{
+			"fieldname": "range2",
+			"label": __("Ageing Range 2"),
+			"fieldtype": "Int",
+			"default": "60",
+			"reqd": 1
+		},
+		{
+			"fieldname": "range3",
+			"label": __("Ageing Range 3"),
+			"fieldtype": "Int",
+			"default": "90",
+			"reqd": 1
+		},
+		{
+			"fieldname": "range4",
+			"label": __("Ageing Range 4"),
+			"fieldtype": "Int",
+			"default": "120",
+			"reqd": 1
+		},
+		{
+			"fieldname": "customer_group",
 			"label": __("Customer Group"),
 			"fieldtype": "Link",
 			"options": "Customer Group"
 		},
 		{
-			"fieldname":"payment_terms_template",
+			"fieldname": "payment_terms_template",
 			"label": __("Payment Terms Template"),
 			"fieldtype": "Link",
 			"options": "Payment Terms Template"
 		},
 		{
-			"fieldname":"territory",
-			"label": __("Territory"),
-			"fieldtype": "Link",
-			"options": "Territory"
-		},
-		{
-			"fieldname":"sales_partner",
+			"fieldname": "sales_partner",
 			"label": __("Sales Partner"),
 			"fieldtype": "Link",
 			"options": "Sales Partner"
 		},
 		{
-			"fieldname":"sales_person",
+			"fieldname": "sales_person",
 			"label": __("Sales Person"),
 			"fieldtype": "Link",
 			"options": "Sales Person"
+		},
+		{
+			"fieldname": "territory",
+			"label": __("Territory"),
+			"fieldtype": "Link",
+			"options": "Territory"
 		},
 		{
 			"fieldname": "group_by_party",
@@ -139,45 +153,50 @@ frappe.query_reports["Jammy Accounts Receivable"] = {
 			"fieldtype": "Check"
 		},
 		{
-			"fieldname":"based_on_payment_terms",
+			"fieldname": "based_on_payment_terms",
 			"label": __("Based On Payment Terms"),
 			"fieldtype": "Check",
 		},
 		{
-			"fieldname":"show_future_payments",
+			"fieldname": "show_future_payments",
 			"label": __("Show Future Payments"),
 			"fieldtype": "Check",
 		},
 		{
-			"fieldname":"show_delivery_notes",
-			"label": __("Show Delivery Notes"),
+			"fieldname": "show_delivery_notes",
+			"label": __("Show Linked Delivery Notes"),
 			"fieldtype": "Check",
 		},
 		{
-			"fieldname":"show_sales_person",
+			"fieldname": "show_sales_person",
 			"label": __("Show Sales Person"),
 			"fieldtype": "Check",
 		},
 		{
-			"fieldname":"tax_id",
+			"fieldname": "tax_id",
 			"label": __("Tax Id"),
 			"fieldtype": "Data",
 			"hidden": 1
 		},
 		{
-			"fieldname":"customer_name",
+			"fieldname": "show_remarks",
+			"label": __("Show Remarks"),
+			"fieldtype": "Check",
+		},
+		{
+			"fieldname": "customer_name",
 			"label": __("Customer Name"),
 			"fieldtype": "Data",
 			"hidden": 1
 		},
 		{
-			"fieldname":"payment_terms",
+			"fieldname": "payment_terms",
 			"label": __("Payment Tems"),
 			"fieldtype": "Data",
 			"hidden": 1
 		},
 		{
-			"fieldname":"credit_limit",
+			"fieldname": "credit_limit",
 			"label": __("Credit Limit"),
 			"fieldtype": "Currency",
 			"hidden": 1
@@ -194,7 +213,6 @@ frappe.query_reports["Jammy Accounts Receivable"] = {
 	},
 
 	onload: function(report) {
-		console.log(222)
 		report.page.add_inner_button(__("Accounts Receivable Summary"), function() {
 			var filters = report.get_values();
 			frappe.set_route('query-report', 'Accounts Receivable Summary', {company: filters.company});
@@ -205,7 +223,7 @@ frappe.query_reports["Jammy Accounts Receivable"] = {
 
 		report.page.add_inner_button(__("Customer Letter"), function() {
 			frappe.query_reports["Jammy Accounts Receivable"].customer_statement_data(report, "customer_letter_print")
-		});
+		});		
 	},
 	print_report: function(report, response, template){
 		filters = report.get_values()
@@ -217,10 +235,8 @@ frappe.query_reports["Jammy Accounts Receivable"] = {
 
 		if(frappe.query_report.data.length > 0){
 			var me = this;
-
 			var base_url = frappe.urllib.get_base_url();
 			var print_css = frappe.boot.print_css;
-			console.log('range1', "0-"+String(filters.range1))
 			var html = frappe.render_template("head",{
 				content: frappe.render_template(template,{   
 					"data": response,
@@ -243,8 +259,7 @@ frappe.query_reports["Jammy Accounts Receivable"] = {
 		else{
 			frappe.throw("No Records to print.")
 		}
-	},
-
+	},	
 	customer_statement_data: function(report, template){
 		frappe.call({
 			method: "jammy_app.jammy_utils.customer_statement",
@@ -259,12 +274,12 @@ frappe.query_reports["Jammy Accounts Receivable"] = {
 			    frappe.msgprint("Please wait while the document is being prepared for reading.")
 			}
 		})
-	},
+	},	
 }
-
 open_pdf = function(html) {
 	var formData = new FormData();
 	formData.append("html", html);
+	formData.append("orientation", "Portrait");
 	var blob = new Blob([], { type: "text/xml"});
 	formData.append("blob", blob);
 	var xhr = new XMLHttpRequest();
@@ -280,6 +295,4 @@ open_pdf = function(html) {
 	};
 	xhr.send(formData);
 }
-
 erpnext.utils.add_dimensions('Jammy Accounts Receivable', 9);
-

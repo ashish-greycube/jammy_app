@@ -75,6 +75,12 @@ def customer_statement(data, filters):
 			row.update({"payment_entry_date": pe_date_list[-1]})
 		row.update({"address": address_details.get(row.get('party'))})
 	data = sorted(data, key=lambda k: k['party'])
+	
+	party_current_due_amount=0.0
+	for dc in data:
+		if dc['age'] and flt(dc['age'])<0:
+			party_current_due_amount=float(flt(dc['outstanding'])+flt(party_current_due_amount))
+
 	final_report_dict = {}
 	for d in data:
 		if d.get('party') in final_report_dict:
@@ -118,6 +124,7 @@ def customer_statement(data, filters):
 			if not d['range5'] == '':
 				d['range5'] = format(float(d['range5']),".2f")
 			final_report_dict.update({d.get('party'): [d]})
+		d['party_current_due_amount']=format(float(party_current_due_amount),".2f")
 	final_report_dict1 = list(final_report_dict)
 	return final_report_dict
 

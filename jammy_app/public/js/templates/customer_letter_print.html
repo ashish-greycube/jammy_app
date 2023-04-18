@@ -36,12 +36,7 @@
 				</div>
 		</div>
 		<div class="col-xs-6" >
-			<!-- <div class=""> -->
-				<!-- <p class="text-right" align="Center">
-					{% count += 1 %}
-					Page No {%= count %}
-				</p> -->
-			<!-- </div> -->
+
 			<div class="" align="Right">
 				<b>BALANCE NOTICE</b>
 			</div>
@@ -49,47 +44,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- <div class="row">
-		<div class="col-xs-4">
-		</div>
-		<div class="col-xs-4" align="right">
-			<b>CUSTOMER LETTER</b>
-		</div>
-		<div class="col-xs-4">
-		</div>
-	</div>
-	<div class="row">
-		<div>
-			{%= filters.report_date %}
-		</div>
 
-		<div style="margin-top: 20px">
-			<p>
-				<b>{{ i }}</b> <br>
-				{% if (data[i][0].address) { %}
-				   {% if (data[i][0].address.address_line1) { %}
-					   {{ data[i][0].address.address_line1 }}<br>
-				   {% } %}
-				    {% if (data[i][0].address.address_line2)  { %}
-						{{ data[i][0].address.address_line2 }}<br>
-				    {% } %}
-                    {% if (data[i][0].address.city) { %}
-						{{ data[i][0].address.city }},
-					{% } %}
-					{% if (data[i][0].address.state) { %}
-						{{ data[i][0].address.state }}&nbsp;
-					{% } %}
-					{% if (data[i][0].address.pincode) { %}
-						{{ data[i][0].address.pincode }}
-					{% } %}
-					{% if (data[i][0].address.country != "United States") { %}
-					<br>
-						{{ data[i][0].address.country }}
-					{% } %}
-				{% } %}
-			</p>
-		</div>
-	</div> -->
 	<br><br><br>
 	<div class="row">
 		Dear {{i}},<br><br>
@@ -129,10 +84,12 @@
 				<td style="text-align:center;">Past Due 1-{{ filters.range1 }}</td>
 				<td style="text-align:center;">Past Due {%= filters.range1 + 1 %}-{{ filters.range2 }}</td>
 				<td style="text-align:center;">Past Due {%= filters.range2 + 1 %}-{{ filters.range3 }}</td>
-				<td style="text-align:center;">Past Due {%= filters.range3 + 1 %}-above</td>
+				<td style="text-align:center;">Past Due {%= filters.range3 + 1 %}-{{ filters.range4 }}</td>
+				<td style="text-align:center;">Past Due {%= filters.range4 + 1 %}-above</td>
 			</thead>
 			<tr>
 				<td style="text-align:center;">{%= format_currency(flt(total_amount)) %}</td>
+				<td style="text-align:center;">{%= format_currency(flt(data[i][0].party_current_due_amount)) %}</td>
 				<td style="text-align:center;">{%= format_currency(flt(range_1)) %}</td>
 				<td style="text-align:center;">{%= format_currency(flt(range_2)) %}</td>
 				<td style="text-align:center;">{%= format_currency(flt(range_3)) %}</td>
