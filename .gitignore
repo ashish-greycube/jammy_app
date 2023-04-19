@@ -4,3 +4,4 @@
 *.swp
 tags
 jammy_app/docs/current
+jammy_app/public/dist
