@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"Reports & Masters\", \"level\": 4, \"col\": 12}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Jammy\", \"col\": 4}}]",
+ "content": "[{\"id\":\"3rgshXUohf\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"jTI83XFT50\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Reports &amp; Masters</span>\",\"col\":12}},{\"id\":\"6sCLmNX0fh\",\"type\":\"card\",\"data\":{\"card_name\":\"Jammy\",\"col\":4}}]",
  "creation": "2023-04-12 00:46:02.570032",
  "docstatus": 0,
  "doctype": "Workspace",
@@ -15,7 +15,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Jammy",
-   "link_count": 0,
+   "link_count": 2,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -28,9 +28,19 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Item-Wise Sales Register",
+   "link_count": 0,
+   "link_to": "Item-wise Sales Register",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2023-04-16 22:35:16.238821",
+ "modified": "2023-04-20 23:14:22.589131",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Jammy",
