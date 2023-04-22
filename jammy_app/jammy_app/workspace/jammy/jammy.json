@@ -31,8 +31,8 @@
   },
   {
    "hidden": 0,
-   "is_query_report": 1,
-   "label": "Item-Wise Sales Register",
+   "is_query_report": 0,
+   "label": "Sales Register",
    "link_count": 0,
    "link_to": "Item-wise Sales Register",
    "link_type": "Report",
@@ -40,8 +40,8 @@
    "type": "Link"
   }
  ],
- "modified": "2023-04-20 23:14:22.589131",
- "modified_by": "Administrator",
+ "modified": "2023-04-21 10:17:12.709848",
+ "modified_by": "ralphc@jammyinc.com",
  "module": "Jammy_app",
  "name": "Jammy",
  "number_cards": [],
