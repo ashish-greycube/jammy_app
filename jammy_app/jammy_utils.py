@@ -78,9 +78,7 @@ def customer_statement(data, filters):
 	
 	party_current_due_amount=0.0
 	for dc in data:
-		print('--'*10)
-		if dc['age'] and flt(dc['age'])<0:
-			print(dc['age'],dc['outstanding'])
+		if dc['age'] and flt(dc['age'])<0 and dc.get('party')!='':
 			party_current_due_amount=float(flt(dc['outstanding'])+flt(party_current_due_amount))
 
 	final_report_dict = {}
@@ -104,9 +102,7 @@ def customer_statement(data, filters):
 			if not d['range5'] == '':
 				d['range5'] = format(float(d['range5']),".2f")
 			final_report_dict[d.get('party')].append(d)
-			d['party_current_due_amount']=format(float(party_current_due_amount),".2f")
 		else:
-			print("d value", d)
 			if d['outstanding']:
 				d['outstanding'] = "{:,.2f}".format(d['outstanding'])
 			if not d['posting_date'] == '':
@@ -127,7 +123,7 @@ def customer_statement(data, filters):
 			if not d['range5'] == '':
 				d['range5'] = format(float(d['range5']),".2f")
 			final_report_dict.update({d.get('party'): [d]})
-			d['party_current_due_amount']=format(float(party_current_due_amount),".2f")
+		d['party_current_due_amount']=format(float(party_current_due_amount),".2f")
 	final_report_dict1 = list(final_report_dict)
 	return final_report_dict
 
