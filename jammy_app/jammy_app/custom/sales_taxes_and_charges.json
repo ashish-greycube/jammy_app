@@ -2,7 +2,6 @@
  "custom_fields": [],
  "custom_perms": [],
  "doctype": "Sales Taxes and Charges",
- "links": [],
  "property_setters": [
   {
    "_assign": null,
@@ -16,10 +15,8 @@
    "doctype_or_field": "DocField",
    "field_name": "description",
    "idx": 0,
-   "is_system_generated": 0,
    "modified": "2021-07-21 12:21:52.113141",
    "modified_by": "Administrator",
-   "module": null,
    "name": "Sales Taxes and Charges-description-columns",
    "owner": "Administrator",
    "parent": null,
@@ -27,7 +24,6 @@
    "parenttype": null,
    "property": "columns",
    "property_type": "Int",
-   "row_name": null,
    "value": "1"
   },
   {
@@ -42,10 +38,8 @@
    "doctype_or_field": "DocField",
    "field_name": "description",
    "idx": 0,
-   "is_system_generated": 0,
    "modified": "2021-07-21 12:21:52.088583",
    "modified_by": "Administrator",
-   "module": null,
    "name": "Sales Taxes and Charges-description-in_list_view",
    "owner": "Administrator",
    "parent": null,
@@ -53,7 +47,6 @@
    "parenttype": null,
    "property": "in_list_view",
    "property_type": "Check",
-   "row_name": null,
    "value": "1"
   },
   {
@@ -68,10 +61,8 @@
    "doctype_or_field": "DocType",
    "field_name": "",
    "idx": 0,
-   "is_system_generated": 0,
    "modified": "2020-07-23 05:21:48.237144",
    "modified_by": "Administrator",
-   "module": null,
    "name": "Sales Taxes and Charges-autoname",
    "owner": "Administrator",
    "parent": null,
@@ -79,7 +70,6 @@
    "parenttype": null,
    "property": "autoname",
    "property_type": "",
-   "row_name": null,
    "value": "INVTD.######"
   },
   {
@@ -94,10 +84,8 @@
    "doctype_or_field": "DocField",
    "field_name": "rate",
    "idx": 0,
-   "is_system_generated": 0,
    "modified": "2020-05-14 09:50:00.947201",
    "modified_by": "Administrator",
-   "module": null,
    "name": "Sales Taxes and Charges-rate-width",
    "owner": "Administrator",
    "parent": null,
@@ -105,7 +93,6 @@
    "parenttype": null,
    "property": "width",
    "property_type": null,
-   "row_name": null,
    "value": "111"
   },
   {
@@ -120,10 +107,8 @@
    "doctype_or_field": "DocField",
    "field_name": "base_total",
    "idx": 0,
-   "is_system_generated": 0,
    "modified": "2020-02-12 09:24:13.526730",
    "modified_by": "Administrator",
-   "module": null,
    "name": "Sales Taxes and Charges-base_total-width",
    "owner": "Administrator",
    "parent": null,
@@ -131,7 +116,6 @@
    "parenttype": null,
    "property": "width",
    "property_type": null,
-   "row_name": null,
    "value": "83"
   }
  ],
