@@ -1,0 +1,14 @@
+	deleted:    jammy_app/fixtures/custom_field.json
+	deleted:    jammy_app/fixtures/page.json
+	deleted:    jammy_app/fixtures/print_format.json
+	deleted:    jammy_app/fixtures/property_setter.json
+	deleted:    jammy_app/fixtures/report.json
+	deleted:    jammy_app/fixtures/role.json
+	deleted:    jammy_app/fixtures/workflow.json
+	deleted:    jammy_app/fixtures/workflow_action.json
+	deleted:    jammy_app/fixtures/workflow_state.json
+	deleted:    jammy_app/jammy_app/custom/batch.json
+	deleted:    jammy_app/jammy_app/custom/packed_item.json
+	deleted:    jammy_app/jammy_app/custom/sales_order.json
+	deleted:    jammy_app/jammy_app/custom/sales_order_item.json
+	deleted:    jammy_app/jammy_app/custom/sales_taxes_and_charges.json
