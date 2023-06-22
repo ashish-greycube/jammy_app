@@ -38,9 +38,19 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Print Price List",
+   "link_count": 0,
+   "link_to": "Jammy  Print Price List",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2023-05-03 00:17:32.808855",
+ "modified": "2023-06-22 17:59:27.251354",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Jammy",
