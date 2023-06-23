@@ -21,45 +21,45 @@ def get_columns(filters):
 			"fieldname": "id",
 			"fieldtype": "Link",
 			"options": "Item Price",
-			"width": 100,
+			"width": 150,
 		},
 		{
 			"label": _("Price List"),
 			"fieldname": "price_list",
 			"fieldtype": "Link",
 			"options": "Price List",
-			"width": 130,
+			"width": 170,
 		},
 		{
 			"label": _("Item Code"),
 			"fieldname": "item_code",
 			"fieldtype": "Link",
 			"options": "Item",
-			"width": 120,
+			"width": 240,
 		},
 		{
 			"label": _("Item Name"),
 			"fieldname": "item_name",
 			"fieldtype": "Data",
-			"width": 170,
+			"width": 160,
 		},
 		{
 			"label": _("Item Description"),
 			"fieldname": "description",
 			"fieldtype": "Data",
-			"width": 210,
+			"width": 450,
 		},
 		{
 			"label": _("Rate"),
 			"fieldname": "rate",
 			"fieldtype": "Data",
-			"width": 90,
+			"width": 110,
 		},
 		{
-			"label": _("Pcs / Ctn"),
+			"label": _("Pcs/Ctn"),
 			"fieldname": "pcs_ctn",
 			"fieldtype": "Int",
-			"width": 100,
+			"width": 90,
 		},
 	]
 	return columns
@@ -70,7 +70,8 @@ def get_entries(filters):
 	entries = frappe.db.sql(
 		"""
 		SELECT
-			ip.name as id, ip.price_list as price_list, ip.item_code as item_code, ip.item_name as item_name,ip.item_description as description, ip.price_list_rate as rate, i.pcs_ctn as pcs_ctn
+			ip.name as id, ip.price_list as price_list, ip.item_code as item_code, ip.item_name as item_name,
+			ip.item_description as description, ip.price_list_rate as rate, i.pcs_ctn as pcs_ctn
 		FROM 
 			`tabItem Price` ip
 		INNER JOIN
@@ -78,8 +79,8 @@ def get_entries(filters):
 		WHERE
 			1=1
 			{conditions}
-		GROUP BY
-            ip.price_list
+		ORDER BY
+            ip.price_list,ip.item_code
 
 		""".format(conditions=conditions),filters,as_dict=1
 	)
