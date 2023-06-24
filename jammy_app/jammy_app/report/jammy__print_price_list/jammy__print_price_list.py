@@ -35,7 +35,7 @@ def get_columns(filters):
 			"fieldname": "item_code",
 			"fieldtype": "Data",
 			"options": "Item",
-			"width": 140,
+			"width": 130,
 		},
 		{
 			"label": _("Item Name"),
@@ -53,7 +53,7 @@ def get_columns(filters):
 			"label": _("Rate"),
 			"fieldname": "rate",
 			"fieldtype": "Currency",
-			"width": 110,
+			"width": 140,
 		},
 		{
 			"label": _("Pcs/Ctn"),
