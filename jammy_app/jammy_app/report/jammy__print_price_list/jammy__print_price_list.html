@@ -1,0 +1,20 @@
+<h1>price_list:{{price_list}}</h1>
+
+
+{% for row in result %}
+<table class="table-bordered">
+                              
+    <tbody>
+              <tr>
+                    <td >{{loop.index}}</td>
+                    <td >{{row.item_code}}</td>
+                    <td >{{row.item_name}}</td>
+                    <td >{{row.description}}</td>
+                    <td>{{row.rate}}</td>
+                    <td>{{row.pcs_ctn}}</td>
+              </tr>
+              
+    </tbody>
+    
+  </table>
+{% endfor %}
