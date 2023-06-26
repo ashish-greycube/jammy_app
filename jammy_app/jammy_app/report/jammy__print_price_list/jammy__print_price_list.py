@@ -102,25 +102,21 @@ def get_conditions(filters):
 
 @frappe.whitelist()
 def get_print_pdf(price_list):
-    print('price_list',price_list)
     filters={'price_list':price_list}
     conditions = get_conditions(filters)
     data=get_entries(filters)
-    options={}
     args = {
           "price_list": filters.get("price_list"),
           "result":data
      }    
     html = frappe.get_template("jammy_app/jammy_app/report/jammy__print_price_list/jammy__print_price_list.html").render(args)
     docname="Jammy Print Price List"
-    print(data)
-#      options={
-#         "page-width": "120mm",
-#         "page-height": "50mm",
-#         "margin-left":"17mm",
-#         "margin-right":"0mm"        
-# }
-    #  if print_type=='indirectpdf':
+    options={
+        "page-size": "A4",
+        "margin-left":"15mm",
+        "margin-right":"15mm",
+        "margin-top":"5mm"  ,
+    }
     frappe.local.response.filename = "{name}.pdf".format(name=docname.replace(" ", "-").replace("/", "-"))
     frappe.local.response.filecontent = get_pdf(html,options)
     frappe.local.response.type = "pdf" 	

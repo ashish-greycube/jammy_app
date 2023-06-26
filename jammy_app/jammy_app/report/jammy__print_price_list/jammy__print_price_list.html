@@ -1,40 +1,7 @@
-{%- from "templates/print_formats/standard_macros.html" import add_header, render_field, print_value, fieldmeta, get_width, get_align_class with context -%}
-  
-  <div id="header-html" class="hidden-pdf">
-      {% if letter_head and not no_letterhead %}
-          <div class="letter-head">{{ letter_head }}</div>
-      {% else%}
-      <table style="width: 100%;">
-
-        <tbody><tr style="width: 100%;">
-          <td style="width: 50%;">
-            <img src="http://127.0.0.1:8000/files/jammy_letter_head_logo.gif" height="80" width="320">
-          </td>
-      
-          <td style="width: 50%;">
-            <table style="width: 100%;">
-              <tbody><tr style="width: 100%;">
-                <td style="text-align: right;"> <h4 style="margin-top: -10px;">Jammy Print Price List</h4></td>
-              </tr>
-             
-              <tr style="width: 100%;">
-                <td style="text-align: right;"><font >Price List : {{price_list}}</font></td>
-              </tr>
-            </tbody></table>
-          </td>
-        </tr>
-      </tbody></table>
-      {% endif %}
- </div>
- 
-
-
-
 <html>
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>{{ title }}</title>
       <meta name="generator" content="frappe">
       {{ include_style('print.bundle.css') }}
       {% if print_style %}
@@ -42,10 +9,7 @@
           {{ print_style }}
           </style>
       {% endif %}
-
-
     <style>
-      
       .tdh{
         background-color: #ebeef0!important;
       }
@@ -53,23 +17,6 @@
         word-wrap: break-word;
         line-height: 25px;  
       }
-      /* .page-footer, .page-footer-space {
-        height: 50px;
-
-      } */
-
-    /* .page-footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      border-top: 1px solid black; 
-      
-    } */
-
-    /* .page-footer:after {
-      counter-increment: page;
-      content: counter(page)
-    } */
     #footer {
          display: block;
          position: fixed;
@@ -79,24 +26,48 @@
          text-align:right;
          left:0px;
     }
+    thead { display: table-header-group;
+     }
     </style>
 </head>
 
-
 <body>
+  <div id="header-html">&nbsp;</div>
+  <div class="print-heading"  class="hidden-pdf">
+    <table style="width: 100%">
+      <tbody><tr style="width: 100%;">
+        <td style="width: 50%;">
+          {% set header_html = frappe.db.get_value('Letter Head', 'Standard', 'content') %}
+         {{header_html}}
+        </td>
+        <td style="width: 50%;">
+          <table style="width: 100%;">
+            <tbody><tr style="width: 100%;">
+              <td style="text-align: right;"> <h4 style="margin-top:-10px;">Jammy Inc. - Price List </h4></td>
+            </tr>
+           
+            <tr style="width: 100%;">
+              <td style="text-align: right;">Price List : {{price_list}} </td>
+            </tr>
+          </tbody></table>
+        </td>
+      </tr>
+    </tbody></table>
+</div>
 
     <hr style="width: 100%;background-color: 1px solid gray;">
     <table class="table table-condensed table-bordered" style="width: 100%; ">
-            <tr style="width:100%;">
-                <th class="tdh"># </th>
-                <th class="tdh">Item Code </th>
+      <thead>
+            <tr style="width:100%">
+                <th class="tdh">#</th>
+                <th class="tdh">Item Code</th>
                 <th class="tdh">Item Name</th>
-                <th class="tdh">Item Description </th>
-                <th class="tdh">Rate </th>
-                <th class="tdh">Pcs/Ctn </th>
+                <th class="tdh">Item Description</th>
+                <th class="tdh" style="text-align: right;">Rate</th>
+                <th class="tdh" style="text-align: right;">Pcs/Ctn</th>
             </tr>
     
-      
+          </thead>
       <tbody>
       {% for row in result %}
             <tr style="width:100%;">
@@ -109,24 +80,20 @@
             </tr>
       {% endfor %}
     </tbody>
-
     </table>
-</body>
 
 
-<!-- <div class="page-footer"> -->
-  <div id="footer" width="100%">
+
+  <div id="footer-html" width="100%">
   <table style="width: 100%; display: flex!important;">
     <tbody><tr style="width: 100%;">
-        <td style="width: 10%; text-align: left!important; font-size: 9px; color: black!important;">Jammy,Inc.</td>
-        <td class="text-center small page-number visible-pdf" style="width: 60%;font-size: 9px; color: black!important;">
-      <!-- {{ _("Page {0} of {1}").format('<span class="page"></span>', '<span class="topage"></span>') }} -->
-      Page {{ "<span class='page'></span>" | int+1}}
+        <td style="width: 10%; text-align: left!important; font-size: 10px; color: black!important;">Jammy,Inc.</td>
+        <td class="text-center small page-number visible-pdf" style="width: 60%;font-size: 10px; color: black!important; text-align:center!important">
+          {{_("Page {0} of {1}").format('<span class="page"></span>', '<span class="topage"></span>') }}
     </td>
-        <td style="width: 30%; text-align: right!important; font-size: 9px; color: black!important;">Price List : {{price_list}}&nbsp; {{ frappe.utils.formatdate(frappe.utils.nowdate(), "MMM-dd-yyyy") }}</td>
-        
+        <td style="width: 30%; text-align: right!important; font-size: 10px; color: black!important;">Price List : {{price_list}}&nbsp; {{ frappe.utils.formatdate(frappe.utils.nowdate(), "MMM-dd-yyyy") }}</td>
     </tr>
 </tbody></table>
 </div>
-
+</body>
 </html>
