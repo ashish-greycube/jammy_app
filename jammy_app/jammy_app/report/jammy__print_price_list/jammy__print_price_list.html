@@ -61,7 +61,6 @@
             <tr style="width:100%">
                 <th class="tdh">#</th>
                 <th class="tdh">Item Code</th>
-                <th class="tdh">Item Name</th>
                 <th class="tdh">Item Description</th>
                 <th class="tdh" style="text-align: right;">Rate</th>
                 <th class="tdh" style="text-align: right;">Pcs/Ctn</th>
@@ -72,9 +71,8 @@
       {% for row in result %}
             <tr style="width:100%;">
                   <td class="tdb" style="width: 5%;"> {{loop.index}} </td>
-                  <td class="tdb" style="width: 10%;"> {{row.item_code}} </td>
-                  <td class="tdb" style="width: 20%;">{{row.item_name}}</td>
-                  <td class="tdb" style="width: 40%;">{{row.description}}</td>
+                  <td class="tdb" style="width: 20%;"> {{row.item_code}} </td>
+                  <td class="tdb" style="width: 50%;">{{row.description}}</td>
                   <td class="tdb" style="width: 15%;text-align: right;">{{ frappe.format(row.rate, {'fieldtype': 'Currency'}) }}</td>
                   <td class="tdb" style="width: 10%;text-align: right;">{{row.pcs_ctn}}</td>
             </tr>
