@@ -56,10 +56,10 @@
 </div>
 
     <hr style="width: 100%;background-color: 1px solid gray;">
-    <table class="table table-condensed table-bordered" style="width: 100%; ">
+    <table class="table table-condensed table-bordered" style="width: 100%;">
       <thead>
             <tr style="width:100%">
-                <th class="tdh">#</th>
+                
                 <th class="tdh">Item Code</th>
                 <th class="tdh">Item Description</th>
                 <th class="tdh" style="text-align: right;">Rate</th>
@@ -67,10 +67,10 @@
             </tr>
     
           </thead>
-      <tbody>
+      <tbody style="font-size: 12px!important; ">
       {% for row in result %}
             <tr style="width:100%;">
-                  <td class="tdb" style="width: 5%;"> {{loop.index}} </td>
+                  
                   <td class="tdb" style="width: 20%;"> {{row.item_code}} </td>
                   <td class="tdb" style="width: 50%;">{{row.description}}</td>
                   <td class="tdb" style="width: 15%;text-align: right;">{{ frappe.format(row.rate, {'fieldtype': 'Currency'}) }}</td>
@@ -86,9 +86,9 @@
   <table style="width: 100%; display: flex!important;">
     <tbody><tr style="width: 100%;">
         <td style="width: 10%; text-align: left!important; font-size: 10px; color: black!important;">Jammy,Inc.</td>
-        <td class="text-center small page-number visible-pdf" style="width: 60%;font-size: 10px; color: black!important; text-align:center!important">
+        <center><td class="text-center small page-number visible-pdf" style="width: 60%;font-size: 10px; color: black!important; text-align:center!important">
           {{_("Page {0} of {1}").format('<span class="page"></span>', '<span class="topage"></span>') }}
-    </td>
+        </td></center>
         <td style="width: 30%; text-align: right!important; font-size: 10px; color: black!important;">Price List : {{price_list}}&nbsp; {{ frappe.utils.formatdate(frappe.utils.nowdate(), "MMM-dd-yyyy") }}</td>
     </tr>
 </tbody></table>
