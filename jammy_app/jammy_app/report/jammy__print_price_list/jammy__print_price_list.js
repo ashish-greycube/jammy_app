@@ -10,6 +10,13 @@ frappe.query_reports["Jammy  Print Price List"] = {
 			"fieldtype":"Link",
 			"options":"Price List",
 		},
+		{
+			"fieldname":"item_type_cf",
+			"label":("Item Type"),
+			"fieldtype":"Select",
+			"options":"Routine Order\nSpecial Order\nAll Order",
+			"default":"Routine Order"
+		},		
 
 	],
 	onload: (report) => {
@@ -21,6 +28,7 @@ frappe.query_reports["Jammy  Print Price List"] = {
 				return;
 			}
 			let url = `/api/method/jammy_app.jammy_app.report.jammy__print_price_list.jammy__print_price_list.get_print_pdf`;
+			console.log('filters',filters)
 			open_url_post(url, filters, true);				
 		});
 

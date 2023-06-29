@@ -62,6 +62,12 @@ def get_columns(filters):
             "fieldtype": "Int",
             "width": 90,
         },
+        {
+            "label": _("Item Type"),
+            "fieldname": "item_type_cf",
+            "fieldtype": "Data",
+            "width": 110,
+        },        
     ]
     return columns
 
@@ -72,7 +78,7 @@ def get_entries(filters):
         """
         SELECT
             ip.name as id, ip.price_list as price_list, ip.item_code as item_code, ip.item_name as item_name,
-            ip.item_description as description, ip.price_list_rate as rate, i.pcs_ctn as pcs_ctn
+            ip.item_description as description, ip.price_list_rate as rate, i.pcs_ctn as pcs_ctn,i.item_type_cf
         FROM 
             `tabItem Price` ip
         INNER JOIN
@@ -98,11 +104,14 @@ def get_conditions(filters):
 
     if filters.get("price_list"):
         conditions += " and ip.price_list = %(price_list)s"
+    if filters.get("item_type_cf") and filters.get("item_type_cf")!="All Order" :
+        conditions += " and i.item_type_cf = %(item_type_cf)s"        
     return conditions
 
 @frappe.whitelist()
-def get_print_pdf(price_list):
-    filters={'price_list':price_list}
+def get_print_pdf():
+    request_data=frappe.local.form_dict
+    filters={'price_list':request_data.get("price_list"),'item_type_cf':request_data.get("item_type_cf")}
     conditions = get_conditions(filters)
     data=get_entries(filters)
     args = {
