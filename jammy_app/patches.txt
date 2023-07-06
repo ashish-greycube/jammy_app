@@ -1,2 +1,3 @@
 jammy_app.patches.create_outstanding_button_in_payment_entry
 jammy_app.patches.create_item_type_in_item
+jammy_app.patches.item_group_custom_fields

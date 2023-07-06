@@ -1,0 +1,125 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-06-30 14:38:33.718031",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "pallet_for_total_cartons",
+  "weight_of_one_pallet",
+  "column_break_a6j8o",
+  "one_line_bol_item",
+  "one_line_bol_item_description",
+  "one_line_bol_item_nmfc",
+  "one_line_bol_item_freight_class",
+  "bol_print_clauses_section_section",
+  "declared_value_of_shipped_property",
+  "liability_limitation_clause",
+  "received_terms",
+  "column_break_qmnc0",
+  "carrier_get_payment_caluse",
+  "dot_regulation_clause",
+  "carrier_acknowledgment_receipt"
+ ],
+ "fields": [
+  {
+   "fieldname": "pallet_for_total_cartons",
+   "fieldtype": "Int",
+   "label": "Pallet for Total Cartons"
+  },
+  {
+   "fieldname": "weight_of_one_pallet",
+   "fieldtype": "Data",
+   "label": "Weight of One Pallet (LBS)"
+  },
+  {
+   "fieldname": "one_line_bol_item_description",
+   "fieldtype": "Data",
+   "label": "One Line BOL Item Description"
+  },
+  {
+   "fieldname": "one_line_bol_item_nmfc",
+   "fieldtype": "Int",
+   "label": "One Line BOL Item NMFC#"
+  },
+  {
+   "fieldname": "one_line_bol_item_freight_class",
+   "fieldtype": "Link",
+   "label": "One Line BOL Item Freight Class",
+   "options": "Freight Class JI"
+  },
+  {
+   "fieldname": "column_break_a6j8o",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "one_line_bol_item",
+   "fieldtype": "Heading",
+   "label": "One Line BOL Item"
+  },
+  {
+   "fieldname": "bol_print_clauses_section_section",
+   "fieldtype": "Section Break",
+   "label": "BOL Print Clauses Section"
+  },
+  {
+   "fieldname": "declared_value_of_shipped_property",
+   "fieldtype": "Small Text",
+   "label": "Declared Value of Shipped Property"
+  },
+  {
+   "fieldname": "liability_limitation_clause",
+   "fieldtype": "Small Text",
+   "label": "Liability Limitation Clause"
+  },
+  {
+   "fieldname": "received_terms",
+   "fieldtype": "Small Text",
+   "label": "Received Terms"
+  },
+  {
+   "fieldname": "carrier_get_payment_caluse",
+   "fieldtype": "Data",
+   "label": "Carrier Get Payment Caluse"
+  },
+  {
+   "fieldname": "dot_regulation_clause",
+   "fieldtype": "Small Text",
+   "label": "Dot Regulation Clause"
+  },
+  {
+   "fieldname": "carrier_acknowledgment_receipt",
+   "fieldtype": "Small Text",
+   "label": "Carrier Acknowledgment Receipt"
+  },
+  {
+   "fieldname": "column_break_qmnc0",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2023-07-06 00:51:03.702922",
+ "modified_by": "Administrator",
+ "module": "Jammy_app",
+ "name": "Bill Of Lading Settings JI",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -93,6 +93,34 @@ var set_total_weight = function(frm) {
 	frm.set_df_property("total_weight_pkg", "read_only", 1);
 }
 
+frappe.ui.form.on("Delivery Note", {
+	onload_post_render: function(frm) {
+		frm.add_custom_button(
+			"Create BOL",function() {
+				
+				frappe.call({
+					method: "jammy_app.jammy_app.custom_jammy.delivery_note.delivery_note.create_bol",
+					args: {
+						'doctype': 'Delivery Note',
+						'docname': frm.doc.name,
+						// 'type_of_bol':"direct_item_info",
+						// 'type_of_bol':"one_line_bol",
+						// 'type_of_bol':"normal_bol"
+					},
+					callback: function(r) {
+						if (!r.exc) {
+                           
+                            frappe.msgprint('Bill of Lading created successfully.');
+							
+                        }
+					},
+					success: function(r) {},
+					url: "" || frappe.request.url,
+				});
+			},"Create");
+	}
+})
+
 // frappe.ui.form.on("Delivery Note Item", "batch_no", function(frm, cdt, cdn) {
 //     var d = locals[cdt][cdn];
 //         frappe.db.get_value("Batch", {"name": d.batch_no}, "purchase_rate", function(value) {

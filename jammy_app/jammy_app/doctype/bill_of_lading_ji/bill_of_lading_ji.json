@@ -1,0 +1,256 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2023-06-30 14:19:52.580126",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "ship_from",
+  "ref",
+  "fob",
+  "ship_to",
+  "cid",
+  "third_party_freight_charges_bill_to",
+  "column_break_vxqkv",
+  "date",
+  "bill_of_lading_no",
+  "carrier_name",
+  "pro_no",
+  "freight_charge_terms_prepaid_unless_marked_otherwise",
+  "section_break_fmhsg",
+  "special_instructions",
+  "section_break_4lahc",
+  "bill_of_lading_details",
+  "section_break_hz23e",
+  "total_weight",
+  "column_break_dflyg",
+  "total_cartons",
+  "column_break_8mpar",
+  "pallet_quantity",
+  "section_break_bipd9",
+  "declared_total_value",
+  "column_break_oyzp3",
+  "declared_total_value_by",
+  "section_break_na6d5",
+  "cod_amount",
+  "column_break_55vyx",
+  "fee_terms",
+  "column_break_lfstc",
+  "trailer_loaded",
+  "column_break_76s7s",
+  "freight_counted",
+  "naming_series"
+ ],
+ "fields": [
+  {
+   "fetch_from": "ref.set_warehouse",
+   "fieldname": "ship_from",
+   "fieldtype": "Link",
+   "label": "Ship From",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "ref",
+   "fieldtype": "Link",
+   "label": "REF#",
+   "options": "Delivery Note"
+  },
+  {
+   "fetch_from": "ref.shipping_address",
+   "fieldname": "ship_to",
+   "fieldtype": "Small Text",
+   "label": "Ship To"
+  },
+  {
+   "fetch_from": "ref.po_no",
+   "fieldname": "cid",
+   "fieldtype": "Small Text",
+   "label": "CID"
+  },
+  {
+   "fieldname": "third_party_freight_charges_bill_to",
+   "fieldtype": "Data",
+   "label": "Third Party Freight Charges Bill To"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "bill_of_lading_no",
+   "fieldtype": "Barcode",
+   "hidden": 1,
+   "label": "Bill of Lading No"
+  },
+  {
+   "fieldname": "column_break_vxqkv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "carrier_name",
+   "fieldtype": "Data",
+   "label": "Carrier Name"
+  },
+  {
+   "fieldname": "pro_no",
+   "fieldtype": "Barcode",
+   "hidden": 1,
+   "label": "Pro No"
+  },
+  {
+   "default": "--Select--",
+   "fieldname": "freight_charge_terms_prepaid_unless_marked_otherwise",
+   "fieldtype": "Select",
+   "label": "Freight Charge Terms (prepaid unless marked otherwise)",
+   "options": "--Select--\nPrepaid\nCollect\n3rd Party"
+  },
+  {
+   "fieldname": "section_break_fmhsg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "special_instructions",
+   "fieldtype": "Small Text",
+   "label": "Special Instructions"
+  },
+  {
+   "fieldname": "section_break_4lahc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "bill_of_lading_details",
+   "fieldtype": "Table",
+   "label": "Bill Of Lading Details",
+   "options": "Bill Of Lading Detail JI"
+  },
+  {
+   "default": "0",
+   "fieldname": "fob",
+   "fieldtype": "Check",
+   "label": "FOB"
+  },
+  {
+   "fieldname": "section_break_hz23e",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_weight",
+   "fieldtype": "Float",
+   "label": "Total Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_dflyg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_cartons",
+   "fieldtype": "Float",
+   "label": "Total Cartons",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_8mpar",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pallet_quantity",
+   "fieldtype": "Float",
+   "label": "Pallet Quantity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_bipd9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "declared_total_value",
+   "fieldtype": "Currency",
+   "label": "Declared Total Value"
+  },
+  {
+   "fieldname": "column_break_oyzp3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "declared_total_value_by",
+   "fieldtype": "Data",
+   "label": "Declared Total Value By"
+  },
+  {
+   "fieldname": "section_break_na6d5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cod_amount",
+   "fieldtype": "Currency",
+   "label": "COD Amount"
+  },
+  {
+   "fieldname": "column_break_55vyx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fee_terms",
+   "fieldtype": "Select",
+   "label": "Fee Terms",
+   "options": "Collect\nPrepaid\nCustomer Check Acceptable"
+  },
+  {
+   "fieldname": "column_break_lfstc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "trailer_loaded",
+   "fieldtype": "Select",
+   "label": "Trailer Loaded",
+   "options": "By Shipper\nBy Driver"
+  },
+  {
+   "fieldname": "column_break_76s7s",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "freight_counted",
+   "fieldtype": "Select",
+   "label": "Freight Counted",
+   "options": "By Shipper\nBy Driver/pallets said to contain\nBy Driver/Pieces"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "BOL-.MM.-.DD.-.YYYY.-.##"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-07-05 23:24:03.498958",
+ "modified_by": "Administrator",
+ "module": "Jammy_app",
+ "name": "Bill Of Lading JI",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
