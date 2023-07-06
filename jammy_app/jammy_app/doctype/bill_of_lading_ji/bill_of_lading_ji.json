@@ -10,16 +10,18 @@
  "field_order": [
   "ship_from",
   "ref",
-  "fob",
+  "shipping_address_name",
   "ship_to",
   "cid",
+  "fob",
   "third_party_freight_charges_bill_to",
   "column_break_vxqkv",
+  "type_of_bol",
   "date",
   "bill_of_lading_no",
   "carrier_name",
   "pro_no",
-  "freight_charge_terms_prepaid_unless_marked_otherwise",
+  "freight_charge_terms",
   "section_break_fmhsg",
   "special_instructions",
   "section_break_4lahc",
@@ -72,7 +74,7 @@
   },
   {
    "fieldname": "third_party_freight_charges_bill_to",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "Third Party Freight Charges Bill To"
   },
   {
@@ -81,8 +83,9 @@
    "label": "Date"
   },
   {
+   "default": "{name}",
    "fieldname": "bill_of_lading_no",
-   "fieldtype": "Barcode",
+   "fieldtype": "Small Text",
    "hidden": 1,
    "label": "Bill of Lading No"
   },
@@ -97,16 +100,9 @@
   },
   {
    "fieldname": "pro_no",
-   "fieldtype": "Barcode",
+   "fieldtype": "Small Text",
    "hidden": 1,
    "label": "Pro No"
-  },
-  {
-   "default": "--Select--",
-   "fieldname": "freight_charge_terms_prepaid_unless_marked_otherwise",
-   "fieldtype": "Select",
-   "label": "Freight Charge Terms (prepaid unless marked otherwise)",
-   "options": "--Select--\nPrepaid\nCollect\n3rd Party"
   },
   {
    "fieldname": "section_break_fmhsg",
@@ -141,6 +137,7 @@
    "fieldname": "total_weight",
    "fieldtype": "Float",
    "label": "Total Weight",
+   "precision": "2",
    "read_only": 1
   },
   {
@@ -151,6 +148,7 @@
    "fieldname": "total_cartons",
    "fieldtype": "Float",
    "label": "Total Cartons",
+   "precision": "2",
    "read_only": 1
   },
   {
@@ -161,6 +159,7 @@
    "fieldname": "pallet_quantity",
    "fieldtype": "Float",
    "label": "Pallet Quantity",
+   "precision": "2",
    "read_only": 1
   },
   {
@@ -226,11 +225,31 @@
    "hidden": 1,
    "label": "Naming Series",
    "options": "BOL-.MM.-.DD.-.YYYY.-.##"
+  },
+  {
+   "fieldname": "type_of_bol",
+   "fieldtype": "Select",
+   "label": "Type Of BOL",
+   "options": "\nDirect DN Item info\nOne line BOL item\nNormal BOL(aggregate by item group)",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "shipping_address_name",
+   "fieldtype": "Link",
+   "label": "Shipping Address",
+   "options": "Address"
+  },
+  {
+   "default": "Prepaid",
+   "fieldname": "freight_charge_terms",
+   "fieldtype": "Select",
+   "label": "Freight Charge Terms (prepaid unless marked otherwise)",
+   "options": "Prepaid\nCollect\n3rd Party"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-05 23:24:03.498958",
+ "modified": "2023-07-06 04:04:33.368833",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Bill Of Lading JI",

@@ -25,30 +25,41 @@
  ],
  "fields": [
   {
+   "default": "20",
    "fieldname": "pallet_for_total_cartons",
    "fieldtype": "Int",
-   "label": "Pallet for Total Cartons"
+   "in_list_view": 1,
+   "label": "No. Of  Total Cartons On Single Pallet",
+   "reqd": 1
   },
   {
+   "default": "35",
    "fieldname": "weight_of_one_pallet",
    "fieldtype": "Data",
-   "label": "Weight of One Pallet (LBS)"
+   "in_list_view": 1,
+   "label": "Weight of One Pallet (LBS)",
+   "reqd": 1
   },
   {
    "fieldname": "one_line_bol_item_description",
    "fieldtype": "Data",
-   "label": "One Line BOL Item Description"
+   "in_list_view": 1,
+   "label": "One Line BOL Item: Description",
+   "reqd": 1
   },
   {
    "fieldname": "one_line_bol_item_nmfc",
    "fieldtype": "Int",
-   "label": "One Line BOL Item NMFC#"
+   "in_list_view": 1,
+   "label": "One Line BOL Item : NMFC#",
+   "reqd": 1
   },
   {
    "fieldname": "one_line_bol_item_freight_class",
    "fieldtype": "Link",
-   "label": "One Line BOL Item Freight Class",
-   "options": "Freight Class JI"
+   "label": "One Line BOL Item: Freight Class",
+   "options": "Freight Class JI",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_a6j8o",
@@ -57,7 +68,7 @@
   {
    "fieldname": "one_line_bol_item",
    "fieldtype": "Heading",
-   "label": "One Line BOL Item"
+   "label": "One Line BOL Item Details"
   },
   {
    "fieldname": "bol_print_clauses_section_section",
@@ -65,31 +76,37 @@
    "label": "BOL Print Clauses Section"
   },
   {
+   "default": "Where the rate is dependent on value, shippers are required to state specifically in writing\nthe agreed or declared value of the property as follows:\n\"The agreed or declared value of the property is specifically stated by the shipper to be not\nexceeding",
    "fieldname": "declared_value_of_shipped_property",
    "fieldtype": "Small Text",
    "label": "Declared Value of Shipped Property"
   },
   {
+   "default": "NOTE: Liability Limitation for loss or damage in this shipment may be applicable. See 49 U.S.C. - 14706(c)(1)(A) and (B).",
    "fieldname": "liability_limitation_clause",
    "fieldtype": "Small Text",
    "label": "Liability Limitation Clause"
   },
   {
+   "default": "RECEIVED, subject to individually determined rates or contracts that have been agreed\nupon in writing between the carrier and shipper, if applicable, otherwise to the rates,\nclassifications and rules that have been established by the carrier and are available to the\nshipper, on request, and to all applicable state and federal regulations.",
    "fieldname": "received_terms",
    "fieldtype": "Small Text",
    "label": "Received Terms"
   },
   {
+   "default": "The carrier shall not make delivery of this shipment without payment of freight and all other\nlawful charges.",
    "fieldname": "carrier_get_payment_caluse",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "Carrier Get Payment Caluse"
   },
   {
+   "default": "This is to certify that the above named materials are properly classified, packaged, marked and labeled, and are in proper condition for transportation according to the applicable regulations of the DOT.",
    "fieldname": "dot_regulation_clause",
    "fieldtype": "Small Text",
-   "label": "Dot Regulation Clause"
+   "label": "DOT Regulation Clause"
   },
   {
+   "default": "Carrier acknowledges receipt of packages and required placards. Carrier certifies emergency response information was made available and/or carrier has the DOT emergency response guidebook or equivalent documentation in the vehicle. Property described above is\nreceived in good order, except as noted.",
    "fieldname": "carrier_acknowledgment_receipt",
    "fieldtype": "Small Text",
    "label": "Carrier Acknowledgment Receipt"
@@ -102,7 +119,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-07-06 00:51:03.702922",
+ "modified": "2023-07-06 02:54:14.571119",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Bill Of Lading Settings JI",

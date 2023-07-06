@@ -94,30 +94,44 @@ var set_total_weight = function(frm) {
 }
 
 frappe.ui.form.on("Delivery Note", {
-	onload_post_render: function(frm) {
+	onload_post_render: function (frm) {
 		frm.add_custom_button(
-			"Create BOL",function() {
-				
-				frappe.call({
-					method: "jammy_app.jammy_app.custom_jammy.delivery_note.delivery_note.create_bol",
-					args: {
-						'doctype': 'Delivery Note',
-						'docname': frm.doc.name,
-						// 'type_of_bol':"direct_item_info",
-						// 'type_of_bol':"one_line_bol",
-						// 'type_of_bol':"normal_bol"
-					},
-					callback: function(r) {
-						if (!r.exc) {
-                           
-                            frappe.msgprint('Bill of Lading created successfully.');
-							
-                        }
-					},
-					success: function(r) {},
-					url: "" || frappe.request.url,
+			"Bill Of Lading",
+			function () {
+				let dialog = new frappe.ui.Dialog({
+					title: 'Choose Type of BOL',
+					fields: [{
+						label: 'Choose Type of BOL',
+						fieldname: 'radio_button_container',
+						fieldtype: 'HTML',
+						options: `<fieldset><div><input type="radio" id="direct_item_info" name="type_of_bol" value="direct_item_info" checked><label for="direct_item_info">Direct DN Item info</label></div><div><input type="radio" id="one_line_bol" name="type_of_bol" value="one_line_bol"><label for="one_line_bol">One line BOL item</label></div><div><input type="radio" id="normal_bol" name="type_of_bol" value="normal_bol"><label for="normal_bol">Normal BOL(aggregate by item group)</label></div></fieldset>`
+					}, ],
+					size: 'small',
+					primary_action_label: 'Create BOL',
+					primary_action(values) {
+						let type_of_bol = $('input[name="type_of_bol"]:checked').val();
+						console.log(type_of_bol)
+						dialog.fields_dict.radio_button_container.$wrapper.empty();
+						dialog.hide();
+						frappe.call({
+							method: "jammy_app.jammy_app.custom_jammy.delivery_note.delivery_note.create_bol",
+							args: {
+								'doctype': 'Delivery Note',
+								'docname': frm.doc.name,
+								'type_of_bol': type_of_bol,
+							},
+							callback: function (r) {
+								if (!r.exc) {
+									frappe.msgprint('Bill of Lading created successfully.');
+								}
+							},
+							success: function (r) {},
+							url: "" || frappe.request.url,
+						});
+					}
 				});
-			},"Create");
+				dialog.show();
+			}, "Create");
 	}
 })
 

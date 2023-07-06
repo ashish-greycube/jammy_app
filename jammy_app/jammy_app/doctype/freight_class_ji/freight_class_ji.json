@@ -12,15 +12,18 @@
  ],
  "fields": [
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "freight_class",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Freight Class",
+   "reqd": 1,
    "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-05 02:58:46.687708",
+ "modified": "2023-07-06 02:54:55.666718",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Freight Class JI",

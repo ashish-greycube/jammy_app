@@ -1,7 +1,8 @@
 {
  "charts": [],
- "content": "[{\"id\":\"rAuIJMyJyA\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"lss3i4WOM8\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Reports &amp; Masters</span>\",\"col\":12}},{\"id\":\"zzLYnZDC6a\",\"type\":\"card\",\"data\":{\"card_name\":\"Jammy\",\"col\":4}}]",
+ "content": "[{\"id\":\"rAuIJMyJyA\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"lss3i4WOM8\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Reports &amp; Masters</span>\",\"col\":12}},{\"id\":\"zzLYnZDC6a\",\"type\":\"card\",\"data\":{\"card_name\":\"Jammy\",\"col\":4}},{\"id\":\"QSB7Sc7Yh9\",\"type\":\"card\",\"data\":{\"card_name\":\"Bill Of Lading\",\"col\":4}}]",
  "creation": "2023-04-12 00:46:02.570032",
+ "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
  "for_user": "",
@@ -48,9 +49,57 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bill Of Lading",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bill Of Lading",
+   "link_count": 0,
+   "link_to": "Bill Of Lading JI",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Delivery Note",
+   "link_count": 0,
+   "link_to": "Delivery Note",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bill Of Lading Settings",
+   "link_count": 0,
+   "link_to": "Bill Of Lading Settings JI",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Freight Class",
+   "link_count": 0,
+   "link_to": "Freight Class JI",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2023-06-22 17:59:27.251354",
+ "modified": "2023-07-06 02:44:27.385454",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Jammy",
