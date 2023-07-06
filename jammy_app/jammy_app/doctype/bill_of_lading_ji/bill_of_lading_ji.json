@@ -178,7 +178,7 @@
   {
    "fieldname": "declared_total_value_by",
    "fieldtype": "Data",
-   "label": "Declared Total Value By"
+   "label": "Declared Total Value By(FOB)"
   },
   {
    "fieldname": "section_break_na6d5",
@@ -249,7 +249,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-06 04:04:33.368833",
+ "modified": "2023-07-06 04:44:32.356551",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Bill Of Lading JI",

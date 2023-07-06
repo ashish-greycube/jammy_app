@@ -15,46 +15,53 @@
  ],
  "fields": [
   {
+   "columns": 4,
    "fieldname": "description",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Description"
   },
   {
+   "columns": 1,
    "fieldname": "weight",
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Weight"
   },
   {
+   "columns": 1,
    "fieldname": "packing_units",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Packing Units"
   },
   {
+   "columns": 2,
    "fieldname": "additional_shipper_info",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Additional Shipper Info"
   },
   {
+   "columns": 1,
    "fieldname": "nmfc",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "NMFC#"
   },
   {
+   "columns": 1,
    "fieldname": "freight_class",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Freight Class"
+   "label": "Freight Class",
+   "options": "Freight Class JI"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-07-04 01:46:43.419850",
+ "modified": "2023-07-06 04:42:49.978641",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Bill Of Lading Detail JI",

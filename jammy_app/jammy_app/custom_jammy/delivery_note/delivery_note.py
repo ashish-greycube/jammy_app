@@ -79,43 +79,28 @@ def create_bol(doctype,docname,type_of_bol):
 
 	elif(type_of_bol=="normal_bol"):
 		bill_of_lading.type_of_bol='Normal BOL(aggregate by item group)'
-		# def key_func(k):
-		# 	return k['item_group']
-		
-		# sort INFO data by 'company' key.
-		# delivery_note_items = sorted(delivery_note.items, key=key_func)
 		bol_rows=[]
 		for item in delivery_note.items:
 			if not any(d['description'] == item.item_group for  d in bol_rows):
-			print(row)
-		
-		# for key, value in groupby(delivery_note_items, key_func):
-		# 	print(key, value)
-		# 	weight=0
-		# 	packing_units=0
-		# 	description=key
-		# 	for row in value:
-		# 		print(row)
-		# 		weight=weight+row.gross_weight
-		# 		packing_units=packing_units+row.cartons
-		# 		total_cartons=total_cartons+weight
-		# 		total_weight=total_weight+packing_units
-
-
-
-		# row = bill_of_lading.append('bill_of_lading_details',{
-		# 		"description":one_line_bol_item_description,
-		# 		"weight": aggregated_weight,
-		# 		"packing_units": aggregated_cartons,
-		# 		"nmfc": one_line_bol_item_nmfc,
-		# 		"freight_class":one_line_bol_item_freight_class,
-		# 	})
-
+				nmfc_cf = frappe.get_value('Item Group', item.item_group, 'nmfc_cf')
+				freight_class_cf = frappe.get_value('Item Group',item.item_group, 'freight_class_cf')	
+				total_weight=total_weight+item.gross_weight		
+				total_cartons=total_cartons+item.cartons
+				bol_rows.append({'description':item.item_group,'weight':item.gross_weight,'packing_units':item.cartons,'nmfc':nmfc_cf,'freight_class':freight_class_cf})
+			else:
+				for d in bol_rows:
+					if d['description'] ==item.item_group:
+						d['weight']=d['weight']+item.gross_weight
+						d['packing_units']=d['packing_units']+item.cartons
+						total_weight=total_weight+item.gross_weight		
+						total_cartons=total_cartons+item.cartons						
+						break
+		for row in bol_rows:
+			bill_of_lading.append('bill_of_lading_details',row)
 
 	bill_of_lading.total_cartons = total_cartons
 	bill_of_lading.pallet_quantity = total_cartons % pallet_for_total_carton
 	bill_of_lading.total_weight = total_weight+(35 * bill_of_lading.pallet_quantity)
-
-	# bill_of_lading.save(ignore_permissions=True)
-	# msg = ('Bill Of Lading {} is created'.format(frappe.bold(get_link_to_form('Bill Of Lading JI', bill_of_lading.name))))
-	# frappe.msgprint(msg)
+	bill_of_lading.save(ignore_permissions=True)
+	msg = ('Bill Of Lading {} is created'.format(frappe.bold(get_link_to_form('Bill Of Lading JI', bill_of_lading.name))))
+	frappe.msgprint(msg)

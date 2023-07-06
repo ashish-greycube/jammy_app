@@ -94,7 +94,7 @@ var set_total_weight = function(frm) {
 }
 
 frappe.ui.form.on("Delivery Note", {
-	onload_post_render: function (frm) {
+	refresh: function (frm) {
 		frm.add_custom_button(
 			"Bill Of Lading",
 			function () {
