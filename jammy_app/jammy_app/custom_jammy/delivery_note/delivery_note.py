@@ -98,7 +98,10 @@ def create_bol(doctype,docname,type_of_bol):
 			bill_of_lading.append('bill_of_lading_details',row)
 
 	bill_of_lading.total_cartons = total_cartons
-	bill_of_lading.pallet_quantity = total_cartons % pallet_for_total_carton
+	if pallet_for_total_carton and pallet_for_total_carton!=0:
+		bill_of_lading.pallet_quantity = total_cartons % pallet_for_total_carton
+	else:
+		bill_of_lading.pallet_quantity =0
 	bill_of_lading.total_weight = total_weight+(35 * bill_of_lading.pallet_quantity)
 	bill_of_lading.save(ignore_permissions=True)
 	msg = ('Bill Of Lading {} is created'.format(frappe.bold(get_link_to_form('Bill Of Lading JI', bill_of_lading.name))))
