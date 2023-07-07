@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 from frappe.model.document import Document
 import frappe
 from frappe import utils
-# from frappe.utils import get_datetime, nowdate
 from frappe.utils.data import getdate, nowdate
 from frappe.utils import get_link_to_form,flt
 from six import string_types
