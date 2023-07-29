@@ -9,6 +9,7 @@
  "engine": "InnoDB",
  "field_order": [
   "ship_from",
+  "ship_from_address",
   "ref",
   "shipping_address_name",
   "ship_to",
@@ -245,11 +246,16 @@
    "fieldtype": "Select",
    "label": "Freight Charge Terms (prepaid unless marked otherwise)",
    "options": "Prepaid\nCollect\n3rd Party"
+  },
+  {
+   "fieldname": "ship_from_address",
+   "fieldtype": "Read Only",
+   "label": "Ship From Address"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-06 04:44:32.356551",
+ "modified": "2023-07-29 00:59:15.029076",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Bill Of Lading JI",

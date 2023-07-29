@@ -3,9 +3,14 @@
 
 import frappe
 from frappe.model.document import Document
+from frappe.contacts.doctype.address.address import get_address_display
 
 class BillOfLadingJI(Document):
     def validate(self):
+        ship_from_address_title=frappe.db.get_value('Address', self.get('ship_from'), 'address_title')
+        self.ship_from_address=ship_from_address_title+'<br>'+get_address_display(self.get('ship_from'))
+        ship_to_title = frappe.db.get_value('Address', self.get('shipping_address_name'), 'address_title')
+        self.ship_to=ship_to_title+'<br>'+get_address_display(self.get('shipping_address_name'))
         total_weight = 0
         total_cartons = 0
         pallet_for_total_carton = frappe.db.get_single_value('Bill Of Lading Settings JI', 'pallet_for_total_cartons')
