@@ -7,8 +7,16 @@ from frappe.contacts.doctype.address.address import get_address_display
 
 class BillOfLadingJI(Document):
     def validate(self):
-        ship_from_address_title=frappe.db.get_value('Address', self.get('ship_from'), 'address_title')
-        self.ship_from_address=ship_from_address_title+'<br>'+get_address_display(self.get('ship_from'))
+        
+        ship_from_address_name=frappe.db.get_list('Dynamic Link', filters={'link_doctype': ['=', 'Warehouse'],'link_name': ['=', self.get('ship_from') ]},fields=['parent'])
+        if len(ship_from_address_name)>0:
+            ship_from_address_name=ship_from_address_name[0].parent
+            ship_from_address_title=frappe.db.get_value('Address',ship_from_address_name, 'address_title')
+            if ship_from_address_title:
+                self.ship_from_address=ship_from_address_title+'<br>'+get_address_display(self.get('ship_from'))
+        else:
+            self.ship_from_address=get_address_display(self.get('ship_from'))
+
         ship_to_title = frappe.db.get_value('Address', self.get('shipping_address_name'), 'address_title')
         self.ship_to=ship_to_title+'<br>'+get_address_display(self.get('shipping_address_name'))
         total_weight = 0
