@@ -13,7 +13,7 @@ class BillOfLadingJI(Document):
             ship_from_address_name=ship_from_address_name[0].parent
             ship_from_address_title=frappe.db.get_value('Address',ship_from_address_name, 'address_title')
             if ship_from_address_title:
-                self.ship_from_address=ship_from_address_title+'<br>'+get_address_display(self.get('ship_from'))
+                self.ship_from_address=ship_from_address_title+'<br>'+get_address_display(ship_from_address_name)
         else:
             self.ship_from_address=get_address_display(self.get('ship_from'))
 
