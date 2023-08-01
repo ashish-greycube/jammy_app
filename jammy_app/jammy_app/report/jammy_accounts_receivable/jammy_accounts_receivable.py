@@ -756,7 +756,7 @@ class JammyReceivablePayableReport(object):
 		lft, rgt = frappe.db.get_value("Cost Center", self.filters.cost_center, ["lft", "rgt"])
 		cost_center_list = [
 			center.name
-			for center in frappe.get_all("Cost Center", filters={"lft": (">=", lft), "rgt": ("<=", rgt)})
+			for center in frappe.db.get_list("Cost Center", filters={"lft": (">=", lft), "rgt": ("<=", rgt)})
 		]
 		print('cost_center_list'*10,cost_center_list)
 		self.qb_selection_filter.append(self.ple.cost_center.isin(cost_center_list))
