@@ -1,5 +1,5 @@
 import frappe
-from frappe.utils import now
+from frappe.utils import now, cint
 import json
 
 
@@ -8,6 +8,11 @@ def shipment(**args):
     """Post to /api/method/jammy_app.shipping_easy.shipment
     https://shippingeasy.readme.io/reference/shipment-notification-callback
     """
+    if not cint(
+        frappe.db.get_single_value("Jammy Settings", "enable_shipment_callback")
+    ):
+        return
+
     # TODO: authorize and validate payload with secret_key
     if "cmd" in args:
         args.pop("cmd")

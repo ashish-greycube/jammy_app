@@ -8,6 +8,7 @@
   "report_manager",
   "date_time_for_customer_statement",
   "sipping_easy_section",
+  "enable_shipment_callback",
   "shipping_easy_api_key",
   "shipping_easy_api_secret",
   "shipping_easy_api_endpoint",
@@ -49,11 +50,17 @@
    "fieldname": "shipping_easy_store_api_key",
    "fieldtype": "Data",
    "label": "Shipping Easy Store API Key"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_shipment_callback",
+   "fieldtype": "Check",
+   "label": "Enable Shipment Callback"
   }
  ],
  "issingle": 1,
  "links": [],
- "modified": "2023-08-08 09:16:05.271289",
+ "modified": "2023-08-10 03:07:41.812223",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Jammy Settings",
