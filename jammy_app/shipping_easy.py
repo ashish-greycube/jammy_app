@@ -5,7 +5,9 @@ import json
 
 @frappe.whitelist(allow_guest=True)
 def shipment(**args):
-    """Post to /api/method/jammy_app.shipping_easy.shipment
+    """
+    Not used currently as it works only for orders created through api (not amazon store orders)
+    Post to /api/method/jammy_app.shipping_easy.shipment
     https://shippingeasy.readme.io/reference/shipment-notification-callback
     """
     if not cint(
