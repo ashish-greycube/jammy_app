@@ -7,6 +7,10 @@
  "field_order": [
   "report_manager",
   "date_time_for_customer_statement",
+  "amazon_settings_section",
+  "default_currency",
+  "default_amazon_customer",
+  "default_amazon_warehouse",
   "sipping_easy_section",
   "enable_shipment_callback",
   "shipping_easy_api_key",
@@ -44,7 +48,7 @@
   {
    "fieldname": "sipping_easy_section",
    "fieldtype": "Section Break",
-   "label": "Sipping Easy"
+   "label": "Shipping Easy"
   },
   {
    "fieldname": "shipping_easy_store_api_key",
@@ -56,11 +60,40 @@
    "fieldname": "enable_shipment_callback",
    "fieldtype": "Check",
    "label": "Enable Shipment Callback"
+  },
+  {
+   "fieldname": "amazon_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Amazon Settings"
+  },
+  {
+   "fieldname": "default_amazon_customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Default Amazon Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "default_currency",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Default Currency",
+   "options": "Currency",
+   "reqd": 1
+  },
+  {
+   "fieldname": "default_amazon_warehouse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Default Amazon Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
   }
  ],
  "issingle": 1,
  "links": [],
- "modified": "2023-08-10 03:07:41.812223",
+ "modified": "2023-08-11 23:36:38.583891",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Jammy Settings",
