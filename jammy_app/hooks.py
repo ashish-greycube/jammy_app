@@ -30,8 +30,7 @@ app_include_js = ["jammy_app.bundle.js"]
 
 # include js in doctype views
 doctype_js = {
-"customer_statement" : "jammy_app.jammy_app.doctype.customer_statement.customer_statement.js"
-
+    "customer_statement": "jammy_app.jammy_app.doctype.customer_statement.customer_statement.js"
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -45,7 +44,7 @@ doctype_js = {
 
 # website user home page (by Role)frappe.db.get_value('Purchase Receipt Item', { name: row.purchase_receipt_item },'batch_no', function(data){
 # role_home_page = {
-#	"Role": "home_page"
+# 	"Role": "home_page"
 # }
 
 # Website user home page (by function)
@@ -61,7 +60,7 @@ doctype_js = {
 # ------------
 
 # before_install = "jammy_app.install.before_install"
-# after_install = "jammy_app.install.after_install"
+after_migrate = "jammy_app.migrate.after_migrate"
 
 # Desk Notifications
 # ------------------
@@ -86,64 +85,64 @@ doctype_js = {
 # Hook on document methods and events
 
 doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-#	}
-   "Quotation" :{
-		"validate" : "jammy_app.jammy_app.custom_jammy.quotation.quotation.validate"
-	},
-	"Sales Order" :{
-		"validate" : "jammy_app.jammy_app.custom_jammy.sales_order.sales_order.validate"
-	},
-	"Sales Invoice" :{
-		"validate" : "jammy_app.jammy_app.custom_jammy.sales_invoice.sales_invoice.validate"
-	},
-	"Delivery Note" :{
-		"validate" : "jammy_app.jammy_app.custom_jammy.delivery_note.delivery_note.validate"
-	},
-	"Packing Slip" :{
-		"validate" : "jammy_app.jammy_app.custom_jammy.packing_slip.packing_slip.validate"
-	}
+    # 	"*": {
+    # 		"on_update": "method",
+    # 		"on_cancel": "method",
+    # 		"on_trash": "method"
+    # 	}
+    "Quotation": {
+        "validate": "jammy_app.jammy_app.custom_jammy.quotation.quotation.validate"
+    },
+    "Sales Order": {
+        "validate": "jammy_app.jammy_app.custom_jammy.sales_order.sales_order.validate"
+    },
+    "Sales Invoice": {
+        "validate": "jammy_app.jammy_app.custom_jammy.sales_invoice.sales_invoice.validate"
+    },
+    "Delivery Note": {
+        "validate": "jammy_app.jammy_app.custom_jammy.delivery_note.delivery_note.validate"
+    },
+    "Packing Slip": {
+        "validate": "jammy_app.jammy_app.custom_jammy.packing_slip.packing_slip.validate"
+    },
 }
 
 doctype_js = {
-    "Customer":"jammy_app/custom_jammy/customer/customer.js",
-    "Packing Slip" : "jammy_app/custom_jammy/packing_slip/packing_slip.js",
-	"Quotation": "jammy_app/custom_jammy/quotation/quotation.js",
-	"Purchase Invoice":"jammy_app/custom_jammy/purchase_invoice/purchase_invoice.js",
-	"Purchase Receipt":"jammy_app/custom_jammy/purchase_receipt/purchase_receipt.js",
-	"Sales Order": "jammy_app/custom_jammy/sales_order/sales_order.js",
-	"Sales Invoice": "jammy_app/custom_jammy/sales_invoice/sales_invoice.js",
-	"Terms and Conditions": "jammy_app/custom_jammy/terms_and_conditions/terms_and_conditions.js",
-	"Delivery Note" : "jammy_app/custom_jammy/delivery_note/delivery_note.js",
+    "Customer": "jammy_app/custom_jammy/customer/customer.js",
+    "Packing Slip": "jammy_app/custom_jammy/packing_slip/packing_slip.js",
+    "Quotation": "jammy_app/custom_jammy/quotation/quotation.js",
+    "Purchase Invoice": "jammy_app/custom_jammy/purchase_invoice/purchase_invoice.js",
+    "Purchase Receipt": "jammy_app/custom_jammy/purchase_receipt/purchase_receipt.js",
+    "Sales Order": "jammy_app/custom_jammy/sales_order/sales_order.js",
+    "Sales Invoice": "jammy_app/custom_jammy/sales_invoice/sales_invoice.js",
+    "Terms and Conditions": "jammy_app/custom_jammy/terms_and_conditions/terms_and_conditions.js",
+    "Delivery Note": "jammy_app/custom_jammy/delivery_note/delivery_note.js",
     # "Journal Entry": "jammy_app/custom_jammy/journal_entry.js",
-	"Pricing Rule": "jammy_app/custom_jammy/pricing_rule.js",
+    "Pricing Rule": "jammy_app/custom_jammy/pricing_rule.js",
     "Payment Entry": "jammy_app/custom_jammy/payment_entry.js",
     "Stock Entry": "jammy_app/custom_jammy/stock_entry.js",
-    "Purchase Order": "jammy_app/custom_jammy/purchase_order.js"
+    "Purchase Order": "jammy_app/custom_jammy/purchase_order.js",
 }
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"jammy_app.tasks.all"
-# 	],
-# 	"daily": [
-# 		"jammy_app.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"jammy_app.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"jammy_app.tasks.weekly"
-# 	]
-# 	"monthly": [
-# 		"jammy_app.tasks.monthly"
-# 	]
-# }
+scheduler_events = {
+    # 	"all": [
+    # 		"jammy_app.tasks.all"
+    # 	],
+    "daily": [
+        "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.notify_errors"
+    ],
+    # 	"hourly": [
+    # 		"jammy_app.tasks.hourly"
+    # 	],
+    # 	"weekly": [
+    # 		"jammy_app.tasks.weekly"
+    # 	]
+    # 	"monthly": [
+    # 		"jammy_app.tasks.monthly"
+    # 	]
+}
 
 # Testing
 # -------
@@ -156,4 +155,3 @@ doctype_js = {
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "jammy_app.event.get_events"
 # }
-

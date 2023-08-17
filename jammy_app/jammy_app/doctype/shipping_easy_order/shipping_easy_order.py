@@ -3,15 +3,15 @@
 
 import frappe
 from frappe.model.document import Document
-from frappe.utils import now, get_datetime_str, add_days, today, get_datetime
+from frappe.utils import now, flt, add_days, today, cint
 import time
 import hmac
 import hashlib
 import requests
 import json
-
-from erpnext import get_default_company
+from erpnext import get_default_company, get_company_currency
 from frappe.utils import nowtime
+from erpnext.stock.doctype.batch.batch import UnableToSelectBatchError
 
 
 class ShippingEasyOrder(Document):
@@ -26,35 +26,75 @@ class ShippingEasyOrder(Document):
         si = frappe.new_doc("Sales Invoice")
         args = frappe._dict(json.loads(self.json_data))
         si.set_posting_time = 1
-        si.posting_date = args["ordered_at"][:10]
+        si.posting_date = args["shipments"][0]["ship_date"]
         si.posting_time = nowtime()
+        si.po_no = args["external_order_identifier"]
+        si.po_date = args["ordered_at"][:10]
+        si.tracking_number = args["shipments"][0]["tracking_number"]
+        si.ship_via = args["shipments"][0]["carrier_key"]
+
+        si.email_option = "NO"
+        si.credit_card_fee = "NO"
 
         si.company = get_default_company()
         si.customer = settings.default_amazon_customer
-        # si.debit_to = args.debit_to or "Debtors - _TC"
         si.update_stock = 1
-        si.currency = settings.default_currency
         si.conversion_rate = args.conversion_rate or 1
+        si.currency = frappe.db.get_value(
+            "Customer", si.customer, "default_currency"
+        ) or get_company_currency(si.company)
 
         # si.is_return = args.is_return
         # si.return_against = args.return_against
+        # si.debit_to = args.debit_to or "Debtors - _TC"
         # si.cost_center = args.cost_center or "_Test Cost Center - _TC"
 
         for d in args["recipients"][0]["line_items"]:
+            item_code = get_mapped_item(d["sku"])
+            item_defaults = frappe.db.get_value(
+                "Item Default",
+                {"parent": item_code},
+                ["income_account", "expense_account"],
+                as_dict=True,
+            )
             si.append(
                 "items",
                 {
-                    "item_code": get_mapped_item(d["sku"]),
+                    "item_code": item_code,
                     "warehouse": settings.default_amazon_warehouse,
                     "qty": d["quantity"],
                     "rate": d["unit_price"],
-                    # "batch"
-                    # "income_account": "Sales - _TC",
-                    # "expense_account": "Cost of Goods Sold - _TC",
+                    "income_account": item_defaults and item_defaults.income_account,
+                    "expense_account": item_defaults and item_defaults.expense_account
                     # "cost_center": args.cost_center or "_Test Cost Center - _TC",
                 },
             )
-        si.insert()
+        total_tax = args["total_tax"]
+        if flt(total_tax):
+            tax = {
+                "charge_type": "Actual",
+                "account_head": settings.taxes_account_head,
+                "tax_amount": total_tax,
+                "description": settings.taxes_account_head,
+            }
+            si.append("taxes", tax)
+        try:
+            si.insert()
+            si.submit()
+        except UnableToSelectBatchError:
+            si.update_stock = 0
+            si.insert()
+            self.db_set("status", "Error")
+        except Exception as ex:
+            frappe.log_error(
+                title="Sales Invoice from Shipping Easy Order failed.",
+                message=frappe.get_traceback(),
+                reference_doctype=self.doctype,
+                reference_name=self.name,
+            )
+            self.db_set("status", "Error")
+
+        self.db_set("status", "Processed")
 
 
 def get_mapped_item(sku):
@@ -65,16 +105,23 @@ def get_mapped_item(sku):
 def sync_orders(from_date=None):
     se_orders = fetch_orders(from_date)
     for d in json.loads(se_orders)["orders"]:
-        doc = frappe.get_doc(
-            {
-                "doctype": "Shipping Easy Order",
-                "order_id": d["id"],
-                "external_order_identifier": d["external_order_identifier"],
-                "json_data": json.dumps(d),
-                "fetched_on": now(),
-                "status": "Pending",
-            }
-        ).insert(ignore_permissions=True)
+        uid = hashlib.sha256(json.dumps(d).encode("utf-8")).hexdigest()
+        try:
+            doc = frappe.get_doc(
+                {
+                    "doctype": "Shipping Easy Order",
+                    "order_id": d["id"],
+                    "external_order_identifier": d["external_order_identifier"],
+                    "json_data": json.dumps(d),
+                    "fetched_on": now(),
+                    "status": "Pending",
+                    "uid": uid,
+                }
+            ).insert(ignore_permissions=True)
+        except frappe.exceptions.UniqueValidationError as ex:
+            print("skiping uniq:", d["external_order_identifier"])
+            pass
+
     frappe.db.commit()
 
 
@@ -123,3 +170,14 @@ def generate_signature(hmac_secret, method, path, params):
 
     hm = hmac.new(hmac_secret, signing_string.encode("utf-8"), hashlib.sha256)
     return hm.hexdigest()
+
+
+def notify_errors():
+    """Cron. Runs Daily to notify of Error status Orders."""
+    orders = frappe.get_all("Shipping Easy Order", {"status": "Error"})
+    if orders:
+        if frappe.get_value("Notification", "Shipping Easy Failure Notification"):
+            doc = frappe.get_doc("Shipping Easy Order", orders[0].name)
+            frappe.get_doc(
+                "Notification", "Shipping Easy Failure Notification"
+            ).send_an_email(doc, {"count": len(orders)})
