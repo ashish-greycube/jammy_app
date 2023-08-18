@@ -32,7 +32,7 @@ class BillOfLadingJI(Document):
        
         self.total_cartons = total_cartons
         if pallet_for_total_carton and pallet_for_total_carton!=0:
-            self.pallet_quantity = total_cartons % pallet_for_total_carton
+            self.pallet_quantity = (total_cartons // pallet_for_total_carton) + ( 1 if ((total_cartons % pallet_for_total_carton) > 0) else 0)
         else:
             self.pallet_quantity = 0
         self.total_weight = total_weight+(35 * self.pallet_quantity)

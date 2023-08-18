@@ -9,6 +9,7 @@
  "field_order": [
   "pallet_for_total_cartons",
   "weight_of_one_pallet",
+  "company_address",
   "column_break_a6j8o",
   "one_line_bol_item",
   "one_line_bol_item_description",
@@ -114,12 +115,20 @@
   {
    "fieldname": "column_break_qmnc0",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "Jammy, Inc.<br>\nPO Box 471697<br>\nFort Worth, TX 76112",
+   "description": "\"Third Party Freight Charges Bill To Address\", When Freight Charge Terms is Prepaid",
+   "fieldname": "company_address",
+   "fieldtype": "Small Text",
+   "label": "Company Address",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-07-06 02:54:14.571119",
+ "modified": "2023-08-18 00:04:37.679042",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Bill Of Lading Settings JI",

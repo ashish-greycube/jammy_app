@@ -30,7 +30,7 @@ def create_bol(doctype,docname,type_of_bol):
 	bill_of_lading.ship_to = delivery_note.shipping_address
 	bill_of_lading.cid = delivery_note.po_no
 	bill_of_lading.freight_charge_terms='Prepaid'
-	bill_of_lading.third_party_freight_charges_bill_to=delivery_note.company_address_display
+	bill_of_lading.third_party_freight_charges_bill_to=frappe.db.get_single_value('Bill Of Lading Settings JI', 'company_address')
 	total_weight = 0
 	total_cartons = 0
 	pallet_for_total_carton = frappe.db.get_single_value('Bill Of Lading Settings JI', 'pallet_for_total_cartons')

@@ -136,9 +136,9 @@
   },
   {
    "fieldname": "total_weight",
-   "fieldtype": "Float",
+   "fieldtype": "Int",
    "label": "Total Weight",
-   "precision": "2",
+   "precision": "0",
    "read_only": 1
   },
   {
@@ -149,8 +149,7 @@
    "fieldname": "total_cartons",
    "fieldtype": "Float",
    "label": "Total Cartons",
-   "precision": "2",
-   "read_only": 1
+   "precision": "2"
   },
   {
    "fieldname": "column_break_8mpar",
@@ -160,8 +159,7 @@
    "fieldname": "pallet_quantity",
    "fieldtype": "Float",
    "label": "Pallet Quantity",
-   "precision": "2",
-   "read_only": 1
+   "precision": "2"
   },
   {
    "fieldname": "section_break_bipd9",
@@ -255,7 +253,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-29 00:59:15.029076",
+ "modified": "2023-08-18 00:35:55.225033",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Bill Of Lading JI",
