@@ -1,4 +1,6 @@
+// cur_frm.add_fetch('item_code', 'pcs_ctn', 'pcs_ctn');
 frappe.ui.form.on("Purchase Order", {
+    refresh:function (frm) {console.log(2)},
     validate:function (frm) {
         for (var i = 0; i < cur_frm.doc.items.length; i++) {
             cur_frm.doc.items[i].transaction_date = cur_frm.doc.transaction_date
@@ -18,6 +20,26 @@ frappe.ui.form.on("Purchase Order", {
     // }
 })
 
+
+frappe.ui.form.on("Purchase Order Item", {
+	pcs_ctn: function(frm, cdt, cdn) {
+        set_cartons(frm, cdt, cdn);
+
+	},
+
+	qty: function(frm, cdt, cdn) {
+        set_cartons(frm, cdt, cdn);
+	}
+});
+
+var set_cartons = function(frm, cdt, cdn) {
+	var row = locals[cdt][cdn];
+	if (row.pcs_ctn) {
+		var qty = row.qty || 1;
+		var cartons = (flt(qty) / flt(row.pcs_ctn));
+		frappe.model.set_value(cdt, cdn, "cartons", cartons);
+	}
+}
 async function call_main(frm) {
     for (var i = 0; i < frm.doc.items.length; i++) {
         if (frm.doc.items[i].item_name==undefined || frm.doc.items[i].item_name=='' || frm.doc.items[i].description==undefined  || frm.doc.items[i].description==''){
