@@ -103,6 +103,9 @@ doc_events = {
     "Packing Slip": {
         "validate": "jammy_app.jammy_app.custom_jammy.packing_slip.packing_slip.validate"
     },
+    "Purchase Order": {
+        "validate": "jammy_app.jammy_app.custom_jammy.purchase_order.purchase_order.validate"
+    }    
 }
 
 doctype_js = {
