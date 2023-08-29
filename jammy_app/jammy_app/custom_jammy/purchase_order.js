@@ -1,6 +1,14 @@
 // cur_frm.add_fetch('item_code', 'pcs_ctn', 'pcs_ctn');
 frappe.ui.form.on("Purchase Order", {
-    refresh:function (frm) {console.log(2)},
+	schedule_date: function(frm) {
+		$.each(frm.doc.items || [], function(i, d) {
+			d.schedule_date = frm.doc.schedule_date;
+		});
+		refresh_field("items");
+	},    
+    // refresh:function (frm) {
+    //     console.log(2)
+    // },
     validate:function (frm) {
         for (var i = 0; i < cur_frm.doc.items.length; i++) {
             cur_frm.doc.items[i].transaction_date = cur_frm.doc.transaction_date
