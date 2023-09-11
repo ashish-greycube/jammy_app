@@ -13,7 +13,7 @@ def validate(doc, method):
                 if item.batch_no==None or item.batch_no=='':
                     is_stock_item = frappe.db.get_value('Item', item.item_code, 'is_stock_item')
                     if is_stock_item==1:
-                        batch_id = make_autoname(supplier_batch_number_series_cf, "Batch",ignore_validate=True)
+                        batch_id = make_autoname(supplier_batch_number_series_cf, "Batch")
                         new_batch = frappe.new_doc('Batch')
                         new_batch.batch_id =batch_id
                         new_batch.item=item.item_code
