@@ -9,7 +9,7 @@ import hmac
 import hashlib
 import requests
 import json
-from erpnext import get_default_company, get_company_currency
+from erpnext import get_default_company, get_company_currency, get_default_cost_center
 from frappe.utils import nowtime
 from erpnext.stock.doctype.batch.batch import UnableToSelectBatchError
 
@@ -37,6 +37,7 @@ class ShippingEasyOrder(Document):
         si.credit_card_fee = "NO"
 
         si.company = get_default_company()
+        si.cost_center = get_default_cost_center(si.company)
         si.customer = settings.default_amazon_customer
         si.update_stock = 1
         si.conversion_rate = args.conversion_rate or 1
@@ -57,27 +58,52 @@ class ShippingEasyOrder(Document):
                 ["income_account", "expense_account"],
                 as_dict=True,
             )
+
+            item_args = {
+                "item_code": item_code,
+                "warehouse": settings.default_amazon_warehouse,
+                "qty": flt(d["quantity"]),
+                # "rate": flt(d["unit_price"]),
+                "price_list_rate": flt(d["unit_price"]),
+                "base_price_list_rate": flt(d["unit_price"]),
+                "income_account": item_defaults and item_defaults.income_account,
+                "expense_account": item_defaults and item_defaults.expense_account,
+                "cost_center": si.cost_center,
+            }
+            referral_discount = get_referral_discount_for_item(item_code)
+            if referral_discount:
+                item_args["margin_type"] = None
+                item_args["margin_rate_or_amount"] = None
+                item_args["discount_percentage"] = referral_discount
+                item_args[
+                    "discount_account"
+                ] = settings.amazon_referral_discount_account
+
+            si.append("items", item_args)
+
+        # skipping taxes, as requested by Ralph
+        # total_tax = args["total_tax"]
+        # if flt(total_tax):
+        #     tax = {
+        #         "charge_type": "Actual",
+        #         "account_head": settings.taxes_account_head,
+        #         "tax_amount": total_tax,
+        #         "description": settings.taxes_account_head,
+        #     }
+        #     si.append("taxes", tax)
+
+        base_shipping_cost = args.get("base_shipping_cost", 0)
+        if base_shipping_cost:
             si.append(
-                "items",
+                "taxes",
                 {
-                    "item_code": item_code,
-                    "warehouse": settings.default_amazon_warehouse,
-                    "qty": d["quantity"],
-                    "rate": d["unit_price"],
-                    "income_account": item_defaults and item_defaults.income_account,
-                    "expense_account": item_defaults and item_defaults.expense_account
-                    # "cost_center": args.cost_center or "_Test Cost Center - _TC",
+                    "charge_type": "Actual",
+                    "account_head": settings.amazon_shipping_account,
+                    "tax_amount": base_shipping_cost,
+                    "description": "Shipping cost",
                 },
             )
-        total_tax = args["total_tax"]
-        if flt(total_tax):
-            tax = {
-                "charge_type": "Actual",
-                "account_head": settings.taxes_account_head,
-                "tax_amount": total_tax,
-                "description": settings.taxes_account_head,
-            }
-            si.append("taxes", tax)
+
         try:
             si.insert()
             si.submit()
@@ -99,6 +125,26 @@ class ShippingEasyOrder(Document):
 
 def get_mapped_item(sku):
     return frappe.db.get_value("Item", {"item_code": sku}, "name")
+
+
+def get_referral_discount_for_item(item_code):
+    out = frappe.db.sql(
+        """
+    with fn as
+            (
+            select t.amazon_referral_discount_pct_cf 
+            from `tabItem Group` tig 
+            inner join `tabItem Group` t on t.lft <= tig.lft and t.rgt >= tig.rgt 
+            where tig.name = (select item_group from `tabItem` where item_code = %s)
+            order by t.lft desc
+            )
+            select * from fn
+            where amazon_referral_discount_pct_cf > 0 
+            limit 1
+                        """,
+        (item_code,),
+    )
+    return out and flt(out[0][0])
 
 
 @frappe.whitelist()
@@ -125,6 +171,30 @@ def sync_orders(from_date=None):
     frappe.db.commit()
 
 
+def fetch_order(order_id="3415852983"):
+    api_timestamp = int(time.time())
+    path = "/api/orders"
+    settings = frappe.get_single("Jammy Settings")
+
+    params = frappe._dict()
+    params["api_key"] = settings.shipping_easy_api_key
+    params["api_timestamp"] = api_timestamp
+    signature = generate_signature(
+        settings.shipping_easy_api_secret, "GET", path, params
+    )
+
+    query = "&".join([f"{k}={v}" for k, v in params.items()])
+
+    url = "{}{}/{}?api_signature={}&{}".format(
+        settings.shipping_easy_api_endpoint, path, order_id, signature, query
+    )
+
+    headers = {"accept": "application/json"}
+    response = requests.get(url, headers=headers)
+
+    return response.text
+
+
 def fetch_orders(from_date=None):
     # page
     # per_page max 200
@@ -143,8 +213,8 @@ def fetch_orders(from_date=None):
     params["api_key"] = settings.shipping_easy_api_key
     params["api_timestamp"] = api_timestamp
     # params["last_updated_at"] = "2023-08-11T06%3A40%3A25Z"
-    params["last_updated_at"] = "{}T00%3A00%3A00Z".format(add_days(today(), -1))
-    params["per_page"] = 3
+    params["last_updated_at"] = "{}T00%3A00%3A00Z".format(add_days(today(), -2))
+    # params["per_page"] = 3
     params["status"] = "shipped"
 
     signature = generate_signature(

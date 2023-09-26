@@ -1,5 +1,6 @@
 import frappe
 from frappe.desk.page.setup_wizard.setup_wizard import make_records
+from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 
 
 def after_migrate():
@@ -18,3 +19,20 @@ def after_migrate():
                 }
             ]
         )
+    setup_custom_fields()
+
+
+def setup_custom_fields():
+    custom_fields = {
+        "Item Group": [
+            dict(
+                fieldname="amazon_referral_discount_pct_cf",
+                label="Amazon Referral Discount %",
+                fieldtype="Percent",
+                insert_after="freight_class_cf",
+                print_hide=1,
+            )
+        ],
+    }
+
+    create_custom_fields(custom_fields, update=True)

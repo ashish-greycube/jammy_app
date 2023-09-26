@@ -9,7 +9,9 @@
   "date_time_for_customer_statement",
   "amazon_settings_section",
   "default_amazon_customer",
+  "amazon_referral_discount_account",
   "taxes_account_head",
+  "amazon_shipping_account",
   "default_amazon_warehouse",
   "sipping_easy_section",
   "enable_shipment_callback",
@@ -86,11 +88,23 @@
    "fieldtype": "Link",
    "label": "Default Amazon Customer",
    "options": "Customer"
+  },
+  {
+   "fieldname": "amazon_referral_discount_account",
+   "fieldtype": "Link",
+   "label": "Amazon Referral Discount Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "amazon_shipping_account",
+   "fieldtype": "Link",
+   "label": "Amazon Shipping Account",
+   "options": "Account"
   }
  ],
  "issingle": 1,
  "links": [],
- "modified": "2023-08-14 05:26:10.037999",
+ "modified": "2023-09-26 11:40:57.367086",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Jammy Settings",
