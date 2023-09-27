@@ -21,110 +21,106 @@ class ShippingEasyOrder(Document):
         )
 
     def make_sales_invoice(self):
-        settings = frappe.get_single("Jammy Settings")
-
-        si = frappe.new_doc("Sales Invoice")
-        args = frappe._dict(json.loads(self.json_data))
-        si.set_posting_time = 1
-        si.posting_date = args["shipments"][0]["ship_date"]
-        si.posting_time = nowtime()
-        si.po_no = args["external_order_identifier"]
-        si.po_date = args["ordered_at"][:10]
-        si.tracking_number = args["shipments"][0]["tracking_number"]
-        si.ship_via = args["shipments"][0]["carrier_key"]
-
-        si.email_option = "NO"
-        si.credit_card_fee = "NO"
-
-        si.company = get_default_company()
-        si.cost_center = get_default_cost_center(si.company)
-        si.customer = settings.default_amazon_customer
-        si.update_stock = 1
-        si.conversion_rate = args.conversion_rate or 1
-        si.currency = frappe.db.get_value(
-            "Customer", si.customer, "default_currency"
-        ) or get_company_currency(si.company)
-
-        # si.is_return = args.is_return
-        # si.return_against = args.return_against
-        # si.debit_to = args.debit_to or "Debtors - _TC"
-        # si.cost_center = args.cost_center or "_Test Cost Center - _TC"
-
-        for d in args["recipients"][0]["line_items"]:
-            item_code = get_mapped_item(d["sku"])
-            item_defaults = frappe.db.get_value(
-                "Item Default",
-                {"parent": item_code},
-                ["income_account", "expense_account"],
-                as_dict=True,
-            )
-
-            item_args = {
-                "item_code": item_code,
-                "warehouse": settings.default_amazon_warehouse,
-                "qty": flt(d["quantity"]),
-                # "rate": flt(d["unit_price"]),
-                "price_list_rate": flt(d["unit_price"]),
-                "base_price_list_rate": flt(d["unit_price"]),
-                "income_account": item_defaults and item_defaults.income_account,
-                "expense_account": item_defaults and item_defaults.expense_account,
-                "cost_center": si.cost_center,
-            }
-            referral_discount = get_referral_discount_for_item(item_code)
-            if referral_discount:
-                item_args["margin_type"] = None
-                item_args["margin_rate_or_amount"] = None
-                item_args["discount_percentage"] = referral_discount
-                item_args[
-                    "discount_account"
-                ] = settings.amazon_referral_discount_account
-
-            si.append("items", item_args)
-
-        # skipping taxes, as requested by Ralph
-        # total_tax = args["total_tax"]
-        # if flt(total_tax):
-        #     tax = {
-        #         "charge_type": "Actual",
-        #         "account_head": settings.taxes_account_head,
-        #         "tax_amount": total_tax,
-        #         "description": settings.taxes_account_head,
-        #     }
-        #     si.append("taxes", tax)
-
-        base_shipping_cost = args.get("base_shipping_cost", 0)
-        if base_shipping_cost:
-            si.append(
-                "taxes",
-                {
-                    "charge_type": "Actual",
-                    "account_head": settings.amazon_shipping_account,
-                    "tax_amount": base_shipping_cost,
-                    "description": "Shipping cost",
-                },
-            )
-
         try:
+            settings = frappe.get_single("Jammy Settings")
+
+            si = frappe.new_doc("Sales Invoice")
+            args = frappe._dict(json.loads(self.json_data))
+            si.set_posting_time = 1
+            si.posting_date = args["shipments"][0]["ship_date"]
+            si.posting_time = nowtime()
+            si.po_no = args["external_order_identifier"]
+            si.po_date = args["ordered_at"][:10]
+            si.tracking_number = args["shipments"][0]["tracking_number"]
+            si.ship_via = args["shipments"][0]["carrier_key"]
+
+            si.email_option = "NO"
+            si.credit_card_fee = "NO"
+
+            si.company = get_default_company()
+            si.cost_center = get_default_cost_center(si.company)
+            si.customer = settings.default_amazon_customer
+            si.update_stock = 1
+            si.conversion_rate = args.conversion_rate or 1
+            si.currency = frappe.db.get_value(
+                "Customer", si.customer, "default_currency"
+            ) or get_company_currency(si.company)
+
+            # si.is_return = args.is_return
+            # si.return_against = args.return_against
+            # si.debit_to = args.debit_to or "Debtors - _TC"
+            # si.cost_center = args.cost_center or "_Test Cost Center - _TC"
+
+            for d in args["recipients"][0]["line_items"]:
+                item_code = get_mapped_item(d["sku"])
+                item_defaults = frappe.db.get_value(
+                    "Item Default",
+                    {"parent": item_code},
+                    ["income_account", "expense_account"],
+                    as_dict=True,
+                )
+
+                item_args = {
+                    "item_code": item_code,
+                    "warehouse": settings.default_amazon_warehouse,
+                    "qty": flt(d["quantity"]),
+                    # "rate": flt(d["unit_price"]),
+                    "price_list_rate": flt(d["unit_price"]),
+                    "base_price_list_rate": flt(d["unit_price"]),
+                    "income_account": item_defaults and item_defaults.income_account,
+                    "expense_account": item_defaults and item_defaults.expense_account,
+                    "cost_center": si.cost_center,
+                }
+                referral_discount = get_referral_discount_for_item(item_code)
+                if referral_discount:
+                    item_args["margin_type"] = None
+                    item_args["margin_rate_or_amount"] = None
+                    item_args["discount_percentage"] = referral_discount
+                    item_args[
+                        "discount_account"
+                    ] = settings.amazon_referral_discount_account
+
+                si.append("items", item_args)
+
+            # skipping taxes, as requested by Ralph
+            # total_tax = args["total_tax"]
+            # if flt(total_tax):
+            #     tax = {
+            #         "charge_type": "Actual",
+            #         "account_head": settings.taxes_account_head,
+            #         "tax_amount": total_tax,
+            #         "description": settings.taxes_account_head,
+            #     }
+            #     si.append("taxes", tax)
+
+            base_shipping_cost = args.get("base_shipping_cost", 0)
+            if base_shipping_cost:
+                si.append(
+                    "taxes",
+                    {
+                        "charge_type": "Actual",
+                        "account_head": settings.amazon_shipping_account,
+                        "tax_amount": base_shipping_cost,
+                        "description": "Shipping cost",
+                    },
+                )
+
             si.insert()
             si.submit()
+            self.db_set("status", "Processed")
         except UnableToSelectBatchError:
             si.update_stock = 0
             si.insert()
             self.db_set("status", "Error")
-        except Exception as ex:
-            frappe.log_error(
-                title="Sales Invoice from Shipping Easy Order failed.",
-                message=frappe.get_traceback(),
-                reference_doctype=self.doctype,
-                reference_name=self.name,
-            )
+        except Exception as e:
+            frappe.log_error(e)
             self.db_set("status", "Error")
-
-        self.db_set("status", "Processed")
 
 
 def get_mapped_item(sku):
-    return frappe.db.get_value("Item", {"item_code": sku}, "name")
+    item_code = frappe.db.get_value("Item", {"item_code": sku}, "item_code")
+    if not item_code:
+        frappe.throw(f"Item not found: {sku}")
 
 
 def get_referral_discount_for_item(item_code):
@@ -148,32 +144,37 @@ def get_referral_discount_for_item(item_code):
 
 
 @frappe.whitelist()
-def sync_orders(from_date=None):
+def sync_orders(from_date=None, order_id=None):
     se_orders = fetch_orders(from_date)
     for d in json.loads(se_orders)["orders"]:
-        uid = hashlib.sha256(json.dumps(d).encode("utf-8")).hexdigest()
-        try:
-            doc = frappe.get_doc(
-                {
-                    "doctype": "Shipping Easy Order",
-                    "order_id": d["id"],
-                    "external_order_identifier": d["external_order_identifier"],
-                    "json_data": json.dumps(d),
-                    "fetched_on": now(),
-                    "status": "Pending",
-                    "uid": uid,
-                }
-            ).insert(ignore_permissions=True)
-        except frappe.exceptions.UniqueValidationError as ex:
-            print("skiping uniq:", d["external_order_identifier"])
-            pass
+        make_shipping_easy_order(d)
+
+
+def make_shipping_easy_order(order):
+    uid = hashlib.sha256(json.dumps(order).encode("utf-8")).hexdigest()
+    try:
+        doc = frappe.get_doc(
+            {
+                "doctype": "Shipping Easy Order",
+                "order_id": order["id"],
+                "external_order_identifier": order["external_order_identifier"],
+                "json_data": json.dumps(order),
+                "fetched_on": now(),
+                "status": "Pending",
+                "uid": uid,
+            }
+        ).insert(ignore_permissions=True)
+    except frappe.exceptions.UniqueValidationError as ex:
+        print("skiping uniq:", order["external_order_identifier"])
+        pass
 
     frappe.db.commit()
 
 
+@frappe.whitelist()
 def fetch_order(order_id="3415852983"):
     api_timestamp = int(time.time())
-    path = "/api/orders"
+    path = f"/api/orders/{order_id}"
     settings = frappe.get_single("Jammy Settings")
 
     params = frappe._dict()
@@ -185,14 +186,15 @@ def fetch_order(order_id="3415852983"):
 
     query = "&".join([f"{k}={v}" for k, v in params.items()])
 
-    url = "{}{}/{}?api_signature={}&{}".format(
-        settings.shipping_easy_api_endpoint, path, order_id, signature, query
+    url = "{}{}?api_signature={}&{}".format(
+        settings.shipping_easy_api_endpoint, path, signature, query
     )
 
     headers = {"accept": "application/json"}
     response = requests.get(url, headers=headers)
 
-    return response.text
+    # return response.text
+    make_shipping_easy_order(json.loads(response.text)["order"])
 
 
 def fetch_orders(from_date=None):
@@ -213,7 +215,7 @@ def fetch_orders(from_date=None):
     params["api_key"] = settings.shipping_easy_api_key
     params["api_timestamp"] = api_timestamp
     # params["last_updated_at"] = "2023-08-11T06%3A40%3A25Z"
-    params["last_updated_at"] = "{}T00%3A00%3A00Z".format(add_days(today(), -2))
+    params["last_updated_at"] = "{}T00%3A00%3A00Z".format(from_date)
     # params["per_page"] = 3
     params["status"] = "shipped"
 
