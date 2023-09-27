@@ -121,6 +121,7 @@ def get_mapped_item(sku):
     item_code = frappe.db.get_value("Item", {"item_code": sku}, "item_code")
     if not item_code:
         frappe.throw(f"Item not found: {sku}")
+    return item_code
 
 
 def get_referral_discount_for_item(item_code):
