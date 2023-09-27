@@ -93,8 +93,8 @@ class ShippingEasyOrder(Document):
             #     }
             #     si.append("taxes", tax)
 
-            base_shipping_cost = args.get("base_shipping_cost", 0)
-            if base_shipping_cost:
+            base_shipping_cost = flt(args.get("base_shipping_cost", 0))
+            if base_shipping_cost > 0:
                 si.append(
                     "taxes",
                     {
