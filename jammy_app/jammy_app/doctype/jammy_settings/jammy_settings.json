@@ -9,12 +9,11 @@
   "date_time_for_customer_statement",
   "amazon_settings_section",
   "default_amazon_customer",
+  "shipping_charge_item",
   "amazon_referral_discount_account",
-  "taxes_account_head",
-  "amazon_shipping_account",
   "default_amazon_warehouse",
   "sipping_easy_section",
-  "enable_shipment_callback",
+  "is_syncing_enabled",
   "shipping_easy_api_key",
   "shipping_easy_api_secret",
   "shipping_easy_api_endpoint",
@@ -48,6 +47,7 @@
    "label": "Shipping Easy API Key"
   },
   {
+   "description": "<h6>Configuration required to pull Orders from Shipping Easy and create Sales Invoice in ERPNext</h6>\n<ol>\n<li>Set Mapping for each ERPNext Item  against Amazon SKU via Item SKU Mapping</li>\n<li>Set default income, expense account for shipping item</li>\n<li>Set Amazon Referral Fee at Item Group or Item Level , System will pickup first from Item Level , if not found at Item Group Level.</li>\n</ol>",
    "fieldname": "sipping_easy_section",
    "fieldtype": "Section Break",
    "label": "Shipping Easy"
@@ -56,12 +56,6 @@
    "fieldname": "shipping_easy_store_api_key",
    "fieldtype": "Data",
    "label": "Shipping Easy Store API Key"
-  },
-  {
-   "default": "0",
-   "fieldname": "enable_shipment_callback",
-   "fieldtype": "Check",
-   "label": "Enable Shipment Callback"
   },
   {
    "fieldname": "amazon_settings_section",
@@ -77,13 +71,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "taxes_account_head",
-   "fieldtype": "Link",
-   "label": "Taxes Account Head",
-   "options": "Account",
-   "reqd": 1
-  },
-  {
    "fieldname": "default_amazon_customer",
    "fieldtype": "Link",
    "label": "Default Amazon Customer",
@@ -96,15 +83,21 @@
    "options": "Account"
   },
   {
-   "fieldname": "amazon_shipping_account",
+   "default": "0",
+   "fieldname": "is_syncing_enabled",
+   "fieldtype": "Check",
+   "label": "Syncing Enabled "
+  },
+  {
+   "fieldname": "shipping_charge_item",
    "fieldtype": "Link",
-   "label": "Amazon Shipping Account",
-   "options": "Account"
+   "label": "Shipping Charge Item",
+   "options": "Item"
   }
  ],
  "issingle": 1,
  "links": [],
- "modified": "2023-09-26 11:40:57.367086",
+ "modified": "2023-09-30 02:17:41.523621",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Jammy Settings",

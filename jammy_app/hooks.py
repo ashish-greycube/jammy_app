@@ -105,7 +105,7 @@ doc_events = {
     },
     "Purchase Order": {
         "validate": "jammy_app.jammy_app.custom_jammy.purchase_order.purchase_order.validate"
-    }    
+    },
 }
 
 doctype_js = {
@@ -133,6 +133,7 @@ scheduler_events = {
     # 	],
     "daily": [
         "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.notify_errors"
+        "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.sync_orders"
     ],
     # 	"hourly": [
     # 		"jammy_app.tasks.hourly"

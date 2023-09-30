@@ -22,6 +22,13 @@ class ShippingEasyOrder(Document):
 
     def make_sales_invoice(self):
         try:
+            if frappe.db.get_value(
+                "Sales Invoice", {"po_no": self.external_order_identifier}
+            ):
+                frappe.throw(
+                    "Sales Invoice exists for %s" % self.external_order_identifier
+                )
+
             settings = frappe.get_single("Jammy Settings")
 
             si = frappe.new_doc("Sales Invoice")
@@ -64,7 +71,6 @@ class ShippingEasyOrder(Document):
                     "item_code": item_code,
                     "warehouse": settings.default_amazon_warehouse,
                     "qty": flt(d["quantity"]),
-                    # "rate": flt(d["unit_price"]),
                     "price_list_rate": flt(d["unit_price"]),
                     "base_price_list_rate": flt(d["unit_price"]),
                     "income_account": item_defaults and item_defaults.income_account,
@@ -82,7 +88,32 @@ class ShippingEasyOrder(Document):
 
                 si.append("items", item_args)
 
-            # skipping taxes, as requested by Ralph
+            # add item for Shipping Cost
+            base_shipping_cost = flt(args.get("base_shipping_cost", 0))
+            if base_shipping_cost > 0:
+                si.append(
+                    "items",
+                    {
+                        "item_code": settings.shipping_charge_item,
+                        "price_list_rate": base_shipping_cost,
+                        "base_price_list_rate": base_shipping_cost,
+                        "qty": 1,
+                    },
+                )
+            # If Shipping cost needs to be added in taxes
+            # base_shipping_cost = flt(args.get("base_shipping_cost", 0))
+            # if base_shipping_cost > 0:
+            #     si.append(
+            #         "taxes",
+            #         {
+            #             "charge_type": "Actual",
+            #             "account_head": settings.amazon_shipping_account,
+            #             "tax_amount": base_shipping_cost,
+            #             "description": "Shipping cost",
+            #         },
+            #     )
+
+            # If needed to add Taxes. Skipping taxes currently as requested by Ralph.
             # total_tax = args["total_tax"]
             # if flt(total_tax):
             #     tax = {
@@ -92,18 +123,6 @@ class ShippingEasyOrder(Document):
             #         "description": settings.taxes_account_head,
             #     }
             #     si.append("taxes", tax)
-
-            base_shipping_cost = flt(args.get("base_shipping_cost", 0))
-            if base_shipping_cost > 0:
-                si.append(
-                    "taxes",
-                    {
-                        "charge_type": "Actual",
-                        "account_head": settings.amazon_shipping_account,
-                        "tax_amount": base_shipping_cost,
-                        "description": "Shipping cost",
-                    },
-                )
 
             si.insert()
             si.submit()
@@ -120,6 +139,8 @@ class ShippingEasyOrder(Document):
 def get_mapped_item(sku):
     item_code = frappe.db.get_value("Item", {"item_code": sku}, "item_code")
     if not item_code:
+        item_code = frappe.db.get_value("Item SKU Mapping", {"amazon_sku": sku}, "item")
+    if not item_code:
         frappe.throw(f"Item not found: {sku}")
     return item_code
 
@@ -135,17 +156,23 @@ def get_referral_discount_for_item(item_code):
             where tig.name = (select item_group from `tabItem` where item_code = %s)
             order by t.lft desc
             )
+            select amazon_referral_discount_pct_cf
+            from tabItem where item_code = %s 
+                and amazon_referral_discount_pct_cf > 0
+            union all
             select * from fn
             where amazon_referral_discount_pct_cf > 0 
             limit 1
                         """,
-        (item_code,),
+        (item_code, item_code),
     )
     return out and flt(out[0][0])
 
 
 @frappe.whitelist()
 def sync_orders(from_date=None, order_id=None):
+    if not cint(frappe.db.get_single_value("Jammy Settings", "is_syncing_enabled")):
+        frappe.throw("Please enable syncing in Jammy Settings")
     se_orders = fetch_orders(from_date)
     for d in json.loads(se_orders)["orders"]:
         make_shipping_easy_order(d)
