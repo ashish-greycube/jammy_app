@@ -27,7 +27,7 @@ def setup_custom_fields():
         "Item Group": [
             dict(
                 fieldname="amazon_referral_discount_pct_cf",
-                label="Amazon Referral Fee",
+                label="Amazon Referral Fee %",
                 fieldtype="Percent",
                 insert_after="freight_class_cf",
                 print_hide=1,
@@ -36,7 +36,7 @@ def setup_custom_fields():
         "Item": [
             dict(
                 fieldname="amazon_referral_discount_pct_cf",
-                label="Amazon Referral Fee",
+                label="Amazon Referral Fee %",
                 fieldtype="Percent",
                 insert_after="include_item_in_manufacturing",
                 print_hide=1,
