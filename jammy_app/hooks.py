@@ -132,8 +132,8 @@ scheduler_events = {
     # 		"jammy_app.tasks.all"
     # 	],
     "daily": [
-        "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.notify_errors"
-        "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.sync_orders"
+        "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.notify_errors",
+        "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.sync_orders",
     ],
     # 	"hourly": [
     # 		"jammy_app.tasks.hourly"
