@@ -196,7 +196,7 @@
    "fieldname": "fee_terms",
    "fieldtype": "Select",
    "label": "Fee Terms",
-   "options": "Collect\nPrepaid\nCustomer Check Acceptable"
+   "options": "\nCollect\nPrepaid\nCustomer Check Acceptable"
   },
   {
    "fieldname": "column_break_lfstc",
@@ -253,7 +253,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-18 00:35:55.225033",
+ "modified": "2023-10-03 23:02:33.482366",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Bill Of Lading JI",
