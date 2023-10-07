@@ -25,8 +25,9 @@ class ShippingEasyOrder(Document):
             if frappe.db.get_value(
                 "Sales Invoice", {"po_no": self.external_order_identifier}
             ):
-                frappe.throw(
-                    "Sales Invoice exists for %s" % self.external_order_identifier
+                frappe.log_error(
+                    title="Sales Invoice exists for po_no: %s. Skipping Shipping Easy Order: %s"
+                    % (self.external_order_identifier, self.order_id)
                 )
 
             settings = frappe.get_single("Jammy Settings")
@@ -58,6 +59,8 @@ class ShippingEasyOrder(Document):
             # si.debit_to = args.debit_to or "Debtors - _TC"
             # si.cost_center = args.cost_center or "_Test Cost Center - _TC"
 
+            si_items = []
+
             for d in args["recipients"][0]["line_items"]:
                 item_code = get_mapped_item(d["sku"])
                 item_defaults = frappe.db.get_value(
@@ -77,29 +80,39 @@ class ShippingEasyOrder(Document):
                     "expense_account": item_defaults and item_defaults.expense_account,
                     "cost_center": si.cost_center,
                 }
-                referral_discount = get_referral_discount_for_item(item_code)
-                if referral_discount:
-                    item_args["margin_type"] = None
-                    item_args["margin_rate_or_amount"] = None
-                    item_args["discount_percentage"] = referral_discount
-                    item_args[
-                        "discount_account"
-                    ] = settings.amazon_referral_discount_account
-
-                si.append("items", item_args)
+                si_items.append(item_args)
 
             # add item for Shipping Cost
             base_shipping_cost = flt(args.get("base_shipping_cost", 0))
             if base_shipping_cost > 0:
-                si.append(
-                    "items",
+                si_items.append(
                     {
                         "item_code": settings.shipping_charge_item,
                         "price_list_rate": base_shipping_cost,
                         "base_price_list_rate": base_shipping_cost,
                         "qty": 1,
+                        "income_account": item_defaults
+                        and item_defaults.income_account,
+                        "expense_account": item_defaults
+                        and item_defaults.expense_account,
                     },
                 )
+
+            # set Amazon Referral Fee
+            # NOTE: The Shipping Fee will be correct only if Order has items with same Amazon Fee
+            for d in si_items:
+                if d["item_code"] == settings.shipping_charge_item:
+                    referral_discount = max(i.discount_percentage for i in si.items)
+                else:
+                    referral_discount = get_referral_discount_for_item(item_code)
+
+                if referral_discount:
+                    d["margin_type"] = None
+                    d["margin_rate_or_amount"] = None
+                    d["discount_percentage"] = referral_discount
+                    d["discount_account"] = settings.amazon_referral_discount_account
+                si.append("items", d)
+
             # If Shipping cost needs to be added in taxes
             # base_shipping_cost = flt(args.get("base_shipping_cost", 0))
             # if base_shipping_cost > 0:
