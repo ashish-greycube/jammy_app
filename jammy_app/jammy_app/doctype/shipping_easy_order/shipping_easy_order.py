@@ -23,7 +23,8 @@ class ShippingEasyOrder(Document):
     def make_sales_invoice(self):
         try:
             if frappe.db.get_value(
-                "Sales Invoice", {"po_no": self.external_order_identifier}
+                "Sales Invoice",
+                {"po_no": self.external_order_identifier, "docstatus": 1},
             ):
                 frappe.log_error(
                     title="Sales Invoice exists for po_no: %s. Skipping Shipping Easy Order: %s"
