@@ -104,7 +104,16 @@ frappe.ui.form.on("Delivery Note", {
 						label: 'Choose Type of BOL',
 						fieldname: 'radio_button_container',
 						fieldtype: 'HTML',
-						options: `<fieldset><div><input type="radio" id="direct_item_info" name="type_of_bol" value="direct_item_info" checked><label for="direct_item_info">Direct DN Item info</label></div><div><input type="radio" id="one_line_bol" name="type_of_bol" value="one_line_bol"><label for="one_line_bol">One line BOL item</label></div><div><input type="radio" id="normal_bol" name="type_of_bol" value="normal_bol"><label for="normal_bol">Normal BOL(aggregate by item group)</label></div></fieldset>`
+						options: `<fieldset>
+						<div><input type="radio" id="normal_bol" name="type_of_bol" value="normal_bol" checked>
+						<label for="normal_bol">Normal BOL(aggregate by item group)</label>
+						</div>
+						<div><input type="radio" id="direct_item_info" name="type_of_bol" value="direct_item_info">
+						<label for="direct_item_info">Direct DN Item info</label></div>
+						<div><input type="radio" id="one_line_bol" name="type_of_bol" value="one_line_bol">
+						<label for="one_line_bol">One line BOL item</label></div>
+
+						</fieldset>`
 					}, ],
 					size: 'small',
 					primary_action_label: 'Create BOL',

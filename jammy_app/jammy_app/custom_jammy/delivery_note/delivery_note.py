@@ -23,7 +23,7 @@ def create_bol(doctype,docname,type_of_bol):
 	bill_of_lading = frappe.new_doc('Bill Of Lading JI')
 	
 	bill_of_lading.ship_from = delivery_note.set_warehouse
-	bill_of_lading.date = getdate(nowdate())
+	bill_of_lading.date = nowdate()
 	bill_of_lading.ref = delivery_note.name
 	bill_of_lading.carrier_name = delivery_note.ship_via
 	bill_of_lading.shipping_address_name=delivery_note.shipping_address_name

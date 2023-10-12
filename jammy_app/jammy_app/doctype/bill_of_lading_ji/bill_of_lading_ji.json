@@ -50,6 +50,7 @@
  "fields": [
   {
    "fetch_from": "ref.set_warehouse",
+   "fetch_if_empty": 1,
    "fieldname": "ship_from",
    "fieldtype": "Link",
    "label": "Ship From",
@@ -63,6 +64,7 @@
   },
   {
    "fetch_from": "ref.shipping_address",
+   "fetch_if_empty": 1,
    "fieldname": "ship_to",
    "fieldtype": "Small Text",
    "label": "Ship To"
@@ -206,7 +208,7 @@
    "fieldname": "trailer_loaded",
    "fieldtype": "Select",
    "label": "Trailer Loaded",
-   "options": "By Shipper\nBy Driver"
+   "options": "\nBy Shipper\nBy Driver"
   },
   {
    "fieldname": "column_break_76s7s",
@@ -216,7 +218,7 @@
    "fieldname": "freight_counted",
    "fieldtype": "Select",
    "label": "Freight Counted",
-   "options": "By Shipper\nBy Driver/pallets said to contain\nBy Driver/Pieces"
+   "options": "\nBy Shipper\nBy Driver/pallets said to contain\nBy Driver/Pieces"
   },
   {
    "fieldname": "naming_series",
@@ -247,13 +249,13 @@
   },
   {
    "fieldname": "ship_from_address",
-   "fieldtype": "Read Only",
+   "fieldtype": "Small Text",
    "label": "Ship From Address"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-03 23:02:33.482366",
+ "modified": "2023-10-12 01:04:46.676245",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Bill Of Lading JI",
