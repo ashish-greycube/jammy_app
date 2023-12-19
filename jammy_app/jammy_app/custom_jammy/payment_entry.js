@@ -2,7 +2,7 @@ cur_frm.add_fetch('party','default_sales_partner','sales_partner');
 
 frappe.ui.form.on('Payment Entry', {
 	refresh: function(frm) {
-		$("button[data-fieldname='get_outstanding_invoice']").hide();
+		$("button[data-fieldname='get_outstanding_invoices']").hide();
 		// frm.trigger('add_custom_outstanding_button')
 	},
 	// party: function(frm) {frm.trigger('add_custom_outstanding_button')},

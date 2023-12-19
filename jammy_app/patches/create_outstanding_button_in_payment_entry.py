@@ -11,7 +11,7 @@ def execute():
                 label="Get Outstanding Invoice",
                 fieldtype="Button",
                 depends_on="eval:doc.docstatus==0",
-                insert_after="get_outstanding_invoice",
+                insert_after="get_outstanding_invoices",
             )
         ]
     }
