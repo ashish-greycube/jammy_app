@@ -142,9 +142,9 @@ class ShippingEasyOrder(Document):
             si.submit()
             self.db_set("status", "Processed")
         except UnableToSelectBatchError:
-            si.update_stock = 0
+            # save as Draft only, do not Submit. User will need to submit after creating stock
             si.insert()
-            self.db_set("status", "Error")
+            self.db_set("status", "Processed")
         except Exception as e:
             frappe.log_error(e)
             self.db_set("status", "Error")
