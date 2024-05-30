@@ -80,4 +80,35 @@ var set_total_weight = function(frm, cdt, cdn) {
 		  frappe.model.set_value(frm.doc.table_items[last_id].doctype, frm.doc.table_items[last_id].warehouse, "warehouse", frm.doc.warehouse); } 
 		}
 	  });
-	  
+
+frappe.ui.form.on("Stock Entry Detail", {
+	total_cartons(frm,cdt,cdn){
+		set_catron_weight(frm,cdt,cdn)
+		set_total_carton_weight(frm,cdt,cdn)
+
+	},
+	weight_per_unit(frm,cdt,cdn){
+		set_catron_weight(frm,cdt,cdn)
+		set_total_carton_weight(frm,cdt,cdn)
+	},
+	items_remove(frm,cdt,cdn){
+		set_total_carton_weight(frm,cdt,cdn)
+	}
+})
+
+let set_catron_weight = function(frm, cdt, cdn){
+	let row = locals[cdt][cdn]
+	if (row.total_cartons && row.weight_per_unit){
+		let carton_weight = row.total_cartons * row.weight_per_unit
+		frappe.model.set_value(cdt,cdn,"custom_carton_weight",carton_weight)
+	}
+}
+
+let set_total_carton_weight = function(frm,cdt,cdn){
+	let stock_item = frm.doc.items
+	let total_carton_weight = 0
+	for( let row of stock_item){
+		total_carton_weight = total_carton_weight + row.custom_carton_weight
+	}
+	frm.set_value("custom_total_carton_weight",total_carton_weight)
+}

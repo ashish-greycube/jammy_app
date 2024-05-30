@@ -106,6 +106,9 @@ doc_events = {
     "Purchase Order": {
         "validate": "jammy_app.jammy_app.custom_jammy.purchase_order.purchase_order.validate"
     },
+    "Stock Entry": {
+        "validate": "jammy_app.jammy_app.custom_jammy.stock_entry.stock_entry.validate"
+    }
 }
 
 doctype_js = {
