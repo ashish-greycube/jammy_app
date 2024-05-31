@@ -82,12 +82,12 @@ var set_total_weight = function(frm, cdt, cdn) {
 	  });
 
 frappe.ui.form.on("Stock Entry Detail", {
-	pcs_ctn(frm,cdt,cdn){
+	qty(frm,cdt,cdn){
 		set_catron_weight(frm,cdt,cdn)
 		set_total_carton_weight(frm,cdt,cdn)
 
 	},
-	weight_per_unit(frm,cdt,cdn){
+	weight_per_pieces(frm,cdt,cdn){
 		set_catron_weight(frm,cdt,cdn)
 		set_total_carton_weight(frm,cdt,cdn)
 	},
@@ -98,8 +98,8 @@ frappe.ui.form.on("Stock Entry Detail", {
 
 let set_catron_weight = function(frm, cdt, cdn){
 	let row = locals[cdt][cdn]
-	if (row.pcs_ctn && row.weight_per_unit){
-		let carton_weight = row.pcs_ctn * row.weight_per_unit
+	if (row.qty && row.weight_per_pieces){
+		let carton_weight = row.qty * row.weight_per_pieces
 		frappe.model.set_value(cdt,cdn,"custom_carton_weight",carton_weight)
 	}
 }
@@ -108,7 +108,7 @@ let set_total_carton_weight = function(frm,cdt,cdn){
 	let stock_item = frm.doc.items
 	let total_carton_weight = 0
 	for( let row of stock_item){
-		total_carton_weight = total_carton_weight + (row.pcs_ctn * row.weight_per_unit)
+		total_carton_weight = total_carton_weight + (row.pcs_ctn * row.weight_per_pieces)
 	}
 	frm.set_value("custom_total_carton_weight",total_carton_weight)
 }
