@@ -7,8 +7,9 @@ def execute():
             dict(
                 fieldname="nmfc_cf",
                 label="NMFC",
-                fieldtype="Int",
+                fieldtype="Data",
                 insert_after="column_break_5",
+                translatable=0
             ),
             dict(
                 fieldname="freight_class_cf",
