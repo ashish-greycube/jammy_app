@@ -85,6 +85,7 @@ def get_entries(filters):
             `tabItem` i ON ip.item_code = i.item_code
         WHERE
             1=1
+            and ( ip.customer IS NULL OR ip.customer = '')
             {conditions}
         ORDER BY
             ip.price_list,ip.item_code
