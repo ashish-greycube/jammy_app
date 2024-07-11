@@ -20,6 +20,22 @@ class ShippingEasyOrder(Document):
             self.doctype, self.name, "make_sales_invoice", queue="short", now=True
         )
 
+    def get_recipient_info(self):
+        template = """
+    {{first_name or ""}} {{last_name or ""}}
+    {{address or ""}}, {{address2 or ""}}, {{address3 or ""}}
+    {{city or ""}}, {{state or ""}}, {{country or ""}}, {{postal_code or ""}}
+    {{phone_number or ""}} {{email or ""}}
+    """
+
+        data = dict(json.loads(self.json_data))
+        for d in data.get("recipients", []):
+            if d.get("first_name") == "[REDACTED]":
+                continue
+            info = frappe.render_template(template, d)
+            return info
+        return "[REDACTED]"    
+
     def make_sales_invoice(self):
         try:
             if frappe.db.get_value(
@@ -59,7 +75,9 @@ class ShippingEasyOrder(Document):
             # si.return_against = args.return_against
             # si.debit_to = args.debit_to or "Debtors - _TC"
             # si.cost_center = args.cost_center or "_Test Cost Center - _TC"
-
+            
+            si.custom_amazon_recipient_info = self.get_recipient_info()
+            
             si_items = []
 
             for d in args["recipients"][0]["line_items"]:
