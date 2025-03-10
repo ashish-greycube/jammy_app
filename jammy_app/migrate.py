@@ -20,6 +20,7 @@ def after_migrate():
             ]
         )
     setup_custom_fields()
+    create_custom_fields_for_tariff()
 
 
 def setup_custom_fields():
@@ -45,3 +46,164 @@ def setup_custom_fields():
     }
 
     create_custom_fields(custom_fields, update=True)
+
+
+def create_custom_fields_for_tariff():
+	custom_fields = {
+		"Customer": [
+			dict(
+				fieldname="custom_apply_tariff",
+				label="Apply Tariff?",
+				fieldtype="Check",
+				insert_after="image",
+				is_custom_field=1,
+				is_system_generated=0,
+				translatable=0,
+				no_copy=1
+			),
+		],
+        "Batch": [
+			dict(
+				fieldname="custom_tariff_recovery",
+				label="Tariff Recovery %",
+				fieldtype="Percent",
+				insert_after="description",
+				is_custom_field=1,
+				is_system_generated=0,
+				translatable=0,
+				no_copy=1
+			),
+		],
+        
+		###### Sales Order ######
+        "Sales Order": [
+              dict(
+				fieldname="custom_apply_tariff",
+				label="Apply Tariff?",
+				fieldtype="Check",
+				insert_after="delivery_date",
+				is_custom_field=1,
+				is_system_generated=0,
+				translatable=0,
+				no_copy=0
+			),
+			dict(
+				fieldname="custom_dt_tariff_amount",
+				label="DT Tariff Amount",
+				fieldtype="Currency",
+				insert_after="column_break_46",
+				is_custom_field=1,
+				is_system_generated=0,
+				translatable=0,
+				no_copy=0,
+				read_only=1,
+			),
+		],
+            
+		###### Sales Order Item ######
+        "Sales Order Item": [
+              dict(
+				fieldname="custom_tariff_recovery",
+				label="Tariff Recovery %",
+				fieldtype="Percent",
+				insert_after="batch_no",
+				is_custom_field=1,
+				is_system_generated=0,
+				translatable=0,
+				no_copy=0,
+                fetch_from="batch_no.custom_tariff_recovery",
+                read_only=1,
+			),
+			dict(
+				fieldname="custom_tariff_rate",
+				label="Tariff Rate",
+				fieldtype="Currency",
+				insert_after="amount",
+				is_custom_field=1,
+				is_system_generated=0,
+				translatable=0,
+				no_copy=0,
+				read_only=1,
+			),
+			dict(
+				fieldname="custom_tariff_amount",
+				label="Tariff Amount",
+				fieldtype="Currency",
+				insert_after="custom_tariff_rate",
+				is_custom_field=1,
+				is_system_generated=0,
+				translatable=0,
+				no_copy=0,
+				read_only=1,
+			),
+		],
+            
+		###### Sales Invoice ######
+        
+		"Sales Invoice": [
+              dict(
+				fieldname="custom_apply_tariff",
+				label="Apply Tariff?",
+				fieldtype="Check",
+				insert_after="tax_id",
+				is_custom_field=1,
+				is_system_generated=0,
+				translatable=0,
+				no_copy=0
+			),
+			dict(
+				fieldname="custom_dt_tariff_amount",
+				label="DT Tariff Amount",
+				fieldtype="Currency",
+				insert_after="column_break_47",
+				is_custom_field=1,
+				is_system_generated=0,
+				translatable=0,
+				no_copy=1,
+				read_only=1,
+			),
+		],
+            
+		"Sales Invoice Item": [
+              dict(
+				fieldname="custom_tariff_recovery",
+				label="Tariff Recovery %",
+				fieldtype="Percent",
+				insert_after="batch_no",
+				is_custom_field=1,
+				is_system_generated=0,
+				translatable=0,
+				no_copy=1,
+                fetch_from="batch_no.custom_tariff_recovery",
+                read_only=1,
+			),
+			dict(
+				fieldname="custom_tariff_rate",
+				label="Tariff Rate",
+				fieldtype="Currency",
+				insert_after="amount",
+				is_custom_field=1,
+				is_system_generated=0,
+				translatable=0,
+				no_copy=1,
+				read_only=1,
+			),
+			dict(
+				fieldname="custom_tariff_amount",
+				label="Tariff Amount",
+				fieldtype="Currency",
+				insert_after="custom_tariff_rate",
+				is_custom_field=1,
+				is_system_generated=0,
+				translatable=0,
+				no_copy=1,
+				read_only=1,
+			),
+		],
+        
+	}
+
+	print("Creating custom fields for Jammy app:")
+	for dt, fields in custom_fields.items():
+		print("*******\n %s: " % dt, [d.get("fieldname") for d in fields])
+	create_custom_fields(custom_fields)

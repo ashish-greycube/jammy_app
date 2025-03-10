@@ -92,10 +92,14 @@ doc_events = {
         "validate": "jammy_app.jammy_app.custom_jammy.quotation.quotation.validate"
     },
     "Sales Order": {
-        "validate": "jammy_app.jammy_app.custom_jammy.sales_order.sales_order.validate"
+        "validate": "jammy_app.jammy_app.custom_jammy.sales_order.sales_order.validate",
+        "before_validate": ["jammy_app.jammy_app.custom_jammy.sales_order.sales_order.set_tariff_if_applicable",
+                            "jammy_app.jammy_app.custom_jammy.sales_order.sales_order.set_batch_tariff_recovery"]
     },
     "Sales Invoice": {
-        "validate": "jammy_app.jammy_app.custom_jammy.sales_invoice.sales_invoice.validate"
+        "validate": "jammy_app.jammy_app.custom_jammy.sales_invoice.sales_invoice.validate",
+        "before_validate": ["jammy_app.jammy_app.custom_jammy.sales_order.sales_order.set_tariff_if_applicable",
+                            "jammy_app.jammy_app.custom_jammy.sales_order.sales_order.set_batch_tariff_recovery"]
     },
     "Delivery Note": {
         "validate": "jammy_app.jammy_app.custom_jammy.delivery_note.delivery_note.validate"

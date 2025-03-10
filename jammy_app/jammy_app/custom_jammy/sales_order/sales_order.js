@@ -135,3 +135,20 @@ frappe.ui.form.on("Sales Order", {
 // 		d.purchase_rate = value.purchase_rate;
 // 	});
 // });
+
+frappe.ui.form.on("Sales Order Item",{
+	batch_no: function(frm, cdt, cdn){
+		let row = locals[cdt][cdn]
+		if (row.batch_no) {
+			frappe.db.get_value('Batch', row.batch_no, 'custom_tariff_recovery')
+				.then(r => {
+					let values = r.message;
+					frappe.model.set_value(cdt, cdn, 'custom_tariff_recovery', values.custom_tariff_recovery || '')
+				})
+		}
+		else{
+			frappe.model.set_value(cdt, cdn, 'custom_tariff_recovery', '')
+		}
+		
+	}
+})

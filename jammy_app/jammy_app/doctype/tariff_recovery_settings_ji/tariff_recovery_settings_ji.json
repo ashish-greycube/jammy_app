@@ -1,0 +1,45 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-03-06 23:28:48.498328",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tariff_recovery_account"
+ ],
+ "fields": [
+  {
+   "fieldname": "tariff_recovery_account",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Tariff Recovery Account",
+   "options": "Account",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-03-06 23:28:56.695272",
+ "modified_by": "Administrator",
+ "module": "Jammy_app",
+ "name": "Tariff Recovery Settings JI",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
