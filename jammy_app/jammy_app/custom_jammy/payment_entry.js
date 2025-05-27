@@ -85,7 +85,7 @@ frappe.ui.form.on('Payment Entry', {
 							for(let tax in taxes){
 								if (taxes[tax].sales_invoice == payment_reference[invoice].reference_name){
 									payment_reference[invoice].freight_charges = taxes[tax].freight_value
-									payment_reference[invoice].custom_tariff = taxes[tax].tariff_value
+									payment_reference[invoice].custom_dt_tariff_amount = taxes[tax].tariff_value
 								}
 							}
 						}
