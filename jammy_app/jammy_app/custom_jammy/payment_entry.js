@@ -56,7 +56,45 @@ frappe.ui.form.on('Payment Entry', {
 			frappe.flags.allocate_payment_amount = true;
 			frm.events.validate_filters_data(frm, filters);
 			frm.doc.cost_center = filters.cost_center;
-			frm.events.get_outstanding_documents(frm, filters);
+
+			frm.events.get_outstanding_documents(frm, filters).then(() => {
+
+                console.log("Outstanding documents fetched successfully");
+
+                // loop child table and make array of all SI
+				let payment_reference = frm.doc.references
+				let reference_invoices = ""
+				
+				if (payment_reference.length > 0){
+					for(let invoice in payment_reference){
+						reference_invoices += payment_reference[invoice].reference_name +","
+					}
+				}
+
+                // do frappe.call and pass the SI array and find in py freight and tarriff
+				frappe.call({
+					method: "jammy_app.api.get_freight_and_tariff",
+					args: {
+						invoices : reference_invoices
+					}
+				}).then(r => {
+					//  in frappe.call return fill the freight/tariff value in child table
+					let taxes = r.message;
+					if (taxes.length > 0){
+						for(let invoice in payment_reference){
+							for(let tax in taxes){
+								if (taxes[tax].sales_invoice == payment_reference[invoice].reference_name){
+									payment_reference[invoice].freight_charges = taxes[tax].freight_value
+									payment_reference[invoice].custom_tariff = taxes[tax].tariff_value
+								}
+							}
+						}
+					}
+				})
+
+            }
+            );
+
 		}, __("Filters"), __("Get Outstanding Documents"));
 	},	
 })

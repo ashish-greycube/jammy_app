@@ -7,7 +7,9 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "tariff_recovery_account"
+  "tariff_recovery_account",
+  "column_break_jntl9",
+  "default_sales_freight_account"
  ],
  "fields": [
   {
@@ -17,12 +19,23 @@
    "label": "Tariff Recovery Account",
    "options": "Account",
    "reqd": 1
+  },
+  {
+   "fieldname": "default_sales_freight_account",
+   "fieldtype": "Link",
+   "label": "Default Sales Freight Account",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_jntl9",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-03-06 23:28:56.695272",
+ "modified": "2025-05-27 00:59:45.171280",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Tariff Recovery Settings JI",
