@@ -13,7 +13,7 @@ frappe.listview_settings["Shipping Easy Order"] = {
         function (values) {
           frappe.call({
             method:
-              "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.sync_orders",
+              "jammy_app.jammy_app.shipping_easy_api.sync_orders",
             args: { from_date: values.from_date },
             freeze: true,
             freeze_message: __("Syncing orders."),

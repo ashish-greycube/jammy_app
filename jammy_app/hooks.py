@@ -142,6 +142,12 @@ scheduler_events = {
         "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.notify_errors",
         "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.sync_orders",
     ],
+    "cron": {
+        "30 1,13 * * *": [
+            # sync shipping easy orders twice daily - 1:30 AM, 1:30 PM
+            "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.sync_orders",
+        ]
+    }
     # 	"hourly": [
     # 		"jammy_app.tasks.hourly"
     # 	],

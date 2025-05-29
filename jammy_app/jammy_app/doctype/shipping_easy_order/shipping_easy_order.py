@@ -3,7 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
-from frappe.utils import now, flt, add_days, today, cint
+from frappe.utils import now, flt, add_days, today, cint, cstr
 import time
 import hmac
 import hashlib
@@ -16,9 +16,28 @@ from erpnext.stock.doctype.batch.batch import UnableToSelectBatchError
 
 class ShippingEasyOrder(Document):
     def on_update(self):
-        frappe.enqueue_doc(
-            self.doctype, self.name, "make_sales_invoice", queue="short", now=True
-        )
+        status = "Processed"
+        error = None
+        sales_invoice = None
+
+        try:
+            sales_invoice = self.make_sales_invoice()
+        except Exception as e:
+            self.set_error("Error")
+
+        if sales_invoice:
+            try:
+                sales_invoice.update_stock = 1
+                sales_invoice.save()
+                sales_invoice.submit()
+            except UnableToSelectBatchError:
+                self.set_error("Batch Error")
+            except Exception as e:
+                self.set_error("Error")
+
+    def set_error(self, status):
+        self.db_set(
+            {"status": status, "error": frappe.get_traceback(with_context=True)})
 
     def get_recipient_info(self):
         template = """
@@ -34,144 +53,143 @@ class ShippingEasyOrder(Document):
                 continue
             info = frappe.render_template(template, d)
             return info
-        return "[REDACTED]"    
+        return "[REDACTED]"
 
     def make_sales_invoice(self):
-        try:
-            if frappe.db.get_value(
-                "Sales Invoice",
-                {"po_no": self.external_order_identifier, "docstatus": 1},
-            ):
-                frappe.log_error(
-                    title="Sales Invoice exists for po_no: %s. Skipping Shipping Easy Order: %s"
-                    % (self.external_order_identifier, self.order_id)
-                )
+        if frappe.db.get_value(
+            "Sales Invoice",
+            {"po_no": self.external_order_identifier, "docstatus": 1},
+        ):
+            frappe.log_error(
+                title="Sales Invoice exists for po_no: %s. Skipping Shipping Easy Order: %s"
+                % (self.external_order_identifier, self.order_id)
+            )
+            return
 
-            settings = frappe.get_single("Jammy Settings")
+        settings = frappe.get_single("Jammy Settings")
 
-            si = frappe.new_doc("Sales Invoice")
-            args = frappe._dict(json.loads(self.json_data))
-            si.set_posting_time = 1
-            si.posting_date = args["shipments"][0]["ship_date"]
-            si.posting_time = nowtime()
-            si.po_no = args["external_order_identifier"]
-            si.po_date = args["ordered_at"][:10]
-            si.tracking_number = args["shipments"][0]["tracking_number"]
-            si.ship_via = args["shipments"][0]["carrier_key"]
+        sales_invoice = frappe.new_doc("Sales Invoice")
+        args = frappe._dict(json.loads(self.json_data))
 
-            si.email_option = "NO"
-            si.credit_card_fee = "NO"
+        # set update_stock to 1 after Draft is saved, to avoid UnableToSelectBatchError
+        sales_invoice.update_stock = 0
 
-            si.company = get_default_company()
-            si.cost_center = get_default_cost_center(si.company)
-            si.customer = settings.default_amazon_customer
-            si.update_stock = 1
-            si.conversion_rate = args.conversion_rate or 1
-            si.currency = frappe.db.get_value(
-                "Customer", si.customer, "default_currency"
-            ) or get_company_currency(si.company)
+        sales_invoice.posting_date = args["shipments"][0]["ship_date"]
+        sales_invoice.set_posting_time = 1
+        sales_invoice.posting_time = nowtime()
+        sales_invoice.po_no = args["external_order_identifier"]
+        sales_invoice.po_date = args["ordered_at"][:10]
+        sales_invoice.tracking_number = args["shipments"][0]["tracking_number"]
+        sales_invoice.ship_via = args["shipments"][0]["carrier_key"]
 
-            # si.is_return = args.is_return
-            # si.return_against = args.return_against
-            # si.debit_to = args.debit_to or "Debtors - _TC"
-            # si.cost_center = args.cost_center or "_Test Cost Center - _TC"
-            
-            si.custom_amazon_recipient_info = self.get_recipient_info()
-            
-            si_items = []
+        sales_invoice.email_option = "NO"
+        sales_invoice.credit_card_fee = "NO"
 
-            for d in args["recipients"][0]["line_items"]:
-                item_code = get_mapped_item(d["sku"])
-                item_defaults = frappe.db.get_value(
-                    "Item Default",
-                    {"parent": item_code},
-                    ["income_account", "expense_account"],
-                    as_dict=True,
-                )
+        sales_invoice.company = get_default_company()
+        sales_invoice.cost_center = get_default_cost_center(
+            sales_invoice.company)
+        sales_invoice.customer = settings.default_amazon_customer
+        sales_invoice.conversion_rate = args.conversion_rate or 1
+        sales_invoice.currency = frappe.db.get_value(
+            "Customer", sales_invoice.customer, "default_currency"
+        ) or get_company_currency(sales_invoice.company)
 
-                item_args = {
-                    "item_code": item_code,
-                    "warehouse": settings.default_amazon_warehouse,
-                    "qty": flt(d["quantity"]),
-                    "price_list_rate": flt(d["unit_price"]),
-                    "base_price_list_rate": flt(d["unit_price"]),
-                    "income_account": item_defaults and item_defaults.income_account,
-                    "expense_account": item_defaults and item_defaults.expense_account,
-                    "cost_center": si.cost_center,
-                }
-                si_items.append(item_args)
+        # si.is_return = args.is_return
+        # si.return_against = args.return_against
+        # si.debit_to = args.debit_to or "Debtors - _TC"
+        # si.cost_center = args.cost_center or "_Test Cost Center - _TC"
 
-            # add item for Shipping Cost
-            base_shipping_cost = flt(args.get("base_shipping_cost", 0))
-            if base_shipping_cost > 0:
-                si_items.append(
-                    {
-                        "item_code": settings.shipping_charge_item,
-                        "price_list_rate": base_shipping_cost,
-                        "base_price_list_rate": base_shipping_cost,
-                        "qty": 1,
-                        "income_account": item_defaults
-                        and item_defaults.income_account,
-                        "expense_account": item_defaults
-                        and item_defaults.expense_account,
-                    },
-                )
+        sales_invoice.custom_amazon_recipient_info = self.get_recipient_info()
 
-            # set Amazon Referral Fee
-            # NOTE: The Shipping Fee will be correct only if Order has items with same Amazon Fee
-            for d in si_items:
-                if d["item_code"] == settings.shipping_charge_item:
-                    referral_discount = max(i.discount_percentage for i in si.items)
-                else:
-                    referral_discount = get_referral_discount_for_item(item_code)
+        si_items = []
 
-                if referral_discount:
-                    d["margin_type"] = None
-                    d["margin_rate_or_amount"] = None
-                    d["discount_percentage"] = referral_discount
-                    d["discount_account"] = settings.amazon_referral_discount_account
-                si.append("items", d)
+        for d in args["recipients"][0]["line_items"]:
+            item_code = get_mapped_item(d["sku"])
+            item_defaults = frappe.db.get_value(
+                "Item Default",
+                {"parent": item_code},
+                ["income_account", "expense_account"],
+                as_dict=True,
+            )
 
-            # If Shipping cost needs to be added in taxes
-            # base_shipping_cost = flt(args.get("base_shipping_cost", 0))
-            # if base_shipping_cost > 0:
-            #     si.append(
-            #         "taxes",
-            #         {
-            #             "charge_type": "Actual",
-            #             "account_head": settings.amazon_shipping_account,
-            #             "tax_amount": base_shipping_cost,
-            #             "description": "Shipping cost",
-            #         },
-            #     )
+            item_args = {
+                "item_code": item_code,
+                "warehouse": settings.default_amazon_warehouse,
+                "qty": flt(d["quantity"]),
+                "price_list_rate": flt(d["unit_price"]),
+                "base_price_list_rate": flt(d["unit_price"]),
+                "income_account": item_defaults and item_defaults.income_account,
+                "expense_account": item_defaults and item_defaults.expense_account,
+                "cost_center": sales_invoice.cost_center,
+            }
+            si_items.append(item_args)
 
-            # If needed to add Taxes. Skipping taxes currently as requested by Ralph.
-            # total_tax = args["total_tax"]
-            # if flt(total_tax):
-            #     tax = {
-            #         "charge_type": "Actual",
-            #         "account_head": settings.taxes_account_head,
-            #         "tax_amount": total_tax,
-            #         "description": settings.taxes_account_head,
-            #     }
-            #     si.append("taxes", tax)
+        # add item for Shipping Cost
+        base_shipping_cost = flt(args.get("base_shipping_cost", 0))
+        if base_shipping_cost > 0:
+            si_items.append(
+                {
+                    "item_code": settings.shipping_charge_item,
+                    "price_list_rate": base_shipping_cost,
+                    "base_price_list_rate": base_shipping_cost,
+                    "qty": 1,
+                    "income_account": item_defaults
+                    and item_defaults.income_account,
+                    "expense_account": item_defaults
+                    and item_defaults.expense_account,
+                },
+            )
 
-            si.insert()
-            si.submit()
-            self.db_set("status", "Processed")
-        except UnableToSelectBatchError:
-            # save as Draft only, do not Submit. User will need to submit after creating stock
-            si.insert()
-            self.db_set("status", "Processed")
-        except Exception as e:
-            frappe.log_error(e)
-            self.db_set("status", "Error")
+        # set Amazon Referral Fee
+        # NOTE: The Shipping Fee will be correct only if Order has items with same Amazon Fee
+        for d in si_items:
+            if d["item_code"] == settings.shipping_charge_item:
+                referral_discount = max(
+                    i.discount_percentage for i in sales_invoice.items)
+            else:
+                referral_discount = get_referral_discount_for_item(
+                    item_code)
+
+            if referral_discount:
+                d["margin_type"] = None
+                d["margin_rate_or_amount"] = None
+                d["discount_percentage"] = referral_discount
+                d["discount_account"] = settings.amazon_referral_discount_account
+            sales_invoice.append("items", d)
+
+        # If Shipping cost needs to be added in taxes
+        # base_shipping_cost = flt(args.get("base_shipping_cost", 0))
+        # if base_shipping_cost > 0:
+        #     si.append(
+        #         "taxes",
+        #         {
+        #             "charge_type": "Actual",
+        #             "account_head": settings.amazon_shipping_account,
+        #             "tax_amount": base_shipping_cost,
+        #             "description": "Shipping cost",
+        #         },
+        #     )
+
+        # If needed to add Taxes. Skipping taxes currently as requested by Ralph.
+        # total_tax = args["total_tax"]
+        # if flt(total_tax):
+        #     tax = {
+        #         "charge_type": "Actual",
+        #         "account_head": settings.taxes_account_head,
+        #         "tax_amount": total_tax,
+        #         "description": settings.taxes_account_head,
+        #     }
+        #     si.append("taxes", tax)
+
+        sales_invoice.insert()
+        return sales_invoice
 
 
 def get_mapped_item(sku):
     item_code = frappe.db.get_value("Item", {"item_code": sku}, "item_code")
     if not item_code:
-        item_code = frappe.db.get_value("Item SKU Mapping", {"amazon_sku": sku}, "item")
+        item_code = frappe.db.get_value(
+            "Item SKU Mapping", {"amazon_sku": sku}, "item")
     if not item_code:
         frappe.throw(f"Item not found: {sku}")
     return item_code
@@ -199,117 +217,3 @@ def get_referral_discount_for_item(item_code):
         (item_code, item_code),
     )
     return out and flt(out[0][0])
-
-
-@frappe.whitelist()
-def sync_orders(from_date=None, order_id=None):
-    if not cint(frappe.db.get_single_value("Jammy Settings", "is_syncing_enabled")):
-        frappe.throw("Please enable syncing in Jammy Settings")
-    se_orders = fetch_orders(from_date)
-    for d in json.loads(se_orders)["orders"]:
-        make_shipping_easy_order(d)
-
-
-def make_shipping_easy_order(order):
-    uid = hashlib.sha256(json.dumps(order).encode("utf-8")).hexdigest()
-    try:
-        doc = frappe.get_doc(
-            {
-                "doctype": "Shipping Easy Order",
-                "order_id": order["id"],
-                "external_order_identifier": order["external_order_identifier"],
-                "json_data": json.dumps(order),
-                "fetched_on": now(),
-                "status": "Pending",
-                "uid": uid,
-            }
-        ).insert(ignore_permissions=True)
-    except frappe.exceptions.UniqueValidationError as ex:
-        print("skiping uniq:", order["external_order_identifier"])
-        pass
-
-    frappe.db.commit()
-
-
-@frappe.whitelist()
-def fetch_order(order_id="3415852983"):
-    api_timestamp = int(time.time())
-    path = f"/api/orders/{order_id}"
-    settings = frappe.get_single("Jammy Settings")
-
-    params = frappe._dict()
-    params["api_key"] = settings.shipping_easy_api_key
-    params["api_timestamp"] = api_timestamp
-    signature = generate_signature(
-        settings.shipping_easy_api_secret, "GET", path, params
-    )
-
-    query = "&".join([f"{k}={v}" for k, v in params.items()])
-
-    url = "{}{}?api_signature={}&{}".format(
-        settings.shipping_easy_api_endpoint, path, signature, query
-    )
-
-    headers = {"accept": "application/json"}
-    response = requests.get(url, headers=headers)
-
-    # return response.text
-    make_shipping_easy_order(json.loads(response.text)["order"])
-
-
-def fetch_orders(from_date=None):
-    # page
-    # per_page max 200
-    # last_updated_at = 2017-05-24T19:38:25Z
-    # status = "shipped", "cleared", "pending_shipment", "ready_for_shipment"
-
-    if not from_date:
-        from_date = add_days(today(), -1)
-
-    settings = frappe.get_single("Jammy Settings")
-
-    api_timestamp = int(time.time())
-    path = "/api/orders"
-
-    params = frappe._dict()
-    params["api_key"] = settings.shipping_easy_api_key
-    params["api_timestamp"] = api_timestamp
-    # params["last_updated_at"] = "2023-08-11T06%3A40%3A25Z"
-    params["last_updated_at"] = "{}T00%3A00%3A00Z".format(from_date)
-    # params["per_page"] = 3
-    params["status"] = "shipped"
-
-    signature = generate_signature(
-        settings.shipping_easy_api_secret, "GET", path, params
-    )
-
-    query = "&".join([f"{k}={v}" for k, v in params.items()])
-
-    url = "{}{}?api_signature={}&{}".format(
-        settings.shipping_easy_api_endpoint, path, signature, query
-    )
-
-    headers = {"accept": "application/json"}
-    response = requests.get(url, headers=headers)
-
-    return response.text
-
-
-def generate_signature(hmac_secret, method, path, params):
-    hmac_secret = str.encode(hmac_secret)
-    params = frappe._dict(params)
-    signing_string = "&".join([method, path] + [f"{k}={v}" for k, v in params.items()])
-
-    hm = hmac.new(hmac_secret, signing_string.encode("utf-8"), hashlib.sha256)
-    return hm.hexdigest()
-
-
-def notify_errors():
-    """Cron. Runs Daily to notify of Error status Orders."""
-    orders = frappe.get_all("Shipping Easy Order", {"status": "Error"})
-    if orders:
-        if frappe.get_value("Notification", "Shipping Easy Failure Notification"):
-            doc = frappe.get_doc("Shipping Easy Order", orders[0].name)
-            frappe.get_doc(
-                "Notification", "Shipping Easy Failure Notification"
-            ).send_an_email(doc, {"count": len(orders)})

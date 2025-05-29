@@ -10,9 +10,12 @@
   "status",
   "order_id",
   "external_order_identifier",
+  "column_break_h9ara",
   "fetched_on",
-  "json_data",
-  "uid"
+  "uid",
+  "section_break_vhovy",
+  "error",
+  "json_data"
  ],
  "fields": [
   {
@@ -35,8 +38,11 @@
   {
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
-   "options": "\nPending\nProcessed\nError"
+   "options": "\nPending\nProcessed\nError\nBatch Error"
   },
   {
    "fieldname": "external_order_identifier",
@@ -49,11 +55,24 @@
    "fieldtype": "Data",
    "label": "UID",
    "unique": 1
+  },
+  {
+   "fieldname": "error",
+   "fieldtype": "Small Text",
+   "label": "Error"
+  },
+  {
+   "fieldname": "column_break_h9ara",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_vhovy",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-17 01:20:11.921541",
+ "modified": "2025-05-23 03:42:29.738722",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Shipping Easy Order",
