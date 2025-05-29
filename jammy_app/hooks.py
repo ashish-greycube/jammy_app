@@ -135,28 +135,15 @@ doctype_js = {
 # ---------------
 
 scheduler_events = {
-    # 	"all": [
-    # 		"jammy_app.tasks.all"
-    # 	],
-    "daily": [
-        "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.notify_errors",
-        "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.sync_orders",
-    ],
     "cron": {
-        "30 1,13 * * *": [
-            # sync shipping easy orders twice daily - 1:30 AM, 1:30 PM
+        "0 7 * * *": [
+            "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.notify_errors",
+        ],
+        "0 7,19 * * *": [
+            # sync shipping easy orders twice daily - 7 AM & 7 PM
             "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.sync_orders",
         ]
     }
-    # 	"hourly": [
-    # 		"jammy_app.tasks.hourly"
-    # 	],
-    # 	"weekly": [
-    # 		"jammy_app.tasks.weekly"
-    # 	]
-    # 	"monthly": [
-    # 		"jammy_app.tasks.monthly"
-    # 	]
 }
 
 # Testing
