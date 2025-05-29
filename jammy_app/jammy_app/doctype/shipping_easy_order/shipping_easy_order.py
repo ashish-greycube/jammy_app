@@ -16,8 +16,6 @@ from erpnext.stock.doctype.batch.batch import UnableToSelectBatchError
 
 class ShippingEasyOrder(Document):
     def on_update(self):
-        status = "Processed"
-        error = None
         sales_invoice = None
 
         try:
@@ -30,6 +28,7 @@ class ShippingEasyOrder(Document):
                 sales_invoice.update_stock = 1
                 sales_invoice.save()
                 sales_invoice.submit()
+                self.db_set({"status": "Processed"})
             except UnableToSelectBatchError:
                 self.set_error("Batch Error")
             except Exception as e:
