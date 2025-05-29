@@ -53,6 +53,18 @@ def get_orders_url(from_date=None, page=1, per_page=50):
 
 @frappe.whitelist()
 def sync_orders(from_date=None):
+    frappe.msgprint("Enqueued Shipping Order sync from %s" % (from_date,))
+
+    frappe.enqueue(
+        _sync_orders,
+        enqueue_after_commit=True,
+        queue="long",
+        from_date=from_date
+    )
+
+
+@frappe.whitelist()
+def _sync_orders(from_date=None):
     if not cint(frappe.db.get_single_value("Jammy Settings", "is_syncing_enabled")):
         frappe.throw("Please enable syncing in Jammy Settings")
 
@@ -100,6 +112,7 @@ def sync_orders(from_date=None):
     return integration_request.name
 
 
+@frappe.whitelist()
 def make_shipping_easy_order(order):
     uid = hashlib.sha256(json.dumps(order).encode("utf-8")).hexdigest()
     try:
