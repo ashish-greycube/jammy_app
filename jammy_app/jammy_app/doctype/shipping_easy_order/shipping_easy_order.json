@@ -10,6 +10,7 @@
   "status",
   "order_id",
   "external_order_identifier",
+  "updated_at",
   "column_break_h9ara",
   "fetched_on",
   "uid",
@@ -68,11 +69,18 @@
   {
    "fieldname": "section_break_vhovy",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "updated_at",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Updated At"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-23 03:42:29.738722",
+ "modified": "2025-05-30 00:33:05.505168",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Shipping Easy Order",

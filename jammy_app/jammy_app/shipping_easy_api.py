@@ -124,6 +124,7 @@ def make_shipping_easy_order(order):
                 "json_data": json.dumps(order),
                 "fetched_on": now(),
                 "status": "Pending",
+                "updated_at": order.get("updated_at"),
                 "uid": uid,
             }
         ).insert(ignore_permissions=True)
