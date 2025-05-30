@@ -141,7 +141,7 @@ scheduler_events = {
         ],
         "0 7,19 * * *": [
             # sync shipping easy orders twice daily - 7 AM & 7 PM
-            "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.sync_orders",
+            "jammy_app.jammy_app.shipping_easy_api.sync_orders",
         ]
     }
 }
