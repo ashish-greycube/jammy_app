@@ -137,7 +137,7 @@ doctype_js = {
 scheduler_events = {
     "cron": {
         "0 7 * * *": [
-            "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.notify_errors",
+            "jammy_app.jammy_app.shipping_easy_api.notify_errors",
         ],
         "0 7,19 * * *": [
             # sync shipping easy orders twice daily - 7 AM & 7 PM
