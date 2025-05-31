@@ -18,6 +18,9 @@ class ShippingEasyOrder(Document):
     def on_update(self):
         sales_invoice = None
 
+        if self.order_id == self.external_order_identifier:
+            return
+
         try:
             sales_invoice = self.make_sales_invoice()
         except Exception as e:

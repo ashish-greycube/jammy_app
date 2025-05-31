@@ -17,7 +17,10 @@
   "shipping_easy_api_key",
   "shipping_easy_api_secret",
   "shipping_easy_api_endpoint",
-  "shipping_easy_store_api_key"
+  "shipping_easy_store_api_key",
+  "import_amazon_csv_tab",
+  "import_file",
+  "import"
  ],
  "fields": [
   {
@@ -93,11 +96,27 @@
    "fieldtype": "Link",
    "label": "Shipping Charge Item",
    "options": "Item"
+  },
+  {
+   "fieldname": "import_amazon_csv_tab",
+   "fieldtype": "Tab Break",
+   "label": "Import Amazon CSV"
+  },
+  {
+   "fieldname": "import_file",
+   "fieldtype": "Attach",
+   "label": "Import File"
+  },
+  {
+   "fieldname": "import",
+   "fieldtype": "Button",
+   "label": "Import",
+   "options": "import_amazon_csv"
   }
  ],
  "issingle": 1,
  "links": [],
- "modified": "2023-09-30 02:17:41.523621",
+ "modified": "2025-05-30 21:47:58.336682",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Jammy Settings",
