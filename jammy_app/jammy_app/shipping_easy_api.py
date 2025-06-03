@@ -69,10 +69,10 @@ def _sync_orders(from_date=None):
         frappe.throw("Please enable syncing in Jammy Settings")
 
     if not from_date:
-        seo = frappe.get_last_doc("Shipping Easy Order")
-        updated_at = json.loads(seo.json_data or "{}").get("updated_at")
-        if updated_at:
-            from_date = updated_at.split("T")[0]
+        last_updated_at = frappe.get_all("Shipping Easy Order", filters={
+        }, limit_page_length=1, order_by="updated_at desc", pluck="updated_at")
+        if last_updated_at:
+            from_date = last_updated_at[0][:10]
 
     if not from_date:
         from_date = add_days(today(), -1)
