@@ -99,7 +99,8 @@ doc_events = {
     "Sales Invoice": {
         "validate": "jammy_app.jammy_app.custom_jammy.sales_invoice.sales_invoice.validate",
         "before_validate": ["jammy_app.jammy_app.custom_jammy.sales_order.sales_order.set_tariff_if_applicable",
-                            "jammy_app.jammy_app.custom_jammy.sales_order.sales_order.set_batch_tariff_recovery"]
+                            "jammy_app.jammy_app.custom_jammy.sales_order.sales_order.set_batch_tariff_recovery"],
+        "on_submit": "jammy_app.jammy_app.doctype.shipping_easy_order.shipping_easy_order.on_submit_sales_invoice"
     },
     "Delivery Note": {
         "validate": "jammy_app.jammy_app.custom_jammy.delivery_note.delivery_note.validate"

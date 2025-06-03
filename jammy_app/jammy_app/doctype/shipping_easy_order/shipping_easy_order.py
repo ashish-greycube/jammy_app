@@ -4,25 +4,28 @@
 import frappe
 from frappe.model.document import Document
 from frappe.utils import now, flt, add_days, today, cint, cstr
-import time
-import hmac
-import hashlib
-import requests
 import json
 from erpnext import get_default_company, get_company_currency, get_default_cost_center
 from frappe.utils import nowtime
 from erpnext.stock.doctype.batch.batch import UnableToSelectBatchError
+import erpnext
 
 
 class ShippingEasyOrder(Document):
     def on_update(self):
         sales_invoice = None
 
-        if self.order_id == self.external_order_identifier:
-            return
-
         try:
-            sales_invoice = self.make_sales_invoice()
+            if self.order_id == self.external_order_identifier:
+                sales_invoice = self.make_sales_invoice_from_csv()
+                # Cancelled
+                data = json.loads(self.json_data)
+                order_status_index = data[0].index("order-status")
+                if not any(row[order_status_index] != "Cancelled" for row in data[1:]):
+                    self.db_set("status", "Cancelled")
+                    return
+            else:
+                sales_invoice = self.make_sales_invoice()
         except Exception as e:
             self.set_error("Error")
 
@@ -31,7 +34,8 @@ class ShippingEasyOrder(Document):
                 sales_invoice.update_stock = 1
                 sales_invoice.save()
                 sales_invoice.submit()
-                self.db_set({"status": "Processed"})
+            except erpnext.stock.stock_ledger.NegativeStockError:
+                self.set_error("Error")
             except UnableToSelectBatchError:
                 self.set_error("Batch Error")
             except Exception as e:
@@ -183,8 +187,93 @@ class ShippingEasyOrder(Document):
         #     }
         #     si.append("taxes", tax)
 
-        sales_invoice.insert()
+        if sales_invoice.items:
+            sales_invoice.insert()
         return sales_invoice
+
+    @frappe.whitelist()
+    def make_sales_invoice_from_csv(self):
+
+        if frappe.db.get_value("Sales Invoice", {"po_no": self.external_order_identifier}):
+            return
+
+        csv_data = json.loads(self.json_data)
+
+        header, items = csv_data[0], csv_data[1:]
+
+        info = ""
+        for i in ['ship-city', 'ship-state', 'ship-postal-code', 'ship-country']:
+            info = info + cstr(self.get_val(items[0], i, header)) + ", "
+
+        si = {
+            "doctype": "Sales Invoice",
+            "update_stock": 0,
+            "posting_date": cstr(self.get_val(items[0], "last-updated-date", header))[:10],
+            "set_posting_time": 1,
+            "posting_time": nowtime(),
+            "po_no": self.external_order_identifier,
+            "po_date": cstr(self.get_val(items[0], "purchase-date", header))[:10],
+            "tracking_number": "",
+            "ship_via": "",
+            "email_option": "NO",
+            "credit_card_fee": "NO",
+            "company": "Jammy, Inc.",
+            "cost_center": "Main - JI",
+            "customer": "AMAZON.COM",
+            "conversion_rate": 1,
+            "currency": "USD",
+            "custom_amazon_recipient_info": info.strip(", "),
+            "items": []
+        }
+
+        for item in items:
+            if cstr(self.get_val(item, "order-status", header)) == "Cancelled":
+                continue
+
+            item_code = get_mapped_item(
+                cstr(self.get_val(item, "sku", header)))
+            item_defaults = frappe.db.get_value(
+                "Item Default",
+                {"parent": item_code},
+                ["income_account", "expense_account"],
+                as_dict=True,
+            )
+            si["items"].append({
+                "item_code": item_code,
+                "warehouse": 'FORT WORTH-BI - JI',
+                "qty": int(cstr(self.get_val(item, "quantity", header))),
+                "price_list_rate": flt(cstr(self.get_val(item, "item-price", header))),
+                "base_price_list_rate": flt(cstr(self.get_val(item, "item-price", header))),
+                "income_account": item_defaults and item_defaults.income_account,
+                "expense_account": item_defaults and item_defaults.expense_account,
+                "cost_center": 'Main - JI',
+            })
+
+        for item in si["items"]:
+            if item["item_code"] == "Amazon Shipping Charge":
+                continue
+            referral_discount = get_referral_discount_for_item(item_code)
+            if referral_discount:
+                item["margin_type"] = None
+                item["margin_rate_or_amount"] = None
+                item["discount_percentage"] = referral_discount
+                item["discount_account"] = "Amazon Fee - JI"
+
+        for item in si["items"]:
+            if item["item_code"] == "Amazon Shipping Charge":
+                referral_discount = max(
+                    i.discount_percentage for i in si["items"])
+
+        if not si["items"]:
+            return
+
+        sales_invoice = frappe.get_doc(si)
+        sales_invoice.insert()
+
+        return sales_invoice
+
+    def get_val(self, row, col, header):
+        return row[header.index(col)]
 
 
 def get_mapped_item(sku):
@@ -219,3 +308,11 @@ def get_referral_discount_for_item(item_code):
         (item_code, item_code),
     )
     return out and flt(out[0][0])
+
+
+def on_submit_sales_invoice(doc, method):
+    seo_name = frappe.db.get_value('Shipping Easy Order', {
+                                   'external_order_identifier': doc.po_no})
+    if seo_name:
+        frappe.db.set_value('Shipping Easy Order',
+                            seo_name, "status", "Processed")

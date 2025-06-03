@@ -1,0 +1,46 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2025-06-03 02:50:55.676703",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "from_creation_date",
+   "fieldtype": "Date",
+   "label": "Created On From",
+   "mandatory": 1,
+   "options": "today",
+   "wildcard_filter": 0
+  },
+  {
+   "default": "All",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "mandatory": 0,
+   "options": "Pending\nProcessed\nError\nBatch Error\nAll\n",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "Standard",
+ "modified": "2025-06-03 02:50:55.676703",
+ "modified_by": "Administrator",
+ "module": "Jammy_app",
+ "name": "Shipping Easy Order To Sales Invoice",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "select tseo.name 'Shipping Easy Order:Link/Shipping Easy Order:140' , \ntseo.status , \norder_id , \nexternal_order_identifier , \ntsi.name 'Sales Invoice:Link/Sales Invoice:140' ,\ntsi.status 'Si Status::140' ,\nRIGHT(tseo.error, 200) error\nfrom `tabShipping Easy Order` tseo \nleft outer join `tabSales Invoice` tsi on tsi.po_no = tseo.external_order_identifier\nwhere tseo.creation > %(from_creation_date)s \nand (tseo.status = %(status)s or %(status)s = 'All')\norder by tseo.creation",
+ "ref_doctype": "Shipping Easy Order",
+ "report_name": "Shipping Easy Order To Sales Invoice",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ]
+}
