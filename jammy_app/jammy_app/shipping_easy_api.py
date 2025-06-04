@@ -116,6 +116,7 @@ def _sync_orders(from_date=None):
 def make_shipping_easy_order(order):
     uid = hashlib.sha256(json.dumps(order).encode("utf-8")).hexdigest()
     try:
+        shipments = order.get("shipments", []) or []
         doc = frappe.get_doc(
             {
                 "doctype": "Shipping Easy Order",
@@ -124,7 +125,7 @@ def make_shipping_easy_order(order):
                 "json_data": json.dumps(order),
                 "fetched_on": now(),
                 "status": "Pending",
-                "updated_at": order.get("updated_at"),
+                "updated_at": shipments and shipments[0].get("ship_date"),
                 "uid": uid,
             }
         ).insert(ignore_permissions=True)

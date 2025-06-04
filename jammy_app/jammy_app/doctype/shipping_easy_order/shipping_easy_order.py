@@ -151,7 +151,7 @@ class ShippingEasyOrder(Document):
         for d in si_items:
             if d["item_code"] == settings.shipping_charge_item:
                 referral_discount = max(
-                    i.discount_percentage for i in sales_invoice.items)
+                    i["discount_percentage"] for i in sales_invoice.items)
             else:
                 referral_discount = get_referral_discount_for_item(
                     item_code)
@@ -194,7 +194,7 @@ class ShippingEasyOrder(Document):
     @frappe.whitelist()
     def make_sales_invoice_from_csv(self):
 
-        if frappe.db.get_value("Sales Invoice", {"po_no": self.external_order_identifier}):
+        if frappe.db.get_value("Sales Invoice", {"po_no": self.external_order_identifier, "docstatus": 1}):
             return
 
         csv_data = json.loads(self.json_data)
@@ -238,21 +238,51 @@ class ShippingEasyOrder(Document):
                 ["income_account", "expense_account"],
                 as_dict=True,
             )
+            qty = int(cstr(self.get_val(item, "quantity", header)))
+            if not qty:
+                continue
+            referral_discount = get_referral_discount_for_item(item_code)
+
+            price_list_rate = flt(
+                cstr(self.get_val(item, "item-price", header)))/qty
+
+            if referral_discount:
+                price_list_rate = price_list_rate/(1-referral_discount*.01)
+
             si["items"].append({
                 "item_code": item_code,
                 "warehouse": 'FORT WORTH-BI - JI',
                 "qty": int(cstr(self.get_val(item, "quantity", header))),
-                "price_list_rate": flt(cstr(self.get_val(item, "item-price", header))),
-                "base_price_list_rate": flt(cstr(self.get_val(item, "item-price", header))),
+                "price_list_rate": price_list_rate,
+                "base_price_list_rate": price_list_rate,
                 "income_account": item_defaults and item_defaults.income_account,
                 "expense_account": item_defaults and item_defaults.expense_account,
                 "cost_center": 'Main - JI',
             })
 
+            # add shipping item
+            item_defaults = frappe.db.get_value(
+                "Item Default",
+                {"parent": "Amazon Shipping Charge"},
+                ["income_account", "expense_account"],
+                as_dict=True,
+            )
+
+            if shipping_price := cstr(self.get_val(item, "shipping-price", header)):
+                si["items"].append({
+                    "item_code": "Amazon Shipping Charge",
+                    "warehouse": 'FORT WORTH-BI - JI',
+                    "qty": 1,
+                    "price_list_rate": shipping_price,
+                    "base_price_list_rate": shipping_price,
+                    "income_account": item_defaults and item_defaults.income_account,
+                    "expense_account": item_defaults and item_defaults.expense_account,
+                    "cost_center": 'Main - JI',
+                })
+
         for item in si["items"]:
             if item["item_code"] == "Amazon Shipping Charge":
                 continue
-            referral_discount = get_referral_discount_for_item(item_code)
             if referral_discount:
                 item["margin_type"] = None
                 item["margin_rate_or_amount"] = None
@@ -262,7 +292,7 @@ class ShippingEasyOrder(Document):
         for item in si["items"]:
             if item["item_code"] == "Amazon Shipping Charge":
                 referral_discount = max(
-                    i.discount_percentage for i in si["items"])
+                    flt(i.get("discount_percentage")) for i in si["items"])
 
         if not si["items"]:
             return
