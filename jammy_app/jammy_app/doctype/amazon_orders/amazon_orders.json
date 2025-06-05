@@ -1,0 +1,78 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "prompt",
+ "creation": "2025-06-04 23:26:59.457052",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "amazon_file",
+  "column_break_wvqxf",
+  "from_date",
+  "to_date",
+  "section_break_4jlyu",
+  "missing_orders_html"
+ ],
+ "fields": [
+  {
+   "fieldname": "missing_orders_html",
+   "fieldtype": "HTML",
+   "label": "Missing Orders"
+  },
+  {
+   "fieldname": "amazon_file",
+   "fieldtype": "Attach",
+   "label": "Amazon File"
+  },
+  {
+   "fieldname": "section_break_4jlyu",
+   "fieldtype": "Section Break",
+   "label": "Missing Orders"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Data",
+   "label": "From Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Data",
+   "label": "To Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_wvqxf",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-06-05 01:39:14.151176",
+ "modified_by": "Administrator",
+ "module": "Jammy_app",
+ "name": "Amazon Orders",
+ "name_case": "UPPER CASE",
+ "naming_rule": "Set by user",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

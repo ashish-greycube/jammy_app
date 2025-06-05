@@ -50,6 +50,7 @@
    "fieldname": "external_order_identifier",
    "fieldtype": "Data",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "External Order Identifier"
   },
   {
@@ -81,7 +82,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-06-03 04:15:05.753921",
+ "modified": "2025-06-05 01:54:48.710790",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Shipping Easy Order",
