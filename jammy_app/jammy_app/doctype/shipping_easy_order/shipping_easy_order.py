@@ -151,7 +151,7 @@ class ShippingEasyOrder(Document):
         for d in si_items:
             if d["item_code"] == settings.shipping_charge_item:
                 referral_discount = max(
-                    i["discount_percentage"] for i in sales_invoice.items)
+                    i.discount_percentage for i in sales_invoice.items)
             else:
                 referral_discount = get_referral_discount_for_item(
                     item_code)
