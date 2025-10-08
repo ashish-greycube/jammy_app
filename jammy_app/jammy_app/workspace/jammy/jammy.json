@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"rAuIJMyJyA\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"lss3i4WOM8\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Reports &amp; Masters</span>\",\"col\":12}},{\"id\":\"GGc9Rz6I_x\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Amazon Settings\",\"col\":3}},{\"id\":\"TnmY8x546y\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Shipping Easy Order\",\"col\":3}},{\"id\":\"_yNY_PnFrW\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item SKU Mapping\",\"col\":3}},{\"id\":\"TtkGiNGVCG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item-wise Sales Register\",\"col\":3}},{\"id\":\"zzLYnZDC6a\",\"type\":\"card\",\"data\":{\"card_name\":\"Jammy\",\"col\":4}},{\"id\":\"QSB7Sc7Yh9\",\"type\":\"card\",\"data\":{\"card_name\":\"Bill Of Lading\",\"col\":4}},{\"id\":\"QT5PBCDfDs\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Tariff Recovery Settings\",\"col\":3}}]",
+ "content": "[{\"id\":\"rAuIJMyJyA\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"lss3i4WOM8\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Reports &amp; Masters</span>\",\"col\":12}},{\"id\":\"GGc9Rz6I_x\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Amazon Settings\",\"col\":3}},{\"id\":\"TnmY8x546y\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Shipping Easy Order\",\"col\":3}},{\"id\":\"_yNY_PnFrW\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item SKU Mapping\",\"col\":3}},{\"id\":\"TtkGiNGVCG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item-wise Sales Register\",\"col\":3}},{\"id\":\"zzLYnZDC6a\",\"type\":\"card\",\"data\":{\"card_name\":\"Jammy\",\"col\":4}},{\"id\":\"QSB7Sc7Yh9\",\"type\":\"card\",\"data\":{\"card_name\":\"Bill Of Lading\",\"col\":4}},{\"id\":\"QT5PBCDfDs\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Tariff Recovery Settings\",\"col\":3}},{\"id\":\"ddoXVa4-wX\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Parcel Service Settings\",\"col\":3}}]",
  "creation": "2023-04-12 00:46:02.570032",
  "custom_blocks": [],
  "docstatus": 0,
@@ -109,7 +109,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-03-10 03:26:45.338905",
+ "modified": "2025-10-07 23:31:59.419368",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Jammy",
@@ -126,6 +126,13 @@
    "doc_view": "List",
    "label": "Tariff Recovery Settings",
    "link_to": "Tariff Recovery Settings JI",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Parcel Service Settings",
+   "link_to": "Parcel Service Settings",
    "type": "DocType"
   },
   {
