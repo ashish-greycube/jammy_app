@@ -187,6 +187,15 @@ class ShippingEasyOrder(Document):
         #     }
         #     si.append("taxes", tax)
 
+        # add sales team from Customer
+        for d in frappe.db.sql("""
+            select 
+                sales_person , allocated_amount , allocated_percentage , commission_rate 
+            from `tabSales Team` tst 
+            where parenttype='Customer' and parent = %s
+                               """, (sales_invoice.customer), as_dict=True):
+            sales_invoice.append("sales_team", d)
+
         if sales_invoice.items:
             sales_invoice.insert()
         return sales_invoice
@@ -298,6 +307,16 @@ class ShippingEasyOrder(Document):
             return
 
         sales_invoice = frappe.get_doc(si)
+
+        # add sales team from Customer
+        for d in frappe.db.sql("""
+            select 
+                sales_person , allocated_amount , allocated_percentage , commission_rate 
+            from `tabSales Team` tst 
+            where parenttype='Customer' and parent = %s
+                               """, (sales_invoice.customer), as_dict=True):
+            sales_invoice.append("sales_team", d)
+
         sales_invoice.insert()
 
         return sales_invoice

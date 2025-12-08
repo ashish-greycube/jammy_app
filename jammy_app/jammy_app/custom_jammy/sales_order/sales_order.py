@@ -14,7 +14,6 @@ def set_batch_tariff_recovery(doc, method):
 			row.custom_tariff_recovery = batch_tariff_recovery if batch_tariff_recovery else 0
 
 def set_tariff_if_applicable(doc, method):
-	print("mein function mein hoon")
 	total_dt_tariff_amount = 0
 	tariff_recovery_account = frappe.db.get_single_value('Tariff Recovery Settings JI', 'tariff_recovery_account')
 	if tariff_recovery_account == None or tariff_recovery_account == '':
