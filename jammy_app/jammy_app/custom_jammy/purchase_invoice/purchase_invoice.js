@@ -25,6 +25,22 @@ frappe.ui.form.on("Purchase Invoice", "validate", function () {
     cur_frm.refresh_field('items')
 });
 
+frappe.ui.form.on("Purchase Invoice", "refresh", function (frm) {
+    if (cur_frm.doc.docstatus == 1 && cur_frm.doc.outstanding_amount != 0) {
+        cur_frm.add_custom_button("Jammy Payment", function () {
+            let args = { "dt": cur_frm.doc.doctype, "dn": cur_frm.doc.name };
+            return frappe.call({
+                method: "erpnext.accounts.doctype.payment_entry.payment_entry.get_payment_entry",
+                args: args,
+                callback: function (r) {
+                    var doclist = frappe.model.sync(r.message);
+                    frappe.set_route("Form", doclist[0].doctype, doclist[0].name);
+                }
+            });
+        }, "Create")
+    }
+});
+
 // frappe.ui.form.on('Purchase Receipt', {
 //     refresh(frm) {
 //         // cur_frm.add_fetch('item_code', 'net_weight', 'net_weight');
