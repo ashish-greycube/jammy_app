@@ -6,6 +6,9 @@ from frappe.model.document import Document
 from frappe.contacts.doctype.address.address import get_address_display
 
 class BillOfLadingJI(Document):
+    def before_insert(self):
+        self.calculate_total_weight_cartoons_and_pallet_quantity()
+
     def validate(self):
         if not self.ship_from_address:
             ship_from_address_name=frappe.db.get_all('Dynamic Link', filters={'link_doctype': ['=', 'Warehouse'],'parenttype': ['=', 'Address'],'link_name': ['=', self.get('ship_from') ]},fields=['parent'])
@@ -23,6 +26,10 @@ class BillOfLadingJI(Document):
                 self.ship_to=ship_to_title+'<br>'+get_address_display(self.get('shipping_address_name'))
             else:
                 self.ship_to=get_address_display(self.get('shipping_address_name'))
+
+        # self.calculate_total_weight_cartoons_and_pallet_quantity()
+
+    def calculate_total_weight_cartoons_and_pallet_quantity(self):
         total_weight = 0
         total_cartons = 0
         pallet_for_total_carton = frappe.db.get_single_value('Bill Of Lading Settings JI', 'pallet_for_total_cartons')
@@ -40,4 +47,3 @@ class BillOfLadingJI(Document):
         else:
             self.pallet_quantity = 0
         self.total_weight = total_weight+(35 * self.pallet_quantity)
-       

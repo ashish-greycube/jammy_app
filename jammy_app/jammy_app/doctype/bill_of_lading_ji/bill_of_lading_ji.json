@@ -140,8 +140,7 @@
    "fieldname": "total_weight",
    "fieldtype": "Int",
    "label": "Total Weight",
-   "precision": "0",
-   "read_only": 1
+   "precision": "0"
   },
   {
    "fieldname": "column_break_dflyg",
@@ -255,7 +254,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-12 01:04:46.676245",
+ "modified": "2026-02-13 03:26:50.107869",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Bill Of Lading JI",
