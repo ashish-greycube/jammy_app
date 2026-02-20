@@ -33,6 +33,18 @@
   "total_cartons",
   "column_break_8mpar",
   "pallet_quantity",
+  "section_break_zoh3g",
+  "pallet_length",
+  "column_break_dadyd",
+  "pallet_width",
+  "column_break_qxugu",
+  "pallet_height",
+  "column_break_kummt",
+  "density",
+  "column_break_vzk1g",
+  "estimated_freight_class",
+  "column_break_1bvil",
+  "printed_freight_class",
   "section_break_bipd9",
   "declared_total_value",
   "column_break_oyzp3",
@@ -250,11 +262,70 @@
    "fieldname": "ship_from_address",
    "fieldtype": "Small Text",
    "label": "Ship From Address"
+  },
+  {
+   "fieldname": "section_break_zoh3g",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "48",
+   "fieldname": "pallet_length",
+   "fieldtype": "Float",
+   "label": "Pallet Length (in)"
+  },
+  {
+   "default": "40",
+   "fieldname": "pallet_width",
+   "fieldtype": "Float",
+   "label": "Pallet Width (in)"
+  },
+  {
+   "fieldname": "pallet_height",
+   "fieldtype": "Float",
+   "label": "Pallet Height (in)"
+  },
+  {
+   "fieldname": "density",
+   "fieldtype": "Float",
+   "label": "Density (Lbs/Ft)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "estimated_freight_class",
+   "fieldtype": "Float",
+   "label": "Estimated Freight Class",
+   "read_only": 1
+  },
+  {
+   "fieldname": "printed_freight_class",
+   "fieldtype": "Float",
+   "label": "Printed Freight Class"
+  },
+  {
+   "fieldname": "column_break_dadyd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_qxugu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_kummt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_vzk1g",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_1bvil",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-13 03:26:50.107869",
+ "modified": "2026-02-19 23:37:51.490283",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Bill Of Lading JI",

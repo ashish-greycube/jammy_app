@@ -29,6 +29,8 @@ class BillOfLadingJI(Document):
 
         # self.calculate_total_weight_cartoons_and_pallet_quantity()
 
+        self.calculate_density_and_freight_class()
+
     def calculate_total_weight_cartoons_and_pallet_quantity(self):
         total_weight = 0
         total_cartons = 0
@@ -47,3 +49,21 @@ class BillOfLadingJI(Document):
         else:
             self.pallet_quantity = 0
         self.total_weight = total_weight+(35 * self.pallet_quantity)
+
+    def calculate_density_and_freight_class(self):
+        if self.pallet_length > 0 and self.pallet_width > 0 and self.pallet_height != None and self.pallet_height > 0:
+            divisor = frappe.db.get_single_value("Bill Of Lading Settings JI", "density_divisor")
+            if divisor != None and divisor > 0 and (self.pallet_length * self.pallet_width * self.pallet_height) > 0:
+                density = (self.total_weight) / ((self.pallet_length * self.pallet_width * self.pallet_height) / divisor)
+                self.density = density
+
+                settings = frappe.get_doc("Bill Of Lading Settings JI")
+                density_class = 0
+                if settings:
+                    for dc in settings.density_class_details:
+                        if density >= dc.get("from") and density < dc.get("to"):
+                            density_class = dc.get("density_class")
+                            break
+                    self.estimated_freight_class = density_class
+                    if self.printed_freight_class == 0 or self.printed_freight_class == None:
+                        self.printed_freight_class = density_class

@@ -22,7 +22,10 @@
   "column_break_qmnc0",
   "carrier_get_payment_caluse",
   "dot_regulation_clause",
-  "carrier_acknowledgment_receipt"
+  "carrier_acknowledgment_receipt",
+  "density_class_details_section",
+  "density_class_details",
+  "density_divisor"
  ],
  "fields": [
   {
@@ -123,12 +126,29 @@
    "fieldtype": "Small Text",
    "label": "Company Address",
    "reqd": 1
+  },
+  {
+   "fieldname": "density_class_details_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "density_class_details",
+   "fieldtype": "Table",
+   "label": "Density Class Details",
+   "options": "Bill Of Ladding Density Class Details JI"
+  },
+  {
+   "default": "1728",
+   "fieldname": "density_divisor",
+   "fieldtype": "Int",
+   "label": "Density Divisor",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-08-18 00:04:37.679042",
+ "modified": "2026-02-19 23:24:31.909191",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Bill Of Lading Settings JI",

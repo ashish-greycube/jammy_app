@@ -21,6 +21,7 @@ def after_migrate():
         )
     setup_custom_fields()
     create_custom_fields_for_tariff()
+    fillup_density_class_details_in_bol_settings()
 
 
 def setup_custom_fields():
@@ -207,3 +208,79 @@ def create_custom_fields_for_tariff():
 	for dt, fields in custom_fields.items():
 		print("*******\n %s: " % dt, [d.get("fieldname") for d in fields])
 	create_custom_fields(custom_fields)
+      
+
+@frappe.whitelist()
+def fillup_density_class_details_in_bol_settings():
+    data = [
+        {
+            "from": 0,
+            "to": 1,
+            "density_class": 400,
+        },
+        {
+            "from": 1,
+            "to": 2,
+            "density_class": 300,
+        },
+        {
+            "from": 2,
+            "to": 4,
+            "density_class": 250,
+        },
+        {
+            "from": 4,
+            "to": 6,
+            "density_class": 175,
+        },
+        {
+            "from": 6,
+            "to": 8,
+            "density_class": 125,
+        },
+        {
+            "from": 8,
+            "to": 10,
+            "density_class": 100,
+        },
+        {
+            "from": 10,
+            "to": 12,
+            "density_class": 92.5,
+        },
+        {
+            "from": 12,
+            "to": 15,
+            "density_class": 85,
+        },
+        {
+            "from": 15,
+            "to": 22.5,
+            "density_class": 70,
+        },
+        {
+            "from": 22.5,
+            "to": 30,
+            "density_class": 65,
+        },
+        {
+            "from": 30,
+            "to": 35,
+            "density_class": 60,
+        },
+        {
+            "from": 35,
+            "to": 50,
+            "density_class": 55,
+        },
+        {
+            "from": 50,
+            "to": 9999,
+            "density_class": 50,
+        }
+    ]
+    settings = frappe.get_doc("Bill Of Lading Settings JI")
+    if settings.density_class_details == []:
+        for d in data:
+            settings.append("density_class_details", d)
+        settings.save(ignore_permissions=True)
