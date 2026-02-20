@@ -141,14 +141,13 @@
    "default": "1728",
    "fieldname": "density_divisor",
    "fieldtype": "Int",
-   "label": "Density Divisor",
-   "reqd": 1
+   "label": "Density Divisor"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-02-19 23:24:31.909191",
+ "modified": "2026-02-20 06:14:16.937063",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Bill Of Lading Settings JI",
