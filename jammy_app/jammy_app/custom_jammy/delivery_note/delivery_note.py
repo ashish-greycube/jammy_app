@@ -1,10 +1,8 @@
-from __future__ import unicode_literals
 from frappe.model.document import Document
 import frappe
 from frappe import utils
 from frappe.utils.data import getdate, nowdate
 from frappe.utils import get_link_to_form,flt
-from six import string_types
 from jammy_app.jammy_app.custom_jammy.quotation.quotation import set_total_cartons_and_total_weight
 from itertools import groupby
 

@@ -13,6 +13,7 @@ import erpnext
 
 class ShippingEasyOrder(Document):
     def on_update(self):
+        print("Helo")
         sales_invoice = None
 
         try:
@@ -25,6 +26,7 @@ class ShippingEasyOrder(Document):
                     self.db_set("status", "Cancelled")
                     return
             else:
+                print("Making Sales Invoice for Shipping Easy Order: %s" % self.name)
                 sales_invoice = self.make_sales_invoice()
         except Exception as e:
             self.set_error("Error")

@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-from . import __version__ as app_version
 
 app_name = "jammy_app"
 app_title = "Jammy_app"

@@ -10,8 +10,9 @@ from datetime import datetime, date
 @frappe.whitelist()
 def customer_statement(data, filters):
 	data = json.loads(data)
+	print(data)
 	filters = json.loads(filters)
-	map(lambda d: [d.pop(k) for k in ['credit_note', 'remarks', \
+	map(lambda d: [d.pop(k, None) for k in ['credit_note', 'remarks', \
 		'territory', 'customer_group']], data)
 	
 	pe_references = []
@@ -64,7 +65,7 @@ def customer_statement(data, filters):
 			if si_references_:
 				row.update({"your_reference": si_references_.get(row.get('voucher_no'))})
 		elif row.get('voucher_type') == "Payment Entry":
-			dt_format = frappe.db.get_value("System Settings", "System Settings", "date_format")
+			dt_format = frappe.db.get_single_value("System Settings","date_format")
 			payment_entry_date= frappe.db.get_value("Payment Entry", {'name':row.get('voucher_no') },'posting_date')
 			pe_date_list.append(payment_entry_date) if payment_entry_date else 0 
 			if len(pe_references_) == 1 :
@@ -74,37 +75,62 @@ def customer_statement(data, filters):
 		if pe_date_list:
 			row.update({"payment_entry_date": pe_date_list[-1]})
 		row.update({"address": address_details.get(row.get('party'))})
-	data = sorted(data, key=lambda k: k['party'])
+	data = sorted(data, key=lambda k: k['party'] if 'party' in k else 'customer')
 	
 	party_current_due_amount=0.0
 	for dc in data:
-		if dc['age'] and flt(dc['age'])<0 and dc.get('party')!='':
-			party_current_due_amount=float(flt(dc['outstanding'])+flt(party_current_due_amount))
+		if dc['age_(days)'] and flt(dc['age_(days)'])<0 and dc.get('customer')!='':
+			party_current_due_amount=float(flt(dc['outstanding_amount'])+flt(party_current_due_amount))
 
 	final_report_dict = {}
 	for d in data:
-		if d.get('party') in final_report_dict:
-			if d['outstanding']:
-				d['outstanding'] = "{:,.2f}".format(d['outstanding'])
+		if d.get('customer') in final_report_dict:
+			if d['outstanding_amount']:
+				d['outstanding_amount'] = "{:,.2f}".format(d['outstanding_amount'])
 			if not d['posting_date'] == '':
 				d['posting_date'] = change_date_format(d['posting_date'])
 			if 'due_date' in d:
 				if not d['due_date'] == '':
 					d['due_date'] = change_date_format(d['due_date'])
-			if not d['range1'] == '':
-				d['range1'] = format(float(d['range1']),".2f")
-			if not d['range2'] == '':
-				d['range2'] = format(float(d['range2']),".2f")
-			if not d['range3'] == '':
-				d['range3'] = format(float(d['range3']),".2f")
-			if not d['range4'] == '':
-				d['range4'] = format(float(d['range4']),".2f")
-			if not d['range5'] == '':
-				d['range5'] = format(float(d['range5']),".2f")
-			final_report_dict[d.get('party')].append(d)
+
+			if 'range1' in filters and f"0_{filters['range1']}" in d and d[f"0_{filters['range1']}"] != '':
+				d[f"0_{filters['range1']}"] = format(float(d[f"0_{filters['range1']}"]), ".2f")
+
+			if (
+				'range1' in filters and 'range2' in filters and
+				f"{filters['range1']+1}_{filters['range2']}" in d and
+				d[f"{filters['range1']+1}_{filters['range2']}"] != ''
+			):
+				d[f"{filters['range1']+1}_{filters['range2']}"] = format(
+					float(d[f"{filters['range1']+1}_{filters['range2']}"]), ".2f"
+				)
+
+			if (
+				'range2' in filters and 'range3' in filters and
+				f"{filters['range2']+1}_{filters['range3']}" in d and
+				d[f"{filters['range2']+1}_{filters['range3']}"] != ''
+			):
+				d[f"{filters['range2']+1}_{filters['range3']}"] = format(
+					float(d[f"{filters['range2']+1}_{filters['range3']}"]), ".2f"
+				)
+
+			if (
+				'range3' in filters and 'range4' in filters and
+				f"{filters['range3']+1}_{filters['range4']}" in d and
+				d[f"{filters['range3']+1}_{filters['range4']}"] != ''
+			):
+				d[f"{filters['range3']+1}_{filters['range4']}"] = format(
+					float(d[f"{filters['range3']+1}_{filters['range4']}"]), ".2f"
+				)
+
+			if 'range5' in filters and f"{filters['range5']}_above" in d and d[f"{filters['range5']}_above"] != '':
+				d[f"{filters['range5']}_above"] = format(
+					float(d[f"{filters['range5']}_above"]), ".2f"
+				)
+			final_report_dict[d.get('customer')].append(d)
 		else:
-			if d['outstanding']:
-				d['outstanding'] = "{:,.2f}".format(d['outstanding'])
+			if d['outstanding_amount']:
+				d['outstanding_amount'] = "{:,.2f}".format(d['outstanding_amount'])
 			if not d['posting_date'] == '':
 				print(d['posting_date'])
 				d['posting_date'] = change_date_format(d['posting_date'])
@@ -112,17 +138,41 @@ def customer_statement(data, filters):
 			if 'due_date' in d:
 				if not d['due_date'] == '':
 					d['due_date'] = change_date_format(d['due_date'])
-			if not d['range1'] == '':
-				d['range1'] = format(float(d['range1']),".2f")
-			if not d['range2'] == '':
-				d['range2'] = format(float(d['range2']),".2f")
-			if not d['range3'] == '':
-				d['range3'] = format(float(d['range3']),".2f")
-			if not d['range4'] == '':
-				d['range4'] = format(float(d['range4']),".2f")
-			if not d['range5'] == '':
-				d['range5'] = format(float(d['range5']),".2f")
-			final_report_dict.update({d.get('party'): [d]})
+			if 'range1' in filters and f"0_{filters['range1']}" in d and d[f"0_{filters['range1']}"] != '':
+				d[f"0_{filters['range1']}"] = format(float(d[f"0_{filters['range1']}"]), ".2f")
+
+			if (
+				'range1' in filters and 'range2' in filters and
+				f"{filters['range1']+1}_{filters['range2']}" in d and
+				d[f"{filters['range1']+1}_{filters['range2']}"] != ''
+			):
+				d[f"{filters['range1']+1}_{filters['range2']}"] = format(
+					float(d[f"{filters['range1']+1}_{filters['range2']}"]), ".2f"
+				)
+
+			if (
+				'range2' in filters and 'range3' in filters and
+				f"{filters['range2']+1}_{filters['range3']}" in d and
+				d[f"{filters['range2']+1}_{filters['range3']}"] != ''
+			):
+				d[f"{filters['range2']+1}_{filters['range3']}"] = format(
+					float(d[f"{filters['range2']+1}_{filters['range3']}"]), ".2f"
+				)
+
+			if (
+				'range3' in filters and 'range4' in filters and
+				f"{filters['range3']+1}_{filters['range4']}" in d and
+				d[f"{filters['range3']+1}_{filters['range4']}"] != ''
+			):
+				d[f"{filters['range3']+1}_{filters['range4']}"] = format(
+					float(d[f"{filters['range3']+1}_{filters['range4']}"]), ".2f"
+				)
+
+			if 'range5' in filters and f"{filters['range5']}_above" in d and d[f"{filters['range5']}_above"] != '':
+				d[f"{filters['range5']}_above"] = format(
+					float(d[f"{filters['range5']}_above"]), ".2f"
+				)
+			final_report_dict.update({d.get('customer'): [d]})
 		d['party_current_due_amount']=format(float(party_current_due_amount),".2f")
 	final_report_dict1 = list(final_report_dict)
 	return final_report_dict

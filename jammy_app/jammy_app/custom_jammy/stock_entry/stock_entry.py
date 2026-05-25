@@ -1,7 +1,5 @@
-from __future__ import unicode_literals
 from frappe.model.document import Document
 import frappe
-from six import string_types
 
 def validate(self,method):
     set_total_catron_weight_and_carton_weight(self)

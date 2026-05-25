@@ -2,7 +2,6 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd.
 # License: GNU General Public License v3. See license.txt
 
-from __future__ import unicode_literals
 import frappe
 from frappe import _, scrub
 from frappe.utils import getdate, nowdate, flt, cint, add_to_date
@@ -13,7 +12,7 @@ import os
 from frappe.utils import get_files_path
 import pdfkit
 import sys
-from frappe.utils.file_manager import save_url
+# from frappe.utils.file_manager import save_url
 import json
 import datetime
 import shutil
@@ -22,7 +21,7 @@ import pdfkit, os, frappe
 from frappe.utils import scrub_urls
 from frappe import _
 from bs4 import BeautifulSoup
-from PyPDF2 import PdfFileWriter, PdfFileReader
+# from PyPDF2 import PdfFileWriter, PdfFileReader
 from jammy_app.jammy_app.report.customer_statement.customize_customer_statement import convert_pdf
 # from datetime import datetime
 
@@ -40,6 +39,7 @@ class JammyReceivablePayableReport(object):
 		columns = self.get_columns(party_naming_by, args)
 		data = self.get_data(party_naming_by, args)
 		chart = self.get_chart_data(columns, data)
+		print(chart)
 		return columns, data, None, chart
 
 	def get_columns(self, party_naming_by, args):
@@ -328,20 +328,27 @@ class JammyReceivablePayableReport(object):
 			.get(against_voucher, [])
 
 	def get_chart_data(self, columns, data):
-		ageing_columns = columns[self.ageing_col_idx_start : self.ageing_col_idx_start+4]
+		ageing_columns = columns[
+			self.ageing_col_idx_start : self.ageing_col_idx_start + 4
+		]
 
-		rows = []
-		for d in data:
-			rows.append(d[self.ageing_col_idx_start : self.ageing_col_idx_start+4])
+		labels = [d.get("label") for d in ageing_columns]
 
-		if rows:
-			rows.insert(0, [[d.get("label")] for d in ageing_columns])
+		datasets = []
+
+		for row in data:
+			datasets.append({
+				"values": row[
+					self.ageing_col_idx_start : self.ageing_col_idx_start + 4
+				]
+			})
 
 		return {
 			"data": {
-				'labels': rows
+				"labels": labels,
+				"datasets": datasets
 			},
-			"type": 'percentage'
+			"type": "percentage"
 		}
 
 def execute(filters=None):
@@ -374,8 +381,8 @@ def get_ageing_data(first_range, second_range, third_range, age_as_on, entry_dat
 def generate_customer_statement(data, filters, report_manager):
 	fil = json.loads(filters)
 	site_path = os.getcwd()
-	current_site = open("currentsite.txt","r")
-	sitename = current_site.read()
+	# current_site = open("currentsite.txt","r")
+	sitename = frappe.local.site#current_site.read()
 	file_path =  site_path+"/"+sitename+"/public/files/"
 	customer_statement_file = open(file_path+"customer_statement_report.html","w+")
 	customer_letter_file = open(file_path+"customer_letter_report.html","w+")
@@ -385,11 +392,11 @@ def generate_customer_statement(data, filters, report_manager):
 		customer_statement_data = customer_statement(data, filters)
 		for key,values in customer_statement_data.items():
 			for val in values:
-				total += val['Outstanding Amount']
-				total_range1 += val['0-'+str(fil['range1'])]
-				total_range2 += val[str((fil['range1'] + 1))+'-'+str(fil['range2'])]
-				total_range3 += val[str((fil['range2'] + 1))+'-'+str(fil['range3'])]
-				total_range4 += val[str((fil['range3'] + 1))+'-Above']
+				total += float(val['outstanding_amount'].replace(',','')) if val['outstanding_amount'] else 0
+				total_range1 += float(val['0_'+str(fil['range1'])])
+				total_range2 += float(val[str((fil['range1'] + 1))+'_'+str(fil['range2'])])
+				total_range3 += float(val[str((fil['range2'] + 1))+'_'+str(fil['range3'])])
+				total_range4 += float(val[str((fil['range3'] + 1))+'_above'])
 			total_range = {'total_range1':total_range1, 'total_range2':total_range2, 'total_range3':total_range3, 'total_range4':total_range4}
 			dt_format = frappe.db.get_value("System Settings", "System Settings", "date_format")
 			curr_date = datetime.datetime.strptime(nowdate(), '%Y-%m-%d').strftime('%m/%d/%Y')
