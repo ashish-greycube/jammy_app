@@ -77,16 +77,30 @@ def customer_statement(data, filters):
 		row.update({"address": address_details.get(row.get('party'))})
 	data = sorted(data, key=lambda k: k['party'] if 'party' in k else 'customer')
 	
+	age_field_name = ""
+	outstanding_amount_field_name = ""
+
 	party_current_due_amount=0.0
 	for dc in data:
-		if dc['age_(days)'] and flt(dc['age_(days)'])<0 and dc.get('customer')!='':
-			party_current_due_amount=float(flt(dc['outstanding_amount'])+flt(party_current_due_amount))
+
+		if "age_(days)" in dc:
+			age_field_name = "age_(days)"
+		elif "age" in dc:
+			age_field_name = "age"
+
+		if "outstanding_amount" in dc:
+			outstanding_amount_field_name = "outstanding_amount"
+		elif "outstanding" in dc:
+			outstanding_amount_field_name = "outstanding"
+
+		if dc[age_field_name] and flt(dc[age_field_name])<0 and dc.get('customer')!='':
+			party_current_due_amount=float(flt(dc[outstanding_amount_field_name])+flt(party_current_due_amount))
 
 	final_report_dict = {}
 	for d in data:
 		if d.get('customer') in final_report_dict:
-			if d['outstanding_amount']:
-				d['outstanding_amount'] = "{:,.2f}".format(d['outstanding_amount'])
+			if d[outstanding_amount_field_name]:
+				d[outstanding_amount_field_name] = "{:,.2f}".format(d[outstanding_amount_field_name])
 			if not d['posting_date'] == '':
 				d['posting_date'] = change_date_format(d['posting_date'])
 			if 'due_date' in d:
@@ -129,8 +143,8 @@ def customer_statement(data, filters):
 				)
 			final_report_dict[d.get('customer')].append(d)
 		else:
-			if d['outstanding_amount']:
-				d['outstanding_amount'] = "{:,.2f}".format(d['outstanding_amount'])
+			if d[outstanding_amount_field_name]:
+				d[outstanding_amount_field_name] = "{:,.2f}".format(d[outstanding_amount_field_name])
 			if not d['posting_date'] == '':
 				print(d['posting_date'])
 				d['posting_date'] = change_date_format(d['posting_date'])
