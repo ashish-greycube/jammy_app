@@ -98,7 +98,7 @@ def customer_statement(data, filters):
 
 	final_report_dict = {}
 	for d in data:
-		if d.get('customer') in final_report_dict:
+		if d.get('party') in final_report_dict:
 			if d[outstanding_amount_field_name]:
 				d[outstanding_amount_field_name] = "{:,.2f}".format(d[outstanding_amount_field_name])
 			if not d['posting_date'] == '':
@@ -141,7 +141,7 @@ def customer_statement(data, filters):
 				d[f"{filters['range5']}_above"] = format(
 					float(d[f"{filters['range5']}_above"]), ".2f"
 				)
-			final_report_dict[d.get('customer')].append(d)
+			final_report_dict[d.get('party')].append(d)
 		else:
 			if d[outstanding_amount_field_name]:
 				d[outstanding_amount_field_name] = "{:,.2f}".format(d[outstanding_amount_field_name])
@@ -186,7 +186,7 @@ def customer_statement(data, filters):
 				d[f"{filters['range5']}_above"] = format(
 					float(d[f"{filters['range5']}_above"]), ".2f"
 				)
-			final_report_dict.update({d.get('customer'): [d]})
+			final_report_dict.update({d.get('party'): [d]})
 		d['party_current_due_amount']=format(float(party_current_due_amount),".2f")
 	final_report_dict1 = list(final_report_dict)
 	return final_report_dict
