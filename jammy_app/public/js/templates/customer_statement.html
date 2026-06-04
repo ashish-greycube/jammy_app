@@ -101,7 +101,7 @@
 		</table>
 	</div>
 	<div class="">
-		<div class="text-right">Total Balance: {%= format_currency(flt(total_amount)) %}</div>
+		<div class="text-right"><b>Total Balance: {%= format_currency(flt(total_amount)) %}</b></div>
 	</div>
 	<div class="">
 		{%
@@ -121,7 +121,6 @@
 
 		<table class="table table-borderless" style="font-size:95%;">
 			<tr>
-				<td style="text-align:center;">Total</td>
 				<td style="text-align:center;">Current</td>
 				<td style="text-align:center;">Past Due 1-{{ filters.range1 }}</td>
 				<td style="text-align:center;">Past Due {%= filters.range1 + 1 %}-{{ filters.range2 }}</td>
@@ -130,7 +129,6 @@
 				<td style="text-align:center;">Past Due {%= filters.range4 + 1 %}-above</td>
 			</tr>
 			<tr>
-				<td style="text-align:center;">{%= format_currency(flt(total_amount)) %}</td>
 				<td style="text-align:center;">{%= format_currency(flt(data[i][0].party_current_due_amount)) %}</td>
 				<td style="text-align:center;">{%= format_currency(flt(range_1)) %}</td>
 				<td style="text-align:center;">{%= format_currency(flt(range_2)) %}</td>

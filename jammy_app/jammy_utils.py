@@ -10,7 +10,7 @@ from datetime import datetime, date
 @frappe.whitelist()
 def customer_statement(data, filters):
 	data = json.loads(data)
-	print(data)
+	# print(data)
 	filters = json.loads(filters)
 	map(lambda d: [d.pop(k, None) for k in ['credit_note', 'remarks', \
 		'territory', 'customer_group']], data)
@@ -75,32 +75,18 @@ def customer_statement(data, filters):
 		if pe_date_list:
 			row.update({"payment_entry_date": pe_date_list[-1]})
 		row.update({"address": address_details.get(row.get('party'))})
-	data = sorted(data, key=lambda k: k['party'] if 'party' in k else 'customer')
-	
-	age_field_name = ""
-	outstanding_amount_field_name = ""
+	data = sorted(data, key=lambda k: k['party'])
 
 	party_current_due_amount=0.0
 	for dc in data:
-
-		if "age_(days)" in dc:
-			age_field_name = "age_(days)"
-		elif "age" in dc:
-			age_field_name = "age"
-
-		if "outstanding_amount" in dc:
-			outstanding_amount_field_name = "outstanding_amount"
-		elif "outstanding" in dc:
-			outstanding_amount_field_name = "outstanding"
-
-		if dc[age_field_name] and flt(dc[age_field_name])<0 and dc.get('customer')!='':
-			party_current_due_amount=float(flt(dc[outstanding_amount_field_name])+flt(party_current_due_amount))
+		if dc['age'] and flt(dc['age'])<0 and dc.get('party')!='':
+			party_current_due_amount=float(flt(dc['outstanding'])+flt(party_current_due_amount))
 
 	final_report_dict = {}
 	for d in data:
 		if d.get('party') in final_report_dict:
-			if d[outstanding_amount_field_name]:
-				d[outstanding_amount_field_name] = "{:,.2f}".format(d[outstanding_amount_field_name])
+			if d['outstanding']:
+				d['outstanding'] = "{:,.2f}".format(d['outstanding'])
 			if not d['posting_date'] == '':
 				d['posting_date'] = change_date_format(d['posting_date'])
 			if 'due_date' in d:
@@ -143,12 +129,10 @@ def customer_statement(data, filters):
 				)
 			final_report_dict[d.get('party')].append(d)
 		else:
-			if d[outstanding_amount_field_name]:
-				d[outstanding_amount_field_name] = "{:,.2f}".format(d[outstanding_amount_field_name])
+			if d['outstanding']:
+				d['outstanding'] = "{:,.2f}".format(d['outstanding'])
 			if not d['posting_date'] == '':
-				print(d['posting_date'])
 				d['posting_date'] = change_date_format(d['posting_date'])
-				print(d['posting_date'])
 			if 'due_date' in d:
 				if not d['due_date'] == '':
 					d['due_date'] = change_date_format(d['due_date'])
