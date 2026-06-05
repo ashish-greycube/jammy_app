@@ -25,6 +25,20 @@ frappe.ui.form.on("Purchase Order", {
     before_save: async function (frm) {
         await call_main(frm)
         cur_frm.refresh_field('items')
+    },
+    onload_post_render(frm){
+        console.log('onload_post_render')
+        frm.set_query("batch_no", "items", function (doc, cdt, cdn) {
+            let row = locals[cdt][cdn]
+            let filters = {
+				item_code: row.item_code,
+                warehouse: row.warehouse,
+			};
+            return {
+				query: "erpnext.controllers.queries.get_batch_no",
+				filters: filters,
+			};
+		});
     }
 })
 
