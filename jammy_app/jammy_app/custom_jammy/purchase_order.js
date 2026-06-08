@@ -27,12 +27,13 @@ frappe.ui.form.on("Purchase Order", {
         cur_frm.refresh_field('items')
     },
     onload_post_render(frm){
-        console.log('onload_post_render')
         frm.set_query("batch_no", "items", function (doc, cdt, cdn) {
             let row = locals[cdt][cdn]
             let filters = {
 				item_code: row.item_code,
                 warehouse: row.warehouse,
+                posting_date: frm.doc.posting_date || frappe.datetime.nowdate(),
+                is_inward: 1
 			};
             return {
 				query: "erpnext.controllers.queries.get_batch_no",
