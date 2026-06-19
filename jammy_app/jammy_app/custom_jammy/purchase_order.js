@@ -120,7 +120,7 @@ function get_item_details(frm, item, overwrite_warehouse=false) {
 			method: "erpnext.stock.get_item_details.get_item_details",
 			child: item,
 			args: {
-				args: {
+				ctx: {
 					item_code: item.item_code,
                     is_old_subcontracting_flow:frm.doc.is_old_subcontracting_flow,
                     supplier:frm.doc.supplier,
