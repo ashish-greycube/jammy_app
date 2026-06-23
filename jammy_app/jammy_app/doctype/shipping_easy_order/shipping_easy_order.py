@@ -33,12 +33,15 @@ class ShippingEasyOrder(Document):
             try:
                 sales_invoice.update_stock = 1
                 sales_invoice.save()
+
+                frappe.db.savepoint("jammy_on_update_shipping_easy_order_before_sales_invoice_submit")
                 sales_invoice.submit()
-            except erpnext.stock.stock_ledger.NegativeStockError:
-                self.set_error("Error")
-            except UnableToSelectBatchError:
-                self.set_error("Batch Error")
-            except Exception as e:
+            except (
+                erpnext.stock.stock_ledger.NegativeStockError,
+                UnableToSelectBatchError,
+                Exception,
+            ):
+                frappe.db.rollback(save_point="jammy_on_update_shipping_easy_order_before_sales_invoice_submit")
                 self.set_error("Error")
 
     def set_error(self, status):
