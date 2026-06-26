@@ -116,6 +116,10 @@ def _sync_orders(from_date=None):
 def make_shipping_easy_order(order):
     uid = hashlib.sha256(json.dumps(order).encode("utf-8")).hexdigest()
     try:
+        # ignore redacted orders
+        if cint(order.get("is_redacted")):
+            print("skipping redacted %s" % json.dumps(order))
+            return
         shipments = order.get("shipments", []) or []
         doc = frappe.get_doc(
             {

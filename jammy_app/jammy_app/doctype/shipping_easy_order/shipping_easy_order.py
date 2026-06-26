@@ -13,7 +13,6 @@ import erpnext
 
 class ShippingEasyOrder(Document):
     def on_update(self):
-        print("Helo")
         sales_invoice = None
 
         try:
@@ -72,10 +71,12 @@ class ShippingEasyOrder(Document):
             "Sales Invoice",
             {"po_no": self.external_order_identifier, "docstatus": 1},
         ):
-            frappe.log_error(
-                title="Sales Invoice exists for po_no: %s. Skipping Shipping Easy Order: %s"
-                % (self.external_order_identifier, self.order_id)
-            )
+            # frappe.log_error(
+            #     title="Sales Invoice exists for po_no: %s. Skipping Shipping Easy Order: %s"
+            #     % (self.external_order_identifier, self.order_id)
+            # )
+            self.error = ("Sales Invoice exists for po_no: %s."%(self.external_order_identifier,))
+            self.status = "Skipped"
             return
 
         settings = frappe.get_single("Jammy Settings")
