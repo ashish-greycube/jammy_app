@@ -118,7 +118,7 @@ def make_shipping_easy_order(order):
     try:
         # ignore redacted orders
         if cint(order.get("is_redacted")):
-            print("skipping redacted %s" % json.dumps(order))
+            print("skipping redacted %s" % order["external_order_identifier"])
             return
         shipments = order.get("shipments", []) or []
         doc = frappe.get_doc(

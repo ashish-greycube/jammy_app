@@ -75,8 +75,9 @@ class ShippingEasyOrder(Document):
             #     title="Sales Invoice exists for po_no: %s. Skipping Shipping Easy Order: %s"
             #     % (self.external_order_identifier, self.order_id)
             # )
-            self.error = ("Sales Invoice exists for po_no: %s."%(self.external_order_identifier,))
-            self.status = "Skipped"
+            self.db_set("error",("Sales Invoice exists for po_no: %s."%(self.external_order_identifier,)))
+            self.db_set("status", "Skipped")
+            print("Skipped %s. Sales Invoice exists." % (self.external_order_identifier))
             return
 
         settings = frappe.get_single("Jammy Settings")
