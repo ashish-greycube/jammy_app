@@ -105,6 +105,9 @@ def create_payment_entry(reference_doctype, reference_name, data):
             'paid_from' : settings.default_paid_from_account,
             'paid_to' : settings.default_paid_to_account,
             'paid_amount' : data.get('amount') / 100,
+            "paid_from_account_currency" : settings.paid_from_account_currency,
+            "paid_to_account_currency" : settings.paid_to_account_currency,
+            "received_amount": data.get('amount') / 100,
             'reference_no' : reference_name,
             'reference_date' : frappe.utils.today(),
         })

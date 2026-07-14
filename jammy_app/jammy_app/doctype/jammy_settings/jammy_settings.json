@@ -21,9 +21,11 @@
   "shipping_easy_store_api_key",
   "stripe_payment_settings_section",
   "default_paid_to_account",
+  "paid_to_account_currency",
   "stripe_webhook_secret",
   "column_break_eacn",
-  "default_paid_from_account"
+  "default_paid_from_account",
+  "paid_from_account_currency"
  ],
  "fields": [
   {
@@ -128,12 +130,26 @@
    "fieldname": "stripe_webhook_secret",
    "fieldtype": "Password",
    "label": "Stripe Webhook Secret"
+  },
+  {
+   "fetch_from": "default_paid_to_account.account_currency",
+   "fieldname": "paid_to_account_currency",
+   "fieldtype": "Data",
+   "label": "Paid To Account Currency",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "default_paid_from_account.account_currency",
+   "fieldname": "paid_from_account_currency",
+   "fieldtype": "Data",
+   "label": "Paid From Account Currency",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "issingle": 1,
  "links": [],
- "modified": "2026-07-13 23:16:59.927321",
+ "modified": "2026-07-14 01:22:08.566534",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Jammy Settings",
