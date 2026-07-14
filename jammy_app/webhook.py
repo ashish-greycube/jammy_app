@@ -1,34 +1,88 @@
 import frappe
+import stripe
 
 @frappe.whitelist(allow_guest=True)
 def on_payment_authorized():
     """
-    This function is called when a payment is authorized.
-    It can be used to perform actions such as updating the order status.
+    Webhook endpoint to handle successful Stripe charge payments.
     """
-    data = frappe.local.form_dict
+    # 1. Setup Keys
+    stripe_settings = frappe.get_doc("Stripe Settings", "Stripe Gateway")
+    jammy_settings = frappe.get_doc("Jammy Settings")
+    stripe.api_key = stripe_settings.get_password("secret_key")
+    endpoint_secret = jammy_settings.get_password("stripe_webhook_secret")
 
-    if data:
-        try:
-            status = data.get("status")
-            isPaid = data.get("paid")
-            if status == "succeeded" and isPaid:
-                description = data.get("description")
-                payment_req = frappe.get_doc("Payment Request", {"subject": description}, "name")
-                if payment_req:
-                    reference_doctype = frappe.db.set_value("Payment Request", payment_req, 'reference_doctype')
-                    reference_name = frappe.db.set_value("Payment Request", payment_req, 'reference_name')
-                    payment_entry = create_payment_entry(reference_doctype, reference_name, data)
+    # 2. Get Raw Payload
+    payload = frappe.request.get_data(as_text=True)
+    sig_header = frappe.request.headers.get('Stripe-Signature')
+
+    event = None
+
+    # 3. Verify Signature
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Meaningful title for malformed JSON/Data
+        frappe.log_error(message=str(e), title="Stripe Webhook Error: Invalid JSON Payload")
+        frappe.local.response['http_status_code'] = 400
+        return "Invalid payload"
+    except stripe.error.SignatureVerificationError as e:
+        # Meaningful title for security/hacker attempts
+        frappe.log_error(message=str(e), title="Stripe Webhook Security: Signature Verification Failed")
+        frappe.local.response['http_status_code'] = 400
+        return "Invalid signature"
+
+    # 4. Handle the 'charge.succeeded' event
+    # Stripe wraps the payload you provided inside an event object
+    if event['type'] == 'charge.succeeded':
+        
+        # This 'charge' variable now contains the exact JSON payload you shared above
+        charge = event['data']['object'] 
+        
+        description = charge.get("description")
+        status = charge.get("status")
+        is_paid = charge.get("paid")
+        
+        # Double check the status based on your payload flags
+        if status == "succeeded" and is_paid:
+            try:
+                # Find the Payment Request name where subject == description
+                payment_req_name = frappe.db.get_value("Payment Request", {"subject": description}, "name")
+                
+                if payment_req_name:
+                    ref_doctype, ref_name = frappe.db.get_value(
+                        "Payment Request", 
+                        payment_req_name, 
+                        ['reference_doctype', 'reference_name']
+                    )
+                    
+                    # Pass the charge object to your entry creation function
+                    payment_entry = create_payment_entry(ref_doctype, ref_name, charge)
+                    
                     if payment_entry:
-                        frappe.db.set_value("Payment Request", payment_req, "status", "Paid")
+                        frappe.db.set_value("Payment Request", payment_req_name, "status", "Paid")
                         frappe.db.commit()
-                    return
-        except Exception as e:
-            log = frappe.log_error(message=frappe.get_traceback(), title="Stripe: Payment Authorization Error for")
-            return
-    else:
-        log = frappe.log_error(message=data, title="Stripe: No Response Data From Webhook")
-        return
+                else:
+                    # Meaningful title for missing records. Includes Charge ID for easy debugging.
+                    frappe.log_error(
+                        message=f"Could not find a Payment Request with subject: '{description}'. Charge ID: {charge.get('id')}", 
+                        title="Stripe Webhook Mismatch: Payment Request Not Found"
+                    )
+                    
+            except Exception as e:
+                # Meaningful title for database/code crashes. Includes Charge ID.
+                frappe.log_error(
+                    message=frappe.get_traceback(), 
+                    title=f"Stripe Webhook Critical: DB Update Failed for Charge {charge.get('id')}"
+                )
+                frappe.local.response['http_status_code'] = 500
+                return "Internal Server Error"
+
+    # 5. Always return a 200 OK to Stripe
+    frappe.local.response['http_status_code'] = 200
+    return "Success"
 
 def create_payment_entry(reference_doctype, reference_name, data):
     """

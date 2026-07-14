@@ -21,6 +21,7 @@
   "shipping_easy_store_api_key",
   "stripe_payment_settings_section",
   "default_paid_to_account",
+  "stripe_webhook_secret",
   "column_break_eacn",
   "default_paid_from_account"
  ],
@@ -122,12 +123,17 @@
   {
    "fieldname": "column_break_eacn",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "stripe_webhook_secret",
+   "fieldtype": "Password",
+   "label": "Stripe Webhook Secret"
   }
  ],
  "grid_page_length": 50,
  "issingle": 1,
  "links": [],
- "modified": "2026-07-13 06:59:55.492054",
+ "modified": "2026-07-13 23:16:59.927321",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Jammy Settings",
