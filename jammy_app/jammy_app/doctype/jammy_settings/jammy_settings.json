@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_bulk_edit": 1,
  "creation": "2020-01-23 04:24:50.724108",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -17,7 +18,11 @@
   "shipping_easy_api_key",
   "shipping_easy_api_secret",
   "shipping_easy_api_endpoint",
-  "shipping_easy_store_api_key"
+  "shipping_easy_store_api_key",
+  "stripe_payment_settings_section",
+  "default_paid_to_account",
+  "column_break_eacn",
+  "default_paid_from_account"
  ],
  "fields": [
   {
@@ -93,11 +98,36 @@
    "fieldtype": "Link",
    "label": "Shipping Charge Item",
    "options": "Item"
+  },
+  {
+   "fieldname": "stripe_payment_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Stripe Payment Settings"
+  },
+  {
+   "description": "Stripe Account",
+   "fieldname": "default_paid_to_account",
+   "fieldtype": "Link",
+   "label": "Default Paid To Account",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "default_paid_from_account",
+   "fieldtype": "Link",
+   "label": "Default Paid From Account",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_eacn",
+   "fieldtype": "Column Break"
   }
  ],
+ "grid_page_length": 50,
  "issingle": 1,
  "links": [],
- "modified": "2025-06-05 02:05:20.187839",
+ "modified": "2026-07-13 06:59:55.492054",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Jammy Settings",
@@ -115,6 +145,8 @@
   }
  ],
  "quick_entry": 1,
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
