@@ -112,7 +112,14 @@ def create_payment_entry(reference_doctype, reference_name, data):
             'reference_date' : frappe.utils.today(),
         })
 
+        payment_entry.append("references", {
+            "reference_doctype": reference_doctype,
+            "reference_name": reference_name,
+            "allocated_amount": data.get('amount') / 100
+        })
+
         payment_entry.insert(ignore_permissions=True)
+        payment_entry.submit()
         return payment_entry.name
     except Exception as e:
         log = frappe.log_error(message=frappe.get_traceback(), title="Stripe: Payment Entry Creation Error")
