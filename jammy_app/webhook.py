@@ -89,6 +89,9 @@ def create_payment_entry(reference_doctype, reference_name, data):
     This function creates a payment entry in the system.
     """
     try:
+        # Set user as Administrator to avoid permission issue
+        frappe.set_user("Administrator")
+    
         reference_doc = frappe.get_doc(reference_doctype, reference_name)
         settings = frappe.get_doc("Jammy Settings")
         payment_entry = frappe.new_doc("Payment Entry")
