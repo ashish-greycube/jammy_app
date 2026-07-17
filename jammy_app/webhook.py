@@ -62,7 +62,10 @@ def on_payment_authorized():
                     payment_entry = create_payment_entry(ref_doctype, ref_name, charge)
                     
                     if payment_entry:
-                        frappe.db.set_value("Payment Request", payment_req_name, "status", "Paid")
+                        # frappe.db.set_value("Payment Request", payment_req_name, "status", "Paid")
+                        doc = frappe.get_doc("Payment Request", payment_req_name)
+                        doc.status = "Paid"
+                        doc.save(ignore_permissions=True)
                         frappe.db.commit()
                 else:
                     # Meaningful title for missing records. Includes Charge ID for easy debugging.
