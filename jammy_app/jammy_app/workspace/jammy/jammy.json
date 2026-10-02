@@ -130,9 +130,73 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Custom Reports",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "amz_test",
+   "link_count": 0,
+   "link_to": "amz_test",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Sales Invoice",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Missing SKU",
+   "link_count": 0,
+   "link_to": "MIssing SKU",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Error Log",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "SEO Sales Invoice to Cancel and Amend",
+   "link_count": 0,
+   "link_to": "SEO Sales Invoice to Cancel and Amend",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Shipping Easy Order",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Shipping Easy Order To Sales Invoice",
+   "link_count": 0,
+   "link_to": "Shipping Easy Order To Sales Invoice",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Shipping Easy Order",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Jammy Sales Analytics Report",
+   "link_count": 0,
+   "link_to": "Jammy Sales Analytics",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Sales Order",
+   "type": "Link"
   }
  ],
- "modified": "2026-09-16 01:20:26.603260",
+ "modified": "2026-10-02 02:39:00.525759",
  "modified_by": "Administrator",
  "module": "Jammy_app",
  "name": "Jammy",
