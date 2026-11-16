@@ -19,6 +19,16 @@ app_license = "MIT"
 
 app_include_js = ["jammy_app.bundle.js"]
 
+# jinja methods available in print formats
+jinja = {
+	"methods": [
+		"jammy_app.barcode_label.barcode_svg",
+		"jammy_app.barcode_label.get_item_barcode",
+		"jammy_app.barcode_label.get_customer_supplier_number",
+		"jammy_app.barcode_label.normalize_gtin14",
+	]
+}
+
 # include js, css files in header of web template
 # web_include_css = "/assets/jammy_app/css/jammy_app.css"
 # web_include_js = "/assets/jammy_app/js/jammy_app.js"

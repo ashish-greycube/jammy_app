@@ -1,0 +1,189 @@
+<style>
+	/*
+	 * 4" x 6" label. These properties on ".print-format" are read by Frappe and passed to
+	 * wkhtmltopdf, so the PDF page is exactly 4in x 6in regardless of Print Settings
+	 * (no zoom / "shrink to fit" needed).
+	 */
+	.print-format {
+		page-size: Custom;
+		page-width: 4in;
+		page-height: 6in;
+		margin-top: 0.1in;
+		margin-bottom: 0.1in;
+		margin-left: 0.1in;
+		margin-right: 0.1in;
+	}
+
+	@page {
+		size: 4in 6in;
+		margin: 0.1in;
+	}
+
+	@media screen {
+		html body .print-format {
+			max-width: 4.2in;
+			min-height: 0;
+			padding: 0.1in;
+		}
+		.jl-label { border: 1px dashed #bbb; margin-bottom: 0.2in; }
+	}
+
+	@media print {
+		html body .print-format {
+			margin: 0 !important;
+			padding: 0 !important;
+			width: 3.8in !important;
+			max-width: 3.8in !important;
+			min-height: 0 !important;
+		}
+	}
+
+	.jl-label {
+		width: 3.8in;
+		height: 5.78in;
+		overflow: hidden;
+		box-sizing: border-box;
+		font-family: Arial, Helvetica, sans-serif;
+		color: #000;
+		font-size: 8.5pt;
+		line-height: 1.2;
+		page-break-inside: avoid;
+	}
+	.jl-label.jl-break { page-break-after: always; }
+
+	.jl-label table {
+		width: 100%;
+		border-collapse: collapse;
+		table-layout: fixed;
+		margin: 0;
+	}
+	.jl-label td {
+		vertical-align: top;
+		padding: 0.04in 0.05in;
+		border: 0;
+	}
+	.jl-label tr.jl-sep > td { border-bottom: 1px solid #000; }
+
+	.jl-header td {
+		text-align: center;
+		font-size: 12pt;
+		font-weight: bold;
+		padding: 0.02in 0.05in 0.05in;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+	.jl-caption { height: 0.15in; white-space: nowrap; overflow: hidden; }
+	.jl-caption-2 { height: 0.29in; overflow: hidden; }
+	.jl-code { height: 0.32in; padding-top: 0.03in; }
+
+	.jl-upc-row td { vertical-align: middle; }
+	.jl-upc-text { font-size: 9pt; }
+	/* exact barcode sizes are set on the <svg> itself; these wrappers just centre it */
+	.jl-upc-img, .jl-gtin-img { display: table; margin: 0 auto; }
+
+	.jl-gtin-row td { text-align: center; padding-top: 0.06in; padding-bottom: 0.03in; }
+	.jl-gtin-text { font-size: 8pt; letter-spacing: 0.02in; margin-top: 0.02in; }
+
+	.jl-footer td { vertical-align: middle; padding-top: 0.06in; }
+	.jl-footer .jl-company { font-size: 11pt; font-weight: bold; }
+	.jl-footer .jl-dn { font-size: 10pt; font-weight: bold; text-align: right; }
+</style>
+
+{%- macro code(value) -%}
+	<div class="jl-code">{{ barcode_svg(value, "code128", 1.75, 0.3) }}</div>
+{%- endmacro -%}
+
+{%- macro label(row, upc, gtin, supplier_number, page_break) -%}
+<div class="jl-label{% if page_break %} jl-break{% endif %}">
+	<table>
+		<tr class="jl-header jl-sep">
+			<td colspan="2">{{ doc.customer or "" }}</td>
+		</tr>
+
+		<tr class="jl-sep">
+			<td>
+				<div class="jl-caption">PO #&nbsp; {{ doc.po_no or "" }}</div>
+				{{ code(doc.po_no) }}
+			</td>
+			<td>
+				<div class="jl-caption">LINE #&nbsp; {{ row.idx }}</div>
+				{{ code(row.idx) }}
+			</td>
+		</tr>
+
+		{%- if upc %}
+		<tr class="jl-upc-row jl-sep">
+			<td class="jl-upc-text">UPC-A&nbsp; {{ upc }}</td>
+			<td><div class="jl-upc-img">{{ barcode_svg(upc, "upca", 0.94, 0.65) }}</div></td>
+		</tr>
+		{%- endif %}
+
+		<tr class="jl-sep">
+			<td>
+				<div class="jl-caption-2">JAMMY PART #<br>{{ row.item_code or "" }}</div>
+				{{ code(row.item_code) }}
+			</td>
+			<td>
+				<div class="jl-caption-2">YOUR PART #<br><b>{{ row.customer_item_code or "" }}</b></div>
+				{{ code(row.customer_item_code) }}
+			</td>
+		</tr>
+
+		{%- if gtin %}
+		<tr class="jl-gtin-row jl-sep">
+			<td colspan="2">
+				<div class="jl-gtin-img">{{ barcode_svg(gtin, "itf14", 3.01, 1.25) }}</div>
+				<div class="jl-gtin-text">{{ gtin }}</div>
+			</td>
+		</tr>
+		{%- endif %}
+
+		<tr class="jl-sep">
+			<td>
+				<div class="jl-caption">PCS/CTN&nbsp; {{ row.pcs_ctn or "" }}</div>
+				{{ code(row.pcs_ctn) }}
+			</td>
+			<td>
+				<div class="jl-caption">QUANTITY&nbsp; {{ row.qty or "" }}</div>
+				{{ code(row.qty) }}
+			</td>
+		</tr>
+
+		<tr class="jl-sep">
+			<td>
+				<div class="jl-caption">VENDOR ID&nbsp; {{ supplier_number }}</div>
+				{{ code(supplier_number) }}
+			</td>
+			<td>
+				<div class="jl-caption">BATCH #&nbsp; {{ row.batch_no or "" }}</div>
+				{{ code(row.batch_no) }}
+			</td>
+		</tr>
+	</table>
+
+	<table class="jl-footer">
+		<tr>
+			<td style="width: 0.75in;"><img src="/files/jammy_new_logo.png" style="height: 0.45in;"></td>
+			<td class="jl-company">JAMMY, INC</td>
+			<td class="jl-dn">{{ doc.name or "" }}</td>
+		</tr>
+	</table>
+</div>
+{%- endmacro -%}
+
+{#- one label per carton (one label for rows without cartons) -#}
+{%- set supplier_number = get_customer_supplier_number(doc.customer, doc.company) -%}
+{%- set ns = namespace(total=0, printed=0) -%}
+{%- for row in doc.items -%}
+	{%- set ns.total = ns.total + ((row.cartons or 0) if (row.cartons or 0) > 0 else 1) -%}
+{%- endfor -%}
+
+{%- for row in doc.items -%}
+	{%- set upc = get_item_barcode(row.item_code, "UPC-A") -%}
+	{%- set gtin = normalize_gtin14(get_item_barcode(row.item_code, "GTIN-14")) -%}
+	{%- set count = (row.cartons or 0) if (row.cartons or 0) > 0 else 1 -%}
+	{%- for i in range(count) -%}
+		{%- set ns.printed = ns.printed + 1 -%}
+		{{ label(row, upc, gtin, supplier_number, ns.printed < ns.total) }}
+	{%- endfor -%}
+{%- endfor -%}
