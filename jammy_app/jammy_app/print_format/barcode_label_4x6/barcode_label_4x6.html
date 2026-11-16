@@ -78,8 +78,14 @@
 
 	.jl-upc-row td { vertical-align: middle; }
 	.jl-upc-text { font-size: 9pt; }
-	/* exact barcode sizes are set on the <svg> itself; these wrappers just centre it */
-	.jl-upc-img, .jl-gtin-img { display: table; margin: 0 auto; }
+	/* barcode images: same bwip-js API as "Bar code Print Format" (no extra library needed) */
+	.jl-code img { display: block; height: 0.3in; width: auto; max-width: 1.75in; }
+	/*
+	 * Exact physical sizes. Given in CSS px (1px = 1/96in) because wkhtmltopdf drops
+	 * fractional pixels: 289px = 3.01in, 120px = 1.25in, 90px x 62px = 0.94in x 0.65in.
+	 */
+	.jl-upc-img { display: block; width: 90px; height: 62px; margin: 0 auto; }
+	.jl-gtin-img { display: block; width: 289px; height: 120px; margin: 0 auto; }
 
 	.jl-gtin-row td { text-align: center; padding-top: 0.06in; padding-bottom: 0.03in; }
 	.jl-gtin-text { font-size: 8pt; letter-spacing: 0.02in; margin-top: 0.02in; }
@@ -90,7 +96,11 @@
 </style>
 
 {%- macro code(value) -%}
-	<div class="jl-code">{{ barcode_svg(value, "code128", 1.75, 0.3) }}</div>
+	<div class="jl-code">
+		{%- if value is not none and (value | string | trim) %}
+		<img src="https://bwipjs-api.metafloor.com/?bcid=code128&height=8&text={{ value | string | trim | urlencode }}">
+		{%- endif %}
+	</div>
 {%- endmacro -%}
 
 {%- macro label(row, upc, gtin, supplier_number, page_break) -%}
@@ -114,7 +124,7 @@
 		{%- if upc %}
 		<tr class="jl-upc-row jl-sep">
 			<td class="jl-upc-text">UPC-A&nbsp; {{ upc }}</td>
-			<td><div class="jl-upc-img">{{ barcode_svg(upc, "upca", 0.94, 0.65) }}</div></td>
+			<td><img class="jl-upc-img" src="https://bwipjs-api.metafloor.com/?bcid=upca&includetext&height=24&text={{ upc | urlencode }}"></td>
 		</tr>
 		{%- endif %}
 
@@ -132,7 +142,7 @@
 		{%- if gtin %}
 		<tr class="jl-gtin-row jl-sep">
 			<td colspan="2">
-				<div class="jl-gtin-img">{{ barcode_svg(gtin, "itf14", 3.01, 1.25) }}</div>
+				<img class="jl-gtin-img" src="https://bwipjs-api.metafloor.com/?bcid=itf14&height=21&text={{ gtin | urlencode }}">
 				<div class="jl-gtin-text">{{ gtin }}</div>
 			</td>
 		</tr>
